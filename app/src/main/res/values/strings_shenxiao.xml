@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 每日工作 -->
+    <string name="tomorrowwork_lineName">路线</string>
+    <string name="tomorrowwork_termCode">终端编码</string>
+    <string name="tomorrowwork_termName">终端名称</string>
+    <string name="tomorrowwork_minorChannels">销售次渠道</string>
+    <string name="tomorrowwork_termType">终端等级</string>
+    <string name="tomorrowwork_contact">联系人</string>
+    <string name="tomorrowwork_address">地址</string>
+    <string name="tomorrowwork_visitDate">拜访时间</string>
+    <string name="tomorrowwork_domain">营销范围</string>
+    <string name="tomorrowwork_visitCmpTreaty">合作状态</string>
+    <string name="tomorrowwork_visitTarget">拜访对象</string>
+    <string name="tomorrowwork_visitrecord">拜访记录</string>
+    <string name="tomorrowwork_visitState">是否有效拜访</string>
+    <string name="tomorrowwork_visitTreatyExe">合作执行到位</string>
+    <string name="tomorrowwork_visitHdistribution">高质量配送</string>
+    <string name="tomorrowwork_visitCollapseCmp">是否瓦解竞品</string>
+    <string name="tomorrowwork_visitSelfOccu">单店占有率</string>
+    <string name="tomorrowwork_proCode">产品编码</string>
+    <string name="tomorrowwork_proName">产品名称</string>
+    <string name="tomorrowwork_visitbPurcPrice">进店价格</string>
+    <string name="tomorrowwork_visitbRetailPrice">零售价格</string>
+    <string name="tomorrowwork_agencyName">进货经销商</string>
+    <string name="tomorrowwork_enter">订单量</string>
+    <string name="tomorrowwork_visitbSalenum">日销量</string>
+    <string name="tomorrowwork_save">库存</string>
+    <string name="tomorrowwork_shopState">铺货状态</string>
+    <string name="tomorrowwork_proLively">产品生动</string>
+    <string name="tomorrowwork_toolLively">道具生动</string>
+    <string name="tomorrowwork_itemName">采集项</string>
+    <string name="tomorrowwork_resultNum">现有量</string>
+    <string name="tomorrowwork_changeNum">变化量</string>
+    <string name="tomorrowwork_ifvild">有效拜访(上海)</string>
+    <string name="tomorrowwork_calendarselect">选择日期:</string>
+    <string name="tomorrowwork_title">日工作记录查询</string>
+    <string name="tomorrowwork_msg_no">无</string>
+    <string name="tomorrowwork_msg_self">我品</string>
+    <string name="tomorrowwork_msg_cmp">竞品</string>
+    <string name="tomorrowwork_msg_double">我品+竞品</string>
+    <string name="tomorrowwork_msg_y">是</string>
+    <string name="tomorrowwork_msg_n">否</string>
+
+    <!-- 终端 -->
+    <string name="terminal_details">终端进货数据查询</string>
+    <string name="terminal_jinhuodetails">终端进货明细</string>
+    <string name="terminal_termName">终端名称</string>
+    <string name="terminal_proName">产品名称</string>
+    <string name="terminal_proCode">产品编码</string>
+    <string name="terminal_Provided">供应商</string>
+    <string name="terminal_enterNum">进货数量</string>
+    <string name="terminal_calendarTo">日期至:</string>
+    <string name="terminal_calendarFrom">日期从:</string>
+    <string name="terminal_lineRoute">线路:</string>
+    <string name="terminal_msg_date">日期选择范围不正确，请从新选择</string>
+
+    <!-- 通知公告 -->
+    <string name="business_notice">通知公告</string>
+	<string name="content">标题</string>
+	<string name="creater">发送者</string>
+	<string name="create_time">通知时间</string>
+    
+    <!-- 今日要事 -->
+    <string name="business_todaything">今日要事</string>
+
+    <string name="progressing">数据加载中...</string>
+    
+    <!-- 问题反馈 -->
+    <string name="business_feedback">反馈</string>
+    <string name="business_question">问题</string>
+    <string name="business_quesionfeedback">问题反馈</string>
+    <string name="business_quesion">与业务相关问题</string>
+    <string name="business_app">本软件的使用问题</string>
+    <string name="business_pad">本PAD的硬件问题</string>
+    <string name="business_default">请输入问题内容</string>
+	<string name="business_please_select_question_type">请选择问题类型</string>
+	<string name="business_please_input_content">请输入内容</string>
+	<string name="business_feedback_mobile">联系方式：</string>
+	
+	<!-- 系统设置 -->
+	<string name="modify_pwd">修改密码</string>
+	<string name="check_update">检查更新</string>
+	<string name="systerm_info">关于系统</string>
+	<string name="version_msg_prompt">发现新版本，是否要更新？</string>
+	<string name="version_msg_newest">目前已是最新版本</string>
+	
+	
+</resources>

@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_search_content"
+    android:orientation="vertical" >
+
+    <include layout="@layout/banner_cui" />
+
+    <include layout="@layout/banner_navigation" />
+
+    <LinearLayout
+        android:id="@+id/linecardsearch_ll_tiaojian"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:background="@color/bg_search_title"
+        android:orientation="vertical"
+        android:padding="2dp"
+        android:visibility="gone" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/bg_search_title"
+            android:orientation="horizontal"
+            android:padding="2dp" >
+
+            <!-- 铺货状态 -->
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" >
+
+                <CheckBox
+                    android:id="@+id/linecardsearch_check_state"
+                    style="@style/linecardsearch_check"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="@string/linecardsearch_state"
+                    android:textColor="@color/darkgreen" />
+            </RelativeLayout>
+            <!-- 产品生动化 -->
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" >
+
+                <CheckBox
+                    android:id="@+id/linecardsearch_check_pro"
+                    style="@style/linecardsearch_check"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="@string/linecardsearch_vivification"
+                    android:textColor="@color/darkgreen" />
+            </RelativeLayout>
+            <!-- 冰冻化 -->
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" >
+
+                <CheckBox
+                    android:id="@+id/linecardsearch_check_ice"
+                    style="@style/linecardsearch_check"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="@string/linecardsearch_frozen"
+                    android:textColor="@color/darkgreen" />
+            </RelativeLayout>
+            <!-- 道具生动化 -->
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" >
+
+                <CheckBox
+                    android:id="@+id/linecardsearch_check_daoju"
+                    style="@style/linecardsearch_check"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="@string/linecardsearch_props"
+                    android:textColor="@color/darkgreen" />
+            </RelativeLayout>
+            <!-- 供货关系 -->
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" >
+
+                <CheckBox
+                    android:id="@+id/linecardsearch_check_supply"
+                    style="@style/linecardsearch_check"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="@string/linecardsearch_supply"
+                    android:textColor="@color/darkgreen" />
+            </RelativeLayout>
+            <!-- 进货价 -->
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" >
+
+                <CheckBox
+                    android:id="@+id/linecardsearch_check_jinhuo"
+                    style="@style/linecardsearch_check"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="@string/linecardsearch_jinhuo"
+                    android:textColor="@color/darkgreen" />
+            </RelativeLayout>
+            <!-- 零售价 -->
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" >
+
+                <CheckBox
+                    android:id="@+id/linecardsearch_check_lingshou"
+                    style="@style/linecardsearch_check"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="@string/linecardsearch_lingshou"
+                    android:textColor="@color/darkgreen" />
+            </RelativeLayout>
+            <!-- 库存 -->
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" >
+
+                <CheckBox
+                    android:id="@+id/linecardsearch_check_store"
+                    style="@style/linecardsearch_check"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="@string/linecardsearch_store"
+                    android:textColor="@color/darkgreen" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/bg_search_title"
+            android:orientation="horizontal"
+            android:padding="2dp" >
+
+            <!-- 路线 -->
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2" >
+
+                <TextView
+                    android:id="@+id/linecardsearch_tv_line"
+                    style="@style/linecardsearch_check"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dp"
+                    android:text="@string/linecardsearch_line"
+                    android:textColor="@color/darkgreen" />
+
+                <Spinner
+                    android:id="@+id/linecardsearch_sp_line"
+                    style="@style/formLabel_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="43dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@id/linecardsearch_tv_line"
+                    android:background="@drawable/bg_spinner" />
+            </RelativeLayout>
+
+            <!-- 终端名称 -->
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2" >
+
+                <TextView
+                    android:id="@+id/linecardsearch_tv_term"
+                    style="@style/linecardsearch_check"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dp"
+                    android:text="@string/linecardsearch_termname"
+                    android:textColor="@color/darkgreen" />
+
+                <EditText
+                    android:id="@+id/linecardsearch_et_termname"
+                    style="@style/formLabel_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="43dp"
+                    android:layout_centerVertical="true"
+                    android:imeOptions="actionDone|flagNoExtractUi"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@id/linecardsearch_tv_term"
+                    android:hint="@string/linecardsearch_intermname" />
+            </RelativeLayout>
+
+            <!-- 零售价 -->
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3" >
+            </RelativeLayout>
+            
+            <!-- 查询 -->
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" >
+
+                <Button
+                    android:id="@+id/linecardsearch_bt_search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="15dp"
+                    android:background="@drawable/bt_sure" />
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linecardsearch_ll_work"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:visibility="visible" >
+
+        <WebView
+            android:id="@+id/linecardsearch_web"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:layerType="software" />
+    </LinearLayout>
+
+</LinearLayout>

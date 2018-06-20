@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/unit_title"
+            style="@style/unit_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_title"
+            android:gravity="center"
+            android:text="@string/checkindex_qulick_title" />
+
+        <!-- 进货时间 -->
+
+        <LinearLayout
+            android:id="@+id/listview_ll_time"
+            style="@style/listview_bg_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/unit_title" >
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/listview_line" />
+
+            <!-- 进货时间 -->
+
+            <TextView
+                style="@style/listview_tv_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/termtz_dialog_time" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/listview_line" />
+
+            <!-- 选择进货时间 -->
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" >
+
+                <Button
+                    android:id="@+id/term_bt_purchasetime"
+                    style="@style/listview_tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/default_date"
+                    android:textColor="#6e655c" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/listview_line" />
+        </LinearLayout>
+
+        <!-- 具体字段 -->
+
+        <LinearLayout
+            android:id="@+id/listview_bg_title"
+            style="@style/listview_bg_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/listview_ll_time" >
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/listview_line" />
+
+            <!-- 产品名称 -->
+
+            <TextView
+                style="@style/listview_tv_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/termtz_dialog_pro" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/listview_line" />
+
+            <!-- 进货量 -->
+
+            <TextView
+                style="@style/listview_tv_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/termtz_dialog_jinhuo" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/listview_line" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/bottom"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true" >
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" >
+
+                <Button
+                    android:id="@+id/quicklydialog_bt_sure"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/bt_sure" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" >
+
+                <Button
+                    android:id="@+id/quicklydialog_bt_cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/bt_cancel2" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_above="@id/bottom"
+            android:background="@color/listview_line" />
+
+        <EditText
+            android:id="@+id/editText1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:visibility="gone" >
+
+            <requestFocus />
+        </EditText>
+
+        <LinearLayout
+            android:id="@+id/center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/line"
+            android:layout_below="@id/listview_bg_title"
+            android:orientation="vertical"
+            android:visibility="gone" >
+
+            <ListView
+                android:id="@+id/quicklydialog_ll"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:divider="@color/listview_line"
+                android:dividerHeight="1dp" />
+        </LinearLayout>
+        <!-- 可滚动线性布局 -->
+
+        <ScrollView
+            android:id="@+id/center1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/line"
+            android:layout_below="@id/listview_bg_title" >
+
+            <LinearLayout
+                android:id="@+id/quicklydialog_lv"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:divider="@color/listview_line"
+                android:dividerHeight="1dp"
+                android:orientation="vertical" />
+        </ScrollView>
+    </RelativeLayout>
+
+</LinearLayout>

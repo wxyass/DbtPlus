@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 巡店拜访 _打招呼_无效终端申请 -->
+    <string name="invalid_dialog_title">无效终端申请</string>
+    <string name="invalid_dialog_reasonlable">申请原因</string>
+    <string name="invalid_dialog_reason1">停止营业</string>
+    <string name="invalid_dialog_reason2">经营业务变更</string>
+    <string name="invalid_dialog_reason3">其他</string>
+    
+    <!-- 巡店拜访 _客情备忘录-->
+    <string name="memo_dialog_title">客情备忘录</string>
+    <string name="memo_dialog_memolabel">客情备忘：</string>
+    <string name="memo_dialog_timelabel">有效时间：</string>
+    <string name="memo_dialog_routename">线路：</string>
+    <string name="memo_dialog_terminalname">终端：</string>
+    <string name="memo_dialog_timeline">至</string>
+    <string name="memo_dialog_timeover"> 永久</string>
+    <string name="memo_dialog_iscall">是否提醒</string>
+    <string name="memo_msg_invalid">日期已过期</string>
+    <string name="memo_msg_errordate">结束日期应大于等于开始日期</string>
+    <string name="memo_msg_date">请设置合理日期并且日期间隔不要超过三天</string>
+    <string name="memo_msg_contentnull">备忘录内容不能为空</string>
+
+    <!-- 运营管理中的指标状态查询 -->
+    <string name="indexstatus_banner_title">指标状态查询</string>
+    <string name="indexstatus_label_line">选择线路：</string>
+    <string name="indexstatus_label_date">截止时间：</string>
+    <string name="indexstatus_label_index">选择指标：</string>
+    <string name="indexstatus_label_value">指标标准：</string>
+    <string name="indexstatus_label_pro">选择产品：</string>
+    <string name="indexstatus_bt_prolst">请选择产品</string>
+    <string name="indexstatus_lv_title_pro">产品</string>
+    <string name="indexstatus_lv_title_select_index">指标</string>
+    <string name="indexstatus_lv_title_index_standard">标准</string>
+    <string name="indexstatus_lv_title_prorate">以前</string>
+    <string name="indexstatus_lv_title_change">变化量</string>
+    <string name="indexstatus_labelitem_line">铺货率查询</string>
+    <string name="indexstatus_labelitem_grid">定格</string>
+    <string name="indexstatus_dialogpro_title">产品选择</string>
+    <string name="indexstatus_msg_update">请先更新数据</string>
+    <string name="indexstatus_msg_line">请选择线路</string>
+    <string name="indexstatus_msg_check">请选择指标</string>
+    <string name="indexstatus_msg_check_title">指标选择</string>
+    <string name="indexstatus_msg_value">请选择指标值</string>
+    <string name="indexstatus_msg_values">请选择指标标准</string>
+    <string name="indexstatus_msg_value_title">指标标准选择</string>
+
+    <!-- 经销商库存 -->
+    <string name="agencystorage_banner_title">经销商库存查询</string>
+    <string name="agencystorage_label_agency">选择经销商：</string>
+    <string name="agencystorage__lv_title_proname">产品名称</string>
+    <string name="agencystorage__lv_title_procode">产品编码</string>
+    <string name="agencystorage__lv_title_storenum">期末库存</string>
+    <string name="agencystorage__lv_title_prestorenum">期初库存</string>
+    <string name="agencystorage__lv_title_jinghuoliang">进货量</string>
+    <string name="agencystorage__lv_title_xiaoshouliang">销售量</string>
+    <string name="agencystorage__lv_title_selecttime">2013-05-28</string>
+    <string name="agencystorage__lv_title_creenttime">当前时间</string>
+    <string name="agencystorage__lv_title_date">生效时间</string>
+    <string name="agencystorage__lv_title_agencyname">经销商</string>
+    <string name="agencystorage__lv_title_agencycode">经销商编码</string>
+    <string name="agencystorage__lv_title_agencyuser">经销商负责人</string>
+    <string name="agencystorage__lv_title_phone">联系电话</string>
+    <string name="agencystorage_select_timea">选择时间A：</string>
+    <string name="agencystorage_select_timeb">选择时间B：</string>
+
+    <!-- 经销商选择 -->
+    <string name="agencyvisit_banner_title">经销商拜访</string>
+    <string name="agencyvisit_lv_title_agencyname">经销商名称</string>
+    <string name="agencyvisit_lv_title_addr">地址</string>
+    <string name="agencyvisit_msg_oksave">保存成功</string>
+    <string name="agencyvisit_msg_failsave">保存失败</string>
+
+    <!-- 进销存台账 -->
+    <string name="inoutsave_label_title">经销商进销存</string>
+    <string name="inoutsave_lv_title_proname">品种</string>
+    <string name="inoutsave_lv_title_innum">进货量(到货确认)</string>
+    <string name="inoutsave_lv_title_indirecout">转入转出(分销量)</string>
+    <string name="inoutsave_lv_title_direcout">每日赠酒销量</string>
+    <string name="inoutsave_lv_title_selfsales">协议店销量</string>
+    <string name="inoutsave_lv_title_unselfsales">非协议店销量</string>
+    <string name="inoutsave_lv_title_othersales">其他销量</string>
+    <string name="inoutsave_lv_title_storenum">期末库存</string>
+    <string name="inoutsave_lv_title_laststorenum">期初库存</string>
+
+    <!-- 调货台账 -->
+    <string name="transfer_label_title">调货台账</string>
+    <string name="transfer_lvitem_choice_pro">点击选择品种</string>
+    <string name="transfer_lvitem_choice_agency">点击选择经销商</string>
+    <string name="transfer_lv_title_opt">操作</string>
+    <string name="transfer_lv_title_proname">品种</string>
+    <string name="transfer_lv_title_agencyname">经销商</string>
+    <string name="transfer_lv_title_turnenter">调入</string>
+    <string name="transfer_lv_title_turnout">调出</string>
+    <string name="transfer_lvitem_button_proname">点击选择品种</string>
+    <string name="transfer_lvitem_button_agency">点击选择经销商</string>
+    <string name="agencyvisit_dialog_over">调货台账信息录入不完整，确定离开本页面吗？</string>
+    <string name="agencyvisit_dialog_overtitle">结束拜访</string>
+    <string name="agencyselect_toask_agencyselect">请选择经销商</string>
+    <string name="transfer_msg_delete">删除成功</string>
+    <string name="transfer_msg_faildelete">删除失败</string>
+    <string name="transfer_msg_isout">是否结束本次拜访？</string>
+    <string name="transfer_msg_title">提示信息</string>
+    <string name="transfer_msg_sure">确认</string>
+    <string name="transfer_msg_cancle">取消</string>
+    <string name="transfer_msg_suredelete">确认删除该条数据吗？</string>
+    <string name="transfer_msg_search_tagagency">输入经销商的首字母或汉字名称</string>
+    
+      <!-- 周工作计划-->
+    <string name="weekworkplan_label_title">周工作计划</string>
+    <string name="weekworkplan_msg1">月</string>
+    <string name="weekworkplan_msg2">年</string>
+    <string name="weekworkplan_msg3">合计</string>
+    <string name="weekworkplan_line_select">请选择线路</string>
+    <string name="weekworkplan_temp_name1">产品名称</string>
+    <string name="weekworkplan_temp_name2">终端类型</string>
+    <string name="weekworkplan_temp_name3">完成百分比</string>
+</resources>

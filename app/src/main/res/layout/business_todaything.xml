@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_page_color"
+    android:orientation="vertical" >
+
+    <include layout="@layout/banner_navigation" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/todaything_bt_todaythingicon"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="80dp"
+            android:src="@drawable/bg_todaything_icon" />
+
+        <ImageView
+            android:id="@+id/todaything_bt_noticeicon"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="80dp"
+            android:src="@drawable/bg_notice_hit" />
+
+        <Spinner
+            android:id="@+id/todaything_spinner_routeline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/todaything_bt_noticeicon"
+            android:layout_marginTop="25dp" />
+    </RelativeLayout>
+
+    <TableLayout
+        android:id="@+id/todaything_tablelayout_taitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numColumns="1" >
+
+        <ListView
+            android:id="@+id/todaything_lv_display"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:cacheColorHint="@color/bg_lv_item"
+            android:divider="@color/listview_line"
+            android:dividerHeight="1dp"
+            android:footerDividersEnabled="false" >
+        </ListView>
+    </TableLayout>
+
+</LinearLayout>

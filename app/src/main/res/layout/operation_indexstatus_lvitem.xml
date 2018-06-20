@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    style="@style/listview_bg_item"
+    android:gravity="center_vertical"
+    android:orientation="horizontal" >
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    
+    <TextView
+        android:id="@+id/indexstatus_tv_item_pro"
+        android:layout_width="235dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        style="@style/listview_tv_item_text" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <TextView
+        android:id="@+id/indexstatus_tv_item_prorate"
+        android:layout_width="125dp"
+        android:layout_height="wrap_content"
+       style="@style/listview_tv_item_number"/>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <TextView
+        android:id="@+id/indexstatus_tv_item_date"
+        android:layout_width="125dp"
+        android:layout_height="wrap_content"
+        style="@style/listview_tv_item_number" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <TextView
+        android:id="@+id/indexstatus_tv_item_change"
+        android:layout_width="90dp"
+        android:layout_height="wrap_content"
+       style="@style/listview_tv_item_number"/>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+</LinearLayout>

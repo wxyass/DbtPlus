@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="distirbution_terminal_type">终端类型</string>
+    <string name="distirbution_channel_type">渠道类型</string>
+    <string name="distirbution_main_channel">主 渠 道</string>
+    <string name="distirbution_poor_channel">次渠 道</string>
+    <string name="distirbution_dialogpro_title">产品选择</string>
+    <string name="distirbution_prompt_pro">请选择产品</string>
+    <string name="distirbution_dialogpro_title_sell">渠道类型选择</string>
+    <string name="distirbution_dialogpro_title_main">主渠道选择</string>
+    <string name="distirbution_dialogpro_title_minor">次渠道选择</string>
+    <string name="distirbution_prompt_sell">请选择渠道类型</string>
+    <string name="distirbution_prompt_main">请选择主渠道</string>
+    <string name="distirbution_prompt_minor">请选择次渠道</string>
+    <string name="distirbution_select_channel_type">渠道类型：</string>
+    <string name="distirbution_select_main_channel">&#160;主" "渠" "道&#160;：</string>
+    <string name="distirbution_select_poor_channel">&#160;次" "渠" "道&#160;：</string>
+    <string name="distirbution_line">路线</string>
+      <string name="distirbution_product">产品名称</string>
+    <string name="distirbution_grid">定格</string>
+    <string name="distirbution_select_terminal_level">终端等级：</string>
+   
+    <string name="distirbution_terminal_level">终端等级</string>
+    <string name="distirbution_dialogpro_title_level">终端等级选择</string>
+     <string name="distirbution_prompt_level">请选择终端等级</string> 
+    <string name="distirbution_have_select_terminal_amount">已选终端总数</string>
+    <string name="distirbution_blank">空白</string>
+    <string name="distirbution_puhuo">铺货</string>
+    <string name="distirbution_effective_distirbute">有效铺货</string>
+    <string name="distirbution_effective_sale">有效销售</string>
+    <string name="distirbution_terminal_amount">铺货终端总数</string>
+    <string name="distirbution_percent">铺货率</string>
+    <string name="distirbution_previously_percent">以前铺货率</string>
+    <string name="distirbution_youxiao_puhuolv">有效铺货率</string>
+    <string name="distirbution_yiqianyouxiao_puhuolv">以前有效铺货率</string>
+    <string name="distirbution_youxiao_puhuobianhualiang">有效铺货变化量</string>
+    <string name="distirbution_youxiao_salelv">有效销售率</string>
+    <string name="distirbution_yiqianyouxiao_salelv">以前有效销售率</string>
+    <string name="distirbution_youxiao_salechange">有效销售变化量</string>
+    
+    <string name="distirbution_variation_quantity">铺货变化量</string>
+    <string name="distirbution_report_type">报表样式：</string>
+    <string name="distirbution_select_line">选择路线：</string>
+    <string name="distirbution_select_time">截止时间：</string>
+    <string name="distirbution_select_product">选择产品：</string>
+    <string name="distirbution_composite">汇总</string>
+    <string name="distirbution_all">全部</string>
+    <string name="distirbution_query">查询</string>
+    <string name="distirbution_title">万能铺货率查询</string>
+    <string name="plan_blantitle">空白终端开发</string>
+    <string name="plan_puhuotitle">有效铺货目标终端</string>
+    <string name="plan_xiaoshoutitle">有效销售目标终端</string>
+    <string name="plan_promotion">促销活动推进</string>
+    <string name="plan_daojutitle">道具生动化</string>
+    <string name="plan_sdhbz">生动化布置</string>
+    <string name="plan_product">产品生动化</string>
+    <string name="plan_bingdongtitle">冰冻化</string>
+    <string name="plan_jingpintitle">竞品清除计划(QC竞品)</string>
+    <string name="plan_other">其他</string>
+    <string name="plan_dingdan">订单目标</string>
+    <string name="down_loading">下载中，请等待...</string>
+    <string name="down_percent">0%</string>
+    <string name="home_channel_distribute_situation">渠道分布情况</string>
+    <string name="home_termnum">终端数量 : 0 家</string>
+    <string name="home_channel_mt">MT-现代零售渠道</string>
+    <string name="home_channel_tt">TT-传统零售渠道</string>
+    <string name="home_channel_op">OP-餐饮渠道</string>
+    <string name="home_channel_et">ET-夜场/娱乐渠道</string>
+    <string name="home_channel_sp">SP-速食餐饮</string>
+    <string name="home_channel_ot">待定</string>
+    <string name="nodata_promotion">暂无数据</string>
+    <string name="show_product_title">产品展示</string>
+    <string name="show_product_introduce">产品介绍</string>
+    <string name="show_product_remart">产品备注</string>
+    <string name="work_plan_week_preview">周工作计划预览</string>
+    <string name="mainactivity_lock_screen">设备已经锁定请输入当前用户的密码解锁</string>
+
+</resources>

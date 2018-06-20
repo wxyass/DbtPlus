@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 通用 -->
+    <string name="tongyong_qishi">温馨提示</string>
+    
+    <!-- 经销商开发 -->
+    <string name="agencykf_details">经销商开发</string>
+    <string name="agencykf_agencyselect">选择</string>
+    <string name="agencykf_agencyname">经销商名称</string>
+    <string name="agencykf_agencyn">经销商名称:</string>
+    <string name="agencykf_contact">法定人</string>
+    <string name="agencykf_mobile">联系电话</string>
+    <string name="agencykf_address">仓库地址</string>
+    <string name="agencykf_persion">人员</string>
+    <string name="agencykf_business">经营状况</string>
+    <string name="agencykf_isone">是否数一数二经销商</string>
+    <string name="agencykf_coverterms">覆盖终端</string>
+    <string name="agencykf_supplyterms">直供终端</string>
+    <string name="agencykf_passdate">达成时间</string>
+    <string name="agencykf_area">仓库面积</string>
+    <string name="agencykf_money">资金</string>
+    <string name="agencykf_carnum">车辆配送</string>
+    <string name="agencykf_productname">销售产品</string>
+    <string name="agencykf_kfdata">开发时间</string>
+    <string name="agencykf_unit_mxm">平方米</string>
+    <string name="agencykf_unit_money">万元</string>
+    <string name="agencykf_unit_l">辆</string>
+    <string name="agencykf_product_product">产品之间以逗号隔开(不超过500汉字)</string>
+    <string name="agencykf_agencyname_more">不能超过50汉字</string>
+    <string name="agencykf_agencymaohao">:</string>
+    
+    <string name="agencykf_add_noname">经销商名称未填写</string>
+    <string name="agencykf_add_marename">经销商名称不能超过50汉字</string>
+    <string name="agencykf_add_nocontact">法定人未填写</string>
+    <string name="agencykf_add_morecontact">法定人不能超过50汉字</string>
+    <string name="agencykf_add_area">仓库地址不能超过100汉字</string>
+    <string name="agencykf_add_product">销售产品不能超过500汉字</string>
+    <string name="agencykf_add_address">不能超过100汉字</string>
+    <string name="agencykf_add_coverterm">终端之间以逗号隔开</string>
+    
+    <string name="agencykf_delete">是否删除此条经销商记录</string>
+    <string name="agencykf_isdelete">确定要删除此经销商记录</string>
+    <string name="agencykf_all">经销商详情</string>
+    <string-array name="isyesno">
+        <item>请选择</item>
+        <item>是</item>
+        <item>否</item>
+    </string-array>
+    
+    <!-- 终端进货台账 -->
+    <string name="termtz_details">终端进货台账录入</string>
+    <string name="termtz_select">选择经销商</string>
+    <string name="termtz_sure">确定查询</string>
+    
+    <string name="termtz_termid">编号</string>
+    <string name="termtz_termname">名称</string>
+    <string name="termtz_sequence">顺序</string>
+    <string name="termtz_grid">定格</string>
+    <string name="termtz_route">路线</string>
+    <string name="termtz_address">地址</string>
+    <string name="termtz_people">关键人</string>
+    <string name="termtz_phone">电话</string>
+    
+    <string name="termtz_dialog_pro">品种</string>
+    <string name="termtz_dialog_time">选择进货时间</string>
+    <string name="termtz_dialog_jinhuo">进货量</string>
+    
+    <string name="dialog_msg_sync">正在同步终端数据</string>
+    <string name="tztermlist_search_hit">输入终端名称</string>
+    <string name="termtz_spin_prompt">请选择定格 </string>
+    <string-array name="termtz_grid_prompt">
+        <item>请选择</item>
+    </string-array>
+    <string name="linelist_gridroute">选择线路:</string>
+    
+    <!--     tag -->
+	<item type="id" name="tag_viewholder"></item>
+	<item type="id" name="tag_listdata"></item>
+	<item type="id" name="tag_viewclick"></item>
+	
+	<string name="dialog_msg_overworkplan">    确定上传周计划    </string>
+
+	<string-array name="isvistguolv">
+        <item>全部</item>
+        <item>今天已拜访过</item>
+        <item>今天未拜访过</item>
+    </string-array>
+    
+	<!-- 关于系统版本特性 -->
+    <string name="syssetting_tv_text1">增加打招呼页面拜访对象选择数据</string>
+    <string name="syssetting_tv_text2">增加促销活动拍照按钮（查指标页面）</string>
+    <string name="syssetting_tv_text3">优化查指标页面单店占有率排序的问题</string>
+    <string name="syssetting_tv_text4">优化按钮触点灵敏度问题</string>
+    <string name="syssetting_tv_text5">优化打招呼页面和新增终端页面中电话限制30位</string>
+    <string name="syssetting_tv_text6">优化拍照页面，照片至少拍一张才能结束上传数据</string>
+    <string name="syssetting_tv_text7">终端进货台账</string>
+    
+    <!-- 存储文件文件夹 -->
+    <string name="Files">Files</string>
+    
+    <!-- 图像文件夹 -->
+    <string name="Image">Image</string>
+    <!-- 缩略图文件夹 -->
+    <string name="Thumbnail">Thumbnail</string>
+    <string name="camera_msg_progress">正在处理图片,请稍后</string>
+    <!-- 视频文件夹 -->
+    <string name="Video">Video</string>
+    <string name="album_enter_select">选择</string>
+    <string name="api_cancel">取消</string>
+    <string name="album_photo_select_tip">项</string>
+    <string name="album_phoot_select_all">全选</string>
+    <string name="album_phoot_unselect_all">取消全选</string>
+    <string name="album_title">我的相册</string>
+    <string name="pgcommon_share">分享</string>
+    <string name="common_cut">移动</string>
+    <string name="common_delete">删除</string>
+    <string name="common_edit">编辑</string>
+    <string name="album_message">图片&amp;视频</string>
+    
+    <!-- 订单明细 -->
+    <string name="operation_orders">当日订单查询</string>
+    <string name="check_grid">定格/线路</string>  
+    <string name="check_term">终端详情</string>  
+    <string name="check_visit">拜访信息</string>  
+    <string name="check_agency">供货商</string>  
+    <string name="text_get">查询</string> 
+    <string name="orders_termname"> 终端名称 </string> 
+    <string name="orders_bigarea">    大   区    </string> 
+    <string name="orders_areaname">    二级区域    </string> 
+    <string name="orders_gridname">    定   格    </string> 
+    <string name="orders_linename">    路   线    </string> 
+    <string name="orders_terminalkey">    终端编码    </string> 
+    <string name="orders_contact">    终端联系人    </string> 
+    <string name="orders_mobile">    联系电话    </string> 
+    <string name="orders_address">    地   址    </string> 
+    <string name="orders_visitperson">    拜访对象    </string> 
+    <string name="orders_visitdate">    拜访时间    </string> 
+    <string name="orders_agencyname">    供货商    </string> 
+    <string name="orders_productname">    产  品    </string> 
+    <string name="orders_prevnum">    订单量    </string> 
+    
+    <!-- 扫描二维码 -->
+    <string name="scan_text">小样，想扫二维码，还不对准了！！</string>
+    <string name="title_activity_zxing">ZxingActivity</string>
+    <string name="title_activity_result">ResultActivity</string>
+    
+    <!-- 终端进货台账查询 --> 
+    <string name="termtzsearch_agency">经销商</string>  
+    <string name="termtzsearch_ceshiagency">测试经销商</string>
+    <string name="termtzsearch_time">进货时间</string>  
+    <string name="termtzsearch_start_time">2015-11-01</string>  
+    <string name="termtzsearch_end_time">2017-11-29</string> 
+    <string name="termtzsearch_isxieyi">协议店</string>  
+    
+    <!-- 路线卡查询 -->
+    <string name="linecardsearch_grid">定格</string>  
+    <string name="linecardsearch_line">路线: </string>  
+    <string name="linecardsearch_termname">终端名称: </string>  
+    <string name="linecardsearch_intermname">输入名称</string>  
+    <string name="linecardsearch_state">铺货状态</string>
+    <string name="linecardsearch_vivification">产品生动化</string>  
+    <string name="linecardsearch_frozen">冰冻化</string>  
+    <string name="linecardsearch_props">道具生动化</string> 
+    <string name="linecardsearch_supply">供货关系</string> 
+    <string name="linecardsearch_jinhuo">进货价</string>
+    <string name="linecardsearch_lingshou">零售价</string>  
+    <string name="linecardsearch_store">库存</string>  
+    
+    <!-- 查指标 -->
+    <string name="checkindex_tv_hz">合作执行是否到位: </string>  
+    <string name="checkindex_tv_zyl">我品单店占有率: </string>  
+    <string name="checkindex_tv_ps">是否高质量配送: </string>  
+    
+</resources>

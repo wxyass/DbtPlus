@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_page_color"
+    android:orientation="vertical" >
+
+    <include layout="@layout/banner_navigation" />
+
+    <LinearLayout
+        android:id="@+id/owd_ll_top"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal" >
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+            <!-- BFZDJS -->
+
+            <CheckBox
+                android:id="@+id/owd_bfzdjs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="终端拜访管理"
+                android:textColor="@color/darkgreen" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+            <!-- ZDYWTJ -->
+
+            <CheckBox
+                android:id="@+id/owd_zdywtj"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="终端业务推进"
+                android:textColor="@color/darkgreen" />
+        </RelativeLayout>
+        
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+            <!-- DDDC,  订单达成-->
+
+            <CheckBox
+                android:id="@+id/owd_dddc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:text="订单达成"
+                android:textColor="@color/darkgreen" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+            <!-- ,SDHTJ -->
+
+            <CheckBox
+                android:id="@+id/owd_sdhtj"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="生动化推进"
+                android:textColor="@color/darkgreen" />
+        </RelativeLayout>
+
+        
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/owd_ll_top2"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal" >
+        
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+            <!-- SDHHG 生动化合格-->
+
+            <CheckBox
+                android:id="@+id/owd_sdhhg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="生动化合格"
+                android:textColor="@color/darkgreen" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+            <!-- ZDHZTJWH 终端合作推进维护-->
+
+            <CheckBox
+                android:id="@+id/owd_zdhztjwh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="终端合作推进维护"
+                android:textColor="@color/darkgreen" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+            <!-- CXHDTJ 促销活动推进-->
+
+            <CheckBox
+                android:id="@+id/owd_cxhdtj"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="促销活动推进"
+                android:textColor="@color/darkgreen" />
+        </RelativeLayout>
+        
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+            <!-- WJJP 瓦解竞品-->
+
+            <CheckBox
+                android:id="@+id/owd_wjjp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:text="瓦解竞品"
+                android:textColor="@color/darkgreen" />
+        </RelativeLayout>
+
+        
+        
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/orders_ll_top"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal" >
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+            <!-- ,SCZBSD -->
+
+            <CheckBox
+                android:id="@+id/owd_sczbsd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="市场指标山东"
+                android:textColor="@color/darkgreen" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+            <!-- ,SCZBBZ -->
+
+            <CheckBox
+                android:id="@+id/owd_sczbbz"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="我品市场指标"
+                android:textColor="@color/darkgreen" />
+        </RelativeLayout>
+
+        
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+            <!-- ,jpsczb, 竞品市场指标 invisible -->
+
+            <CheckBox
+                android:id="@+id/owd_jpsczb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_centerVertical="true"
+                android:visibility="visible"
+                android:text="竞品市场指标"
+                android:textColor="@color/darkgreen" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+            <!-- zdkc, 终端库存  invisible-->
+
+            <CheckBox
+                android:id="@+id/owd_zdkc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_centerVertical="true"
+                android:visibility="visible"
+                android:text="终端库存"
+                android:textColor="@color/darkgreen" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="1dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical" >
+
+            <!-- 今日计划日期 -->
+
+            <TextView
+                android:id="@+id/weekwork_tv_week"
+                style="@style/page_label_small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="@string/weekwork_week"
+                android:textSize="16sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical" >
+
+            <!-- 日期 -->
+
+            <Button
+                android:id="@+id/weekwork_bt_week"
+                style="@style/button_text"
+                android:layout_width="wrap_content"
+                android:layout_height="43dp"
+                android:background="@drawable/bg_search_button"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:text="@string/default_date" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical" >
+
+            <!-- 上一工作日期 -->
+
+            <TextView
+                android:id="@+id/weekwork_tv_day_prev"
+                style="@style/page_label_small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="@string/weekwork_week"
+                android:textSize="16sp"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical" >
+
+            <!-- 日期 -->
+
+            <Button
+                android:id="@+id/weekwork_bt_day_prev"
+                style="@style/button_text"
+                android:layout_width="wrap_content"
+                android:layout_height="43dp"
+                android:background="@drawable/bg_search_button"
+                android:paddingLeft="5dp"
+                android:paddingRight="10dp"
+                android:text="@string/default_date"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical" >
+
+            <!-- 查询 -->
+
+            <Button
+                android:id="@+id/weekwork_bt_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/bt_search" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/bg_operation_work_dayworkboost"
+        android:baselineAligned="false"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <RadioGroup
+            android:id="@+id/weekwork_rg_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/weekwork_rb_work"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_workday_work"
+                android:button="@android:color/transparent"
+                android:checked="true" />
+
+            <RadioButton
+                android:id="@+id/weekwork_rb_summary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:background="@drawable/bg_work_summary"
+                android:button="@android:color/transparent" />
+
+            <RadioButton
+                android:id="@+id/weekwork_rb_remark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:background="@drawable/bg_work_remark"
+                android:button="@android:color/transparent" />
+        </RadioGroup>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/weekwork_ll_work"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible" >
+
+        <WebView
+            android:id="@+id/weekwork_web_workreport"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layerType="software" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/weekwork_ll_remark"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <TextView
+            android:id="@+id/weekwork_tv_remarkdate"
+            style="@style/page_label_big"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="" />
+
+        <EditText
+            android:id="@+id/weekwork_et_remark"
+            style="@style/page_label_small"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/bg_edit_multi"
+            android:enabled="false"
+            android:gravity="top"
+            android:hint="@string/weekwork_hint_remark"
+            android:minLines="7"
+            android:padding="5dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/weekwork_ll_summary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <TextView
+            android:id="@+id/weekwork_tv_summarydate"
+            style="@style/page_label_big"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="" />
+
+        <EditText
+            android:id="@+id/weekwork_et_summary"
+            style="@style/page_label_small"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/bg_edit_multi"
+            android:gravity="top"
+            android:hint="@string/gongzuozongjie_hint"
+            android:minLines="7"
+            android:padding="5dp"
+            android:paddingBottom="10dp" />
+
+        <Button
+            android:id="@+id/weekwork_bt_submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bt_syssetting_submit" />
+    </LinearLayout>
+
+</LinearLayout>

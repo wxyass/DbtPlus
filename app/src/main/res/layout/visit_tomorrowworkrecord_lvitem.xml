@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/listview_bg_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" >
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <TextView
+        android:id="@+id/tomorrow_tv_lvitem_line"
+        style="@style/listview_tv_item_text"
+        android:layout_width="120dp"
+        android:layout_height="match_parent" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <TextView
+        android:id="@+id/tomorrow_tv_lvitem_terminalcode"
+        style="@style/listview_tv_item_text"
+        android:layout_width="120dp"
+        android:layout_height="match_parent" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <TextView
+        android:id="@+id/tomorrow_tv_lvitem_terminalname"
+        style="@style/listview_tv_item_text"
+        android:layout_width="200dp"
+        android:layout_height="match_parent" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <TextView
+        android:id="@+id/tomorrow_tv_lvitem_minorchannel"
+        style="@style/listview_tv_item_text"
+        android:layout_width="150dp"
+        android:layout_height="match_parent" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <TextView
+        android:id="@+id/tomorrow_tv_lvitem_tlevel"
+        style="@style/listview_tv_item_text"
+        android:layout_width="120dp"
+        android:layout_height="match_parent" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <TextView
+        android:id="@+id/tomorrow_tv_lvitem_contact"
+        style="@style/listview_tv_item_text"
+        android:layout_width="120dp"
+        android:layout_height="match_parent" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <TextView
+        android:id="@+id/tomorrow_tv_lvitem_address"
+        style="@style/listview_tv_item_text"
+        android:layout_width="300dp"
+        android:layout_height="match_parent" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <TextView
+        android:id="@+id/tomorrow_tv_lvitem_visitdate"
+        style="@style/listview_tv_item_text"
+        android:layout_width="200dp"
+        android:layout_height="match_parent" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <TextView
+        android:id="@+id/tomorrow_tv_lvitem_visittarget"
+        style="@style/listview_tv_item_text"
+        android:layout_width="120dp"
+        android:layout_height="match_parent" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <TextView
+        android:id="@+id/tomorrow_tv_lvitem_cmptreaty"
+        style="@style/listview_tv_item_text"
+        android:layout_width="120dp"
+        android:layout_height="match_parent" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <TextView
+        android:id="@+id/tomorrow_tv_lvitem_visituser"
+        style="@style/listview_tv_item_text"
+        android:layout_width="120dp"
+        android:layout_height="match_parent" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <!-- 拜访记录 -->
+
+    <TextView
+        android:id="@+id/tomorrow_tv_lvitem_visitrecord"
+        style="@style/listview_tv_item_text"
+        android:layout_width="300dp"
+        android:layout_height="match_parent" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <TextView
+        android:id="@+id/tomorrow_tv_lvitem_status"
+        style="@style/listview_tv_item_text"
+        android:layout_width="120dp"
+        android:layout_height="match_parent" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <TextView
+        android:id="@+id/tomorrow_tv_lvitem_exetreaty"
+        style="@style/listview_tv_item_text"
+        android:layout_width="120dp"
+        android:layout_height="match_parent" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <TextView
+        android:id="@+id/tomorrow_tv_lvitem_ishdistribution"
+        style="@style/listview_tv_item_text"
+        android:layout_width="120dp"
+        android:layout_height="match_parent" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <!-- 高质量配送 -->
+
+    <TextView
+        android:id="@+id/tomorrow_tv_lvitem_iscmpcollapse"
+        style="@style/listview_tv_item_text"
+        android:layout_width="120dp"
+        android:layout_height="match_parent" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <TextView
+        android:id="@+id/tomorrow_tv_lvitem_selfoccupancy"
+        style="@style/listview_tv_item_number"
+        android:layout_width="120dp"
+        android:layout_height="match_parent" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <TextView
+        android:id="@+id/tomorrow_tv_lvitem_procode"
+        style="@style/listview_tv_item_text"
+        android:layout_width="200dp"
+        android:layout_height="match_parent" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <TextView
+        android:id="@+id/tomorrow_tv_lvitem_proname"
+        style="@style/listview_tv_item_text"
+        android:layout_width="300dp"
+        android:layout_height="match_parent" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <TextView
+        android:id="@+id/tomorrow_tv_lvitem_purcprice"
+        style="@style/listview_tv_item_number"
+        android:layout_width="120dp"
+        android:layout_height="match_parent" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <TextView
+        android:id="@+id/tomorrow_tv_lvitem_retailprice"
+        style="@style/listview_tv_item_number"
+        android:layout_width="120dp"
+        android:layout_height="match_parent" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <TextView
+        android:id="@+id/tomorrow_tv_lvitem_agencyname"
+        style="@style/listview_tv_item_text"
+        android:layout_width="300dp"
+        android:layout_height="match_parent" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <!-- 订单量 -->
+
+    <TextView
+        android:id="@+id/tomorrow_tv_lvitem_innum"
+        style="@style/listview_tv_item_number"
+        android:layout_width="120dp"
+        android:layout_height="match_parent" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <!-- 销量 -->
+
+    <TextView
+        android:id="@+id/tomorrow_tv_lvitem_visitbsalenum"
+        style="@style/listview_tv_item_number"
+        android:layout_width="120dp"
+        android:layout_height="match_parent" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <!-- 库存 -->
+
+    <TextView
+        android:id="@+id/tomorrow_tv_lvitem_visitselfoccu"
+        style="@style/listview_tv_item_number"
+        android:layout_width="120dp"
+        android:layout_height="match_parent" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <TextView
+        android:id="@+id/tomorrow_tv_lvitem_shopstate"
+        style="@style/listview_tv_item_text"
+        android:layout_width="120dp"
+        android:layout_height="match_parent" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <TextView
+        android:id="@+id/tomorrow_tv_lvitem_prolively"
+        style="@style/listview_tv_item_text"
+        android:layout_width="120dp"
+        android:layout_height="match_parent" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <TextView
+        android:id="@+id/tomorrow_tv_lvitem_toollively"
+        style="@style/listview_tv_item_text"
+        android:layout_width="120dp"
+        android:layout_height="match_parent" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <TextView
+        android:id="@+id/tomorrow_tv_lvitem_itemname"
+        style="@style/listview_tv_item_text"
+        android:layout_width="120dp"
+        android:layout_height="match_parent" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <TextView
+        android:id="@+id/tomorrow_tv_lvitem_resultnum"
+        style="@style/listview_tv_item_number"
+        android:layout_width="120dp"
+        android:layout_height="match_parent" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <TextView
+        android:id="@+id/tomorrow_tv_lvitem_changenum"
+        style="@style/listview_tv_item_number"
+        android:layout_width="120dp"
+        android:layout_height="match_parent" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <TextView
+        android:id="@+id/tomorrow_tv_lvitem_ifvlid"
+        style="@style/listview_tv_item_tv_center"
+        android:layout_width="140dp"
+        android:layout_height="match_parent" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+</LinearLayout>

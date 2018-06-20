@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">DBT.TsingTao</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <!-- 文本框提示信息 -->
+    <string name="hit_input">请输入</string>
+    <string name="hit_spinner">请选择</string>
+
+    <!-- 错误信息 -->
+    <string name="msg_err_netfail">网络请求失败</string>
+    <string name="msg_err_netdealfail">处理网络返回结果失败</string>
+    <string name="msg_err_nettatusfail">网络状态不可用，请确保网络状态及网络设置是否正确</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    
+    <!-- 对话框 -->
+    <string name="dialog_title">提示信息</string>
+    <string name="dialog_bt_sure">确定</string>
+    <string name="dialog_bt_cancel">取消</string>
+    <string name="dialog_bt_close">关闭</string>
+    <string name="dialog_bt_nervertips">不再提示</string>
+    <string name="dialog_msg_del">确认要删除吗?</string>
+    <string name="dialog_msg_search">查询中...</string>
+    <string name="dialog_msg_delete">初始化中，稍后请重新登录</string>
+    
+    <!-- 提示信息 -->
+    <string name="msg_syncdata">请先同步数据</string>
+    <string name="msg_search_nodata">查无相关数据</string>
+    <string name="msg_search_netfail">查询失败，请稍后再试！ </string>
+
+</resources>

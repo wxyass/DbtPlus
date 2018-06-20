@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 系統菜單 -->
+    <string name="menu_shopvisit">巡店拜访</string>
+    <string name="menu_desktop">返回桌面</string>
+    <string name="menu_sync">同步数据</string>
+    <string name="menu_question">问题反馈</string>
+    <string name="menu_system">系统设置</string>
+    
+    <!-- banner -->
+    <string name="banner_welcome_am">上午好！欢迎登录系统！</string>
+    <string name="banner_welcome_pm">下午好！欢迎登录系统！</string>
+    <string name="banner_progress">今日进度：</string>
+
+    <!-- 登录 -->
+    <string name="login_uid">员工号：</string>
+    <string name="login_pwd">密    码：</string>
+    <string name="login_uid_hint">请输入用户名</string>
+    <string name="login_pwd_hint">请输入密码</string>
+    <string name="login_msg_fail">登录失败</string>
+    <string name="login_msg_invaluid">用户名不能为空</string>
+    <string name="login_msg_invalpwd">密码不能为空</string>
+    <string name="login_msg_invaluser">请先清除上次登录账户的缓存数据</string>
+    <string name="login_msg_invalgrid">用户所属定格变更，请先清除上次登录账户的缓存数据</string>
+    <string name="login_msg_invaldate">系统时间误差较大，请调整系统时间</string>
+    <string name="login_msg_usererror">用户信息异常，不能正常登录</string>
+    <string name="login_msg_progress">登录中...</string>
+    <string name="login_msg_online">登录成功</string>
+    <string name="login_msg_offline">离线登录成功</string>
+    <string name="login_msg_pwdfail">登录失败，确认用户名及密码。</string>
+    <string name="login_msg_userice">该用户已离职或冻结！</string>
+    <string name="login_msg_device">该设备已冻结！</string>
+    <string name="login_msg_nogrid">未分配定格，请联系管理员。</string>
+    
+
+    <!-- 巡店拜访 -->
+    <string name="shopvisit_visitdatelabel1">该终端上次拜访时间：</string>
+    <string name="shopvisit_visitdatelabel2">距离今天</string>
+    <string name="shopvisit_visitdatelabel3">天</string>
+    <string name="dialog_msg_overshopvisit">是否结束本次拜访？</string>
+    <string name="dialog_msg_see">您目前处于查看状态，不可以修改数据！</string>
+    <string name="dialog_back">温馨提示</string>
+    <string name="dialog_msg_backdesc">如果返回，本次拜访无效</string>
+    
+    <!-- 添加供货关系弹出窗口 -->
+    <string name="addrelation_title">添加产品信息(可多选)</string>
+    <string name="addrelation_channelprice">渠道价：</string>
+    <string name="addrelation_sellprice">零售价：</string>
+    <string name="addrelation_unit">元</string>
+    <string name="addrelation_msg_repetitionadd">有产品已存在，不能重复添加</string>
+    
+
+    <!-- 巡店拜访_线路列表 -->
+    <string name="linelist_title">选择线路</string>
+    <string name="linelist_gridname">定格:</string>
+    <string name="linelist_planlabel">本周计划拜访日期：</string>
+    
+    <!-- 巡店拜访_终端列表 -->
+    <string name="termlist_title">选择终端</string>
+    <string name="termlist_visitdatelabel1">上次拜访时间：</string>
+    <string name="termlist_visitdatelabel2">距今</string>
+    <string name="termlist_visitdingge">5号定格</string>
+    <string name="termlist_visitdatelabel3">天</string>
+    <string name="termlist_search_hit">输入终端的首字母或汉字名称</string>
+    <string name="termlist_confirm_title">提示</string>
+    <string name="termlist_confirm_msg">确定要重复拜访吗？</string>
+    <string name="termlist_confirm_sure">确定</string>
+    <string name="termlist_sure">确定要进入拜访吗?</string>
+    <string name="termlist_confirm_cancel">取消</string>
+    <string name="termlist_confirm_see">查看</string>
+    <string name="termlist_vistlv">拜访过滤</string>
+    
+    <!-- 巡店拜访 _终端指标结果-->
+    <string name="termindex_proname">产品</string>
+    <string name="termindex_item">采集项</string>
+    <string name="termindex_changenum">变化量</string>
+    <string name="termindex_finalnum">最终量</string>
+    <string name="termindex_provchangenum">上次变化</string>
+    <string name="termindex_provfinalnum">上次最终</string>
+
+    <!-- 巡店拜访 _打招呼 -->
+    <string name="sayhi_termstatus">是否有效终端：</string>
+    <string name="sayhi_termstatus_valid">有效</string>
+    <string name="sayhi_termstatus_invalid">无效</string>
+    <string name="sayhi_visitstatus">是否有效拜访：</string>
+    <string name="sayhi_wopindianzhao">是否我品店招：</string>
+    <string name="sayhi_visitstatus_ture">有效</string>
+    <string name="sayhi_visitstatus_false">无效</string>
+    <string name="sayhi_prostatus">销售产品范围：</string>
+    <string name="sayhi_protocol">终端合作状态：</string>         
+    <string name="sayhi_prostatus_mine">我品</string>
+    <string name="sayhi_prostatus_vie">竞品</string>
+    <string name="sayhi_terminfo">确认终端信息</string>
+    
+    <!-- 巡店拜访 _进销存 -->
+    <string name="invoicing_askgoods">问货源</string>
+    <string name="invoicing_opt">操作</string>
+    <string name="invoicing_proname">产品</string>
+    <string name="invoicing_channelprice">渠道价</string>
+    <string name="invoicing_sellprice">零售价</string>
+    <string name="invoicing_agency">供货商</string>
+    <string name="invoicing_checkgoods">订单推荐</string>
+    <string name="invoicing_provin">上周期进货总量</string>
+    <string name="invoicing_dingdanlang">订单量</string>
+    <string name="invoicing_addcard">累计卡</string>
+    <string name="invoicing_provinsum">本月合计</string>
+    <string name="invoicing_provstore">上次库存</string>
+    <string name="invoicing_daysell">日销量</string>
+    <string name="invoicing_firstdate">最早生产日期</string>
+    <string name="invoicing_mst_norelation">无进销存数据，无法做查指标！</string>
+    
+    <!-- 巡店拜访 _查指标 -->
+    <string name="checkindex_quickcollect">快速采集</string>
+    <string name="checkindex_checkcollect">指标采集</string>
+    <string name="checkindex_collect">分项采集</string>
+    <string name="checkindex_index">指标</string>
+    <string name="checkindex_proname">产品</string>
+    <string name="checkindex_result">结果</string>
+    <string name="checkindex_calculate">数据采集</string>
+    <string name="checkindex_selfoccu">我品的单店占用率：</string>
+    <string name="checkindex_protocolstatus">合作执行是否到位：</string>
+    <string name="checkindex_protocolstatus_true">到位</string>
+    <string name="checkindex_protocolstatus_false">不到位</string>
+    <string name="checkindex_hdistribution">是否为高质量配送：</string>
+    <string name="checkindex_hdistribution_true">达到</string>
+    <string name="checkindex_hdistribution_false">未达到</string>
+    <string name="checkindex_qulick_title">快速采集量录入</string>
+    <string name="checkindex_item">采集项</string>
+    <string name="checkindex_changenum">变化量</string>
+    <string name="checkindex_finalnum">现有量</string>
+    <string name="checkindex_xinxiandu">新鲜度</string>
+    <string name="checkindex_caculate_title">采集计算框</string>
+    <string name="checkindex_promotion">促销活动</string>
+    <string name="checkindex_promotion_name">活动项</string>
+    <string name="checkindex_promotion_pro">关联产品</string>
+    <string name="checkindex_promotion_status">完成状态</string>
+    <string name="checkindex_promotion_status1">是否达成</string>
+    <string name="checkindex_promotion_reachnum">达成组数</string>
+    <string name="checkindex_promotion_camera">拍照</string>
+    <string name="checkindex_promotion_status_true">达成</string>
+    <string name="checkindex_promotion_status_false">未达成</string>
+    <string name="checkindex_save_fail">查指标数据保存失败</string>
+    
+    <!-- 巡店拜访 _聊竞品 -->
+    <string name="chatvie_viestatus">竞品情况</string>
+    <string name="chatvie_viename">竞品</string>
+    <string name="chatvie_monthsell">销量</string>
+    <string name="chatvie_currstore">当前库存</string>
+    <string name="chatvie_remark">描述</string>
+    <string name="chatvie_viesource">竞品来源</string>
+    <string name="chatvie_opt">操作</string>
+    <string name="chatvie_channelprice">进店价</string>
+    <string name="chatvie_sellprice">零售价</string>
+    <string name="chatvie_agency">供应商</string>
+    <string name="chatvie_clearvie">是否成功瓦解竞品(WJ竞品)：</string>
+    <string name="chatvie_clearvie_ture">达成</string>
+    <string name="chatvie_clearvie_false">未达成</string>
+    <string name="chatvie_report">拜访记录：</string>
+    <string name="chatvie_hint_agency">请选择经销商</string>
+    
+    <!-- 巡店拜访 _拍照 -->
+    <string name="camera_pictype">照片类型</string>
+    <string name="camera_operation">拍照</string>
+    <string name="camera_delect">删除</string>
+    
+    <!-- 新增终端 -->
+    <string name="termadd_star">*</string>
+    <string name="termadd_title">新增终端</string>
+    <string name="termadd_termcode">终端编码：</string>
+    <string name="termadd_belongline">所属线路：</string>
+    <string name="termadd_termname">终端名称：</string>
+    <string name="termadd_level">终端等级：</string>
+    <string name="termadd_prov">省：</string>
+    <string name="termadd_city">市：</string>
+    <string name="termadd_country">县：</string>
+    <string name="termadd_address">地址：</string>
+    <string name="termadd_person">联系人：</string>
+    <string name="termadd_tel">电话：</string>
+    <string name="termadd_sequence">拜访顺序：</string>
+    <string name="termadd_cycle">拜访周期：</string>
+    <string name="termadd_hvolume">高档容量：</string>
+    <string name="termadd_mvolume">中档容量：</string>
+    <string name="termadd_pvolume">普档容量：</string>
+    <string name="termadd_lvolume">低档容量：</string>
+    <string name="termadd_totalvolume">总容量：</string>
+    <string name="termadd_areatype">区域类型：</string>
+    <string name="termadd_sellchannel">销售渠道：</string>
+    <string name="termadd_mainchannel">主渠道：</string>
+    <string name="termadd_minorchannel">次渠道：</string>
+    <string name="termadd_visitperson">拜访对象：</string>
+    <string name="termadd_msg_invaltermname">终端名称不能为空</string>
+    <string name="termadd_msg_invalbelogline">请选择终端所属线路</string>
+    <string name="termadd_msg_invaltermlevel">请选择终端所属等级</string>
+    <string name="termadd_msg_invalprov">请选择终端所属省份</string>
+    <string name="termadd_msg_invalcity">请选择终端所属的市</string>
+    <string name="termadd_msg_invalcountry">请选择终端所属的区县</string>
+    <string name="termadd_msg_invaladdress">请输入终端地址</string>
+    <string name="termadd_msg_invalcontact">请输入联系人姓名</string>
+    <string name="termadd_msg_invalmobile">请输入联系人电话</string>
+    <string name="termadd_msg_invalmobilelength">电话长度不能超过30位</string>
+    <string name="termadd_msg_invalsequence">请输入拜访顺序</string>
+    <string name="termadd_msg_invalsellchannel">请选择终端的销售渠道</string>
+    <string name="termadd_msg_invalmainchannel">请选择终端的主渠道</string>
+    <string name="termadd_msg_invalminorchannel">请选择终端的次渠道</string>
+    <string name="termadd_msg_repeat">相同路线、相同名称、相同类型的终端、一天只能新建一次</string>
+    <string name="termadd_msg_addsuccess">新增终端成功</string>
+    <string name="termadd_msg_syncsuccess">新增终端上传成功</string>
+    <string name="termadd_msg_syncfail">新增终端上传失败</string>
+    <string name="termadd_msg_addfail">新增终端失败</string>
+    <string name="termadd_unit_cycle">天/次</string>
+    <string name="termadd_unit_volume">件/年</string>
+    
+    <!-- 日工作推进 --> 
+    <string name="daywork_title">日工作推进查询</string>   
+    <string name="daywork_day">今日计划日期:</string>   
+    <string name="daywork_day_prev">上一工作日期:</string>   
+    <string name="daywork_msg_summary">请填写日工作总结内容</string>   
+    <string name="gongzuozongjie_hint">请填写内容</string>
+    <string name="daywork_msg_prevdate">上一工作日期必须小于今日计划日期</string>   
+    <string name="daywork_msg_currdate">今日计划日期必须大于上一工作日期</string>   
+    
+    <!-- 周工作推进 --> 
+    <string name="weekwork_title">周工作总结查询</string>   
+    <string name="weekwork_week">计划周:</string>   
+    <string name="weekwork_msg_summary">请填写周工作总结内容</string>   
+    <string name="weekwork_hint_summary">请填写工作总结内容</string>   
+    <string name="weekwork_hint_remark">暂无相关工作点评</string>   
+    
+    <!-- 月工作推进 --> 
+    <string name="monthwork_title">月工作推进</string>   
+    <string name="monthwork_month">计划月:</string>   
+    <string name="monthwork_msg_summary">请填写月工作总结内容</string>   
+    
+
+    
+</resources>

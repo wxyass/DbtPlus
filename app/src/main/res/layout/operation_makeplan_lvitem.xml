@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="28dp"
+    android:background="@color/bg_page_color"
+    android:gravity="center_vertical"
+    android:orientation="horizontal" >
+
+    <TextView
+        android:id="@+id/makeplan_lvitem_tv_type"
+        style="@style/listview_tv_item_text"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_weight="1"
+        android:gravity="center" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="fill_parent"
+        android:background="@color/listview_line" />
+
+    <TextView
+        android:id="@+id/makeplan_lvitem_tv_num"
+        style="@style/listview_tv_item_text"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_weight="3"
+        android:gravity="center" />
+
+</LinearLayout>

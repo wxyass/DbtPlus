@@ -1,0 +1,33 @@
+<resources>
+
+    <!-- App字体列表 -->
+    <dimen name="font_size1">24sp</dimen>
+    <dimen name="font_size2">20sp</dimen>
+    <dimen name="font_size3">18sp</dimen>
+    <dimen name="font_size4">16sp</dimen>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="home_weather_textsize">18sp</dimen>
+    <dimen name="show_product_textsize">16sp</dimen>
+    <dimen name="home_content_textsize">18sp</dimen>
+    <dimen name="home_content_textsize1">16sp</dimen>
+
+    <!-- 拍照大小 -->
+    <dimen name="thumbnail_imageview_size">41.0dip</dimen>
+    <dimen name="bottom_bar_height">75.0dip</dimen>
+    <dimen name="top_menu_bar_height">45.0dip</dimen>
+    <dimen name="shutter_bottom_size">62.0dip</dimen>
+    <dimen name="album_header_bar_height">50.0dip</dimen>
+    <dimen name="title_view_left_back_padding_left">12.0dip</dimen>
+    <dimen name="title_view_left_back_padding_right">12.0dip</dimen>
+    <dimen name="album_header_btn_width">48.0dip</dimen>
+    <dimen name="album_rooter_bar_height">48.0dip</dimen>
+    <dimen name="album_rooter_bar_text_size">16.0sp</dimen>
+    <dimen name="videodetails_textsize_time">13.0dip</dimen>
+    <dimen name="video_bottom_bar_height">40.0dip</dimen>
+    
+    <dimen name="banner_button_h">35dp</dimen>
+
+</resources>

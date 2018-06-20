@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:cuisw="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:gravity="center_vertical"
+    android:orientation="horizontal" >
+
+    <ImageView
+        style="@style/point"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ico_point" />
+
+    <TextView
+        android:id="@+id/noproindex_tv_indexname"
+        style="@style/page_label_big"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        style="@style/page_label_big"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=":" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:gravity="center_vertical" >
+
+        <RadioGroup
+            android:id="@+id/noproindex_rg_indexvalue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone" >
+        </RadioGroup>
+
+        <EditText
+            android:id="@+id/noproindex_et_indexvalue"
+            style="@style/page_label_small"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/hit_input"
+            android:singleLine="true"
+            android:visibility="gone" >
+
+            <requestFocus />
+        </EditText>
+
+        <EditText
+            android:id="@+id/noproindex_et_indexvalue_num"
+            style="@style/page_label_small"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/hit_input"
+            android:inputType="number"
+            android:singleLine="true"
+            android:visibility="gone" />
+
+        <Spinner
+            android:id="@+id/noproindex_sp_indexvalue"
+            style="@style/page_label_small"
+            android:layout_width="120dp"
+            android:layout_height="43dp"
+            android:background="@drawable/bg_spinner"
+            android:visibility="gone" />
+
+        <et.tsingtaopad.cui.SlideSwitch
+            android:id="@+id/noproindex_sw_indexvalue"
+            style="@style/page_label_small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:visibility="gone"
+            cuisw:defStatus="on"
+            cuisw:offText=""
+            cuisw:onText=""
+            cuisw:textColor="#595757"
+            cuisw:textSize="17sp" />
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_search_content"
+    android:orientation="vertical" >
+
+    <include layout="@layout/banner_cui" />
+
+    <include layout="@layout/banner_navigation" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bg_search_title"
+        android:orientation="horizontal"
+        android:padding="15dp" >
+
+        <TextView
+            style="@style/page_label_big"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:text="@string/terminal_calendarFrom" />
+
+        <Button
+            android:id="@+id/terminaldetails_btn_timebegin"
+            style="@style/button_text"
+            android:layout_width="150dp"
+            android:layout_height="43dp"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/bg_search_button"
+            android:gravity="center_vertical|left"
+            android:paddingLeft="5dp" />
+
+        <TextView
+            style="@style/page_label_big"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="20dp"
+            android:text="@string/terminal_calendarTo" />
+
+        <Button
+            android:id="@+id/terminaldetails_btn_timeend"
+            style="@style/button_text"
+            android:layout_width="150dp"
+            android:layout_height="43dp"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/bg_search_button"
+            android:gravity="center_vertical|left"
+            android:paddingLeft="5dp" />
+
+        <TextView
+            style="@style/page_label_big"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="20dp"
+            android:text="@string/terminal_lineRoute" />
+
+        <Spinner
+            android:id="@+id/terminaldetails_spinner_selectrouteline"
+            android:layout_width="150dp"
+            android:layout_height="43dp"
+            android:layout_marginBottom="1dp"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/bg_spinner" />
+
+        <Button
+            android:id="@+id/terminaldetails_btn_submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="40dp"
+            android:background="@drawable/bt_indexstatus_search" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            style="@style/listview_bg_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/listview_line" />
+
+            <TextView
+                style="@style/listview_tv_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="0.5dip"
+                android:layout_weight="2"
+                android:padding="5dp"
+                android:text="@string/terminal_termName" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/listview_line" />
+
+            <TextView
+                style="@style/listview_tv_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="0.5dip"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="@string/terminal_proName" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/listview_line" />
+
+            <TextView
+                style="@style/listview_tv_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="0.5dip"
+                android:layout_weight="2"
+                android:padding="5dp"
+                android:text="@string/terminal_proCode" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/listview_line" />
+
+            <TextView
+                style="@style/listview_tv_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="0.5dip"
+                android:layout_weight="3"
+                android:padding="5dp"
+                android:text="@string/terminal_Provided" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/listview_line" />
+
+            <TextView
+                style="@style/listview_tv_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="0.5dip"
+                android:layout_weight="1"
+                android:padding="5dp"
+                android:text="@string/terminal_enterNum" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/listview_line" />
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/purchasedetails_lv_display"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:cacheColorHint="@color/bg_lv_item"
+            android:divider="@color/listview_line"
+            android:dividerHeight="1dp" >
+        </ListView>
+    </LinearLayout>
+
+</LinearLayout>

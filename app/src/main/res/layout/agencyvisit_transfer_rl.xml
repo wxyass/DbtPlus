@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_page_color" >
+
+    <ImageView
+        android:id="@+id/image2"
+        android:layout_width="220dp"
+        android:layout_height="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:scaleType="fitXY"
+        android:visibility="gone"
+        android:src="@drawable/bg_agencyvisit_shadow" />
+
+    <RelativeLayout
+        style="@style/content_margin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/transfer_ib_add"
+        android:layout_below="@+id/image2" >
+
+        <LinearLayout
+            android:id="@+id/ll_title"
+            style="@style/listview_bg_title"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal" >
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/listview_line" />
+
+            <!-- 品种 -->
+
+            <TextView
+                style="@style/listview_tv_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:gravity="center"
+                android:text="@string/transfer_lv_title_proname" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/listview_line" />
+
+            <!-- 经销商 -->
+
+            <TextView
+                style="@style/listview_tv_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:gravity="center"
+                android:text="@string/transfer_lv_title_agencyname" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/listview_line" />
+
+            <!-- 调入 -->
+
+            <TextView
+                style="@style/listview_tv_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:text="@string/transfer_lv_title_turnenter" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/listview_line" />
+
+            <!-- 调出 -->
+
+            <TextView
+                style="@style/listview_tv_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:text="@string/transfer_lv_title_turnout" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/listview_line" />
+
+            <!-- 操作 -->
+
+            <TextView
+                style="@style/listview_tv_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:text="@string/transfer_lv_title_opt" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/listview_line" />
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/transfer_lv_transfer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/view1"
+            android:layout_below="@+id/ll_title"
+            android:layout_marginBottom="10dp"
+            android:cacheColorHint="@color/bg_lv_item"
+            android:descendantFocusability="beforeDescendants"
+            android:divider="@color/listview_line"
+            android:dividerHeight="1dp"
+            android:footerDividersEnabled="false" >
+        </ListView>
+
+        <View
+            android:id="@+id/view1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_alignParentBottom="true" />
+    </RelativeLayout>
+
+    <ImageButton
+        android:id="@+id/transfer_ib_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_centerHorizontal="true"
+        android:background="@null"
+        android:src="@drawable/bt_agencyvisit_add" 
+        android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>

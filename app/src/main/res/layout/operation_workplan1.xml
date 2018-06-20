@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_page_color"
+    android:orientation="vertical" >
+
+    <include layout="@layout/banner_navigation" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            style="@style/page_label_big"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:text="@string/workplan_select_time" />
+
+        <Button
+            android:id="@+id/workplan_btn_time"
+            style="@style/button_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/default_date" />
+
+        <TextView
+            android:id="@+id/workplan_tv_rounds"
+            style="@style/page_label_big"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            style="@style/content_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <!-- 审核状态 -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/border_bg_gray"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <TextView
+                    style="@style/listview_tv_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:text="@string/workplan_time" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="wrap_content"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    style="@style/listview_tv_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:text="@string/workplan_state" />
+            </LinearLayout>
+
+            <!-- 计划计划时间 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="wrap_content"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    android:id="@+id/workplan_tv_time1"
+                    style="@style/listview_tv_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:text="2013/12/12" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="wrap_content"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    style="@style/listview_tv_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:text="@string/workplan_state"
+                    android:visibility="gone" />
+
+                <LinearLayout
+                    android:id="@+id/workplan_ll_state"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                     >
+
+                    <ImageView
+                        android:id="@+id/workplan_im_state1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ico_plan_add"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/workplan_tv_state1"
+                        style="@style/listview_tv_item_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/workplan_statea" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="wrap_content"
+                    android:background="@color/listview_line" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@color/listview_line" />
+
+            <!-- 2013年5月第5周工作计划 -->
+
+            <TextView
+                android:id="@+id/workplan_tv_plantitle"
+                style="@style/unit_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bg_title"
+                android:text="@string/default_title_info" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/border_bg_gray"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <TextView
+                    style="@style/listview_tv_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:text="@string/workplan_visit_time" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="wrap_content"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    style="@style/listview_tv_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:text="@string/workplan_state"
+                    android:visibility="gone" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="wrap_content"
+                    android:background="@color/listview_line"
+                    android:visibility="gone" />
+
+                <TextView
+                    style="@style/listview_tv_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:text="@string/workplan_operation" />
+            </LinearLayout>
+
+            <et.tsingtaopad.operation.workplan.MyListView
+                android:id="@+id/workplan_lv_content"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:background="@drawable/border_bg_white"
+                android:cacheColorHint="#00000000"
+                android:divider="@color/listview_line"
+                android:dividerHeight="1dp" />
+
+            <!-- 本周计划完成目标汇总 -->
+
+            <TextView
+                android:id="@+id/preview_workplan_tv_plantitle"
+                style="@style/unit_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bg_title"
+                android:text="@string/default_week_title_info2" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:background="@drawable/border_bg_white"
+                android:visibility="gone" >
+
+                <include layout="@layout/operation_workplan_lvitem" />
+            </LinearLayout>
+
+            <!-- 周计划制定 -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/bg_plantform_color"
+                    android:orientation="vertical" >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical" >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#F8F8F8"
+                            android:orientation="vertical" >
+
+                            <!-- 工作时间: -->
+
+                            <LinearLayout
+                                style="@style/content_margin"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="10dp"
+                                android:gravity="center_vertical" >
+
+                                <ImageView
+                                    style="@style/point"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/ico_point" />
+
+                                <TextView
+                                    style="@style/page_label_big"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/makeplan_time" />
+
+                                <TextView
+                                    android:id="@+id/makeplan_tv_time"
+                                    style="@style/page_label_big"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="15dp" />
+                            </LinearLayout>
+
+                            <!-- 本周计划完成目标汇总： -->
+
+                            <LinearLayout
+                                style="@style/content_margin"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="10dp"
+                                android:gravity="center_vertical" >
+
+                                <ImageView
+                                    style="@style/point"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/ico_point" />
+
+                                <TextView
+                                    style="@style/page_label_big"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/default_week_title_info" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <!-- 暂无数据(有效铺货终端,其他,促销活动推进,空白终端,道具生动化,产品生动化,冰冻化,有效销售目标终端) -->
+
+                        <LinearLayout
+                            android:id="@+id/work_plan_week_preview_contentllayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/border_bg_gray"
+                            android:orientation="vertical" >
+
+                            <TextView
+                                android:id="@+id/preview_plan_no_data_promotion"
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:gravity="center"
+                                android:text="@string/nodata_promotion"
+                                android:textColor="#ffffff"
+                                android:textSize="24sp" />
+                        </LinearLayout>
+
+                        <!-- 备注 -->
+
+                        <TextView
+                            style="@style/content_margin"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:background="#F4F4F4"
+                            android:gravity="center_vertical"
+                            android:minHeight="50dp"
+                            android:paddingLeft="10dp"
+                            android:text="备注"
+                            android:textColor="#6F6D6E"
+                            android:textSize="24sp" />
+
+                        <View
+                            android:layout_width="fill_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/listview_line" />
+
+                        <!-- 备注输入框 -->
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="20dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:focusable="true"  
+   							android:focusableInTouchMode="true"
+                            android:background="#F8F9FB"
+                            android:orientation="vertical" >
+
+                            <EditText
+                                android:id="@+id/remarks"
+                                android:layout_width="match_parent"
+                                android:layout_height="200dp" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <WebView
+                    android:id="@+id/webview"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="20dp" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

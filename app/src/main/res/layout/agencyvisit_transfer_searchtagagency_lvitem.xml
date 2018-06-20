@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_page_color"
+    style="@style/listview_bg_item"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/searchtagagency_tv_agencyname"
+        style="@style/dialog_tv_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="10dp"
+        android:gravity="left|center_vertical" />
+
+</LinearLayout>

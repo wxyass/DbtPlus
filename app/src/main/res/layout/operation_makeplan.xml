@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_page_color"
+    android:orientation="vertical" >
+
+    <include layout="@layout/banner_cui" />
+
+    <include layout="@layout/banner_navigation" />
+
+    <!-- 工作日期: -->
+    <LinearLayout
+        style="@style/content_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical" >
+
+        <ImageView
+            style="@style/point"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ico_point" />
+
+        <TextView
+            style="@style/page_label_big"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/makeplan_date" />
+
+        <TextView
+            android:id="@+id/makeplan_tv_time"
+            style="@style/page_label_big"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:text="@string/default_time" />
+    </LinearLayout>
+
+    <!-- 拜访线路: -->
+    <LinearLayout
+        style="@style/content_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:gravity="center_vertical" >
+
+        <ImageView
+            style="@style/point"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ico_point" />
+
+        <TextView
+            style="@style/page_label_big"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/makeplan_line" />
+
+        <Spinner
+            android:id="@+id/makeplan_sp_line"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="15dp" />
+    </LinearLayout>
+
+    <!-- 工作时间: 上午 下午-->
+    <LinearLayout
+        style="@style/content_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:gravity="center_vertical" >
+
+        <ImageView
+            style="@style/point"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ico_point" />
+
+        <TextView
+            style="@style/page_label_big"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/makeplan_time" />
+
+        <!-- 上午 -->
+        <TextView
+            style="@style/page_label_big2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:text="@string/makeplan_am" />
+
+        <Button
+            android:id="@+id/makeplan_btn_am1"
+            style="@style/button_text2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/default_time1" />
+
+        <TextView
+            style="@style/page_label_big2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/makeplan_symbol" />
+
+        <Button
+            android:id="@+id/workplan_btn_am2"
+            style="@style/button_text2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/default_time2" />
+
+        <!-- 下午 -->
+        <TextView
+            style="@style/page_label_big2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:text="@string/makeplan_pm" />
+
+        <Button
+            android:id="@+id/workplan_btn_pm1"
+            style="@style/button_text2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/default_time3" />
+
+        <TextView
+            style="@style/page_label_big2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/makeplan_symbol" />
+
+        <Button
+            android:id="@+id/makeplan_btn_pm2"
+            style="@style/button_text2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/default_time4" />
+    </LinearLayout>
+
+    <View
+        style="@style/content_margin"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@drawable/ico_line" />
+
+    <!-- 终端数量标题 -->
+    <LinearLayout
+        style="@style/content_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical" >
+
+        <ImageView
+            style="@style/point"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ico_point" />
+
+        <TextView
+            style="@style/page_label_big"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/makeplan_productnum" />
+    </LinearLayout>
+
+    <!-- 终端数量表名 -->
+    <LinearLayout
+        style="@style/content_margin"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/border_bg_gray"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <TextView
+            style="@style/listview_tv_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/makeplan_total" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:background="@color/listview_line" />
+
+        <TextView
+            style="@style/listview_tv_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:text="@string/makeplan_terminal" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:background="@color/listview_line" />
+
+        <TextView
+            style="@style/listview_tv_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/makeplan_num" />
+    </LinearLayout>
+
+    <!-- 终端数量listview -->
+    <LinearLayout
+        style="@style/content_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="120dp"
+            android:background="@color/listview_line" />
+
+        <TextView
+            android:id="@+id/makeplan_tv_totalnum"
+            style="@style/page_label_big"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/default_digital" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="120dp"
+            android:background="@color/listview_line" />
+
+        <ListView
+            android:id="@+id/makeplan_lv_terminaltype"
+            android:layout_width="0dp"
+            android:layout_height="120dp"
+            android:layout_weight="4"
+            android:cacheColorHint="@color/bg_lv_item"
+            android:divider="@color/listview_line"
+            android:dividerHeight="1dp"
+            android:scrollbars="none" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="120dp"
+            android:background="@color/listview_line" />
+    </LinearLayout>
+
+    <View
+        style="@style/content_margin"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/listview_line" />
+
+    <!-- 计划 ViewPager -->
+    <LinearLayout
+        style="@style/content_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:orientation="vertical" >
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/makeplan_vp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <android.support.v4.view.PagerTabStrip
+                android:id="@+id/makeplan_vp_tab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top" />
+        </android.support.v4.view.ViewPager>
+    </LinearLayout>
+
+</LinearLayout>

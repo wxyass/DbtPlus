@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_page_color"
+    android:orientation="vertical" >
+
+    <include layout="@layout/banner_navigation" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp" >
+
+        <TextView
+            android:id="@+id/weekwork_tv_week"
+            style="@style/page_label_small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:text="@string/weekwork_week" />
+
+        <Button
+            android:id="@+id/weekwork_bt_week"
+            style="@style/button_text"
+            android:layout_width="wrap_content"
+            android:layout_height="43dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/weekwork_tv_week"
+            android:background="@drawable/bg_search_button"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="@string/default_date" />
+
+        <TextView
+            android:id="@+id/weekwork_tv_day_prev"
+            style="@style/page_label_small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/weekwork_bt_week"
+            android:text="@string/weekwork_week"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/weekwork_bt_day_prev"
+            style="@style/button_text"
+            android:layout_width="wrap_content"
+            android:layout_height="43dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/weekwork_tv_day_prev"
+            android:background="@drawable/bg_search_button"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="@string/default_date"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/weekwork_bt_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/bt_search" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/bg_operation_work_dayworkboost"
+        android:baselineAligned="false"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <RadioGroup
+            android:id="@+id/weekwork_rg_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/weekwork_rb_work"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_workday_work"
+                android:button="@android:color/transparent"
+                android:checked="true" />
+
+            <RadioButton
+                android:id="@+id/weekwork_rb_summary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:background="@drawable/bg_work_summary"
+                android:button="@android:color/transparent" />
+
+            <RadioButton
+                android:id="@+id/weekwork_rb_remark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:background="@drawable/bg_work_remark"
+                android:button="@android:color/transparent" />
+        </RadioGroup>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/weekwork_ll_work"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible" >
+
+        <WebView
+            android:id="@+id/weekwork_web_workreport"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layerType="software" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/weekwork_ll_remark"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <TextView
+            android:id="@+id/weekwork_tv_remarkdate"
+            style="@style/page_label_big"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="" />
+
+        <EditText
+            android:id="@+id/weekwork_et_remark"
+            style="@style/page_label_small"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/bg_edit_multi"
+            android:enabled="false"
+            android:gravity="top"
+            android:hint="@string/weekwork_hint_remark"
+            android:minLines="7"
+            android:padding="5dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/weekwork_ll_summary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <TextView
+            android:id="@+id/weekwork_tv_summarydate"
+            style="@style/page_label_big"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="" />
+
+        <EditText
+            android:id="@+id/weekwork_et_summary"
+            style="@style/page_label_small"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/bg_edit_multi"
+            android:gravity="top"
+            android:hint="@string/gongzuozongjie_hint"
+            android:minLines="7"
+            android:padding="5dp"
+            android:paddingBottom="10dp" />
+
+        <Button
+            android:id="@+id/weekwork_bt_submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bt_syssetting_submit" />
+    </LinearLayout>
+
+</LinearLayout>

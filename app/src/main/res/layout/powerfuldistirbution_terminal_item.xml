@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/listview_bg_item"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="horizontal" >
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <TextView
+        android:id="@+id/distirbution_gridid"
+        style="@style/listview_tv_item_text"
+        android:layout_width="150dip"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"/>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <TextView
+        android:id="@+id/distirbution_lineid"
+        style="@style/listview_tv_item_text"
+        android:layout_width="100dip"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"/>
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <TextView
+        android:id="@+id/distirbution_product"
+        style="@style/listview_tv_item_text"
+        android:layout_width="150dip"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal" />
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <TextView
+        android:id="@+id/distirbution_terminal_level"
+        style="@style/listview_tv_item_text"
+        android:layout_width="100dip"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <TextView
+        android:id="@+id/distirbution_have_select_terminal_amount"
+        style="@style/listview_tv_item_text"
+        android:layout_width="120dip"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"/>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <TextView
+        android:id="@+id/distirbution_blank"
+        style="@style/listview_tv_item_text"
+        android:layout_width="100dip"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <TextView
+        android:id="@+id/distirbution_puhuo"
+        style="@style/listview_tv_item_text"
+        android:layout_width="100dip"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"/>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <TextView
+        android:id="@+id/distirbution_effective_distirbute"
+        style="@style/listview_tv_item_text"
+        android:layout_width="100dip"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"/>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <TextView
+        android:id="@+id/distirbution_effective_sale"
+        style="@style/listview_tv_item_text"
+        android:layout_width="100dip"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <TextView
+        android:id="@+id/distirbution_terminal_amount"
+        style="@style/listview_tv_item_text"
+        android:layout_width="120dip"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <TextView
+        android:id="@+id/distirbution_percent"
+        style="@style/listview_tv_item_text"
+        android:layout_width="100dip"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <TextView
+        android:id="@+id/distirbution_previously_percent"
+        style="@style/listview_tv_item_text"
+        android:layout_width="100dip"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <TextView
+        android:id="@+id/distirbution_variation_quantity"
+        style="@style/listview_tv_item_text"
+        android:layout_width="100dip"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+    
+     <TextView
+        android:id="@+id/distirbution_youxiao_puhuolv"
+        style="@style/listview_tv_item_text"
+        android:layout_width="100dip"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal" />
+     
+     <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+     
+     <TextView
+        android:id="@+id/distirbution_yiqianyouxiao_puhuolv"
+        style="@style/listview_tv_item_text"
+        android:layout_width="140dip"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal" />
+     
+     <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+     
+     <TextView
+        android:id="@+id/distirbution_youxiao_puhuobianhualiang"
+        style="@style/listview_tv_item_text"
+        android:layout_width="140dip"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal" />
+     
+     <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+     
+     <TextView
+        android:id="@+id/distirbution_youxiao_salelv"
+        style="@style/listview_tv_item_text"
+        android:layout_width="100dip"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal" />
+     
+     <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+     
+     <TextView
+        android:id="@+id/distirbution_yiqianyouxiao_salelv"
+        style="@style/listview_tv_item_text"
+        android:layout_width="140dip"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal" />
+     
+      <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+      
+      <TextView
+        android:id="@+id/distirbution_youxiao_salechange"
+        style="@style/listview_tv_item_text"
+        android:layout_width="140dip"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal" />
+      
+       <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+</LinearLayout>

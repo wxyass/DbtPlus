@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_search_content"
+    android:orientation="vertical" >
+
+    <include layout="@layout/banner_cui" />
+
+    <include layout="@layout/banner_navigation" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bg_search_title"
+        android:orientation="horizontal"
+        android:padding="15dp"
+        android:paddingTop="20dp" >
+
+        <TextView
+            android:id="@+id/calendar_tv_timeselect"
+            style="@style/page_label_big"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tomorrowwork_calendarselect" />
+
+        <Button
+            android:id="@+id/tomorrowwork_bt_timeselect"
+            style="@style/button_text"
+            android:layout_width="150dp"
+            android:layout_height="43dp"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/bg_search_button"
+            android:gravity="center_vertical|left"
+            android:paddingLeft="5dp" />
+
+        <Button
+            android:id="@+id/calendar_bt_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="15dp"
+            android:background="@drawable/bt_indexstatus_search" />
+    </LinearLayout>
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                style="@style/listview_bg_title"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:orientation="horizontal" >
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    style="@style/listview_tv_title"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/tomorrowwork_lineName" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    style="@style/listview_tv_title"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/tomorrowwork_termCode" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    style="@style/listview_tv_title"
+                    android:layout_width="200dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/tomorrowwork_termName" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    style="@style/listview_tv_title"
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/tomorrowwork_minorChannels" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    style="@style/listview_tv_title"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/tomorrowwork_termType" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    style="@style/listview_tv_title"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/tomorrowwork_contact" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    style="@style/listview_tv_title"
+                    android:layout_width="300dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/tomorrowwork_address" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    style="@style/listview_tv_title"
+                    android:layout_width="200dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/tomorrowwork_visitDate" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    style="@style/listview_tv_title"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/tomorrowwork_domain" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    style="@style/listview_tv_title"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/tomorrowwork_visitCmpTreaty" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    style="@style/listview_tv_title"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/tomorrowwork_visitTarget" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+                
+                <!-- 拜访记录 -->
+                <TextView
+                    style="@style/listview_tv_title"
+                    android:layout_width="300dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/tomorrowwork_visitrecord" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    style="@style/listview_tv_title"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/tomorrowwork_visitState" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    style="@style/listview_tv_title"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/tomorrowwork_visitTreatyExe" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    style="@style/listview_tv_title"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/tomorrowwork_visitHdistribution" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    style="@style/listview_tv_title"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/tomorrowwork_visitCollapseCmp" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    style="@style/listview_tv_title"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/tomorrowwork_visitSelfOccu" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    style="@style/listview_tv_title"
+                    android:layout_width="200dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/tomorrowwork_proCode" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    style="@style/listview_tv_title"
+                    android:layout_width="300dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/tomorrowwork_proName" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    style="@style/listview_tv_title"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/tomorrowwork_visitbPurcPrice" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    style="@style/listview_tv_title"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/tomorrowwork_visitbRetailPrice" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    style="@style/listview_tv_title"
+                    android:layout_width="300dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/tomorrowwork_agencyName" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    style="@style/listview_tv_title"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/tomorrowwork_enter" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    style="@style/listview_tv_title"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/tomorrowwork_visitbSalenum" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    style="@style/listview_tv_title"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/tomorrowwork_save" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    style="@style/listview_tv_title"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/tomorrowwork_shopState" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    style="@style/listview_tv_title"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/tomorrowwork_proLively" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    style="@style/listview_tv_title"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/tomorrowwork_toolLively" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    style="@style/listview_tv_title"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/tomorrowwork_itemName" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    style="@style/listview_tv_title"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/tomorrowwork_resultNum" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    style="@style/listview_tv_title"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/tomorrowwork_changeNum" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+                <TextView
+                    style="@style/listview_tv_title"
+                    android:layout_width="140dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/tomorrowwork_ifvild" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+            </LinearLayout>
+
+            <ListView
+                android:id="@+id/tomorrow_work_listView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:cacheColorHint="@color/bg_lv_item"
+                android:divider="@color/listview_line"
+                android:dividerHeight="1dp" >
+            </ListView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/listview_line" />
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/bg_search_bottom" />
+        </LinearLayout>
+    </HorizontalScrollView>
+
+</LinearLayout>

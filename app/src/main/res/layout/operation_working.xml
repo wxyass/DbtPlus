@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_page_color"
+    android:orientation="vertical" >
+
+    <include layout="@layout/banner_navigation" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            style="@style/page_label_big"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/working_today_plan"/>
+
+        <Button
+            style="@style/button_text"
+            android:gravity="center"
+            android:text="@string/default_date"
+            android:id="@+id/working_btn_today"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            style="@style/page_label_big"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/working_last_plan"/>
+
+        <Button
+            style="@style/button_text"
+            android:gravity="center"
+            android:text="@string/default_date"
+            android:id="@+id/working_btn_last"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/working_btn_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bt_indexstatus_search" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:baselineAligned="false"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/bg_operation_work_dayworkboost"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="105dp"
+            android:layout_weight="1"
+            android:gravity="center" >
+
+            <Button
+                android:id="@+id/working_btn_dayworkboost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="105dp"
+            android:layout_weight="1"
+            android:gravity="center" >
+
+            <Button
+                android:id="@+id/working_btn_dayworksummary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/working_ll_dayworkboost"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible" >
+
+        <WebView
+            android:id="@+id/working_web_dayworkboost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layerType="software"
+             />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/working_ll_dayworksummary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <TextView
+            style="@style/page_label_big"
+            android:id="@+id/working_tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/default_date"/>
+
+        <EditText
+            style="@style/page_label_small"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="5dp"
+            android:id="@+id/working_et_context"
+            android:background="@color/bg_content_color_gray"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minLines="7"
+			android:gravity="top"
+            android:hint="@string/working_hint_content" />
+        <Button
+            android:id="@+id/working_btn_submit" 
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bt_syssetting_submit"/>
+    </LinearLayout>
+
+</LinearLayout>

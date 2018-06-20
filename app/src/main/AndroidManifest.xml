@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="et.tsingtaopad">
+
+    <!-- 百度定位 -->
+    <!-- 这个权限用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- 这个权限用于访问GPS定位 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- 获取运营商信息，用于支持提供运营商信息相关的接口 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <!-- 用于读取手机当前的状态 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!-- 写入扩展存储，向扩展卡写入数据，用于写入离线定位数据 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <!-- SD卡读取权限，用户写入离线定位数据 -->
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <!-- 允许应用读取低级别的系统日志文件 -->
+    <uses-permission android:name="android.permission.READ_LOGS" />
+
+    <!-- 000000000000000000000000000000 -->
+    <uses-permission android:name="android.permission.SUBSCRIBED_FEEDS_READ" />
+    <uses-permission android:name="android.permission.SUBSCRIBED_FEEDS_WRITE" />
+    <uses-permission android:name="android.permission.CLEAR_APP_CACHE" />
+    <!-- 访问网络，网络定位需要上网 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 相机 -->
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <application
+        android:name="et.tsingtaopad.MyApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
+        <activity
+            android:name="et.tsingtaopad.guide.GuideActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustUnspecified" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- 平台主界面 -->
+        <activity
+            android:name="et.tsingtaopad.login.LoginActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustUnspecified" />
+        <!-- 平台主界面 -->
+        <activity
+            android:name="et.tsingtaopad.MainActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustUnspecified" />
+        <!-- 锁屏界面 -->
+        <activity
+            android:name="et.tsingtaopad.login.LockScreenActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyDialogStyle"
+            android:windowSoftInputMode="stateHidden|adjustUnspecified" />
+        <activity
+            android:name="et.tsingtaopad.PlatformMenuActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/platformmenu" >
+        </activity>
+        <!-- 启动应用的时候开启servic 主要负责监听网络变化 执行上传功能 -->
+        <service android:name="et.tsingtaopad.visit.syncdata.MainService" />
+        <!-- 拜访工作 -->
+        <!-- 下载界面loading -->
+        <activity
+            android:name="et.tsingtaopad.visit.syncdata.DownLoadDataProgressActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyDialogStyle" />
+        <!-- 网络连接错误提示 -->
+        <activity
+            android:name="et.tsingtaopad.visit.syncdata.NetworkErrorPromptActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/PromptDialogStyle" />
+        <!-- 巡店拜访 -->
+        <activity
+            android:name="et.tsingtaopad.visit.shopvisit.ShopVisitActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustUnspecified" />
+        <!-- 巡店拜访_终端指标状态 -->
+        <activity
+            android:name="et.tsingtaopad.visit.shopvisit.termindex.TermIndexActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- 自定义拍摄照片 -->
+        <activity
+            android:name="et.tsingtaopad.visit.shopvisit.camera.TakeCameraActivity"
+            android:screenOrientation="portrait" />
+        <!-- 自定义拍摄照片 -->
+        <activity
+            android:name="et.tsingtaopad.visit.shopvisit.camera.container.TakeCameraAty"
+            android:screenOrientation="portrait"
+            />
+        <!-- 拍照展示 -->
+        <activity
+            android:name="et.tsingtaopad.visit.shopvisit.camera.ShowPicActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- 经销商开发 -->
+        <activity
+            android:name="et.tsingtaopad.visit.agencykf.AgencyKFActivity"
+            android:screenOrientation="portrait" />
+        <!-- 经销商添加 编辑 -->
+        <activity
+            android:name="et.tsingtaopad.visit.agencykf.AddAgencyActivity"
+            android:screenOrientation="portrait" />
+        <!-- 测试分销商 -->
+        <activity
+            android:name="et.tsingtaopad.visit.agencyvisit.ledger.LedgerViewPagerActivity"
+            android:configChanges="screenSize|orientation|keyboardHidden"
+            android:screenOrientation="landscape" />
+        <!-- 终端进货台账 -->
+        <activity
+            android:name="et.tsingtaopad.visit.termtz.TzAgencyActivity"
+            android:screenOrientation="portrait" />
+        <!-- 终端进货台账同步页面 -->
+        <activity
+            android:name="et.tsingtaopad.visit.termtz.TzProgressActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyDialogStyle"/>
+        <!-- 终端进货台账-终端列表 -->
+        <activity
+            android:name="et.tsingtaopad.visit.termtz.TzTermActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- 终端详情 -->
+        <activity
+            android:name="et.tsingtaopad.visit.terminaldetails.TerminalDetailsFragment"
+            android:configChanges="screenSize|orientation|keyboardHidden"
+            android:screenOrientation="landscape" />
+
+        <!-- 每日工作 -->
+        <activity
+            android:name="et.tsingtaopad.visit.tomorrowworkrecord.TomorrowWorkRecordFragment"
+            android:configChanges="screenSize|orientation|keyboardHidden"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="stateHidden|adjustUnspecified" />
+
+        <!-- 终端进货台账查询 -->
+        <activity
+            android:name="et.tsingtaopad.operation.termtz.TermtzSearchFragment"
+            android:configChanges="screenSize|orientation|keyboardHidden"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="stateHidden|adjustUnspecified" />
+
+        <!-- 路线卡查询 -->
+        <activity
+            android:name="et.tsingtaopad.operation.linecardsearch.LineCardSearchFragment"
+            android:configChanges="screenSize|orientation|keyboardHidden"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="stateHidden|adjustUnspecified" />
+
+        <!-- 经销商库存 -->
+        <activity
+            android:name="et.tsingtaopad.visit.agencystorage.AgencyStorageActivity"
+            android:configChanges="screenSize|orientation|keyboardHidden"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="stateHidden|adjustUnspecified" >
+        </activity>
+
+        <!-- 运营管理 -->
+        <!-- 万能铺货率查询 -->
+        <activity
+            android:name="et.tsingtaopad.operation.distirbution.DistirbutionActivity"
+            android:configChanges="screenSize|orientation|keyboardHidden"
+            android:screenOrientation="landscape" />
+        <!-- 促销活动查询 -->
+        <activity
+            android:name="et.tsingtaopad.operation.promotion.PromotionActivity"
+            android:screenOrientation="portrait" />
+        <!-- 日工作推进 -->
+        <activity
+            android:name="et.tsingtaopad.operation.working.DayWorkingActivity"
+            android:configChanges="orientation|screenSize" />
+
+        <activity
+            android:name="et.tsingtaopad.operation.working.DayWorkingNewActivity"
+            android:configChanges="orientation|screenSize" />
+
+        <!-- 制定工作计划 -->
+        <activity
+            android:name="et.tsingtaopad.operation.workplan.MakePlanActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="et.tsingtaopad.operation.workplan.MakePlanLinearLayout"
+            android:screenOrientation="portrait" />
+
+
+        <activity
+            android:name="et.tsingtaopad.operation.workplan.DayPlanActivity"
+            android:screenOrientation="portrait" />
+        <!-- 工作计划一周统计预览 -->
+        <activity
+            android:name="et.tsingtaopad.operation.workplan.WeekPlanPreviewActivity"
+            android:screenOrientation="portrait" />
+        <!-- 登录后修改密码 -->
+        <activity
+            android:name="et.tsingtaopad.login.RepasswordActivity"
+            android:screenOrientation="portrait" />
+
+
+        <!-- 业务管理 -->
+        <!-- 产品展示 -->
+        <!-- 通知公告 -->
+        <activity
+            android:name="et.tsingtaopad.syssetting.notice.notification.NotificationNoticeActivity"
+            android:screenOrientation="portrait" />
+        <!-- 制定周工作计划 -->
+        <activity
+            android:name="et.tsingtaopad.operation.weekworkplan.MakeWeekPlanActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- 百度定位服务 -->
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote" >
+            <intent-filter>
+                <action android:name="com.baidu.location.service_v2.2" >
+                </action>
+            </intent-filter>
+        </service>
+
+        <!-- 扫描二维码 -->
+        <activity
+            android:name="et.tsingtaopad.syssetting.zxing.ZxingActivity"
+            android:label="@string/title_activity_zxing" >
+
+        </activity>
+        <activity
+            android:name="et.tsingtaopad.syssetting.zxing.MipcaActivityCapture"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+        </activity>
+        <activity
+            android:name="et.tsingtaopad.syssetting.zxing.ResultActivity"
+            android:label="@string/title_activity_result" >
+        </activity>
+        <activity
+            android:name="et.tsingtaopad.syssetting.zxing.LoadAppActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <!-- meta-data需要写在application中 -->
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="rNfYkn5W7yB8nTz5H8Awpyla" />
+    </application>
+
+</manifest>

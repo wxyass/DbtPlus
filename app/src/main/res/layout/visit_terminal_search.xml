@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical" >
+
+    <include layout="@layout/banner_navigation" />
+
+    <HorizontalScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                style="@style/listview_bg_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp" >
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    style="@style/listview_tv_title"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:text="终端名称" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    style="@style/listview_tv_title"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:text="终端编码" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    style="@style/listview_tv_title"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:text="线路名称" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    style="@style/listview_tv_title"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="联系人" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    style="@style/listview_tv_title"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:text="电话" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    style="@style/listview_tv_title"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="地址" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+            </LinearLayout>
+
+            <ListView
+                android:id="@+id/termListView"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:cacheColorHint="@color/bg_lv_item"
+                android:divider="@color/listview_line"
+                android:dividerHeight="1dp" >
+            </ListView>
+        </LinearLayout>
+    </HorizontalScrollView>
+
+</LinearLayout>

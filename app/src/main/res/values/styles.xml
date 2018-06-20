@@ -1,0 +1,342 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <!--
+        Base application theme, dependent on API level. This theme is replaced
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+
+    -->
+    <style name="AppBaseTheme" parent="android:Theme.Light">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+
+        -->
+    </style>
+
+    <!--<style name="AppTheme" parent="AppBaseTheme">
+    </style>-->
+
+    <style name="FullscreenTheme" parent="android:Theme.NoTitleBar">
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowBackground">@null</item>
+        <item name="buttonBarStyle">@style/ButtonBar</item>
+        <item name="buttonBarButtonStyle">@style/ButtonBarButton</item>
+    </style>
+
+    <style name="ButtonBar">
+        <item name="android:paddingLeft">2dp</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingRight">2dp</item>
+        <item name="android:paddingBottom">0dp</item>
+        <item name="android:background">@android:drawable/bottom_bar</item>
+    </style>
+
+    <style name="ButtonBarButton" />
+
+    <!-- App字体列表 -->
+    <style name="font_size1">
+        <item name="android:textSize">24sp</item>
+    </style>
+    <style name="font_size2">
+        <item name="android:textSize">20sp</item>
+    </style>
+    <style name="font_size3">
+        <item name="android:textSize">18sp</item>
+    </style>
+    <style name="font_size4">
+        <item name="android:textSize">15sp</item>
+    </style>
+    <style name="font_size5">
+        <item name="android:textSize">14sp</item>
+    </style>
+    <style name="font_size6">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <!-- 一级banner -->
+    <style name="banner_main" parent="@style/font_size4">
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+    <!-- 一级banner -->
+    <style name="banner_main2" parent="@style/font_size5">
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
+    <!-- 二级banner -->
+    <style name="banner_child" parent="@style/font_size1">
+        <item name="android:textColor">#4e604c</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <!-- 页面上距XXX多长时间 -->
+    <style name="banner_time" parent="@style/font_size4">
+        <item name="android:textColor">#9fa0a0</item>
+    </style>
+
+    <!-- 页面上某一模块的标题文字 -->
+    <style name="unit_title" parent="@style/font_size2">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <!-- ListView距离左右边框的距离 -->
+    <style name="content_margin">
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:layout_marginLeft">10dp</item>
+    </style>
+
+    <style name="home_content_margin">
+        <item name="android:layout_marginRight">25dp</item>
+        <item name="android:layout_marginLeft">25dp</item>
+    </style>
+    <!-- 页面上下边框的距离 -->
+    <style name="content_margin_top_buttom">
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+    </style>
+    <!-- 页面上下右边框的距离 -->
+    <style name="content_margin_top_buttom_right">
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+    </style>
+    <!-- 页面上下左边框的距离 -->
+    <style name="content_margin_top_buttom_left">
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:layout_marginLeft">10dp</item>
+    </style>
+    <!-- 页面上下左右边框的距离 -->
+    <style name="content_margin_layout">
+        <item name="android:layout_margin">10dp</item>
+    </style>
+    <!-- 首页文字样式 -->
+    <style name="home_tv_style">
+        <item name="android:drawablePadding">5dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textSize">@dimen/home_content_textsize1</item>
+        <item name="android:textColor">#898989</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <!-- ListView上标题的背景色 -->
+    <style name="listview_bg_title">
+        <item name="android:background">@drawable/bg_lv_title</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <!-- ListView上每个item的背景色 -->
+    <style name="listview_bg_item">
+        <item name="android:background">@color/bg_lv_item</item>
+        <item name="android:minHeight">50dp</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <!-- ListView上标题中的文字 -->
+    <style name="listview_tv_title" parent="@style/font_size6">
+        <item name="android:textColor">#000000</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <!-- ListView上每个item中的文字 -->
+    <style name="listview_tv_item_text" parent="@style/font_size4">
+        <item name="android:textColor">#666464</item>
+        <item name="android:gravity">center_vertical|left</item>
+        <item name="android:paddingLeft">5dp</item>
+    </style>
+
+    <!-- ListView上每个item中的数字 -->
+    <style name="listview_tv_item_number" parent="@style/font_size4">
+        <item name="android:textColor">#666464</item>
+        <item name="android:gravity">center_vertical|right</item>
+        <item name="android:paddingRight">10dp</item>
+    </style>
+    <!-- ListView上每个item中的文字居中 -->
+    <style name="listview_tv_item_tv_center" parent="@style/font_size4">
+        <item name="android:textColor">#666464</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <!-- button上文字 -->
+    <style name="button_text" parent="@style/font_size4">
+        <item name="android:textColor">#6e655c</item>
+    </style>
+    <style name="button_text2" parent="@style/font_size5">
+        <item name="android:textColor">#6e655c</item>
+    </style>
+
+    <!-- 页面上的点 -->
+    <style name="point">
+        <item name="android:layout_marginRight">10dp</item>
+    </style>
+
+    <!-- 页面上一级文字 -->
+    <style name="page_label_big" parent="@style/font_size2">
+        <item name="android:textColor">#595757</item>
+    </style>
+    <style name="page_label_big2" parent="@style/font_size5">
+        <item name="android:textColor">#595757</item>
+    </style>
+    <!-- 经销商库存查询上一级文字 -->
+    <style name="page_agency_big" parent="@style/font_size4">
+        <item name="android:textColor">#595757</item>
+    </style>
+    <!-- 页面上二级文字 -->
+    <style name="page_label_small" parent="@style/font_size3">
+        <item name="android:textColor">#595757</item>
+    </style>
+    <!-- 促销活动二级文字 -->
+    <style name="page_act_small" parent="@style/font_size4">
+        <item name="android:textColor">#595757</item>
+    </style>
+    <!-- 促销活动san级文字 -->
+    <style name="page_act_lv" parent="@style/font_size6">
+        <item name="android:textColor">#595757</item>
+    </style>
+
+    <!-- 表单标签中每项提示标题 -->
+    <style name="formLabel_title" parent="@style/font_size4">
+        <item name="android:textColor">#595757</item>
+        <item name="android:paddingRight">5dp</item>
+        <item name="android:gravity">center_vertical|right</item>
+    </style>
+    <!-- 表单标签中* -->
+    <style name="formLabel_xing" parent="@style/font_size4">
+        <item name="android:textColor">#595757</item>
+        <item name="android:paddingRight">5dp</item>
+        <item name="android:gravity">center_vertical|left</item>
+    </style>
+
+    <!-- 表单标签中每项的输入内容 -->
+    <style name="formLabel_value" parent="@style/font_size4">
+        <item name="android:textColor">#595757</item>
+        <item name="android:paddingLeft">5dp</item>
+        <item name="android:gravity">center_vertical|left</item>
+    </style>
+
+    <!-- dialog上标题中的文字 -->
+    <style name="dialog_tv_title" parent="@style/font_size2">
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <!-- dialog上每个item中的文字 -->
+    <style name="dialog_tv_item" parent="@style/font_size4">
+        <item name="android:textColor">#000000</item>
+    </style>
+
+    <!-- dialog上item列表的上的提示文字 -->
+    <style name="dialog_tv_prompt" parent="@style/font_size3">
+        <item name="android:textColor">#3b9f2b</item>
+    </style>
+
+    <!-- 结束当然页面拜访的dialog提示文字 -->
+    <style name="dialog_tv_over_prompt" parent="@style/font_size3">
+        <item name="android:textColor">#595757</item>
+    </style>
+
+    <!-- 结束当然页面拜访的dialog提示文字背景 -->
+    <style name="dialog_over_prompt_bg">
+        <item name="android:background">#e4e6e9</item>
+    </style>
+
+    <style name="AnimationFade">
+        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
+        <item name="android:windowExitAnimation">@android:anim/fade_out</item>
+    </style>
+
+    <style name="show_product_tv_style">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:drawableBottom">@drawable/bg_line_xu</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:drawablePadding">5dp</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textColor">@color/normal_gray_pressed_gray</item>
+        <item name="android:textSize">@dimen/show_product_textsize</item>
+    </style>
+
+    <style name="menu_anim_left" parent="@android:style/Animation">
+        <item name="android:windowEnterAnimation">@anim/push_left_in</item>
+        <item name="android:windowExitAnimation">@anim/push_left_out</item>
+    </style>
+
+    <style name="platformmenu" parent="android:Theme.Dialog">
+        <item name="android:windowAnimationStyle">@style/menu_anim_left</item>
+        <!-- 边框 -->
+        <item name="android:windowFrame">@null</item>
+        <!-- 是否浮现在activity之上 -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 半透明 -->
+        <item name="android:windowIsTranslucent">true</item>
+        <!-- 无标题 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 背景透明 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- 模糊 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:gravity">left</item>
+    </style>
+    <!-- 平台快捷菜单  end -->
+    <!-- 数据下载对话框  start -->
+    <style name="MyDialogStyle">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+    <style name="PromptDialogStyle">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+    <!-- 拍照重构 -->
+    <style name="CheckBoxStyle">
+        <item name="android:layout_width">28.0dip</item>
+        <item name="android:layout_height">28.0dip</item>
+        <item name="android:layout_marginRight">20.0dip</item>
+        <item name="android:button">@null</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+    <!-- 拍照重构 -->
+    <style name="video_detail_player_bottom_btn">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">fill_parent</item>
+    </style>
+    <!-- 拍照重构 -->
+    <style name="video_detail_player">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <!-- checkbox -->
+    <style name="linecardsearch_check">
+        <item name="android:textSize">15sp</item>
+    </style>
+    <!-- checkbox -->
+    <style name="termtzsearch_check">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">#595757</item>
+    </style>
+
+</resources>

@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical" >
+
+    <include layout="@layout/banner_cui" />
+
+    <include layout="@layout/banner_navigation" />
+
+    <LinearLayout
+        style="@style/content_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical" >
+
+        <TableLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:shrinkColumns="*" >
+
+            <!-- 经销商名称 -->
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:gravity="center" >
+
+                <TextView
+                    style="@style/formLabel_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:text="@string/agencykf_agencyname"
+                    android:textSize="20sp" />
+                <TextView
+                    style="@style/formLabel_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/agencykf_agencymaohao"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/agencykf_tv_agencyname"
+                    style="@style/formLabel_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="5"
+                    android:maxLength="150"
+                    android:singleLine="true"
+                    android:textSize="20sp" />
+
+                <TextView
+                    style="@style/formLabel_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/termadd_star"
+                    android:textColor="#fd022b"
+                    android:visibility="invisible" />
+            </TableRow>
+
+            <!-- 法定人 -->
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:gravity="center" >
+
+                <TextView
+                    style="@style/formLabel_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:text="@string/agencykf_contact"
+                    android:textSize="20sp" />
+                <TextView
+                    style="@style/formLabel_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/agencykf_agencymaohao"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/agencykf_tv_contact"
+                    style="@style/formLabel_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="5"
+                    android:maxLength="150"
+                    android:singleLine="true"
+                    android:textSize="20sp" />
+
+                <TextView
+                    style="@style/formLabel_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/termadd_star"
+                    android:textColor="#fd022b"
+                    android:visibility="invisible" />
+            </TableRow>
+
+            <!-- 联系电话 -->
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:gravity="center" >
+
+                <TextView
+                    style="@style/formLabel_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:text="@string/agencykf_mobile"
+                    android:textSize="20sp" />
+                <TextView
+                    style="@style/formLabel_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/agencykf_agencymaohao"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/agencykf_tv_mobile"
+                    style="@style/formLabel_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="5"
+                    android:maxLength="150"
+                    android:singleLine="true"
+                    android:textSize="20sp" />
+
+                <TextView
+                    style="@style/formLabel_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/termadd_star"
+                    android:textColor="#fd022b"
+                    android:visibility="invisible" />
+            </TableRow>
+            <!-- 仓库地址 -->
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:gravity="center" >
+
+                <TextView
+                    style="@style/formLabel_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:text="@string/agencykf_address"
+                    android:textSize="20sp" />
+                <TextView
+                    style="@style/formLabel_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/agencykf_agencymaohao"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/agencykf_tv_address"
+                    style="@style/formLabel_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="5"
+                    android:maxLength="150"
+                    android:singleLine="true"
+                    android:textSize="20sp" />
+
+                <TextView
+                    style="@style/formLabel_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/termadd_star"
+                    android:textColor="#fd022b"
+                    android:visibility="invisible" />
+            </TableRow>
+            <!-- 仓库面积 -->
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:gravity="center" >
+
+                <TextView
+                    style="@style/formLabel_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:text="@string/agencykf_area"
+                    android:textSize="20sp" />
+                <TextView
+                    style="@style/formLabel_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/agencykf_agencymaohao"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/agencykf_tv_area"
+                    style="@style/formLabel_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="5"
+                    android:background="@android:color/transparent"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    android:paddingBottom="8dp"
+                    android:singleLine="true"
+                    android:textSize="20sp" />
+
+                <TextView
+                    style="@style/formLabel_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/termadd_star"
+                    android:textColor="#fd022b"
+                    android:visibility="invisible" />
+            </TableRow>
+            <!-- 资金 -->
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:gravity="center" >
+
+                <TextView
+                    style="@style/formLabel_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:text="@string/agencykf_money"
+                    android:textSize="20sp" />
+                <TextView
+                    style="@style/formLabel_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/agencykf_agencymaohao"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/agencykf_tv_money"
+                    style="@style/formLabel_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="5"
+                    android:background="@android:color/transparent"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    android:paddingBottom="8dp"
+                    android:singleLine="true"
+                    android:textSize="20sp" />
+
+                <TextView
+                    style="@style/formLabel_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/termadd_star"
+                    android:textColor="#fd022b"
+                    android:visibility="invisible" />
+            </TableRow>
+            <!-- 车辆配送 -->
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:gravity="center" >
+
+                <TextView
+                    style="@style/formLabel_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:text="@string/agencykf_carnum"
+                    android:textSize="20sp" />
+                <TextView
+                    style="@style/formLabel_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/agencykf_agencymaohao"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/agencykf_tv_carnum"
+                    style="@style/formLabel_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="5"
+                    android:background="@android:color/transparent"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    android:paddingBottom="8dp"
+                    android:singleLine="true"
+                    android:textSize="20sp" />
+
+                <TextView
+                    style="@style/formLabel_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/termadd_star"
+                    android:textColor="#fd022b"
+                    android:visibility="invisible" />
+            </TableRow>
+            <!-- 销售产品 -->
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:gravity="center" >
+
+                <TextView
+                    style="@style/formLabel_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:text="@string/agencykf_productname"
+                    android:textSize="20sp" />
+                <TextView
+                    style="@style/formLabel_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/agencykf_agencymaohao"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/agencykf_tv_productname"
+                    style="@style/formLabel_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="5"
+                    android:background="@android:color/transparent"
+                    android:inputType="number"
+                    android:paddingBottom="8dp"
+                    android:textSize="20sp" />
+
+                <TextView
+                    style="@style/formLabel_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/termadd_star"
+                    android:textColor="#fd022b"
+                    android:visibility="invisible" />
+            </TableRow>
+            <!-- 开发时间 -->
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:gravity="center" >
+
+                <TextView
+                    style="@style/formLabel_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:text="@string/agencykf_kfdata"
+                    android:textSize="20sp" />
+                <TextView
+                    style="@style/formLabel_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/agencykf_agencymaohao"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/agencykf_btn_kfdata"
+                    style="@style/button_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="5"
+                    android:text="@string/default_date"
+                    android:textSize="20sp" />
+
+                <TextView
+                    style="@style/formLabel_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/termadd_star"
+                    android:textColor="#fd022b"
+                    android:visibility="invisible" />
+            </TableRow>
+        </TableLayout>
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,216 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_page_color" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <!-- 标题 客情备忘录 -->
+
+        <TextView
+            style="@style/dialog_tv_title"
+            android:layout_width="fill_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/bg_title"
+            android:gravity="center"
+            android:text="@string/memo_dialog_title" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal" >
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" >
+
+                <!-- 线路名称 -->
+
+                <TextView
+                    android:id="@+id/tv_01"
+                    style="@style/page_label_big"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="@string/memo_dialog_routename"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/memo_tv_routeName"
+                    style="@style/page_label_big"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:layout_toRightOf="@id/tv_01"
+                    android:gravity="center_vertical"
+                    android:textSize="14dp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" >
+
+                <!-- 终端名称 -->
+
+                <TextView
+                    android:id="@+id/tv_02"
+                    style="@style/page_label_big"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="@string/memo_dialog_terminalname"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/memo_tv_terminalName"
+                    style="@style/page_label_big"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:layout_toRightOf="@id/tv_02"
+                    android:gravity="center_vertical"
+                    android:textSize="14dp" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical" >
+
+            <EditText
+                android:id="@+id/memo_et_content"
+                style="@style/page_label_small"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="@color/bg_memo_tv"
+                android:gravity="start"
+                android:padding="10dp" />
+
+            <LinearLayout
+                android:id="@+id/memo_ll_datelayout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    style="@style/page_label_big"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="@string/memo_dialog_timelabel"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/memo_tv_timestart"
+                    style="@style/page_label_small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_spinner_use"
+                    android:gravity="center_vertical"
+                    android:textSize="14dp" />
+
+                <TextView
+                    style="@style/page_label_small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/memo_dialog_timeline"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/memo_tv_timeend"
+                    style="@style/page_label_small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_spinner_use"
+                    android:gravity="center_vertical"
+                    android:textSize="14dp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/memo_tv_timeover"
+                    style="@style/page_label_small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="@string/memo_dialog_timeover"
+                    android:textSize="14dp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/ico_line" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal" >
+
+                <CheckBox
+                    android:id="@+id/memo_cb_iscall"
+                    style="@style/page_label_small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/bt_checkbox"
+                    android:checked="true"
+                    android:paddingLeft="0dp" />
+
+                <TextView
+                    style="@style/page_label_small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical|left"
+                    android:text="@string/memo_dialog_iscall"
+                    android:textSize="14dp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/ico_line" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp" >
+
+                <ImageView
+                    android:id="@+id/memo_iv_save"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1.0"
+                    android:src="@drawable/bt_sure" />
+
+                <ImageView
+                    android:id="@+id/memo_iv_cancel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1.0"
+                    android:src="@drawable/bt_cancel2" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

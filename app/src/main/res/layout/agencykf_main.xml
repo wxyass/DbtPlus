@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_search_content"
+    android:orientation="vertical" >
+
+    <include layout="@layout/banner_cui" />
+
+    <include layout="@layout/banner_navigation" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bg_search_title"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="horizontal"
+        android:padding="15dp" >
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="46dp"
+            android:layout_weight="3" >
+
+            <TextView
+                android:id="@+id/tv_03"
+                style="@style/page_label_big"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:text="@string/agencykf_agencyn"
+                android:textSize="18dp" />
+
+            <EditText
+                android:id="@+id/addagency_et_agencyname"
+                style="@style/button_text"
+                android:layout_width="160dp"
+                android:layout_height="44dp"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@id/tv_03"
+                android:background="@drawable/bg_search_button"
+                android:layout_centerVertical="true"
+                android:hint="请输入经销商名称"
+                android:paddingLeft="5dp" />
+        </RelativeLayout>
+
+        <!-- 查询 -->
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+
+            <Button
+                android:id="@+id/addagency_btn_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="18dp"
+                android:background="@drawable/bt_kf_search" />
+        </RelativeLayout>
+
+        <!-- 新增 -->
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+
+            <Button
+                android:id="@+id/addagency_btn_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="18dp"
+                android:background="@drawable/bt_kf_add" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            style="@style/listview_bg_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <!-- 经销商名称 -->
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/listview_line" />
+
+            <TextView
+                style="@style/listview_tv_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="0.5dip"
+                android:layout_weight="1"
+                android:padding="5dp"
+                android:text="@string/agencykf_agencyname" />
+
+            <!-- 法定人 -->
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/listview_line" />
+
+            <TextView
+                style="@style/listview_tv_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="0.5dip"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="@string/agencykf_contact" />
+
+            <!-- 联系电话 -->
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/listview_line" />
+
+            <TextView
+                style="@style/listview_tv_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="0.5dip"
+                android:layout_weight="1"
+                android:padding="5dp"
+                android:text="@string/agencykf_mobile" />
+
+            <!-- 开发时间 -->
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/listview_line" />
+
+            <TextView
+                style="@style/listview_tv_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="0.5dip"
+                android:layout_weight="1"
+                android:padding="5dp"
+                android:text="@string/agencykf_kfdata" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/listview_line" />
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/addagency_lv_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:cacheColorHint="@color/bg_lv_item"
+            android:divider="@color/listview_line"
+            android:dividerHeight="1dp" >
+        </ListView>
+    </LinearLayout>
+
+</LinearLayout>

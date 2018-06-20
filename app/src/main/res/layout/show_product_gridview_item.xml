@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:descendantFocusability="blocksDescendants" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/gridview_item_bg"
+        android:padding="2dp" >
+
+        <ImageView
+            android:id="@+id/pruductIcon"
+            android:layout_width="fill_parent"
+            android:layout_height="150dp"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="10dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/bg_login" />
+
+<!--         <TextView -->
+<!--             android:id="@+id/product_price" -->
+<!--             android:layout_width="wrap_content" -->
+<!--             android:layout_height="wrap_content" -->
+<!--             android:layout_alignBottom="@id/pruductIcon" -->
+<!--             android:background="@drawable/bg_product_price" -->
+<!--             android:gravity="center_vertical" -->
+<!--             android:textColor="@android:color/white" -->
+<!--             android:textSize="14sp" /> -->
+
+        <TextView
+            android:id="@+id/pruduct_name"
+            style="@style/content_margin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/pruductIcon"
+            android:singleLine="true"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/pruduct_desc"
+            style="@style/content_margin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/pruduct_name"
+            android:layout_marginBottom="10dp"
+            android:singleLine="true"
+            android:textColor="@color/darkgray"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+</RelativeLayout>

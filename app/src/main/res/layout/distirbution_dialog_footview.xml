@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <LinearLayout
+        android:id="@+id/headViewLl"
+        style="@style/listview_bg_item"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:descendantFocusability="blocksDescendants"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/common_multiple_tv_lvitem"
+            style="@style/dialog_tv_item"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="6dp"
+            android:layout_weight="1.0"
+            android:text="@string/distirbution_composite" />
+        <CheckBox
+            android:id="@+id/distirbutionCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:focusableInTouchMode="false" />
+    </LinearLayout>
+      <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/listview_line" />
+</LinearLayout>

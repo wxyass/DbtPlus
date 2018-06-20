@@ -1,0 +1,794 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="#FFFFFF" >
+
+    <TextView
+        android:id="@+id/unit_title"
+        style="@style/unit_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_title"
+        android:gravity="center"
+        android:text="@string/checkindex_qulick_title" />
+
+    <!-- 逻辑按钮 -->
+
+    <LinearLayout
+        android:id="@+id/bottom"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal" >
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+
+            <!-- 编辑 -->
+
+            <Button
+                android:id="@+id/agencykfdialog_bt_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@drawable/bt_kf_edit" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+
+            <!-- 删除 -->
+
+            <Button
+                android:id="@+id/agencykfdialog_bt_detele"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@drawable/bt_kf_delete" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+
+            <!-- 取消 -->
+
+            <Button
+                android:id="@+id/agencykfdialog_bt_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@drawable/bt_cancel2" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_above="@id/bottom"
+        android:background="@color/listview_line" />
+
+    <ScrollView
+        android:id="@+id/center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/line"
+        android:layout_below="@id/unit_title" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <!-- 经销商名称 -->
+
+            <LinearLayout
+                android:id="@+id/listview_bg_title2"
+                style="@style/listview_bg_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    style="@style/listview_tv_item_number"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="@string/agencykf_agencyname" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    android:id="@+id/agencykfdatial_tv_agencyname"
+                    style="@style/listview_tv_item_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="5dp" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/listview_line" />
+            <!-- 法定人 -->
+
+            <LinearLayout
+                android:id="@+id/listview_bg_title3"
+                style="@style/listview_bg_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    style="@style/listview_tv_item_number"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="@string/agencykf_contact" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    android:id="@+id/agencykfdatial_tv_agencypeople"
+                    style="@style/listview_tv_item_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="5dp" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/line2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/listview_line" />
+
+            <!-- 联系电话 -->
+
+            <LinearLayout
+                android:id="@+id/listview_bg_title4"
+                style="@style/listview_bg_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    style="@style/listview_tv_item_number"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="@string/agencykf_mobile" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    android:id="@+id/agencykfdatial_tv_mobile"
+                    style="@style/listview_tv_item_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/line3"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/listview_line" />
+
+            <!-- 仓库地址 -->
+
+            <LinearLayout
+                android:id="@+id/listview_bg_title5"
+                style="@style/listview_bg_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    style="@style/listview_tv_item_number"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="@string/agencykf_address" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    android:id="@+id/agencykfdatial_tv_address"
+                    style="@style/listview_tv_item_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="5dp" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/line4"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/listview_line" />
+
+            <!-- 仓库面积 -->
+
+            <LinearLayout
+                android:id="@+id/listview_bg_title6"
+                style="@style/listview_bg_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    style="@style/listview_tv_item_number"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="@string/agencykf_area" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    android:id="@+id/agencykfdatial_tv_area"
+                    style="@style/listview_tv_item_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/line5"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/listview_line" />
+            <!-- 资金 -->
+
+            <LinearLayout
+                android:id="@+id/listview_bg_title7"
+                style="@style/listview_bg_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    style="@style/listview_tv_item_number"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="@string/agencykf_money" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    android:id="@+id/agencykfdatial_tv_money"
+                    style="@style/listview_tv_item_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/line6"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/listview_line" />
+            <!-- 车辆配送 -->
+
+            <LinearLayout
+                android:id="@+id/listview_bg_title8"
+                style="@style/listview_bg_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    style="@style/listview_tv_item_number"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="@string/agencykf_carnum" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    android:id="@+id/agencykfdatial_tv_carnum"
+                    style="@style/listview_tv_item_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/line7"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/listview_line" />
+            <!-- 人员 -->
+
+            <LinearLayout
+                android:id="@+id/listview_bg_title12"
+                style="@style/listview_bg_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    style="@style/listview_tv_item_number"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="@string/agencykf_persion" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    android:id="@+id/agencykfdatial_tv_persion"
+                    style="@style/listview_tv_item_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/line12"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/listview_line" />
+            <!-- 销售产品 -->
+
+            <LinearLayout
+                android:id="@+id/listview_bg_title9"
+                style="@style/listview_bg_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    style="@style/listview_tv_item_number"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="@string/agencykf_productname" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    android:id="@+id/agencykfdatial_tv_productname"
+                    style="@style/listview_tv_item_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="5dp" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/line8"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/listview_line" />
+            <!-- 经营状况 -->
+
+            <LinearLayout
+                android:id="@+id/listview_bg_title13"
+                style="@style/listview_bg_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    style="@style/listview_tv_item_number"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="@string/agencykf_business" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    android:id="@+id/agencykfdatial_tv_business"
+                    style="@style/listview_tv_item_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/line13"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/listview_line" />
+            <!-- 是否数一数二经销商 -->
+
+            <LinearLayout
+                android:id="@+id/listview_bg_title14"
+                style="@style/listview_bg_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    style="@style/listview_tv_item_number"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="@string/agencykf_isone" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    android:id="@+id/agencykfdatial_tv_isone"
+                    style="@style/listview_tv_item_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/line14"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/listview_line" />
+            <!-- 覆盖终端 -->
+
+            <LinearLayout
+                android:id="@+id/listview_bg_title15"
+                style="@style/listview_bg_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    style="@style/listview_tv_item_number"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="@string/agencykf_coverterms" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    android:id="@+id/agencykfdatial_tv_coverterms"
+                    style="@style/listview_tv_item_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/line15"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/listview_line" />
+            <!-- 直供终端 -->
+
+            <LinearLayout
+                android:id="@+id/listview_bg_title16"
+                style="@style/listview_bg_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    style="@style/listview_tv_item_number"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="@string/agencykf_supplyterms" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    android:id="@+id/agencykfdatial_tv_supplyterms"
+                    style="@style/listview_tv_item_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/line16"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/listview_line" />
+            <!-- 开发时间 -->
+
+            <LinearLayout
+                android:id="@+id/listview_bg_title10"
+                style="@style/listview_bg_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    style="@style/listview_tv_item_number"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="@string/agencykf_kfdata" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    android:id="@+id/agencykfdatial_tv_kfdata"
+                    style="@style/listview_tv_item_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/line9"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/listview_line" />
+            <!-- 达成时间 -->
+
+            <LinearLayout
+                android:id="@+id/listview_bg_title17"
+                style="@style/listview_bg_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    style="@style/listview_tv_item_number"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="@string/agencykf_passdate" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    android:id="@+id/agencykfdatial_tv_passdate"
+                    style="@style/listview_tv_item_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/line17"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/listview_line" />
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

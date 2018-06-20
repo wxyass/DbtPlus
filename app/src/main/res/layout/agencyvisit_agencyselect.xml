@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/agencyselect_fl_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_page_color" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <include layout="@layout/banner_navigation" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ico_agencyselect_title" />
+
+        <LinearLayout
+            style="@style/content_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="15dp"
+                android:background="@color/listview_line" />
+
+            <LinearLayout
+                style="@style/listview_bg_title"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal" >
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    style="@style/listview_tv_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0"
+                    android:text="@string/agencyvisit_lv_title_agencyname" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    style="@style/listview_tv_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0"
+                    android:text="@string/agencyvisit_lv_title_addr" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+
+                <TextView
+                    style="@style/listview_tv_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0"
+                    android:text="@string/agencystorage__lv_title_phone" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/listview_line" />
+            </LinearLayout>
+
+            <ListView
+                android:id="@+id/agencyselect_lv_select"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:cacheColorHint="@color/bg_lv_item"
+                android:divider="@color/listview_line"
+                android:dividerHeight="1dp"
+                android:footerDividersEnabled="false" >
+            </ListView>
+
+            <ImageButton
+                android:id="@+id/agencyselect_ib_ok"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:background="@null"
+                android:src="@drawable/bt_sure" />
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>

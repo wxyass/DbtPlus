@@ -1,0 +1,113 @@
+<resources>
+
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    
+    <!-- 背景色 -->
+    <color name="bg_lv_item">#f8f8f9</color>
+
+    <color name="black_overlay">#66000000</color>
+    <!-- 今日进度完成数 -->
+    <color name="holo_orange_dark">#ffff8800</color>
+    <!-- 今日进度总计划数 -->
+    <color name="holo_blue_dark">#ff0099cc</color>
+    <!-- 列表中横竖线的颜色值 -->
+    <color name="listview_line">#dedcda</color>
+
+    <!-- 列表中字体颜色 -->
+    <color name="listview_item_font_color">#666464</color>
+
+    <!-- 平台背景颜色 原#dcdcdc-->
+    <color name="bg_plantform_color">#eef4f7</color>
+
+    <!-- 每页的背景色 -->
+    <color name="bg_page_color">#f7f7f7</color>
+
+    <!-- 页面中内容的背景色(浅绿色) -->
+    <color name="bg_content_color">#e3efe3</color>
+
+    <!-- 页面中内容的背景色(浅灰色) -->
+    <color name="bg_content_color_gray">#e4e6e9</color>
+
+    <!-- 页面中内容的背景色(灰色) -->
+    <color name="bg_content_color_deepgray">#EFEEEC</color>
+
+    <!-- 橘色 -->
+    <color name="bg_content_color_orange">#FFAF00</color>
+
+    <!-- 绿色 -->
+    <color name="font_color_green">#598f35</color>
+
+    <!-- 进销存台账和调货台账ViewPager的title字体颜色 -->
+    <color name="agency_viewpager_title">#2a7406</color>
+
+    <!-- 巡店拜访-终端列表-已上传过状态 -->
+    <color name="termlst_sync_font_color">#fe0000</color>
+
+    <!-- 巡店拜访-终端列表-已拜访未上传过状态 -->
+    <color name="termlst_insync_font_color">#ed6c00</color>
+    <!-- 万能的铺货率 字体按下去变化的颜色 灰色 -->
+    <color name="darkgray">#a9a9a9 </color>
+    <!-- 万能的铺货率 字体正常色值 -->
+    <color name="distirbution_tv_color">#595757 </color>
+    <!-- 透明 -->
+    <color name="transparent">#00000000 </color>
+    <!-- 客情备忘录输入内容背景 -->
+    <color name="bg_memo_tv">#efefef </color>
+    <!-- 首页饼状图颜色 -->
+
+
+
+     <!-- mt绿色 -->
+    <color name="home_mt"> #23ac38</color>
+     <!-- et橘黄黄色 -->
+    <color name="home_et"> #f08300</color>
+      <!-- sp红色 #e95377 灰色 #666666-->
+    <color name="home_sp"> #e95377</color>
+     <!-- ot蓝色 -->
+    <color name="home_ot"> #00ada9</color>
+    <!-- tt紫蓝色-->
+    <color name="home_tt"> #5977b3</color>
+    <!-- op黑色-->
+    <color name="home_op"> #727171</color>
+    
+    <color name="home_channel_cb00c52"> #b00c52</color>
+    <color name="home_channel_c9f8dfa"> #9f8dfa</color>
+    <color name="home_channel_c10b594"> #10b594</color>
+    
+    
+     <!--网络信号差对话框  -->
+     <!-- wt 纯白色 -->
+     <color name="prompt_wt"> #FFFFFF</color>
+     <!-- bk 纯黑色 -->
+      <color name="prompt_bk"> #000000</color>
+      
+      
+    <!-- 查询类界面的条件部分的背景色 -->
+    <color name="bg_search_title"> #f4f4f4</color>
+    <!-- 查询类界面的结果部分的背景色 -->
+    <color name="bg_search_content"> #e6e6e6</color>
+    <!-- 首页底部按钮的背景色 -->
+    <color name="bg_main_bottom"> #e0f1eb</color>
+    
+    <!-- 拍照颜色 -->
+    <color name="main_menu_bg">#aa111213</color>
+    <color name="common_title_bg">#aa111213</color>
+    <color name="primary_title_text_color">#ff888888</color>
+    <color name="common_title_text">#ff565555</color>
+    <color name="common_text_yellow">#ffffe049</color>
+    <color name="album_item_bg">#fffcfcfd</color>
+    <color name="video_playter_bg">#333333</color>
+    
+    <!-- 订单明细颜色 -->
+    <color name="blue">#EFEEEC</color><!-- 表格描边颜色 -->
+    <color name="darktitle">#000000</color><!-- 标题字体颜色#008F7D 深黑-->
+    <color name="darkgreen">#727171</color><!-- 表格字体颜色#008F7D 浅灰-->
+    
+    <!-- 扫描二维码 -->
+    <color name="result_view">#b0000000</color>
+      <color name="viewfinder_mask">#60000000</color>
+      <color name="possible_result_points">#c0ffff00</color> 
+
+</resources>

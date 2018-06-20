@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/listview_bg_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" >
+
+    <!-- 经销商名称 -->
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <TextView
+        android:id="@+id/developagency_tv_agencyname"
+        style="@style/listview_tv_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="0.5dip"
+        android:layout_weight="1"
+        android:padding="5dp"
+        android:text="@string/agencykf_details" />
+
+    <!-- 法定人 -->
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <TextView
+        android:id="@+id/developagency_tv_legalperson"
+        style="@style/listview_tv_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="0.5dip"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="@string/agencykf_contact" />
+
+    <!-- 联系电话 -->
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <TextView
+        android:id="@+id/developagency_tv_telnum"
+        style="@style/listview_tv_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="0.5dip"
+        android:layout_weight="1"
+        android:padding="5dp"
+        android:text="@string/agencykf_mobile" />
+
+    <!-- 开发时间 -->
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <TextView
+        android:id="@+id/developagency_tv_developdata"
+        style="@style/listview_tv_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="0.5dip"
+        android:layout_weight="1"
+        android:padding="5dp"
+        android:text="@string/agencykf_kfdata" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+</LinearLayout>

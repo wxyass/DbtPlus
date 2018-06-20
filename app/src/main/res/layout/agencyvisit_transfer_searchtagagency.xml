@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_page_color"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        style="@style/content_margin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <EditText
+                android:id="@+id/searchtagagency_tv_searchcontent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_term_search_input"
+                android:hint="@string/transfer_msg_search_tagagency"
+                android:paddingLeft="5dp"
+                android:singleLine="true" />
+
+            <requestFocus />
+
+            <Button
+                android:id="@+id/searchtagagency_bt_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/bt_term_search"
+                android:gravity="center_vertical" />
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/searchtagagency_lv_agencyname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:cacheColorHint="@color/bg_lv_item"
+            android:divider="@color/listview_line"
+            android:dividerHeight="1dp" >
+        </ListView>
+    </LinearLayout>
+
+</RelativeLayout>

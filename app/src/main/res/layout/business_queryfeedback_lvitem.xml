@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    style="@style/listview_bg_item" >
+
+    <TextView
+        style="@style/listview_tv_item_text"
+        android:id="@+id/business_tv_questiontitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/question"
+        android:layout_marginTop="35dp"
+        android:layout_marginLeft="22dp"
+        android:layout_toRightOf="@+id/business_lv_icon_quesion"
+        android:text="1" />
+
+    <TextView
+        style="@style/listview_tv_item_text"
+        android:id="@+id/business_tv_feedbacktitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/business_lv_icon_quesion"
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="14dp"
+        android:text="TextView" />
+
+    <TextView
+        style="@style/listview_tv_item_text"
+        android:id="@+id/feedback"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/business_tv_questiontitle"
+        android:layout_marginLeft="103dp"
+        android:layout_toRightOf="@+id/business_lv_icon_quesion"
+        android:text="221111111111111111111111111111111111111111111111" />
+
+    <TextView
+        style="@style/listview_tv_item_text"
+        android:id="@+id/question"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/business_tv_feedbacktitle"
+        android:layout_marginLeft="103dp"
+        android:layout_toRightOf="@+id/business_lv_icon_quesion"
+        android:text="TextView111111111111111111111111111111111111" />
+
+    <TextView
+        style="@style/listview_tv_item_text"
+        android:id="@+id/business_tv_userfeedback"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/feedback"
+        android:layout_marginRight="20dp"
+        android:text="44" />
+
+    <TextView
+        style="@style/listview_tv_item_text"
+        android:id="@+id/business_tv_userquestion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/question"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:text="55" />
+
+    <View
+        android:id="@+id/center_line"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/business_tv_userquestion"
+        android:layout_marginTop="2dp"
+        android:background="@drawable/bg_quesionbotttom_line" />
+
+    <ImageView
+        android:id="@+id/business_lv_icon_quesion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="14dp"
+        android:src="@drawable/icon_quesion" />
+
+    <ImageView
+        android:id="@+id/business_lv_icon_feedback"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="28dp"
+        android:layout_below="@+id/question"
+        android:layout_marginTop="32dp"
+        android:src="@drawable/icon_feedback" />
+
+	<!-- <View
+	    android:layout_width="wrap_content"
+	    android:layout_height="10dp"
+	    android:layout_alignParentLeft="true"
+	    android:layout_below="@+id/TextView04"
+	    android:background="@drawable/bg_bottom_yy" /> -->
+
+</RelativeLayout>

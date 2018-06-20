@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_content_color_gray" >
+
+    <include
+        android:id="@+id/title_bar"
+        layout="@layout/banner_navigation" />
+
+    <GridView
+        android:id="@+id/show_product_gridview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/title_bar"
+        android:layout_margin="10dp"
+        android:cacheColorHint="@color/transparent"
+        android:horizontalSpacing="10dp"
+        android:listSelector="@color/transparent"
+        android:numColumns="3"
+        android:verticalSpacing="10dp" />
+    <!-- 无数据显示的textview -->
+    <TextView
+        android:id="@+id/nodata_promotion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="@string/nodata_promotion"
+        android:textSize="25sp"
+        android:visibility="gone" />
+
+</RelativeLayout>

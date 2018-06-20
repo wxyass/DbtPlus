@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/listview_bg_item"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:layout_marginTop="10dp"
+    android:background="@color/bg_page_color"
+    android:gravity="center"
+    android:minHeight="70dp"
+    android:orientation="horizontal" >
+
+    <TextView
+        android:id="@+id/makeweekplan_tv_viewpagger_item_product"
+        style="@style/listview_tv_item_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center" />
+
+    <LinearLayout
+        android:id="@+id/makeweekplan_ll_viewpagger_item_terminal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/makeweekplan_ll_viewpagger_item_rate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+    </LinearLayout>
+
+    <View
+        android:layout_width="2dp"
+        android:layout_height="wrap_content"
+        android:background="@color/listview_line" />
+
+    <TextView
+        android:id="@+id/vp_tv_num"
+        style="@style/listview_tv_item_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/default_digital" />
+
+    <View
+        android:layout_width="2dp"
+        android:layout_height="wrap_content"
+        android:background="@color/listview_line" />
+
+    <TextView
+        android:id="@+id/vp_tv_terminal"
+        style="@style/listview_tv_item_text"
+        android:layout_width="match_parent"
+        android:layout_height="55dip"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:hint="@string/makeplan_hint_terminal" />
+
+</LinearLayout>

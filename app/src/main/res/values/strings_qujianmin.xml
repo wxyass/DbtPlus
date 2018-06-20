@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 系统设置 -->
+    <string name="sys">系统设置</string>
+    <string name="sys_hint_currentpsd">请输入当前密码</string>
+    <string name="sys_hint_newpsd">请输入新密码</string>
+    <string name="sys_hint_repeatpsd">请再次输入密码</string>
+    <string name="sys_currentpsd">当前密码  :  </string>
+    <string name="sys_newpsd">设置新密码  :  </string>
+    <string name="sys_repeatpsd">重复新密码  :  </string>
+    <string name="sys_update">当前版本   :V </string>
+    <string name="sys_version">系统版本   : </string>
+    <string name="sys_versionproperties">新版特性   : </string>
+    <string name="sys_versioncontent">--交互体验优化\n--用户体验向上 \n--上传下载实现差量更新，最大程度节省流量。\n--可以离线登录，无网路环境系可以独立使用。\n--代码进行了规范，软件运行效率极大提升。\n--基本大数据应用的底层框架改造，极大提升了大数据报表查询及分析速度。</string>
+    <string name="sys_version1">1.0</string>
+    <string name="sys_copyright_information">版权信息   : </string>
+    <string name="sys_copyright_information_detailed">本系统所有版权归青岛啤酒集团所有，未经授权所有组织和个人不得复制和传播本系统及功能模块，否则将追究法律责任！</string>
+    <string name="sys_msg_psd1">用户密码不能为空</string>
+    <string name="sys_msg_psd2">新密码不能为空</string>
+    <string name="sys_msg_psd3">重复密码不能为空</string>
+    <string name="sys_msg_psd4">当前密码输入不正确，请重新输入</string>
+    <string name="sys_msg_psd5">新密码两次设置不一致</string>
+    <string name="sys_msg_psd6">新密码与原密码不能相同</string>
+    <string name="sys_msg_psd7">新密码长度需大于等于8位</string>
+    <string name="sys_msg_psd8">新密码必须包含字母和阿拉伯数字</string>
+    <string name="sys_msg_psd9">新密码不能修改成原始密码</string>
+    <string name="sys_msg_net_fail">网络状态不可用，请确保网络状态及网络设置是否正确</string>
+    <string name="sys_msg_succes">修改密码成功</string>
+    <string name="sys_msg_fail">修改密码失败</string>
+    <string name="sys_digits_pwd">0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM</string>
+
+    <!-- 日工作推进 -->
+    <string name="working_today_plan">今日计划日期:</string>
+    <string name="working_last_plan">上一工作日期:</string>
+    <string name="working_hint_content">请填写报告内容</string>
+    <string name="working_msg1">您还未提交该日提的总结</string>
+    <string name="working_msg2">请输入该日期的总结</string>
+    <string name="working_title">日工作推进</string>
+
+    <!-- 日工作计划 -->
+    <string name="workplan_select_time">请选择时间：</string>
+    <string name="workplan_visit_time">预计拜访时间</string>
+    <string name="workplan_time">日期</string>
+    <string name="workplan_state">状态</string>
+    <string name="workplan_operation">操作</string>
+    <string name="workplan_statea">未制定</string>
+    <string name="workplan_stateb">等待提交</string>
+    <string name="workplan_statec">已提交</string>
+    <string name="workplan_stated">审核未通过</string>
+    <string name="workplan_statef">审核通过</string>
+    <string name="workplan_auto_statef">自动通过</string>
+    <string name="workplan_title">周工作计划制定</string>
+    <string name="workplan_msg1">第</string>
+    <string name="workplan_msg2">周</string>
+    <string name="workplan_msg3">年</string>
+    <string name="workplan_msgyear">年第</string>
+    <string name="workplan_msg4">月第</string>
+    <string name="workplan_rmonth">月工作计划</string>
+    <string name="workplan_msg5">周工作计划</string>
+    <string name="workplan_msg6">日周</string>
+    <string name="workplan_week">星期</string>
+    <string name="workplan_month">月</string>
+
+    <!-- 制定工作计划 -->
+    <string name="workplan_daytitle">日工作计划</string>
+    <string name="makeplan_date">工作日期:</string>
+    <string name="makeplan_line">拜访线路:</string>
+    <string name="makeplan_time">工作时间:</string>
+    <string name="makeplan_am">上午:</string>
+    <string name="makeplan_pm">下午:</string>
+    <string name="makeplan_symbol">-</string>
+    <string name="makeplan_productnum">终端数量:</string>
+    <string name="makeplan_total">合计</string>
+    <string name="makeplan_terminal">终端</string>
+    <string name="makeplan_num">数量</string>
+    <string name="makeplan_name">名称</string>
+    <string name="makeplan_productname">采集项名称</string>
+    <string name="makeplan_operation">操作</string>
+    <string name="makeplan_proname">产品名称</string>
+    <string name="makeplan_pinpai">品牌</string>
+    <string name="makeplan_terminalselect">终端选择</string>
+    <string name="makeplan_productselect">产品选择</string>
+    <string name="makeplan_hint_terminal">请选择终端</string>
+
+    <!-- 促销活动查询 -->
+    <string name="promotion_promotion">促销活动:</string>
+    <string name="promotion_promotion1">促销活动达成查询</string>
+    <string name="promotion_promotion2">请选择促销活动</string>
+    <string name="promotion_line">选择线路:</string>
+    <string name="promotion_line1">请选择线路</string>
+    <string name="promotion_selltype">渠道类型:</string>
+    <string name="promotion_startdate">开始时间:</string>
+    <string name="promotion_date">截止日期:</string>
+    <string name="promotion_type">终端类型:</string>
+    <string name="promotion_grade">终端等级:</string>
+    <string name="promotion_type1">请选择终端类型</string>
+    <string name="promotion_termgrade">请选择终端等级</string>
+    <string name="promotion_termsell">请选择渠道类型</string>
+    <string name="promotion_abort">至</string>
+    <string name="promotion_condition">活动达成情况</string>
+    <string name="promotion_finish">已完成:</string>
+    <string name="promotion_finish1">已完成</string>
+    <string name="promotion_unfinished">未达成:</string>
+    <string name="promotion_unfinished1">未达成</string>
+    <string name="promotion_total">终端总计:</string>
+    <string name="promotion_rate">完成率:</string>
+    <string name="promotion_timebegin">活动的有效时间:</string>
+    <string name="promotion_to">至</string>
+    <string name="promotion_title_line">选择线路</string>
+    <string name="promotion_title_level">选择终端类型</string>
+    <string name="promotion_title_secSell">选择渠道类型</string>
+    <string name="promotion_valid_prom">请选择促销活动</string>
+    <string name="promotion_valid_line">请选择线路</string>
+    <string name="promotion_lv_no">序号</string>
+    <string name="promotion_lv_term">终端</string>
+    <string name="promotion_lv_status">状态</string>
+
+    <!-- 产品展示 -->
+    <string name="productshow">新品展示</string>
+    <!-- 初始化 -->
+    <string name="succes">保存成功</string>
+    <string name="saveerror">保存失败</string>
+    <string name="default_date">2013-05-28</string>
+    <string name="default_text">制作时间 :</string>
+    <string name="default_time">08:00</string>
+    <string name="default_time1">08:00</string>
+    <string name="default_time2">12:00</string>
+    <string name="default_time3">13:00</string>
+    <string name="default_time4">18:00</string>
+    <string name="default_digital">0</string>
+    <string name="default_week">第5周</string>
+    <string name="default_weeka">星期二</string>
+    <string name="default_title_info">2013年5月第5周工作计划</string>
+    <string name="default_week_title_info">本周计划完成目标汇总：</string>
+    <string name="default_week_title_info2">本周计划完成目标汇总</string>
+    <string name="point">点</string>
+
+</resources>

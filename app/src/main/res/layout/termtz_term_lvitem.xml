@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/listview_bg_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" >
+
+    <!-- 终端编号 -->
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <TextView
+        android:id="@+id/tzterm_tv_termid"
+        style="@style/listview_tv_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="0.5dip"
+        android:layout_weight="1"
+        android:padding="5dp"
+        android:text="@string/termtz_termid" />
+
+    <!-- 终端名称 -->
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <TextView
+        android:id="@+id/tzterm_tv_termname"
+        style="@style/listview_tv_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="0.5dip"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="@string/termtz_termname" />
+
+    <!-- 终端顺序 -->
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <TextView
+        android:id="@+id/tzterm_tv_sequence"
+        style="@style/listview_tv_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="0.5dip"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="@string/termtz_sequence" />
+
+    <!-- 定格 -->
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <TextView
+        android:id="@+id/tzterm_tv_grid"
+        style="@style/listview_tv_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="0.5dip"
+        android:layout_weight="1"
+        android:padding="5dp"
+        android:text="@string/termtz_grid" />
+
+    <!-- 路线 -->
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <TextView
+        android:id="@+id/tzterm_tv_route"
+        style="@style/listview_tv_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="0.5dip"
+        android:layout_weight="1"
+        android:padding="5dp"
+        android:text="@string/termtz_route" />
+    <!-- 地址 -->
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <TextView
+        android:id="@+id/tzterm_tv_address"
+        style="@style/listview_tv_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="0.5dip"
+        android:layout_weight="1"
+        android:padding="5dp"
+        android:text="@string/termtz_address" />
+    <!-- 关键人 -->
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <TextView
+        android:id="@+id/tzterm_tv_people"
+        style="@style/listview_tv_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="0.5dip"
+        android:layout_weight="1"
+        android:padding="5dp"
+        android:text="@string/termtz_people" />
+    <!-- 联系电话 -->
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <TextView
+        android:id="@+id/tzterm_tv_phone"
+        style="@style/listview_tv_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="0.5dip"
+        android:layout_weight="1"
+        android:padding="5dp"
+        android:text="@string/termtz_phone" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+</LinearLayout>

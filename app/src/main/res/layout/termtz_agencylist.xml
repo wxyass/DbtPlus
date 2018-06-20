@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_search_title"
+    android:orientation="vertical" >
+
+    <include layout="@layout/banner_cui" />
+
+    <include layout="@layout/banner_navigation" />
+
+    <LinearLayout
+        style="@style/content_margin"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="15dp"
+        android:background="@color/bg_search_title"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical" >
+
+            <ImageView
+                style="@style/point"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ico_point" />
+
+            <TextView
+                style="@style/page_label_big"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/linelist_gridname" />
+
+            <!-- 定格 -->
+
+            <TextView
+                android:id="@+id/termtz_tv_gridname"
+                style="@style/font_size3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#549b35" />
+        </LinearLayout>
+
+        <!-- 选择经销商 -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center_vertical" >
+
+            <ImageView
+                style="@style/point"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ico_point" />
+
+            <TextView
+                style="@style/page_label_big"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/termtz_select" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:gravity="right|center_vertical"
+                android:visibility="gone" >
+
+                <EditText
+                    android:id="@+id/termtz_et_search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_term_search_input"
+                    android:ems="14"
+                    android:hint="请输入经销商的名称"
+                    android:paddingLeft="5dp"
+                    android:singleLine="true" >
+                </EditText>
+
+                <Button
+                    android:id="@+id/termtz_bt_search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:background="@drawable/bt_term_search"
+                    android:gravity="center_vertical" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/line_ll"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginTop="10dp"
+            android:background="@color/listview_line"
+            android:orientation="vertical"
+            android:padding="1dp" >
+
+            <ListView
+                android:id="@+id/termtz_lv"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:cacheColorHint="@color/bg_lv_item"
+                android:divider="@color/listview_line"
+                android:dividerHeight="1dp" >
+            </ListView>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

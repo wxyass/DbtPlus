@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/listview_bg_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" >
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <!-- 点击选择品种 -->
+    <EditText
+        android:id="@+id/transfer_et_proname"
+        style="@style/listview_tv_item_text"
+        android:layout_width="0dp"
+        android:layout_weight="5"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/bg_make_plan_textarea"
+        android:focusable="false"
+        android:hint="@string/transfer_lvitem_choice_pro" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <!-- 点击选择经销商 -->
+    <EditText
+        android:id="@+id/transfer_et_agencyname"
+        style="@style/listview_tv_item_text"
+        android:layout_width="0dp"
+        android:layout_weight="5"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/bg_make_plan_textarea"
+        android:focusable="false"
+        android:hint="@string/transfer_lvitem_choice_agency" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <!-- 调入 -->
+    <EditText
+        android:id="@+id/transfer_et_turnenter"
+        style="@style/listview_tv_item_number"
+        android:layout_width="0dp"
+        android:layout_weight="3"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:inputType="number"
+        android:maxLength="7" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <!-- 调出 -->
+    <EditText
+        android:id="@+id/transfer_et_turnout"
+        style="@style/listview_tv_item_number"
+        android:layout_width="0dp"
+        android:layout_weight="3"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:inputType="number"
+        android:maxLength="7" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+    <!-- 删除按钮 -->
+    <ImageButton
+        android:id="@+id/transfer_ib_delete"
+        android:layout_width="0dp"
+        android:layout_weight="3"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@null"
+        android:src="@drawable/bt_delete_list" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/listview_line" />
+
+</LinearLayout>

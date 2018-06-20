@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/content_margin"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_page_color"
+    android:orientation="vertical" >
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|center_horizontal"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/bg_search_bottom" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+            <ListView
+                android:id="@+id/invoicing_lv_checkgoods"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:divider="@color/listview_line"
+                android:dividerHeight="1dp"
+                android:fadeScrollbars="true">
+            </ListView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/listview_line" />
+        </LinearLayout>
+</LinearLayout>
