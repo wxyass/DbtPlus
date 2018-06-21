@@ -9,6 +9,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Date;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -22,8 +23,11 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
+import android.os.Build;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -40,6 +44,7 @@ import et.tsingtaopad.DeleteTools;
 import et.tsingtaopad.R;
 import et.tsingtaopad.db.tables.MstSoftupdateM;
 import et.tsingtaopad.tools.CheckUtil;
+import et.tsingtaopad.tools.DateUtil;
 import et.tsingtaopad.tools.FunUtil;
 import et.tsingtaopad.tools.HttpUtil;
 import et.tsingtaopad.tools.JsonUtil;
@@ -85,7 +90,7 @@ public class VersionService {
             	if (downloadDialog!=null && downloadDialog.isShowing()) {
             		downloadDialog.dismiss();
 				}
-            	showNoticeDialog();
+            	// showNoticeDialog();
                 installApk();
                 break;
                 
@@ -248,7 +253,11 @@ public class VersionService {
                     int length = conn.getContentLength();
                     InputStream is = conn.getInputStream();
                     
-                    File file = context.getFilesDir();
+                    //File file = context.getFilesDir();
+                    String sdcardPath = Environment.getExternalStorageDirectory().getAbsolutePath();
+                    String path = sdcardPath + "/dbt/et.tsingtaopad" + "/bug";
+                    File file = new File(path);
+
                     if(!file.exists()){
                         file.mkdir();
                     }
@@ -309,11 +318,29 @@ public class VersionService {
         File apkfile = new File(apkPath);
         if (!apkfile.exists()) {
             return;
-        }    
-        Intent i = new Intent(Intent.ACTION_VIEW);
-        i.setDataAndType(Uri.parse("file://" + apkfile.toString()),
-                                "application/vnd.android.package-archive"); 
-        context.startActivity(i);
+        }
+
+        /*Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setDataAndType(Uri.parse("file://" + apkfile.toString()),"application/vnd.android.package-archive");
+        context.startActivity(i);*/
+
+        final Intent intent = new Intent();
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setAction(Intent.ACTION_VIEW);
+        /*intent.setDataAndType(Uri.fromFile(apkfile),"application/vnd.android.package-archive");
+        context.startActivity(intent);*/
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            Uri contentUri = FileProvider.getUriForFile(context, "et.tsingtaopad.provider", apkfile);
+            //添加这一句表示对目标应用临时授权该Uri所代表的文件
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            intent.setDataAndType(contentUri,"application/vnd.android.package-archive");
+            context.startActivity(intent);
+        } else {
+            intent.setDataAndType(Uri.fromFile(apkfile),"application/vnd.android.package-archive");
+            context.startActivity(intent);
+        }
+
     }
     
     /**

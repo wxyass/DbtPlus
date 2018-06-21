@@ -16,12 +16,14 @@ import java.util.Map;
 
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -38,11 +40,14 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.blankj.utilcode.util.FileUtils;
 import com.j256.ormlite.android.AndroidDatabaseConnection;
 import com.j256.ormlite.dao.Dao;
 
+
 import et.tsingtaopad.BaseFragmentSupport;
 import et.tsingtaopad.ConstValues;
+import et.tsingtaopad.GlobalValues;
 import et.tsingtaopad.MyApplication;
 import et.tsingtaopad.R;
 import et.tsingtaopad.db.DatabaseHelper;
@@ -51,6 +56,7 @@ import et.tsingtaopad.db.tables.MstCameraInfoM;
 import et.tsingtaopad.db.tables.MstTerminalinfoM;
 import et.tsingtaopad.tools.DateUtil;
 import et.tsingtaopad.tools.DbtLog;
+import et.tsingtaopad.tools.FileTool;
 import et.tsingtaopad.tools.FileUtil;
 import et.tsingtaopad.tools.FunUtil;
 import et.tsingtaopad.tools.ImageUtil;
@@ -60,6 +66,7 @@ import et.tsingtaopad.tools.ViewUtil;
 import et.tsingtaopad.visit.shopvisit.ShopVisitService;
 import et.tsingtaopad.visit.shopvisit.camera.container.TakeCameraAty;
 import et.tsingtaopad.visit.shopvisit.camera.domain.CameraDataStc;
+import et.tsingtaopad.visit.shopvisit.camera.domain.CameraImageBean;
 import et.tsingtaopad.visit.shopvisit.camera.domain.PictypeDataStc;
 import et.tsingtaopad.visit.shopvisit.checkindex.CheckIndexService;
 import et.tsingtaopad.visit.shopvisit.checkindex.domain.CheckIndexPromotionStc;
@@ -481,6 +488,27 @@ public class CameraFragment extends BaseFragmentSupport {
 	private void toCamera2(int position) {
 		DbtLog.logUtils(TAG, "toCamera2()-跳到系统摄像头界面");
 
+		if (hasPermission(GlobalValues.HARDWEAR_CAMERA_PERMISSION)) {
+			// 拥有了此权限,那么直接执行业务逻辑
+			startToCamera();
+		} else {
+			// 还没有对一个权限(请求码,权限数组)这两个参数都事先定义好
+			requestPermission(GlobalValues.HARDWEAR_CAMERA_CODE, GlobalValues.HARDWEAR_CAMERA_PERMISSION);
+		}
+
+	}
+
+	@Override
+	public void doOpenCamera() {
+		startToCamera();
+	}
+
+	/**
+	 * 打开系统相机,去拍照
+	 */
+	private void startToCamera() {
+		DbtLog.logUtils(TAG, "toCamera2()-跳到系统摄像头界面");
+
 		/*
 		 * Intent intent = null; intent = new Intent(); // 指定开启系统相机的Action
 		 * intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -490,28 +518,40 @@ public class CameraFragment extends BaseFragmentSupport {
 		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 		// 根据文件地址创建文件
 
-		// intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		// String sdcardPath = Environment.getExternalStorageDirectory() + "";
 		String sdcardPath = Environment.getExternalStorageDirectory().getAbsolutePath();
-		// File file3 =
-		// Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-		// new
-		// File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),"MyCameraApp");
-		// String sdcardPath2 =
-		// Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getAbsolutePath();
-		// path = sdcardPath + "/dbt/et.tsingtaopad" + "/photo" +
-		// File.separator;
 		path = sdcardPath + "/dbt/et.tsingtaopad" + "/photo/";
-		// String path2 = getActivity().getFilesDir().getAbsolutePath() +
-		// File.separator + "photo" + File.separator;
 		name = DateUtil.formatDate(new Date(), null) + ".jpg";
-		// name = System.currentTimeMillis() + ".jpg";
 
-		// saveHeadImg(path, bm, nam
 		File file = new File(path, name);
 		DbtLog.logUtils(TAG, "创建File: "+path + name);
-		
-		try {
+
+
+		Uri fileuri;
+		// 兼容7.0及以上的写法
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+			//intent = toCameraByFileProvider(intent,tempFile);
+			//intent = toCameraByContentResolver(intent,tempFile,currentPhotoName);
+
+            /*fileuri = toCameraByContentResolverUri(tempFile,currentPhotoName);
+            CameraImageBean cameraImageBean = CameraImageBean.getInstance();
+            cameraImageBean.setmPath(fileuri);
+            cameraImageBean.setPicname(currentPhotoName);
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, fileuri);
+            DELEGATE.startActivityForResult(intent, RequestCodes.TAKE_PHONE);*/
+
+			intent = toCameraByContentResolver(intent,file,name);
+			startActivityForResult(intent, 100);
+		} else {
+			fileuri = Uri.fromFile(file);// 将File转为Uri
+			//CameraImageBean.getInstance().setmPath(fileUri);
+			CameraImageBean cameraImageBean = CameraImageBean.getInstance();
+			cameraImageBean.setmPath(fileuri);
+			cameraImageBean.setPicname(name);
+			intent.putExtra(MediaStore.EXTRA_OUTPUT, fileuri);
+			startActivityForResult(intent, 100);
+		}
+
+		/*try {
 			if (file.exists()) {
 				file.delete();
 			}
@@ -525,8 +565,26 @@ public class CameraFragment extends BaseFragmentSupport {
 		// 设置系统相机拍摄照片完成后图片文件的存放地址
 		intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
 		// intent.putExtra("return-data", true);
-		startActivityForResult(intent, 100);
+		startActivityForResult(intent, 100);*/
 
+	}
+
+
+	// Android 7.0调用系统相机适配 使用FileUtils库中的方法转化
+	private Intent toCameraByContentResolver(Intent intent,File tempFile,String currentPhotoName){
+		final ContentValues contentValues = new ContentValues(1);// ?
+		contentValues.put(MediaStore.Images.Media.DATA, tempFile.getPath());//?
+		final Uri uri = getContext().getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
+		// 需要将Uri路径转化为实际路径?
+		final File realFile = FileUtils.getFileByPath(FileTool.getRealFilePath(getContext(), uri));
+		// 将File转为Uri
+		final Uri realUri = Uri.fromFile(realFile);
+		//将拍取的照片保存到指定URI
+		intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+		CameraImageBean cameraImageBean = CameraImageBean.getInstance();
+		cameraImageBean.setmPath(realUri);
+		cameraImageBean.setPicname(currentPhotoName);
+		return intent;
 	}
 
 	/**
@@ -658,12 +716,19 @@ public class CameraFragment extends BaseFragmentSupport {
 							// 自动裁剪
 							//picphoto = FunUtil.zoomImg(picphoto, 480, 640);
 							//picphoto = FunUtil.scaleBitmap(picphoto, 480, 640);
-							
-							
+
+							// 获取照片文件路径
+							CameraImageBean cameraImageBean = CameraImageBean.getInstance();
+							String picname = cameraImageBean.getPicname();
+							Uri uri = cameraImageBean.getmPath();
+
+
 							// 裁剪后台所需大小  本地读取照片并裁剪
-							picphoto = FunUtil.convertToBitmap(path+name,480,640);
+							// picphoto = FunUtil.convertToBitmap(path+name,480,640);
+
+							picphoto = getBitmapFormUri(getContext(), uri);
+
 							DbtLog.logUtils(TAG, "onActivityResult()-裁剪成功");
-							
 							//int a = 1/0;
 
 							// path = sdcardPath + "/dbt/et.tsingtaopad/photo/";
@@ -854,10 +919,10 @@ public class CameraFragment extends BaseFragmentSupport {
 							Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE); // MediaStore.Images.Media.EXTERNAL_CONTENT_URI
 																								// //ACTION_MEDIA_SCANNER_SCAN_FILE
 							String path = Environment.getExternalStorageDirectory() + "";
-							Uri uri = Uri.fromFile(new File(path));
+							Uri newuri = Uri.fromFile(new File(path));
 							// Uri uri =
 							// MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
-							intent.setData(uri);
+							intent.setData(newuri);
 							getActivity().sendBroadcast(intent);
 
 							// 重新读取照片数据

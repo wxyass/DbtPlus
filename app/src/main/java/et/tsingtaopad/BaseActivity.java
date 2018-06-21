@@ -9,15 +9,22 @@ import android.app.ActivityManager;
 import android.app.ActivityManager.RunningAppProcessInfo;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Toast;
+
 import et.tsingtaopad.login.LockScreenActivity;
 
 
@@ -218,5 +225,105 @@ public class BaseActivity extends FragmentActivity {
 		}
 		return false;
 	}
+
+
+	 // 权限相关 ↓--------------------------------------------------------------------------
+
+	 /**
+	  * 判断是否有指定的权限
+	  */
+	 public boolean hasPermission(String... permissions) {
+
+		 for (String permisson : permissions) {
+			 if (ContextCompat.checkSelfPermission(getApplicationContext(), permisson)
+					 != PackageManager.PERMISSION_GRANTED) {
+				 return false;
+			 }
+		 }
+		 return true;
+	 }
+
+	 /**
+	  * 申请指定的权限.
+	  */
+	 public void requestPermission(int code, String... permissions) {
+
+		 if (Build.VERSION.SDK_INT >= 23) {
+			 requestPermissions(permissions, code);
+			 // startAppSettings();
+		 }
+	 }
+
+	 /**
+	  * 启动当前应用设置页面
+	  */
+	 private void startAppSettings() {
+		 Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+		 intent.setData(Uri.parse("package:" + getPackageName()));
+		 startActivity(intent);
+	 }
+
+	 // 定义几个常量
+
+	 @Override
+	 public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+		 switch (requestCode) {
+			 case GlobalValues.HARDWEAR_CAMERA_CODE:
+				 if (grantResults.length > 0
+						 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+					 doOpenCamera();
+				 }else{
+					 Toast.makeText(getApplicationContext(),"请先开启相机权限",Toast.LENGTH_SHORT).show();
+				 }
+				 break;
+			 case GlobalValues.WRITE_READ_EXTERNAL_CODE:
+				 if (grantResults.length > 0
+						 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+					 doWriteSDCard();
+				 }else{
+					 Toast.makeText(getApplicationContext(),"请先开启读写存储权限",Toast.LENGTH_SHORT).show();
+				 }
+				 break;
+			 case GlobalValues.LOCAL_CODE:
+				 if (grantResults.length > 0
+						 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+					 doLocation();
+				 }else{
+					 Toast.makeText(getApplicationContext(),"请先开启定位权限",Toast.LENGTH_SHORT).show();
+				 }
+				 break;
+			 case GlobalValues.WRITE_LOCAL_CODE:
+				 if (grantResults.length > 0
+						 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+					 doCameraWriteSD();
+				 }else{
+					 Toast.makeText(getApplicationContext(),"请先开启读写存储权限",Toast.LENGTH_SHORT).show();
+				 }
+				 break;
+		 }
+	 }
+
+	 public void doCameraWriteSD() {
+
+	 }
+
+	 // 定位
+	 public void doLocation() {
+	 }
+
+
+	 // 拍照
+	 public void doOpenCamera() {
+
+	 }
+
+	 // 读写SD卡业务逻辑,由具体的子类实现
+	 public void doWriteSDCard() {
+
+	 }
+
+	 // 权限相关 ↑--------------------------------------------------------------------------
+
+
 	
 }

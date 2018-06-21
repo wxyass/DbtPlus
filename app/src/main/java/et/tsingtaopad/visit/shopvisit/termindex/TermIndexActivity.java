@@ -20,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import et.tsingtaopad.BaseActivity;
+import et.tsingtaopad.GlobalValues;
 import et.tsingtaopad.R;
 import et.tsingtaopad.cui.NoScrollListView;
 import et.tsingtaopad.db.tables.MstVisitM;
@@ -393,22 +394,38 @@ public class TermIndexActivity extends BaseActivity implements OnClickListener {
 		//case R.id.banner_navigation_bt_confirm:
 			if (ViewUtil.isDoubleClick(v.getId(), 2500))
 				return;
-			DbtLog.logUtils(TAG, "进入拜访");
-			Intent intent = new Intent(this, ShopVisitActivity.class);
-			intent.putExtra("isFirstVisit", isFirstVisit);//  是否第一次拜访  0:第一次拜访   1:重复拜访
-			intent.putExtra("seeFlag", seeFlag);
-			intent.putExtra("termStc", termStc);
-			intent.putExtra("visitM", visitM);
-			intent.putExtra("visitDate", visitDateTv.getText().toString());
-			intent.putExtra("visitDay", visitDayTv.getText().toString());
-			intent.putExtra("lastTime", lastTime);
-			startActivity(intent);
-			finish();
+			if (hasPermission(GlobalValues.LOCAL_PERMISSION)) {
+				// 拥有了此权限,那么直接执行业务逻辑
+				confirmVisit();
+			} else {
+				// 还没有对一个权限(请求码,权限数组)这两个参数都事先定义好
+				requestPermission(GlobalValues.LOCAL_CODE, GlobalValues.LOCAL_PERMISSION);
+			}
+
 			break;
 
 		default:
 			break;
 		}
+	}
+
+	@Override
+	public void doLocation() {
+		confirmVisit();
+	}
+
+	private void  confirmVisit(){
+		DbtLog.logUtils(TAG, "进入拜访");
+		Intent intent = new Intent(this, ShopVisitActivity.class);
+		intent.putExtra("isFirstVisit", isFirstVisit);//  是否第一次拜访  0:第一次拜访   1:重复拜访
+		intent.putExtra("seeFlag", seeFlag);
+		intent.putExtra("termStc", termStc);
+		intent.putExtra("visitM", visitM);
+		intent.putExtra("visitDate", visitDateTv.getText().toString());
+		intent.putExtra("visitDay", visitDayTv.getText().toString());
+		intent.putExtra("lastTime", lastTime);
+		startActivity(intent);
+		finish();
 	}
 
 }

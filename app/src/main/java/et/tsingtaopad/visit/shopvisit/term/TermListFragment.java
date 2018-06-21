@@ -29,6 +29,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import et.tsingtaopad.BaseFragmentSupport;
 import et.tsingtaopad.ConstValues;
+import et.tsingtaopad.GlobalValues;
 import et.tsingtaopad.R;
 import et.tsingtaopad.tools.CheckUtil;
 import et.tsingtaopad.tools.DateUtil;
@@ -234,6 +235,7 @@ public class TermListFragment extends BaseFragmentSupport implements OnClickList
             //case R.id.banner_navigation_bt_confirm:
                 //if (ViewUtil.isDoubleClick(v.getId(), 1000)) return;
                 confirmVisit();
+
                 break;
 
             // 查询终端
@@ -284,6 +286,8 @@ public class TermListFragment extends BaseFragmentSupport implements OnClickList
             transaction.commit();
         }
     }
+
+
 
     /**
      * 查询
