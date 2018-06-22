@@ -7,6 +7,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.ref.SoftReference;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -23,6 +24,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -70,6 +72,7 @@ import et.tsingtaopad.visit.shopvisit.camera.domain.CameraImageBean;
 import et.tsingtaopad.visit.shopvisit.camera.domain.PictypeDataStc;
 import et.tsingtaopad.visit.shopvisit.checkindex.CheckIndexService;
 import et.tsingtaopad.visit.shopvisit.checkindex.domain.CheckIndexPromotionStc;
+import et.tsingtaopad.visit.shopvisit.invoicing.InvoicingFragment;
 
 /**
  * 项目名称：营销移动智能工作平台 </br> 文件名：CameraFragment.java</br> 作者：ywm </br>
@@ -123,7 +126,12 @@ public class CameraFragment extends BaseFragmentSupport {
 
 	AlertDialog dialog;
 
-	final Handler handler = new Handler() {
+	MyHandler handler;
+
+	//是否在加载数据
+	private boolean isLoadingData = true;
+
+	/*final Handler handler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
 			super.handleMessage(msg);
@@ -160,7 +168,82 @@ public class CameraFragment extends BaseFragmentSupport {
 				DbtLog.logUtils(TAG, "onActivityResult()-图片保存失败,请重新拍照");
 			}
 		}
-	};
+	};*/
+
+
+	/**
+	 * 接收子线程消息的 Handler
+	 */
+	public static class MyHandler extends Handler {
+
+		// 软引用
+		SoftReference<CameraFragment> fragmentRef;
+
+		public MyHandler(CameraFragment fragment) {
+			fragmentRef = new SoftReference<CameraFragment>(fragment);
+		}
+
+		@Override
+		public void handleMessage(Message msg) {
+			CameraFragment fragment = fragmentRef.get();
+			if (fragment == null) {
+				return;
+			}
+			// 处理UI 变化
+			super.handleMessage(msg);
+			if (msg.what == 1) {// 拍照完成,刷新页面
+				fragment.notifyAdapterData();
+			}
+			else if (msg.what == 2) {// 图片正在保存,请稍后
+				// Toast.makeText(getActivity(), "图片正在保存,请稍后", Toast.LENGTH_SHORT).show();
+			}
+			else if (msg.what == 3) {// 弹出滚动条, 替换2
+				// 拍照  弹出进度框
+				fragment.showDialogBuilder();
+			}
+			else if (msg.what == 4) {// 拍照处理成功 取消滚动条, 拍照完成,刷新页面
+				fragment.closeDialogBuilder(false);// false:不吐司
+			}
+			else if (msg.what == 6) {// 拍照处理失败 取消滚动条, 拍照完成,刷新页面
+				fragment.closeDialogBuilder(true); // true:吐司 解释为什么失败
+			}
+		}
+
+
+
+
+	}
+
+
+
+	// 拍照完成,刷新页面
+	private void notifyAdapterData() {
+		if (dialog != null) {
+			dialog.dismiss();
+		}
+		gridAdapter.notifyDataSetChanged();
+	}
+
+	// 拍照 弹出进度框
+	private void showDialogBuilder() {
+		dialog = new Builder(getActivity()).setCancelable(false).create();
+		dialog.setView(getActivity().getLayoutInflater().inflate(R.layout.camera_progress, null), 0, 0, 0, 0);
+		dialog.setCancelable(false); // 是否可以通过返回键 关闭
+		dialog.show();
+	}
+
+	// 拍照处理成功 取消滚动条, 拍照完成,刷新页面
+	private void closeDialogBuilder(boolean type) {
+		if (dialog != null) {
+			dialog.dismiss();
+		}
+		gridAdapter.notifyDataSetChanged();
+
+		if(type){
+			Toast.makeText(getActivity(), "图片保存失败,请重新拍照", Toast.LENGTH_SHORT).show();
+			DbtLog.logUtils(TAG, "onActivityResult()-图片保存失败,请重新拍照");
+		}
+	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -168,9 +251,36 @@ public class CameraFragment extends BaseFragmentSupport {
 		DbtLog.logUtils(TAG, "onCreateView()-打开拍照模块");
 		createphotoFile();// 创建拍照文件夹
 		this.initView(view);
-		this.initData();
+		// this.initData();
+		this.asynch();
 		return view;
 	}
+
+	/**
+	 * 异步加载
+	 */
+	public void asynch() {
+		DbtLog.logUtils(TAG, "asynch()");
+		new AsyncTask<Void, Void, Void>() {
+			protected void onPreExecute() {
+				isLoadingData = true;
+			}
+
+			@Override
+			protected Void doInBackground(Void... params) {
+				return null;
+			}
+
+			protected void onPostExecute(Void result) {
+				initData();
+				isLoadingData = false;
+			}
+
+			;
+
+		}.execute();
+	}
+
 
 	private void initView(View view) {
 		DbtLog.logUtils(TAG, "initView()-初始化拍照模块界面");
@@ -182,7 +292,7 @@ public class CameraFragment extends BaseFragmentSupport {
 
 	private void initData() {
 		DbtLog.logUtils(TAG, "initData()-初始化拍照模块界面数据");
-
+		handler = new MyHandler(this);
 		// 获取参数
 		Bundle bundle = getArguments();
 		termId = bundle.getString("termId");
@@ -570,23 +680,6 @@ public class CameraFragment extends BaseFragmentSupport {
 	}
 
 
-	// Android 7.0调用系统相机适配 使用FileUtils库中的方法转化
-	private Intent toCameraByContentResolver(Intent intent,File tempFile,String currentPhotoName){
-		final ContentValues contentValues = new ContentValues(1);// ?
-		contentValues.put(MediaStore.Images.Media.DATA, tempFile.getPath());//?
-		final Uri uri = getContext().getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
-		// 需要将Uri路径转化为实际路径?
-		final File realFile = FileUtils.getFileByPath(FileTool.getRealFilePath(getContext(), uri));
-		// 将File转为Uri
-		final Uri realUri = Uri.fromFile(realFile);
-		//将拍取的照片保存到指定URI
-		intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-		CameraImageBean cameraImageBean = CameraImageBean.getInstance();
-		cameraImageBean.setmPath(realUri);
-		cameraImageBean.setPicname(currentPhotoName);
-		return intent;
-	}
-
 	/**
 	 * 打开系统相机,去拍照
 	 */
@@ -674,7 +767,6 @@ public class CameraFragment extends BaseFragmentSupport {
 				new Thread() {
 					@Override
 					public void run() {
-						// TODO Auto-generated method stub
 						super.run();
 						// ----
 						try {

@@ -1,6 +1,8 @@
 package et.tsingtaopad;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -8,6 +10,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
@@ -15,11 +18,17 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
+import com.blankj.utilcode.util.FileUtils;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+
+import et.tsingtaopad.tools.FileTool;
+import et.tsingtaopad.visit.shopvisit.camera.domain.CameraImageBean;
 
 public class BaseFragmentSupport extends Fragment {
 	
@@ -56,6 +65,11 @@ public class BaseFragmentSupport extends Fragment {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
 	}
 
 
@@ -120,6 +134,23 @@ public class BaseFragmentSupport extends Fragment {
 		ByteArrayInputStream isBm = new ByteArrayInputStream(baos.toByteArray());//把压缩后的数据baos存放到ByteArrayInputStream中
 		Bitmap bitmap = BitmapFactory.decodeStream(isBm, null, null);//把ByteArrayInputStream数据生成图片
 		return bitmap;
+	}
+
+	// Android 7.0调用系统相机适配 使用FileUtils库中的方法转化
+	public Intent toCameraByContentResolver(Intent intent, File tempFile, String currentPhotoName){
+		final ContentValues contentValues = new ContentValues(1);// ?
+		contentValues.put(MediaStore.Images.Media.DATA, tempFile.getPath());//?
+		final Uri uri = getContext().getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
+		// 需要将Uri路径转化为实际路径?
+		final File realFile = FileUtils.getFileByPath(FileTool.getRealFilePath(getContext(), uri));
+		// 将File转为Uri
+		final Uri realUri = Uri.fromFile(realFile);
+		//将拍取的照片保存到指定URI
+		intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+		CameraImageBean cameraImageBean = CameraImageBean.getInstance();
+		cameraImageBean.setmPath(realUri);
+		cameraImageBean.setPicname(currentPhotoName);
+		return intent;
 	}
 
 	// 权限相关 ↓--------------------------------------------------------------------------

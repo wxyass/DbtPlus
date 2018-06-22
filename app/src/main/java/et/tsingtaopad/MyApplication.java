@@ -35,10 +35,14 @@ public class MyApplication extends Application
 
 
 
+
     @Override
     public void onCreate()
     {
         super.onCreate();
+
+        // LeakCanary.install(this);
+
         instance = this;
         mContext = getApplicationContext();
         //设置该CrashHandler为程序的默认处理器    

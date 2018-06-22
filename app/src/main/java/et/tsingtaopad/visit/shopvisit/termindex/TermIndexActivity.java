@@ -1,5 +1,6 @@
 package et.tsingtaopad.visit.shopvisit.termindex;
 
+import java.lang.ref.SoftReference;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -20,6 +21,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import et.tsingtaopad.BaseActivity;
+import et.tsingtaopad.ConstValues;
 import et.tsingtaopad.GlobalValues;
 import et.tsingtaopad.R;
 import et.tsingtaopad.cui.NoScrollListView;
@@ -31,6 +33,7 @@ import et.tsingtaopad.tools.DbtLog;
 import et.tsingtaopad.tools.ViewUtil;
 import et.tsingtaopad.visit.shopvisit.ShopVisitActivity;
 import et.tsingtaopad.visit.shopvisit.ShopVisitService;
+import et.tsingtaopad.visit.shopvisit.invoicing.InvoicingFragment;
 import et.tsingtaopad.visit.shopvisit.term.domain.MstTermListMStc;
 import et.tsingtaopad.visit.shopvisit.termindex.domain.TermIndexStc;
 
@@ -67,15 +70,17 @@ public class TermIndexActivity extends BaseActivity implements OnClickListener {
 	private RelativeLayout backRl;
 	private RelativeLayout confirmRl;
 	private ProgressDialog progressDialog;
-	private final int INITFINISH = 1;
+	/*private final int INITFINISH = 1;
 	private final int DATAFINISH = 2;
-	private final int DATACHULI = 3;
+	private final int DATACHULI = 3;*/
 
 	private List<KvStc> indexValueLst;
 	private Map<String, List<TermIndexStc>> proMap;
 	private Map<String, List<TermIndexStc>> IndexMap;
 
-	private Handler handler = new Handler() {
+	MyHandler handler;
+
+	/*private Handler handler = new Handler() {
 
 		@Override
 		public void handleMessage(Message msg) {
@@ -84,17 +89,17 @@ public class TermIndexActivity extends BaseActivity implements OnClickListener {
 			switch (msg.what) {
 
 			// 提示信息
-			case INITFINISH:
+			case ConstValues.WAIT1:
 				// initDate();
 
 				break;
 
 			// 主线程更新UI数据
-			case DATACHULI:
+			case ConstValues.WAIT3:
 				initViewDate();
 				break;
 
-			case DATAFINISH:
+			case ConstValues.WAIT2:
 				progressDialog.dismiss();
 
 				break;
@@ -104,15 +109,62 @@ public class TermIndexActivity extends BaseActivity implements OnClickListener {
 			}
 		}
 
-	};
+	};*/
+
+
+	/**
+	 * 接收子线程消息的 Handler
+	 */
+	public static class MyHandler extends Handler {
+
+		// 软引用
+		SoftReference<TermIndexActivity> fragmentRef;
+
+		public MyHandler(TermIndexActivity fragment) {
+			fragmentRef = new SoftReference<TermIndexActivity>(fragment);
+		}
+
+		@Override
+		public void handleMessage(Message msg) {
+			TermIndexActivity fragment = fragmentRef.get();
+			if (fragment == null) {
+				return;
+			}
+			// 处理UI 变化
+			super.handleMessage(msg);
+			switch (msg.what) {
+
+				// 提示信息
+				case ConstValues.WAIT1:
+					break;
+
+				// 主线程更新UI数据
+				case ConstValues.WAIT3:
+					fragment.initViewDate();
+					break;
+
+				case ConstValues.WAIT2:
+					fragment.closeProgressDialog();
+					break;
+
+				default:
+					break;
+			}
+		}
+	}
+
+	// 关闭
+	private void closeProgressDialog() {
+		progressDialog.dismiss();
+	}
 
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		starttime = new Date().getTime();
 		setContentView(R.layout.shopvisit_termindex);
-		
-		
+
+		handler = new MyHandler(this);
 
 		// 弹出进度框
 		progressDialog = new ProgressDialog(this);
@@ -130,7 +182,7 @@ public class TermIndexActivity extends BaseActivity implements OnClickListener {
 	// 子线程中 初始化控件, 初始化数据
 	private void initDate2() {
 
-		Thread thread = new Thread() {
+		/*Thread thread = new Thread() {
 
 			@Override
 			public void run() {
@@ -209,11 +261,89 @@ public class TermIndexActivity extends BaseActivity implements OnClickListener {
 				} catch (Exception e) {
 					Log.e(TAG, "MakePlanActivity INIT EXCEPTION:", e);
 				} finally {
-					handler.sendEmptyMessage(DATACHULI);
+					handler.sendEmptyMessage(ConstValues.WAIT3);
 				}
 			}
 		};
-		thread.start();
+		thread.start();*/
+
+
+		try {
+
+			DbtLog.logUtils(TAG, "initDate2: run thread" );
+			initView();
+
+			// 查询之前时间
+			Long time = new Date().getTime();
+			service = new TermIndexService(getBaseContext());
+			shopVisitService = new ShopVisitService(getBaseContext(), null);
+
+			// 获取传送参数
+			seeFlag = getIntent().getExtras().getString("seeFlag");
+			isFirstVisit = getIntent().getExtras().getString("isFirstVisit");
+			termStc = (MstTermListMStc) getIntent().getExtras().getSerializable("termStc");
+
+			DbtLog.logUtils(TAG, "initDate2:" + termStc.getTerminalname());
+
+			// 获取最后一次拜访的信息
+			visitM = shopVisitService.findNewVisit(termStc.getTerminalkey(), false);
+			// 获取上一次结束拜访信息
+			MstVisitM visitM_end = shopVisitService.findNewVisit(termStc.getTerminalkey(), true);
+
+			if (visitM == null) {// 若此终端从未拜访过 设置此终端的上次拜访时间为1901-01-01
+				// 01:01
+				lastTime = "1901-01-01 01:01";// 2016-03-08 11:24
+				// 读取上次拜访的时间
+				// (查询拜访主表的关于此终端的所有拜访记录,取最新一次,不管是否上传成功过,查询此记录的拜访时间)
+			} else {
+				lastTime = DateUtil.formatDate(0, visitM.getVisitdate());// 2016-03-08
+				// 11:24
+			}
+
+			// 计算访终端上次拜访日期
+			titleTv.setText(termStc.getTerminalname());
+			if (visitM_end != null) {
+				if (visitM_end == null || CheckUtil.isBlankOrNull(visitM_end.getVisitdate())) {
+					visitDateTv.setText("");
+					visitDayTv.setText("0");
+				} else {
+					visitDateTv.setText(DateUtil.formatDate(0, visitM_end.getVisitdate()));
+					int day = (int) DateUtil.diffDays(new Date(),
+							DateUtil.parse(visitM_end.getVisitdate().substring(0, 8), "yyyyMMdd"));
+					visitDayTv.setText(String.valueOf(day));
+				}
+
+			} else {
+				visitDateTv.setText("");
+				visitDayTv.setText("0");
+			}
+
+			if (visitM != null) {
+				// 设置当前拜访线路
+				visitM.setRoutekey(termStc.getRoutekey());
+			}
+			// 获取各渠道下对应的指标及指标值关系
+
+			indexValueLst = service.queryCheckType(termStc.getMinorchannel());
+			DbtLog.logUtils(TAG, "indexValueLst 指标的结构数据:" + indexValueLst.size());
+
+			// 获取终端上一次的指标采集数据
+			List<TermIndexStc> termIndexLst = new ArrayList<TermIndexStc>();
+			if (visitM != null) { // 终端指标完成状态值的获取
+				termIndexLst = service.queryTermIndex(visitM.getVisitkey(), visitM.getUploadFlag(),
+						visitM.getTerminalkey(), termStc.getMinorchannel());
+			}
+			proMap = service.distinctByProduct(termIndexLst);
+			IndexMap = service.initTermIndex(termIndexLst);
+			// 查询之后时间
+			Long time1 = new Date().getTime();
+			Log.e("message", "查询数据库时间1" + (time1 - time));
+
+		} catch (Exception e) {
+			Log.e(TAG, "MakePlanActivity INIT EXCEPTION:", e);
+		} finally {
+			handler.sendEmptyMessage(ConstValues.WAIT3);
+		}
 	}
 
 	// 加载数据
@@ -251,7 +381,7 @@ public class TermIndexActivity extends BaseActivity implements OnClickListener {
 			Log.e(TAG, "initViewDate :", e);
 		} finally {
 			DbtLog.logUtils(TAG, "数据加载成功");
-			handler.sendEmptyMessage(DATAFINISH);
+			handler.sendEmptyMessage(ConstValues.WAIT2);
 		}
 	}
 

@@ -200,7 +200,7 @@ public class ShopVisitActivity extends BaseActivity implements OnClickListener,
 
         // 弹出进度框
         /*progressDialog = new ProgressDialog(this);
-		progressDialog.setMessage("初始化中...");
+        progressDialog.setMessage("初始化中...");
 		progressDialog.show();*/
 
 
@@ -442,7 +442,7 @@ public class ShopVisitActivity extends BaseActivity implements OnClickListener,
     }
 
     String sdf = "";
-	
+
 	
 	/*private void initVisitData() {
 
@@ -875,31 +875,21 @@ public class ShopVisitActivity extends BaseActivity implements OnClickListener,
                 .findViewById(R.id.sayhi_et_termName);
         if (termNameTv != null) {
 
-            Spinner belongLineSp = (Spinner) view
-                    .findViewById(R.id.sayhi_sp_belongLine);
-            Spinner levelSp = (Spinner) view
-                    .findViewById(R.id.sayhi_sp_termLevel);
+            Spinner belongLineSp = (Spinner) view.findViewById(R.id.sayhi_sp_belongLine);
+            Spinner levelSp = (Spinner) view.findViewById(R.id.sayhi_sp_termLevel);
             Spinner provSp = (Spinner) view.findViewById(R.id.sayhi_sp_prov);
             Spinner citySp = (Spinner) view.findViewById(R.id.sayhi_sp_city);
-            Spinner countrySp = (Spinner) view
-                    .findViewById(R.id.sayhi_sp_country);
-            EditText addressEt = (EditText) view
-                    .findViewById(R.id.sayhi_et_address);
-            EditText linkmanEt = (EditText) view
-                    .findViewById(R.id.sayhi_et_person);
-            EditText telEt = (EditText) view
-                    .findViewById(R.id.sayhi_et_contactTel);
-            EditText sequenceEt = (EditText) view
-                    .findViewById(R.id.sayhi_et_sequence);
-            Spinner sellChannelSp = (Spinner) view
-                    .findViewById(R.id.sayhi_sp_sellChannel);
-            Spinner mainChannelSp = (Spinner) view
-                    .findViewById(R.id.sayhi_sp_mainChannel);
-            Spinner minorChannelSp = (Spinner) view
-                    .findViewById(R.id.sayhi_sp_minorChannel);
+            Spinner countrySp = (Spinner) view.findViewById(R.id.sayhi_sp_country);
+            EditText addressEt = (EditText) view.findViewById(R.id.sayhi_et_address);
+            EditText linkmanEt = (EditText) view.findViewById(R.id.sayhi_et_person);
+            EditText telEt = (EditText) view.findViewById(R.id.sayhi_et_contactTel);
+            EditText sequenceEt = (EditText) view.findViewById(R.id.sayhi_et_sequence);
+            Spinner sellChannelSp = (Spinner) view.findViewById(R.id.sayhi_sp_sellChannel);
+            Spinner mainChannelSp = (Spinner) view.findViewById(R.id.sayhi_sp_mainChannel);
+            Spinner minorChannelSp = (Spinner) view.findViewById(R.id.sayhi_sp_minorChannel);
 
             int msgId = -1;
-            if ("".equals(FunUtil.isNullSetSpace(termNameTv.getText())
+            /*if ("".equals(FunUtil.isNullSetSpace(termNameTv.getText())
                     .toString())) {
                 termNameTv.requestFocus();
                 msgId = R.string.termadd_msg_invaltermname;
@@ -921,30 +911,15 @@ public class ShopVisitActivity extends BaseActivity implements OnClickListener,
                     "-1"))) {
                 msgId = R.string.termadd_msg_invaltermlevel;
 
-            } /*else if ("-1".equals(FunUtil.isBlankOrNullTo(provSp.getTag(),
-					"-1"))) {
-				msgId = R.string.termadd_msg_invalprov;
-
-			} else if ("-1".equals(FunUtil.isBlankOrNullTo(citySp.getTag(),
-					"-1"))) {
-				msgId = R.string.termadd_msg_invalcity;
-
-			} else if ("-1".equals(FunUtil.isBlankOrNullTo(countrySp.getTag(),
-					"-1"))) {
-				msgId = R.string.termadd_msg_invalcountry;
-
-			}*/ else if ("-1".equals(FunUtil.isBlankOrNullTo(
-                    sellChannelSp.getTag(), "-1"))) {
+            } else if ("-1".equals(FunUtil.isBlankOrNullTo(sellChannelSp.getTag(), "-1"))) {
                 msgId = R.string.termadd_msg_invalsellchannel;
 
-            } else if ("-1".equals(FunUtil.isBlankOrNullTo(
-                    mainChannelSp.getTag(), "-1"))) {
+            } else if ("-1".equals(FunUtil.isBlankOrNullTo(mainChannelSp.getTag(), "-1"))) {
                 msgId = R.string.termadd_msg_invalmainchannel;
 
-            } else if ("-1".equals(FunUtil.isBlankOrNullTo(
-                    minorChannelSp.getTag(), "-1"))) {
+            } else if ("-1".equals(FunUtil.isBlankOrNullTo(minorChannelSp.getTag(), "-1"))) {
                 msgId = R.string.termadd_msg_invalminorchannel;
-            }
+            }*/
 
             if (msgId != -1) {
                 tabHost.setCurrentTab(0);
