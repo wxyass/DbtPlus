@@ -174,7 +174,8 @@ public class InvoicingFragment extends BaseFragmentSupport implements OnClickLis
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.shopvisit_invoicing, null);
+        //View view = inflater.inflate(R.layout.shopvisit_invoicing, null);
+        View view = inflater.inflate(R.layout.shopvisit_invoicing, container, false);
         DbtLog.logUtils(TAG, "onCreateView()");
         this.initView(view);
         //this.initData();

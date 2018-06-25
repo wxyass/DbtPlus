@@ -7,8 +7,8 @@ android {
         applicationId "et.tsingtaopad"
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
-        versionCode 52
-        versionName "2.4.3.6.4"
+        versionCode 53
+        versionName "2.4.3.6.5"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     dexOptions{
@@ -61,4 +61,6 @@ dependencies {
     compile 'com.blankj:utilcode:1.10.0'
 
     // 内存泄漏
+
+    // ANR
 }

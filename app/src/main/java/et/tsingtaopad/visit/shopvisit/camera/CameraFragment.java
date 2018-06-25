@@ -247,7 +247,8 @@ public class CameraFragment extends BaseFragmentSupport {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.shopvisit_camera, null);
+		//View view = inflater.inflate(R.layout.shopvisit_camera, null);
+		View view = inflater.inflate(R.layout.shopvisit_camera, container, false);
 		DbtLog.logUtils(TAG, "onCreateView()-打开拍照模块");
 		createphotoFile();// 创建拍照文件夹
 		this.initView(view);
@@ -1008,14 +1009,12 @@ public class CameraFragment extends BaseFragmentSupport {
 							}
 
 							// 重新扫描磁盘
-							Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE); // MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-																								// //ACTION_MEDIA_SCANNER_SCAN_FILE
+							/*Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE); // MediaStore.Images.Media.EXTERNAL_CONTENT_URI // //ACTION_MEDIA_SCANNER_SCAN_FILE
 							String path = Environment.getExternalStorageDirectory() + "";
 							Uri newuri = Uri.fromFile(new File(path));
-							// Uri uri =
-							// MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+							// Uri uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
 							intent.setData(newuri);
-							getActivity().sendBroadcast(intent);
+							getActivity().sendBroadcast(intent);*/
 
 							// 重新读取照片数据
 							//initpic();

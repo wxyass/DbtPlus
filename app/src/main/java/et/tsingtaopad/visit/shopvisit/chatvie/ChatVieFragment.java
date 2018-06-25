@@ -82,7 +82,8 @@ public class ChatVieFragment extends BaseFragmentSupport implements OnClickListe
     @Override
     public View onCreateView(LayoutInflater inflater,ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.shopvisit_chatvie, null);
+        // View view = inflater.inflate(R.layout.shopvisit_chatvie, null);
+        View view = inflater.inflate(R.layout.shopvisit_chatvie, container, false);
         DbtLog.logUtils(TAG, "onCreateView()");
         this.initView(view);
         // this.initData();

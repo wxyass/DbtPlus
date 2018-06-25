@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
-import android.support.multidex.MultiDex;
 import android.util.Log;
 
 import com.ibm.mqtt.MqttPersistenceException;
+
 
 /**
  * 项目名称：营销移动智能工作平台 </br>
@@ -39,9 +39,12 @@ public class MyApplication extends Application
     @Override
     public void onCreate()
     {
+        // new ANRWatchDog().start();
         super.onCreate();
 
         // LeakCanary.install(this);
+        // 在主进程初始化调用哈
+        //BlockCanary.install(this, new AppBlockCanaryContext()).start();
 
         instance = this;
         mContext = getApplicationContext();

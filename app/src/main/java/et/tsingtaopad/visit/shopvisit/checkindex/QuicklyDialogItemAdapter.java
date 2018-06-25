@@ -1,19 +1,17 @@
 package et.tsingtaopad.visit.shopvisit.checkindex;
 
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.Calendar;
 import java.util.List;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -89,7 +87,8 @@ public class QuicklyDialogItemAdapter extends BaseAdapter {
         ViewHolder holder = null;
         if (convertView == null) {
             holder = new ViewHolder();
-            convertView = LayoutInflater.from(context).inflate(R.layout.checkindex_quicklydialog_lvitem2, null);
+            //convertView = LayoutInflater.from(context).inflate(R.layout.checkindex_quicklydialog_lvitem2, null);
+            convertView = LayoutInflater.from(context).inflate(R.layout.checkindex_quicklydialog_lvitem2, parent,false);
             holder.proNameTv = (TextView)convertView.findViewById(R.id.quicklydialog_tv_proname);
             holder.changeNumEt = (EditText)convertView.findViewById(R.id.quicklydialog_et_changenum);
             holder.finalNumEt = (EditText)convertView.findViewById(R.id.quicklydialog_et_finalnum);
@@ -102,11 +101,16 @@ public class QuicklyDialogItemAdapter extends BaseAdapter {
         holder.proNameTv.setHint(item.getProId());
         holder.proNameTv.setText(item.getProName());
         DecimalFormat df = new DecimalFormat("0");
+        /*NumberFormat nf = NumberFormat.getInstance();
+        nf.setGroupingUsed(false);*/
+
         String changeNum = "";
         
         // 改变量
         if (item.getChangeNum() != null) {
             changeNum = df.format(item.getChangeNum());
+            // changeNum = item.getChangeNum()+"";
+            //changeNum = nf.format(item.getChangeNum());
         }
         if ("0".equals(changeNum)) {
             holder.changeNumEt.setHint(null);
@@ -119,6 +123,8 @@ public class QuicklyDialogItemAdapter extends BaseAdapter {
         String finalNum = "";
         if (item.getFinalNum() != null) {
             finalNum = df.format(item.getFinalNum());
+            //finalNum = item.getFinalNum()+"";
+            //finalNum = nf.format(item.getFinalNum());
         }
         if ("0".equals(finalNum)) {
             holder.finalNumEt.setHint(null);
@@ -127,7 +133,7 @@ public class QuicklyDialogItemAdapter extends BaseAdapter {
             holder.finalNumEt.setText(finalNum);
         }
         
-        if("101".equals(itemid)){// 库存 则显示新鲜度按钮
+        /*if("101".equals(itemid)){// 库存 则显示新鲜度按钮
         	holder.xinxianduBtn.setVisibility(View.VISIBLE);
         }else{
         	holder.xinxianduBtn.setVisibility(View.INVISIBLE);
@@ -169,7 +175,7 @@ public class QuicklyDialogItemAdapter extends BaseAdapter {
 					dateDialog.show();
 				}
 			}
-		});
+		});*/
         
         return convertView;
     }

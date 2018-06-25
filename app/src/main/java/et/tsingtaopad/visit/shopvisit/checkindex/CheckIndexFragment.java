@@ -306,7 +306,8 @@ public class CheckIndexFragment extends BaseFragmentSupport implements OnClickLi
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.shopvisit_checkindex, null);
+        //View view = inflater.inflate(R.layout.shopvisit_checkindex, null);
+        View view = inflater.inflate(R.layout.shopvisit_checkindex, container, false);
         DbtLog.logUtils(TAG, "onCreateView()");
         this.initView(view);
         this.asynch();
@@ -1313,12 +1314,12 @@ public class CheckIndexFragment extends BaseFragmentSupport implements OnClickLi
                                 }
 
                                 // 重新扫描磁盘
-                                Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);   //, MediaStore.Images.Media.EXTERNAL_CONTENT_URI //ACTION_MEDIA_SCANNER_SCAN_FILE
+                                /*Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);   //, MediaStore.Images.Media.EXTERNAL_CONTENT_URI //ACTION_MEDIA_SCANNER_SCAN_FILE
                                 String path = Environment.getExternalStorageDirectory() + "";
                                 Uri newuri = Uri.fromFile(new File(path));
                                 //Uri uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
                                 intent.setData(newuri);
-                                getActivity().sendBroadcast(intent);
+                                getActivity().sendBroadcast(intent);*/
 
                             } catch (Exception e) {
                                 // 更新UI界面 刷新适配器
@@ -1361,7 +1362,7 @@ public class CheckIndexFragment extends BaseFragmentSupport implements OnClickLi
         // 获取快速采集的数据源
         quicklyDialogLv = (LinearLayout) itemForm.findViewById(R.id.quicklydialog_lv);
         quicklyDialogLv.removeAllViews();
-        handler.postDelayed(new Runnable() {
+        /*handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 quicklyProItemLst = service.initQuicklyProItem(proItemLst);
@@ -1373,14 +1374,14 @@ public class CheckIndexFragment extends BaseFragmentSupport implements OnClickLi
                     ListView proItemLv = (ListView) layout.findViewById(R.id.quicklydialog_lv_pro);
                     QuicklyProItem item = quicklyProItemLst.get(i);
                     indexNameTv.setHint(item.getItemId());
-
                     indexNameTv.setText(item.getItemName());
                     proItemLv.setAdapter(new QuicklyDialogItemAdapter(getActivity(), item.getProItemLst(), item.getItemId()));
                     ViewUtil.setListViewHeight(proItemLv);
                     quicklyDialogLv.addView(layout);
                 }
             }
-        }, 30);
+        }, 30);*/
+        asynitem();
 
 
         // 确定
@@ -1389,6 +1390,7 @@ public class CheckIndexFragment extends BaseFragmentSupport implements OnClickLi
             @Override
             public void onClick(View arg0) {
                 if (ViewUtil.isDoubleClick(arg0.getId(), 2500)) return;
+                if (isasynitem) return;
                 QuicklyProItem itemI;
                 ProItem itemJ;
                 List<ProItem> itemJLst;
@@ -1442,6 +1444,42 @@ public class CheckIndexFragment extends BaseFragmentSupport implements OnClickLi
                 quicklyDialog.cancel();
             }
         });
+    }
+
+    /**
+     * 异步加载
+     */
+    private Boolean isasynitem = true;
+    public void asynitem() {
+        DbtLog.logUtils(TAG, "asynch()");
+        new AsyncTask<Void, Void, Void>() {
+            protected void onPreExecute() {
+                isasynitem = true;
+            }
+
+            @Override
+            protected Void doInBackground(Void... params) {
+                return null;
+            }
+
+            protected void onPostExecute(Void result) {
+                quicklyProItemLst = service.initQuicklyProItem(proItemLst);
+                quicklyDialogLv.setOrientation(LinearLayout.VERTICAL);
+
+                for (int i = 0; i < quicklyProItemLst.size(); i++) {
+                    View layout = inflater.inflate(R.layout.checkindex_quicklydialog_lvitem1, null);
+                    TextView indexNameTv = (TextView) layout.findViewById(R.id.quicklydialog_tv_itemname);
+                    ListView proItemLv = (ListView) layout.findViewById(R.id.quicklydialog_lv_pro);
+                    QuicklyProItem item = quicklyProItemLst.get(i);
+                    indexNameTv.setHint(item.getItemId());
+                    indexNameTv.setText(item.getItemName());
+                    proItemLv.setAdapter(new QuicklyDialogItemAdapter(getActivity(), item.getProItemLst(), item.getItemId()));
+                    ViewUtil.setListViewHeight(proItemLv);
+                    quicklyDialogLv.addView(layout);
+                }
+                isasynitem = false;
+            }
+        }.execute();
     }
 
     /**

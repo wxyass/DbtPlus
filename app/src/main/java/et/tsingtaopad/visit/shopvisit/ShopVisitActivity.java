@@ -20,6 +20,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.location.LocationProvider;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -157,7 +158,11 @@ public class ShopVisitActivity extends BaseActivity implements OnClickListener,
             R.drawable.bt_shopvisit_checkindex, R.drawable.bt_shopvisit_chatvie,
             R.drawable.bt_shopvisit_camera};
 
-    private Handler handler = new Handler() {
+
+    //是否在加载数据
+    private boolean isLoadingData = true;
+
+    /*private Handler handler = new Handler() {
 
         @Override
         public void handleMessage(Message msg) {
@@ -186,9 +191,7 @@ public class ShopVisitActivity extends BaseActivity implements OnClickListener,
                     break;
             }
         }
-
-
-    };
+    };*/
 
     @Override
     protected void onCreate(Bundle arg0) {
@@ -210,13 +213,45 @@ public class ShopVisitActivity extends BaseActivity implements OnClickListener,
         }
 
         // 初始化界面并组建Bundle参数
-        Bundle bundle = this.initData();
-        initBandleDate(bundle);
+        /*Bundle bundle = this.initData();
+        initBandleDate(bundle);*/
+
+        this.asynch();
 
         // 初始化界面并组建Bundle参数
         //this.initVisitData();
-        //this.initViewDate();
+        //this.initViewDate();// 因为注释掉handler,所以这句话会导致报错
     }
+
+    /**
+     * 异步加载
+     */
+    public void asynch() {
+        DbtLog.logUtils(TAG, "asynch()");
+        new AsyncTask<Void, Void, Void>() {
+            protected void onPreExecute() {
+                isLoadingData = true;
+            }
+
+            @Override
+            protected Void doInBackground(Void... params) {
+                return null;
+            }
+
+            protected void onPostExecute(Void result) {
+                // 初始化界面并组建Bundle参数
+                Bundle bundle = initData();
+                initBandleDate(bundle);
+                isLoadingData = false;
+            }
+
+            ;
+
+        }.execute();
+    }
+
+
+
 
     private void initViewDate() {
         Thread thread = new Thread() {
@@ -231,7 +266,7 @@ public class ShopVisitActivity extends BaseActivity implements OnClickListener,
                 } catch (Exception e) {
                     Log.e(TAG, "MakePlanActivity INIT EXCEPTION:", e);
                 } finally {
-                    handler.sendEmptyMessage(DATAFINISH);
+                    // handler.sendEmptyMessage(DATAFINISH);
                 }
             }
         };

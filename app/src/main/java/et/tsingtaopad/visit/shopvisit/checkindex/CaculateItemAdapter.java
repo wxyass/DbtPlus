@@ -103,11 +103,12 @@ public class CaculateItemAdapter extends BaseAdapter implements OnClickListener 
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Log.d("calculateItem ", position+"  "+DateUtil.formatDate(new Date(), "yyyyMMdd HH:mm:ss:SSS"));
+        Log.d("calculateItem ", position+"  "+DateUtil.getDateTimeStr(6));
         ViewHolder holder = null;
         if (convertView == null) {
             holder = new ViewHolder();
-            convertView = LayoutInflater.from(context).inflate(R.layout.checkindex_caculate_lvitem2, null);
+            //convertView = LayoutInflater.from(context).inflate(R.layout.checkindex_caculate_lvitem2, null);
+            convertView = LayoutInflater.from(context).inflate(R.layout.checkindex_caculate_lvitem2, parent,false);
             holder.proTv = (TextView)convertView.findViewById(R.id.caculate_tv_proname);
             holder.indexValueRg = (RadioGroup)convertView.findViewById(R.id.caculate_rg_indexvalue);//展示指标值集合
             holder.indexValueEt = (EditText)convertView.findViewById(R.id.caculate_et_indexvalue);

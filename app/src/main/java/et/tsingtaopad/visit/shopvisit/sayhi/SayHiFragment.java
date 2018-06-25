@@ -217,7 +217,8 @@ public class SayHiFragment extends BaseFragmentSupport implements
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.shopvisit_sayhi, null);
+        // View view = inflater.inflate(R.layout.shopvisit_sayhi, null);
+        View view = inflater.inflate(R.layout.shopvisit_sayhi, container, false);
         DbtLog.logUtils(TAG, "onCreateView()");
         this.initView(view);
         // this.initData();
