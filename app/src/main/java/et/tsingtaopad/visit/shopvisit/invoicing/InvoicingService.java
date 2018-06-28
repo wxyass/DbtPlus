@@ -1,6 +1,7 @@
 package et.tsingtaopad.visit.shopvisit.invoicing;
 
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -116,7 +117,10 @@ public class InvoicingService extends ShopVisitService {
                 .isBlankOrNull(visitId) || CheckUtil.isBlankOrNull(termId)) {
             return;
         }
-        
+
+
+        //DecimalFormat df = new DecimalFormat("0");
+
         AndroidDatabaseConnection connection = null;
         try {
             DatabaseHelper helper = DatabaseHelper.getHelper(context);
@@ -140,23 +144,17 @@ public class InvoicingService extends ShopVisitService {
                     proItem.setVisitkey(visitId);
                     proItem.setProductkey(item.getProId());
                     proItem.setAgencykey(item.getAgencyId());
-                    proItem.setPurcprice(Double.valueOf(
-                            FunUtil.isNullToZero(item.getChannelPrice())));// 渠道价
-                    proItem.setRetailprice(Double.valueOf(
-                            FunUtil.isNullToZero(item.getSellPrice())));// 零售价
+                    proItem.setPurcprice(Double.valueOf(FunUtil.isNullToZero(item.getChannelPrice())));// 渠道价
+                    proItem.setRetailprice(Double.valueOf(FunUtil.isNullToZero(item.getSellPrice())));// 零售价
                     // TODO hongen 需要计算这几个量
-                    proItem.setPurcnum(Double.valueOf(
-                            FunUtil.isNullToZero(item.getPrevNum())));// 订单量
-                    
-                    proItem.setAddcard(Double.valueOf(
-                            FunUtil.isNullToZero(item.getAddcard())));// 累计卡
-                    
-                    proItem.setPronum(Double.valueOf(
-                            FunUtil.isNullToZero(item.getPrevStore())));
-                    proItem.setCurrnum(Double.valueOf(
-                            FunUtil.isNullToZero(item.getCurrStore())));
-                    proItem.setSalenum(Double.valueOf(
-                            FunUtil.isNullToZero(item.getDaySellNum())));
+                    proItem.setPurcnum(Double.valueOf(FunUtil.isNullToZero(item.getPrevNum())));// 订单量
+                    //proItem.setPurcnum(item.getPrevNum());// 订单量
+                    //proItem.setPurcnum(Double.valueOf(FunUtil.isNullToZero(item.getPrevNum())).doubleValue());// 订单量
+                    //proItem.setPurcnum(df.format(Double.parseDouble(FunUtil.isNullToZero(item.getPrevNum()))));// 订单量
+                    proItem.setAddcard(Double.valueOf(FunUtil.isNullToZero(item.getAddcard())));// 累计卡
+                    proItem.setPronum(Double.valueOf(FunUtil.isNullToZero(item.getPrevStore())));
+                    proItem.setCurrnum(Double.valueOf(FunUtil.isNullToZero(item.getCurrStore())));
+                    proItem.setSalenum(Double.valueOf(FunUtil.isNullToZero(item.getDaySellNum())));
                     proItem.setPadisconsistent(ConstValues.FLAG_0);
                     proItem.setDeleteflag(ConstValues.FLAG_0);
                     //proItem.setCreuser(ConstValues.loginSession.getUserCode());

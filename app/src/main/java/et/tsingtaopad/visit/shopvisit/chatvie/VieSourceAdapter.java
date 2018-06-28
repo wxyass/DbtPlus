@@ -71,20 +71,22 @@ public class VieSourceAdapter extends BaseAdapter
 
     @Override
     public int getCount() {
-        if (CheckUtil.IsEmpty(dataLst)) {
+        /*if (CheckUtil.IsEmpty(dataLst)) {
             return 0;
         } else {
             return dataLst.size();
-        }
+        }*/
+        return dataLst.size();
     }
 
     @Override
     public Object getItem(int arg0) {
-        if (CheckUtil.IsEmpty(dataLst)) {
+        /*if (CheckUtil.IsEmpty(dataLst)) {
             return null;
         } else {
             return dataLst.get(arg0);
-        }
+        }*/
+        return dataLst.get(arg0);
     }
 
     @Override

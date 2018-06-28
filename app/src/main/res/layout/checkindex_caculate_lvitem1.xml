@@ -22,7 +22,7 @@
         android:layout_height="match_parent"
         android:background="@color/listview_line" />
 
-    <ListView
+    <et.tsingtaopad.cui.NoScrollListView
         android:id="@+id/caculate_lv_indexvalue"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

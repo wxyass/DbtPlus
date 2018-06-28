@@ -43,6 +43,7 @@ public class InvoicingStc implements Serializable
 
     // 订单量(原名称是上周期进货总量)
     private String prevNum;
+    // private Double prevNum;
 
     // 上周期进货总量总和
     private String prevNumSum;
@@ -152,13 +153,11 @@ public class InvoicingStc implements Serializable
         this.sellPrice = sellPrice;
     }
 
-    public String getPrevNum()
-    {
+    public String getPrevNum() {
         return prevNum;
     }
 
-    public void setPrevNum(String prevNum)
-    {
+    public void setPrevNum(String prevNum) {
         this.prevNum = prevNum;
     }
 

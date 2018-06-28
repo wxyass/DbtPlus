@@ -13,6 +13,7 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import et.tsingtaopad.R;
+import et.tsingtaopad.cui.NoScrollListView;
 import et.tsingtaopad.initconstvalues.domain.KvStc;
 import et.tsingtaopad.tools.CheckUtil;
 import et.tsingtaopad.tools.DateUtil;
@@ -88,7 +89,7 @@ public class CaculateAdapter extends BaseAdapter {
             holder = new ViewHolder();
             convertView = LayoutInflater.from(context).inflate(R.layout.checkindex_caculate_lvitem1, null);
             holder.indexNameTv = (TextView) convertView.findViewById(R.id.caculate_tv_indexname);
-            holder.indexValueLv = (ListView) convertView.findViewById(R.id.caculate_lv_indexvalue);
+            holder.indexValueLv = (NoScrollListView) convertView.findViewById(R.id.caculate_lv_indexvalue);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -110,6 +111,6 @@ public class CaculateAdapter extends BaseAdapter {
 
     private class ViewHolder {
         private TextView indexNameTv;
-        private ListView indexValueLv;
+        private NoScrollListView indexValueLv;
     }
 }

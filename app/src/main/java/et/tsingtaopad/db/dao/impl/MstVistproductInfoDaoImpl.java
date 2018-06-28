@@ -121,25 +121,20 @@ public class MstVistproductInfoDaoImpl extends
 		InvoicingStc item;
 		while (cursor.moveToNext()) {
 			item = new InvoicingStc();
-			item.setRecordId(cursor.getString(cursor
-					.getColumnIndex("recordkey")));
-			String productkey = cursor.getString(cursor
-					.getColumnIndex("productkey"));
+			item.setRecordId(cursor.getString(cursor.getColumnIndex("recordkey")));
+			String productkey = cursor.getString(cursor.getColumnIndex("productkey"));
 			item.setProId(productkey);
 			item.setProName(cursor.getString(cursor.getColumnIndex("proname")));
-			item.setAgencyId(cursor.getString(cursor
-					.getColumnIndex("agencykey")));
-			item.setAgencyName(cursor.getString(cursor
-					.getColumnIndex("agencyname")));
-			item.setChannelPrice(cursor.getString((cursor
-					.getColumnIndex("inprice"))));// 进店价
-			item.setSellPrice(cursor.getString(cursor
-					.getColumnIndex("reprice")));// 零售价
+			item.setAgencyId(cursor.getString(cursor.getColumnIndex("agencykey")));
+			item.setAgencyName(cursor.getString(cursor.getColumnIndex("agencyname")));
+			item.setChannelPrice(cursor.getString((cursor.getColumnIndex("inprice"))));// 进店价
+			item.setSellPrice(cursor.getString(cursor.getColumnIndex("reprice")));// 零售价
 			
-			item.setAddcard(cursor.getString(cursor
-					.getColumnIndex("addcard")));// 累计卡
+			item.setAddcard(cursor.getString(cursor.getColumnIndex("addcard")));// 累计卡
 			
-			// 上周期进货总量
+			// 订单量(原上周期进货总量)
+			/*String purcnum = cursor.getString(cursor.getColumnIndex("purcnum"));
+			item.setPrevNum(FunUtil.isBlankOrNullToDouble(purcnum));*/
 			item.setPrevNum(cursor.getString(cursor.getColumnIndex("purcnum")));
 			// 上周期进货总量总和
 			item.setPrevNumSum(purcnumMap.get(productkey));
@@ -356,16 +351,11 @@ public class MstVistproductInfoDaoImpl extends
 			item.setProId(cursor.getString(cursor.getColumnIndex("productkey")));
 			item.setProName(cursor.getString(cursor.getColumnIndex("proname")));
 			item.setIndexId(cursor.getString(cursor.getColumnIndex("checkkey")));
-			item.setIndexType(cursor.getString(cursor
-					.getColumnIndex("checktype")));
-			item.setIndexName(cursor.getString(cursor
-					.getColumnIndex("checkname")));
-			item.setIndexValueId(cursor.getString(cursor
-					.getColumnIndex("acresult")));
-			item.setIndexValueName(cursor.getString(cursor
-					.getColumnIndex("cstatusname")));
-			item.setRecordId(cursor.getString(cursor
-					.getColumnIndex("recordkey")));
+			item.setIndexType(cursor.getString(cursor.getColumnIndex("checktype")));
+			item.setIndexName(cursor.getString(cursor.getColumnIndex("checkname")));
+			item.setIndexValueId(cursor.getString(cursor.getColumnIndex("acresult")));
+			item.setIndexValueName(cursor.getString(cursor.getColumnIndex("cstatusname")));
+			item.setRecordId(cursor.getString(cursor.getColumnIndex("recordkey")));
 			lst.add(item);
 		}
 		return lst;

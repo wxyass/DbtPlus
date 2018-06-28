@@ -35,6 +35,7 @@ import et.tsingtaopad.BaseFragmentSupport;
 import et.tsingtaopad.ConstValues;
 import et.tsingtaopad.R;
 import et.tsingtaopad.adapter.ListViewKeyValueAdapter;
+import et.tsingtaopad.cui.NoScrollListView;
 import et.tsingtaopad.initconstvalues.domain.KvStc;
 import et.tsingtaopad.tools.CheckUtil;
 import et.tsingtaopad.tools.DbtLog;
@@ -178,6 +179,7 @@ public class InvoicingFragment extends BaseFragmentSupport implements OnClickLis
         View view = inflater.inflate(R.layout.shopvisit_invoicing, container, false);
         DbtLog.logUtils(TAG, "onCreateView()");
         this.initView(view);
+        handler = new MyHandler(this);
         //this.initData();
         this.asynch();
         return view;
@@ -226,7 +228,7 @@ public class InvoicingFragment extends BaseFragmentSupport implements OnClickLis
     private void initData() {
         DbtLog.logUtils(TAG, "initData()");
 
-        handler = new MyHandler(this);
+
         //InvoicingService--进销存业务逻辑
         service = new InvoicingService(getActivity(), null);
 
@@ -239,19 +241,21 @@ public class InvoicingFragment extends BaseFragmentSupport implements OnClickLis
         service.delRepeatVistProduct(visitId);
         //获取某次拜访的我品的进销存数据情况
         dataLst = service.queryMinePro(visitId, termId);
-        //请求网络获取本月合计数值
-        //getmonthSum();
-        //订单推荐Adapter(原先名字是核查进销存Adapter)
-        checkAdapter = new InvoicingCheckGoodsAdapter(getActivity(), dataLst);//核查进销存
-        //给订单推荐(原先是核查进销存)设置数据适配器
-        checkGoodsLv.setAdapter(checkAdapter);
-        //设置ListView的高度
-        ViewUtil.setListViewHeight(checkGoodsLv);
-        //问货源Adapter
-        askAdapter = new InvoicingAskGoodsAdapter(
-                getActivity(), seeFlag, dataLst, termId, visitId, checkAdapter, askGoodsLv, checkGoodsLv);//问货源
-        askGoodsLv.setAdapter(askAdapter);
-        ViewUtil.setListViewHeight(askGoodsLv);
+        //if(dataLst.size()>0){
+            //请求网络获取本月合计数值
+            //getmonthSum();
+            //订单推荐Adapter(原先名字是核查进销存Adapter)
+            checkAdapter = new InvoicingCheckGoodsAdapter(getActivity(), dataLst);//核查进销存
+            //给订单推荐(原先是核查进销存)设置数据适配器
+            checkGoodsLv.setAdapter(checkAdapter);
+            //设置ListView的高度
+            ViewUtil.setListViewHeight(checkGoodsLv);
+            //问货源Adapter
+            askAdapter = new InvoicingAskGoodsAdapter(
+                    getActivity(), seeFlag, dataLst, termId, visitId, checkAdapter, askGoodsLv, checkGoodsLv);//问货源
+            askGoodsLv.setAdapter(askAdapter);
+            ViewUtil.setListViewHeight(askGoodsLv);
+        //}
     }
 
     @Override
@@ -479,6 +483,7 @@ public class InvoicingFragment extends BaseFragmentSupport implements OnClickLis
                 //item.setFristdate(itemBtn.getText().toString());
                 itemEt = (EditText) view.findViewById(R.id.checkgoods_et_prevnum);// 订单量
                 item.setPrevNum(itemEt.getText().toString());
+                //item.setPrevNum(FunUtil.isBlankOrNullToDouble(itemEt.getText().toString()));
                 itemEt = (EditText) view.findViewById(R.id.checkgoods_et_daysell);// 日销量
                 item.setDaySellNum(itemEt.getText().toString());
 

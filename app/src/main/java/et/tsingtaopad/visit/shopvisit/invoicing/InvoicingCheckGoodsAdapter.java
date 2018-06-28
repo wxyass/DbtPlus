@@ -1,5 +1,6 @@
 package et.tsingtaopad.visit.shopvisit.invoicing;
 
+import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -24,6 +25,7 @@ import et.tsingtaopad.ConstValues;
 import et.tsingtaopad.R;
 import et.tsingtaopad.tools.CheckUtil;
 import et.tsingtaopad.tools.DateUtil;
+import et.tsingtaopad.tools.FunUtil;
 import et.tsingtaopad.visit.shopvisit.invoicing.domain.InvoicingStc;
 
 /**
@@ -69,20 +71,22 @@ public class InvoicingCheckGoodsAdapter extends
 
     @Override
     public int getCount() {
-        if (CheckUtil.IsEmpty(dataLst)) {
+        /*if (CheckUtil.IsEmpty(dataLst)) {
             return 0;
         } else {
             return dataLst.size();
-        }
+        }*/
+        return dataLst.size();
     }
 
     @Override
     public Object getItem(int arg0) {
-        if (CheckUtil.IsEmpty(dataLst)) {
+        /*if (CheckUtil.IsEmpty(dataLst)) {
             return 0;
         } else {
             return dataLst.get(arg0);
-        }
+        }*/
+        return dataLst.get(arg0);
     }
 
     @Override
@@ -113,12 +117,28 @@ public class InvoicingCheckGoodsAdapter extends
         final InvoicingStc item = dataLst.get(position);
         holder.productNameTv.setHint(item.getProId());
         holder.productNameTv.setText(item.getProName());
+
+        DecimalFormat df = new DecimalFormat("0");
+
+
         //订单量(原名称是上周期进货总量)
         if (ConstValues.FLAG_0.equals(item.getPrevNum())) {
             holder.prevNumEt.setHint(item.getPrevNum());
         } else {
             holder.prevNumEt.setText(item.getPrevNum());
         }
+
+        // 订单量(原名称是上周期进货总量)
+        /*String prevnum = "";
+        if (item.getPrevNum() != null) {
+            prevnum = df.format(item.getPrevNum());
+        }
+        if ("0".equals(prevnum)) {
+            holder.prevNumEt.setHint(null);
+            holder.prevNumEt.setText("0");
+        } else {
+            holder.prevNumEt.setText(prevnum);
+        }*/
         
         //累计卡)
         if (ConstValues.FLAG_0.equals(item.getAddcard())) {
@@ -128,7 +148,7 @@ public class InvoicingCheckGoodsAdapter extends
         }else {
             holder.addcardEt.setText(item.getAddcard());
         }
-        
+
         //上周期进货总量总和
         holder.prevNumSumTV.setText(item.getPrevNumSum());
         
@@ -181,6 +201,7 @@ public class InvoicingCheckGoodsAdapter extends
             switch (et.getId()) {
             case R.id.checkgoods_et_prevnum:
                 stc.setPrevNum(content);
+                //stc.setPrevNum(FunUtil.isBlankOrNullToDouble(content));
                 break;
                 
             case R.id.checkgoods_et_daysell:

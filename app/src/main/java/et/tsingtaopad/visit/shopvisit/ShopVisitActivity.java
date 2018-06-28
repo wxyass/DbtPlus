@@ -208,7 +208,7 @@ public class ShopVisitActivity extends BaseActivity implements OnClickListener,
 
 
         if (!ConstValues.FLAG_1.equals(seeFlag)) {
-            initBaiduXY();
+            // initBaiduXY();
             yuanshengLocation2();
         }
 
@@ -1088,7 +1088,7 @@ public class ShopVisitActivity extends BaseActivity implements OnClickListener,
     public void initBaiduXY() {
         try {
             if (!isOpenGPS()) {
-                openGPS();
+                //openGPS();
                 //getAppDetailSettingIntent(getApplicationContext());
                 //openDingWei();
                 //isHavepermission();
@@ -1317,7 +1317,9 @@ public class ShopVisitActivity extends BaseActivity implements OnClickListener,
     public void yuanshengLocation2() {
 
         if (!isOpenGPS()) {
-            openGPS();
+            // openGPS();// 2018年6月26日16:55:20   进入这个页面肯定获取到了权限
+
+
             //getAppDetailSettingIntent(getApplicationContext());
             //openDingWei();
             //isHavepermission();
@@ -1352,7 +1354,9 @@ public class ShopVisitActivity extends BaseActivity implements OnClickListener,
 
         // 1秒更新一次，或最小位移变化超过1米更新一次；
         // 注意：此处更新准确度非常低，推荐在service里面启动一个Thread，在run中sleep(10000);然后执行handler.sendMessage(),更新位置
-        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 1,
+        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+                5000,
+                120,
                 locationListener);
     }
 
@@ -1475,9 +1479,9 @@ public class ShopVisitActivity extends BaseActivity implements OnClickListener,
             // 清空EditText对象
             //editText.getEditableText().clear();
             // 经度
-            longitude = 0.0;
+            //longitude = 0.0;
             // 纬度
-            latitude = 0.0;
+            //latitude = 0.0;
         }
     }
 

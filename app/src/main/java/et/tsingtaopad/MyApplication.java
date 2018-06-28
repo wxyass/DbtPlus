@@ -10,6 +10,7 @@ import android.util.Log;
 import com.ibm.mqtt.MqttPersistenceException;
 
 
+
 /**
  * 项目名称：营销移动智能工作平台 </br>
  * 文件名：MyApplication.java</br>
@@ -44,7 +45,7 @@ public class MyApplication extends Application
 
         // LeakCanary.install(this);
         // 在主进程初始化调用哈
-        //BlockCanary.install(this, new AppBlockCanaryContext()).start();
+        // BlockCanary.install(this, new AppBlockCanaryContext()).start();
 
         instance = this;
         mContext = getApplicationContext();

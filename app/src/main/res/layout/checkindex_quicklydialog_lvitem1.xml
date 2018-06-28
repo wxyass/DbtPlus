@@ -28,7 +28,7 @@
             android:layout_height="match_parent"
             android:background="@color/listview_line" />
 
-        <ListView
+        <et.tsingtaopad.cui.NoScrollListView
             android:id="@+id/quicklydialog_lv_pro"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

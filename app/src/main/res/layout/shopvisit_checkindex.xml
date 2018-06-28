@@ -136,7 +136,7 @@
                     android:background="@color/listview_line" />
             </LinearLayout>
 
-            <ListView
+            <et.tsingtaopad.cui.NoScrollListView
                 android:id="@+id/checkindex_lv_calculate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

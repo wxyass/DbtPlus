@@ -118,7 +118,7 @@ public class CheckIndexFragment extends BaseFragmentSupport implements OnClickLi
 
     private Button quickCollectBt;
     private Button activityPicBt;
-    private ListView calculateLv;
+    private NoScrollListView calculateLv;
     private NoScrollListView promotionLv;
     private CaculateAdapter calculateAdapter;
     private PromotionAdapter promotionAdapter;
@@ -279,7 +279,7 @@ public class CheckIndexFragment extends BaseFragmentSupport implements OnClickLi
             }
             service.calculateIndex(channelId, proItemLst, calculateLst, proId, indexId);
             calculateAdapter.notifyDataSetChanged();
-            ViewUtil.setListViewHeight(calculateLv);
+            ViewUtil.setListViewHeight(calculateLv);// 解决无响应,注释这一行
         }
     }
 
@@ -348,7 +348,7 @@ public class CheckIndexFragment extends BaseFragmentSupport implements OnClickLi
         promotionTitle = (LinearLayout) view.findViewById(R.id.checkindex_ll_promotion_title);
         promotionHead = (LinearLayout) view.findViewById(R.id.checkindex_ll_promotion_head);
         //采项分集listView
-        calculateLv = (ListView) view.findViewById(R.id.checkindex_lv_calculate);
+        calculateLv = (NoScrollListView) view.findViewById(R.id.checkindex_lv_calculate);
         //促销活动listView
         promotionLv = (NoScrollListView) view.findViewById(R.id.checkindex_lv_promotion);
 
@@ -439,7 +439,7 @@ public class CheckIndexFragment extends BaseFragmentSupport implements OnClickLi
         calculateAdapter = new CaculateAdapter(
                 getActivity(), calculateLst, ConstValues.indexLst, proItemLst);// 上下文,指标对象集合,同步下来的指标集合,所有产品集合
         calculateLv.setAdapter(calculateAdapter);
-        ViewUtil.setListViewHeight(calculateLv);
+        ViewUtil.setListViewHeight(calculateLv);// 解决无响应,注释这一行
 
         //获取巡店拜访-查指标的促销活动页面部分的数据
         promotionLst = service.queryPromotion(visitId, term.getSellchannel(), term.getTlevel());
@@ -1469,7 +1469,7 @@ public class CheckIndexFragment extends BaseFragmentSupport implements OnClickLi
                 for (int i = 0; i < quicklyProItemLst.size(); i++) {
                     View layout = inflater.inflate(R.layout.checkindex_quicklydialog_lvitem1, null);
                     TextView indexNameTv = (TextView) layout.findViewById(R.id.quicklydialog_tv_itemname);
-                    ListView proItemLv = (ListView) layout.findViewById(R.id.quicklydialog_lv_pro);
+                    NoScrollListView proItemLv = (NoScrollListView) layout.findViewById(R.id.quicklydialog_lv_pro);
                     QuicklyProItem item = quicklyProItemLst.get(i);
                     indexNameTv.setHint(item.getItemId());
                     indexNameTv.setText(item.getItemName());
