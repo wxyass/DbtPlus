@@ -275,7 +275,7 @@ public class WeekWorkingFragment extends BaseFragmentSupport implements OnClickL
         int day = Integer.parseInt(date.substring(6, 8));
 
         // 时间择取器事件监听
-        new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener()
+        new DatePickerDialog(getActivity(),R.style.dialog_date, new DatePickerDialog.OnDateSetListener()
         {
 
             @Override

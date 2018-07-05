@@ -231,7 +231,7 @@ public class InvoicingCheckGoodsAdapter extends
 		switch (dateBtn.getId()) {
 		// 最早生产时间
 		case R.id.checkgoods_et_firstdate:
-			DatePickerDialog dateDialog = new DatePickerDialog(v.getContext(),
+			DatePickerDialog dateDialog = new DatePickerDialog(v.getContext(),R.style.dialog_date,
 					new DatePickerDialog.OnDateSetListener() {
 						@Override
 						public void onDateSet(DatePicker view, int year,

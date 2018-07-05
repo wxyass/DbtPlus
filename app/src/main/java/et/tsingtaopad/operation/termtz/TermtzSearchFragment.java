@@ -210,7 +210,7 @@ public class TermtzSearchFragment extends BaseActivity implements OnClickListene
 		// 开始时间
 		case R.id.termtzsearch_bt_start:
 
-			DatePickerDialog dateDialog = new DatePickerDialog(v.getContext(), new DatePickerDialog.OnDateSetListener() {
+			DatePickerDialog dateDialog = new DatePickerDialog(v.getContext(),R.style.dialog_date, new DatePickerDialog.OnDateSetListener() {
 				@Override
 				public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
 					calendar.set(year, monthOfYear, dayOfMonth);
@@ -236,7 +236,7 @@ public class TermtzSearchFragment extends BaseActivity implements OnClickListene
 			break;
 		// 结束时间
 		case R.id.termtzsearch_bt_end:
-			DatePickerDialog enddateDialog = new DatePickerDialog(v.getContext(), new DatePickerDialog.OnDateSetListener() {
+			DatePickerDialog enddateDialog = new DatePickerDialog(v.getContext(),R.style.dialog_date, new DatePickerDialog.OnDateSetListener() {
 				@Override
 				public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
 					calendar.set(year, monthOfYear, dayOfMonth);

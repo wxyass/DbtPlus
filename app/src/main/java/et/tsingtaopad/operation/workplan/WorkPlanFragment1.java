@@ -1038,7 +1038,7 @@ public class WorkPlanFragment1 extends BaseFragmentSupport implements OnClickLis
 
                 break;
             case R.id.workplan_btn_time:
-                DatePickerDialog dateDialog = new DatePickerDialog(v.getContext(), new DatePickerDialog.OnDateSetListener()
+                DatePickerDialog dateDialog = new DatePickerDialog(v.getContext(),R.style.dialog_date, new DatePickerDialog.OnDateSetListener()
                 {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth)

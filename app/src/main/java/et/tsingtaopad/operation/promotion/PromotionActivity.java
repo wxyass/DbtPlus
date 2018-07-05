@@ -211,7 +211,7 @@ public class PromotionActivity extends BaseActivity
 	        int startday = Integer.parseInt(searchDate.substring(8, 10));
 
 			// 日期选择框
-			new DatePickerDialog(v.getContext(), new DatePickerDialog.OnDateSetListener() {
+			new DatePickerDialog(v.getContext(),R.style.dialog_date, new DatePickerDialog.OnDateSetListener() {
 
 				@Override
 				public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
@@ -236,7 +236,7 @@ public class PromotionActivity extends BaseActivity
 	        int day = Integer.parseInt(searchDate.substring(8, 10));
 
 			// 日期选择框
-			new DatePickerDialog(v.getContext(), new DatePickerDialog.OnDateSetListener() {
+			new DatePickerDialog(v.getContext(),R.style.dialog_date, new DatePickerDialog.OnDateSetListener() {
 
 				@Override
 				public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {

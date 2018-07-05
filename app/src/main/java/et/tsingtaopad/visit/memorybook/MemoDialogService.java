@@ -63,7 +63,7 @@ public class MemoDialogService {
 	public void showDatePicDialog(Context context, final TextView tv) {
 
 		Calendar c = Calendar.getInstance();
-		Dialog date = new DatePickerDialog(context, new OnDateSetListener() {
+		Dialog date = new DatePickerDialog(context,R.style.dialog_date, new OnDateSetListener() {
 
 			@Override
 			public void onDateSet(DatePicker view, int year, int monthOfYear,
@@ -83,7 +83,7 @@ public class MemoDialogService {
 
 		Calendar c = Calendar.getInstance();
 
-		DatePickerDialog dateDialog = new DatePickerDialog(context,
+		DatePickerDialog dateDialog = new DatePickerDialog(context,R.style.dialog_date,
 				new OnDateSetListener() {
 					@Override
 					public void onDateSet(DatePicker view, int year,int monthOfYear, int dayOfMonth) {// 选择日期写入EditText

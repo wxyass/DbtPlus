@@ -22,6 +22,25 @@
         -->
     </style>
 
+    <!-- Base application theme. -->
+    <style name="DBTAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!--Theme.AppCompat.Light.DarkActionBar-->
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <!-- 在继承Theme.AppCompat.Light.DarkActionBar基础上,做处理-->
+    <!-- 1. 防止app启动时,出现白屏或者黑屏，设置一张图片 -->
+    <style name="Theme.MyAppTheme" parent="DBTAppTheme">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowBackground">@drawable/ico_guide_page_o</item>
+        <item name="android:windowFullscreen">true</item>
+
+    </style>
+
     <!--<style name="AppTheme" parent="AppBaseTheme">
     </style>-->
 
@@ -41,6 +60,13 @@
     </style>
 
     <style name="ButtonBarButton" />
+
+    <style name="dialog_date" parent="Base.Theme.AppCompat.Light.Dialog.FixedSize">
+        <!--设置header部分显示的颜色-->
+        <item name="colorPrimary">@color/holo_blue_dark</item>
+        <item name="colorPrimaryDark">@color/holo_blue_dark</item>
+        <item name="colorAccent">@color/holo_blue_dark</item>
+    </style>
 
     <!-- App字体列表 -->
     <style name="font_size1">

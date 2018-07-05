@@ -1328,13 +1328,13 @@ public class ShopVisitActivity extends BaseActivity implements OnClickListener,
         lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
         //判断GPS是否正常启动
-        if (!lm.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+        /*if (!lm.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             Toast.makeText(this, "请开启GPS导航...", Toast.LENGTH_SHORT).show();
             //返回开启GPS导航设置界面
             Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
             startActivityForResult(intent, 0);
             return;
-        }
+        }*/
 
         //为获取地理位置信息时设置查询条件
         String bestProvider = lm.getBestProvider(getCriteria(), true);

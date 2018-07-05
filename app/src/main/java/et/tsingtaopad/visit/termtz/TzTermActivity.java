@@ -414,7 +414,7 @@ public class TzTermActivity extends Activity implements
  	 				day = Integer.parseInt(time[2]);
  				}
  				// 设置日期弹框  
- 				DatePickerDialog dateDialog = new DatePickerDialog(v.getContext(),
+ 				DatePickerDialog dateDialog = new DatePickerDialog(v.getContext(),R.style.dialog_date,
  						new DatePickerDialog.OnDateSetListener() {
  							@Override
  							public void onDateSet(DatePicker view, int year,

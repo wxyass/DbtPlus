@@ -25,6 +25,7 @@ import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 
 import et.tsingtaopad.ConstValues;
+import et.tsingtaopad.R;
 import et.tsingtaopad.db.tables.MstSynckvM;
 import et.tsingtaopad.tools.HttpUtil;
 
@@ -72,7 +73,7 @@ public abstract class ServiceSupport {
 	 * */
 	public void getDatePickerDialog(String currentDate, final Button currentbt) {
 		String p[] = currentDate.split("-");
-		new DatePickerDialog(context, new OnDateSetListener() {
+		new DatePickerDialog(context, R.style.dialog_date, new OnDateSetListener() {
 
 			@Override
 			public void onDateSet(DatePicker view, int year, int monthOfYear,

@@ -131,7 +131,7 @@ public class CalculateIndexItemPuhuoAdapter extends BaseAdapter {
 			
 			@Override
 			public void onClick(final View v) {
-				DatePickerDialog dateDialog = new DatePickerDialog(context,
+				DatePickerDialog dateDialog = new DatePickerDialog(context,R.style.dialog_date,
 						new DatePickerDialog.OnDateSetListener() {
 							@Override
 							public void onDateSet(DatePicker view, int year,

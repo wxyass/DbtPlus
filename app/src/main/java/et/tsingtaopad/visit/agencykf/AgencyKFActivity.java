@@ -545,7 +545,7 @@ public class AgencyKFActivity extends BaseActivity implements OnClickListener {
 
 			@Override
 			public void onClick(View v) {
-				DatePickerDialog dateDialog = new DatePickerDialog(v.getContext(),
+				DatePickerDialog dateDialog = new DatePickerDialog(v.getContext(),R.style.dialog_date,
 						new DatePickerDialog.OnDateSetListener() {
 							@Override
 							public void onDateSet(DatePicker view, int year,
@@ -606,7 +606,7 @@ public class AgencyKFActivity extends BaseActivity implements OnClickListener {
 
 			@Override
 			public void onClick(View v) {
-				DatePickerDialog dateDialog = new DatePickerDialog(v.getContext(),
+				DatePickerDialog dateDialog = new DatePickerDialog(v.getContext(),R.style.dialog_date,
 						new DatePickerDialog.OnDateSetListener() {
 							@Override
 							public void onDateSet(DatePicker view, int year,

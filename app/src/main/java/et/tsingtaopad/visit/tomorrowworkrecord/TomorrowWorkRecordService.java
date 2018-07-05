@@ -172,7 +172,7 @@ public class TomorrowWorkRecordService {
 	 */
     public void getDatePickerDialog(final Button currentbt) {
         Calendar c = Calendar.getInstance();
-        new DatePickerDialog(context, new OnDateSetListener() {
+        new DatePickerDialog(context,R.style.dialog_date, new OnDateSetListener() {
 
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear,

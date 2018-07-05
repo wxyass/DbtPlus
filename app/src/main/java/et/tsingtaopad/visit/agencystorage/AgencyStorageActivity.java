@@ -223,7 +223,7 @@ public class AgencyStorageActivity extends BaseActivity
             break;
          //选择时间a
          case R.id.agencystorage_btn_time:
-        	 DatePickerDialog dateDialog = new DatePickerDialog(v.getContext(), new DatePickerDialog.OnDateSetListener() {
+        	 DatePickerDialog dateDialog = new DatePickerDialog(v.getContext(),R.style.dialog_date, new DatePickerDialog.OnDateSetListener() {
  				@Override
  				public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
  					calendar.set(year, monthOfYear, dayOfMonth);
@@ -250,7 +250,7 @@ public class AgencyStorageActivity extends BaseActivity
         	 break;
         //选择时间b	 
         case R.id.agencystorage_btn_timeb:
-        	 DatePickerDialog dateDialog1 = new DatePickerDialog(v.getContext(), new DatePickerDialog.OnDateSetListener() {
+        	 DatePickerDialog dateDialog1 = new DatePickerDialog(v.getContext(),R.style.dialog_date, new DatePickerDialog.OnDateSetListener() {
   				@Override
   				public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
   					calendar.set(year, monthOfYear, dayOfMonth);

@@ -371,7 +371,7 @@ public class DayWorkingActivity extends Activity implements OnClickListener, OnC
         int day = Integer.parseInt(date.substring(6, 8));
 
         // 时间择取器事件监听
-        new DatePickerDialog(DayWorkingActivity.this, new DatePickerDialog.OnDateSetListener()
+        new DatePickerDialog(DayWorkingActivity.this,R.style.dialog_date, new DatePickerDialog.OnDateSetListener()
         {
 
             @Override

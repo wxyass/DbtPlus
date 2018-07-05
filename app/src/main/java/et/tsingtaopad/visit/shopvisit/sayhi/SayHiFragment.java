@@ -854,7 +854,7 @@ public class SayHiFragment extends BaseFragmentSupport implements
 
         switch (v.getId()) {
             case R.id.sayhi_btn_time:
-                DatePickerDialog dateDialog = new DatePickerDialog(v.getContext(),
+                DatePickerDialog dateDialog = new DatePickerDialog(v.getContext(),R.style.dialog_date,
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int year,

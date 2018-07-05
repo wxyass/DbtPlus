@@ -152,7 +152,7 @@ public class IndexstatusService {
     public void showDatePicDialog(Context context, final TextView tv) {
 
         Calendar c = Calendar.getInstance();
-        Dialog date = new DatePickerDialog(context, new OnDateSetListener() {
+        Dialog date = new DatePickerDialog(context,R.style.dialog_date, new OnDateSetListener() {
 
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear,

@@ -268,7 +268,7 @@ public class WeekWorkPlanFragment extends BaseFragmentSupport implements OnClick
 			break;
 		case R.id.workplan_btn_time:
 			Calendar c = Calendar.getInstance();
-			DatePickerDialog dateDialog = new DatePickerDialog(v.getContext(), new DatePickerDialog.OnDateSetListener() {
+			DatePickerDialog dateDialog = new DatePickerDialog(v.getContext(),R.style.dialog_date, new DatePickerDialog.OnDateSetListener() {
 				@SuppressLint("SimpleDateFormat")
 				@Override
 				public void onDateSet(DatePicker view, int year1, int monthOfYear, int dayOfMonth) {

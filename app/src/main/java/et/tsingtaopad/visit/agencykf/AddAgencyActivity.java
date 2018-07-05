@@ -264,7 +264,7 @@ public class AddAgencyActivity extends BaseActivity implements OnClickListener {
 	 * 设置开发时间
 	 */
 	private void setData(View v) {
-		DatePickerDialog dateDialog = new DatePickerDialog(v.getContext(),
+		DatePickerDialog dateDialog = new DatePickerDialog(v.getContext(),R.style.dialog_date,
 				new DatePickerDialog.OnDateSetListener() {
 					@Override
 					public void onDateSet(DatePicker view, int year,
@@ -297,7 +297,7 @@ public class AddAgencyActivity extends BaseActivity implements OnClickListener {
 	 * 设置达成时间
 	 */
 	private void setData2(View v) {
-		DatePickerDialog dateDialog = new DatePickerDialog(v.getContext(),
+		DatePickerDialog dateDialog = new DatePickerDialog(v.getContext(),R.style.dialog_date,
 				new DatePickerDialog.OnDateSetListener() {
 					@Override
 					public void onDateSet(DatePicker view, int year,

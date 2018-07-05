@@ -276,7 +276,7 @@ public class DistirbutionActivity extends BaseActivity implements OnClickListene
 
             case R.id.distirbution_bt_time:
                 Calendar calendar = Calendar.getInstance();
-                new DatePickerDialog(this, new OnDateSetListener()
+                new DatePickerDialog(this,R.style.dialog_date, new OnDateSetListener()
                 {
 
                     @Override
