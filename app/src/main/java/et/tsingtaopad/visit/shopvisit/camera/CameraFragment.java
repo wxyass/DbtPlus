@@ -164,8 +164,8 @@ public class CameraFragment extends BaseFragmentSupport {
 					dialog.dismiss();
 				}
 				gridAdapter.notifyDataSetChanged();
-				Toast.makeText(getActivity(), "图片保存失败,请重新拍照", Toast.LENGTH_SHORT).show();
-				DbtLog.logUtils(TAG, "onActivityResult()-图片保存失败,请重新拍照");
+				Toast.makeText(getActivity(), "图片保存失败,请先开启权限", Toast.LENGTH_SHORT).show();
+				DbtLog.logUtils(TAG, "onActivityResult()-图片保存失败,请先开启权限");
 			}
 		}
 	};*/
@@ -240,8 +240,8 @@ public class CameraFragment extends BaseFragmentSupport {
 		gridAdapter.notifyDataSetChanged();
 
 		if(type){
-			Toast.makeText(getActivity(), "图片保存失败,请重新拍照", Toast.LENGTH_SHORT).show();
-			DbtLog.logUtils(TAG, "onActivityResult()-图片保存失败,请重新拍照");
+			Toast.makeText(getActivity(), "图片保存失败,请先开启权限", Toast.LENGTH_SHORT).show();
+			DbtLog.logUtils(TAG, "onActivityResult()-图片保存失败,请先开启权限");
 		}
 	}
 
@@ -1161,11 +1161,11 @@ public class CameraFragment extends BaseFragmentSupport {
 
 				} catch (Exception e) {
 					e.printStackTrace();
-					Toast.makeText(getActivity(), "图片保存失败,请重新拍照", Toast.LENGTH_SHORT).show();
-					DbtLog.logUtils(TAG, "onActivityResult()-图片保存失败,请重新拍照");
+					Toast.makeText(getActivity(), "图片保存失败,请先开启权限", Toast.LENGTH_SHORT).show();
+					DbtLog.logUtils(TAG, "onActivityResult()-图片保存失败,请先开启权限");
 				}
 			} else {
-				Toast.makeText(getActivity(), "初始化相机失败,请重新拍照", Toast.LENGTH_SHORT).show();
+				Toast.makeText(getActivity(), "初始化相机失败,请先开启权限", Toast.LENGTH_SHORT).show();
 			}
 
 			break;

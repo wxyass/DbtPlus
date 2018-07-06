@@ -46,6 +46,7 @@ import com.lidroid.xutils.http.callback.RequestCallBack;
 import et.tsingtaopad.BaseFragmentSupport;
 import et.tsingtaopad.ConstValues;
 import et.tsingtaopad.DeleteTools;
+import et.tsingtaopad.GlobalValues;
 import et.tsingtaopad.R;
 import et.tsingtaopad.db.DatabaseHelper;
 import et.tsingtaopad.operation.distirbution.DistirbutionActivity;
@@ -778,7 +779,25 @@ public class VisitFragment1 extends BaseFragmentSupport //implements OnClickList
 	 */
 	private void syncData() {
 		//showNotifyDialog();
-		
+		if (hasPermission(GlobalValues.WRITE_READ_EXTERNAL_PERMISSION)) {
+			// 拥有了此权限,那么直接执行业务逻辑
+			syncDownData();
+		} else {
+			// 还没有对一个权限(请求码,权限数组)这两个参数都事先定义好
+			requestPermission(GlobalValues.WRITE_READ_EXTERNAL_CODE, GlobalValues.WRITE_READ_EXTERNAL_PERMISSION);
+		}
+	}
+
+	@Override
+	public void doWriteSDCard() {
+		try {
+			syncDownData();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void syncDownData(){
 		// 如果网络可用
 		if (NetStatusUtil.isNetValid(getActivity())) {
 			// 根据后台标识   "0":需清除数据 ,"1":不需清除数据,直接同步
@@ -809,7 +828,6 @@ public class VisitFragment1 extends BaseFragmentSupport //implements OnClickList
 					}).create().show();
 			builder.setCancelable(false); // 是否可以通过返回键 关闭
 		}
-		
 	}
 
 	/**

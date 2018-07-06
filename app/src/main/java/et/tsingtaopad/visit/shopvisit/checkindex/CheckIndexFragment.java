@@ -206,7 +206,7 @@ public class CheckIndexFragment extends BaseFragmentSupport implements OnClickLi
                     if (dialog != null) {
                         dialog.dismiss();
                     }
-                    Toast.makeText(getActivity(), "图片保存失败,请重新拍照", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "图片保存失败,请先开启权限", Toast.LENGTH_SHORT).show();
                     break;
 
                 default:
@@ -297,7 +297,7 @@ public class CheckIndexFragment extends BaseFragmentSupport implements OnClickLi
             dialog.dismiss();
         }
         if (type) {
-            Toast.makeText(getActivity(), "图片保存失败,请重新拍照", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "图片保存失败,请先开启权限", Toast.LENGTH_SHORT).show();
         }
     }
 
