@@ -7,8 +7,8 @@ android {
         applicationId "et.tsingtaopad"
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
-        versionCode 57
-        versionName "2.4.3.6.9"
+        versionCode 59
+        versionName "2.4.3.7.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     dexOptions{

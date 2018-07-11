@@ -120,7 +120,8 @@
     
     <!-- 订单明细 -->
     <string name="operation_orders">当日订单查询</string>
-    <string name="check_grid">定格/线路</string>  
+    <string name="operation_zhuguan">主管系统</string>
+    <string name="check_grid">定格/线路</string>
     <string name="check_term">终端详情</string>  
     <string name="check_visit">拜访信息</string>  
     <string name="check_agency">供货商</string>  

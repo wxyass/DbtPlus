@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:layout_centerVertical="true"
         android:gravity="center"
-        android:inputType="number"
+        android:digits="1234567890"
         android:maxLength="3"
         android:singleLine="true" />
 

@@ -58,6 +58,8 @@ import et.tsingtaopad.operation.working.DayWorkingFragment;
 import et.tsingtaopad.operation.working.DayWorkingNewActivity;
 import et.tsingtaopad.operation.working.WeekWorkingFragment;
 import et.tsingtaopad.operation.workplan.WorkPlanFragment1;
+import et.tsingtaopad.operation.zhuguan.ZgFragment;
+import et.tsingtaopad.operation.zhuguan.ZhuguanFragment;
 import et.tsingtaopad.syssetting.SystemSettingInfor;
 import et.tsingtaopad.syssetting.SystemSettingModifyPwdFragment;
 import et.tsingtaopad.syssetting.notice.NoticeFragmentTest;
@@ -184,6 +186,8 @@ public class OperationFragment1 extends BaseFragmentSupport //implements OnClick
 		
 		authorityMap.put("1000024", R.drawable.bt_operation_load);// 路线卡查询
 		authorityMap.put("1000025", R.drawable.bt_operation_taizhang);// 终端进货台账查询
+
+		authorityMap.put("1000026", R.drawable.bt_operation_zhuguan);// 主管系统
 		
 		
 		
@@ -206,7 +210,7 @@ public class OperationFragment1 extends BaseFragmentSupport //implements OnClick
 				}
 				//images.add(authorityMap.get("1000023"));// 改行记得删除
 				//images.add(authorityMap.get("1000024"));// 改行记得删除
-				//images.add(authorityMap.get("1000025"));// 改行记得删除
+				// images.add(authorityMap.get("1000026"));// 改行记得删除
 				JieMianAdapter jieMianAdapter = new JieMianAdapter();
 				platform_gv_visit.setSelector(new ColorDrawable(Color.TRANSPARENT));
 				platform_gv_visit.setAdapter(jieMianAdapter);
@@ -388,7 +392,12 @@ public class OperationFragment1 extends BaseFragmentSupport //implements OnClick
 							fragment = new OrdersFragment();
 							//intent = new Intent(getActivity(), OrdersActivity.class);
 							break;
-							
+							// 主管系统
+						case R.drawable.bt_operation_zhuguan:
+							//fragment = new ZhuguanFragment();
+							intent = new Intent(getActivity(), ZgFragment.class);
+							break;
+
 						// 日工作推进(标准)
 						case R.drawable.bt_operation_workdetail1:
 							//fragment = new DayWorkingFragment();

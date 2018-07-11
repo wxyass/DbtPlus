@@ -29,8 +29,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
         android:layout_weight="2"
-        android:ems="8"
-        android:maxLength="8"
+        android:ems="6"
+        android:maxLength="6"
         android:hint="@string/hit_input"
         android:inputType="number"
         android:singleLine="true" />
@@ -47,8 +47,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
         android:layout_weight="2"
-        android:ems="8"
-        android:maxLength="8"
+        android:ems="6"
+        android:maxLength="6"
         android:hint="@string/hit_input"
         android:inputType="number"
         android:singleLine="true" />

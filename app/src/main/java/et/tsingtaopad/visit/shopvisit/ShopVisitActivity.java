@@ -1355,7 +1355,7 @@ public class ShopVisitActivity extends BaseActivity implements OnClickListener,
         // 1秒更新一次，或最小位移变化超过1米更新一次；
         // 注意：此处更新准确度非常低，推荐在service里面启动一个Thread，在run中sleep(10000);然后执行handler.sendMessage(),更新位置
         lm.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-                5000,
+                10000,
                 120,
                 locationListener);
     }

@@ -221,8 +221,8 @@ public class SayHiFragment extends BaseFragmentSupport implements
         View view = inflater.inflate(R.layout.shopvisit_sayhi, container, false);
         DbtLog.logUtils(TAG, "onCreateView()");
         this.initView(view);
-        // this.initData();
-        this.asynch();
+         this.initData();
+        //this.asynch();
         return view;
     }
 
@@ -243,7 +243,7 @@ public class SayHiFragment extends BaseFragmentSupport implements
 
             protected void onPostExecute(Void result) {
                 initData();
-                isLoadingData = false;
+
             }
 
             ;
@@ -485,6 +485,10 @@ public class SayHiFragment extends BaseFragmentSupport implements
             Long time4 = new Date().getTime();
             Log.e("Optimization", "给终端数据赋值" + (time4 - time3));
         }
+
+        // 加载完毕
+        isLoadingData = false;
+
     }
 
     /**

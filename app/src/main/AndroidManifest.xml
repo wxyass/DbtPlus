@@ -74,7 +74,7 @@
         <activity
             android:name="et.tsingtaopad.MainActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustUnspecified" />
+            android:windowSoftInputMode="adjustPan" />
         <!-- 锁屏界面 -->
         <activity
             android:name="et.tsingtaopad.login.LockScreenActivity"
@@ -135,6 +135,7 @@
         <activity
             android:name="et.tsingtaopad.visit.agencyvisit.ledger.LedgerViewPagerActivity"
             android:configChanges="screenSize|orientation|keyboardHidden"
+            android:windowSoftInputMode="adjustPan"
             android:screenOrientation="landscape" />
         <!-- 终端进货台账 -->
         <activity
@@ -159,6 +160,12 @@
         <!-- 每日工作 -->
         <activity
             android:name="et.tsingtaopad.visit.tomorrowworkrecord.TomorrowWorkRecordFragment"
+            android:configChanges="screenSize|orientation|keyboardHidden"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="stateHidden|adjustUnspecified" />
+        <!-- 主管系统 -->
+        <activity
+            android:name=".operation.zhuguan.ZgFragment"
             android:configChanges="screenSize|orientation|keyboardHidden"
             android:screenOrientation="landscape"
             android:windowSoftInputMode="stateHidden|adjustUnspecified" />

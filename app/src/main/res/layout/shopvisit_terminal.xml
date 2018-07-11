@@ -166,6 +166,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:cacheColorHint="@color/bg_lv_item"
+                    android:descendantFocusability="beforeDescendants"
                     android:divider="@color/listview_line"
                     android:dividerHeight="1dp" >
                 </ListView>
