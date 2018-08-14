@@ -333,9 +333,6 @@ public class CheckIndexFragment extends BaseFragmentSupport implements OnClickLi
                 initData();
                 isLoadingData = false;
             }
-
-            ;
-
         }.execute();
     }
 

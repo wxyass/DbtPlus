@@ -7,8 +7,8 @@ android {
         applicationId "et.tsingtaopad"
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
-        versionCode 59
-        versionName "2.4.3.7.1"
+        versionCode 63
+        versionName "2.4.3.7.5"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     dexOptions{
@@ -63,4 +63,7 @@ dependencies {
     // 内存泄漏
 
     // ANR
+
+    // 图片拉伸展示
+    compile 'com.github.chrisbanes:PhotoView:2.0.0'
 }

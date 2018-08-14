@@ -6,10 +6,6 @@
     android:gravity="center_horizontal"
     android:orientation="vertical" >
 
-    <include layout="@layout/banner_navigation" />
-
-    <!--  -->
-
     <LinearLayout
         android:id="@+id/orders_ll_top"
         android:layout_width="match_parent"

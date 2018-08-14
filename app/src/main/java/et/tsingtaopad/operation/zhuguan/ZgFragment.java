@@ -14,6 +14,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.webkit.CookieManager;
+import android.webkit.CookieSyncManager;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ListView;
@@ -42,12 +44,10 @@ import et.tsingtaopad.visit.tomorrowworkrecord.TomorrowWorkRecordService;
  * 日期      原因  BUG号    修改人 修改版本<br>
  */
 @SuppressLint("NewApi")
-public class ZgFragment extends BaseActivity implements OnClickListener {
+public class ZgFragment extends BaseActivity {
 
     private final String TAG = "ZgFragment";
 
-    private TextView tv_title;
-    private Button btn_back;
     private WebView web_zhuguan;
 
 
@@ -64,14 +64,16 @@ public class ZgFragment extends BaseActivity implements OnClickListener {
      */
     private void initView() {
         // 绑定界面组件
-        btn_back = (Button) findViewById(R.id.banner_navigation_bt_back);
+        /*btn_back = (Button) findViewById(R.id.banner_navigation_bt_back);
         tv_title = (TextView) findViewById(R.id.banner_navigation_tv_title);
-        web_zhuguan = (WebView) findViewById(R.id.weekwork_web_zhuguan);
+
         RelativeLayout backRl = (RelativeLayout) findViewById(R.id.banner_navigation_rl_back);
         RelativeLayout confirmRl = (RelativeLayout) findViewById(R.id.banner_navigation_rl_confirm);
         backRl.setOnClickListener(this);
         confirmRl.setOnClickListener(this);
-        btn_back.setOnClickListener(this);
+        btn_back.setOnClickListener(this);*/
+
+        web_zhuguan = (WebView) findViewById(R.id.weekwork_web_zhuguan);
 
     }
 
@@ -85,11 +87,11 @@ public class ZgFragment extends BaseActivity implements OnClickListener {
 
 
         StringBuffer urlBuffer = new StringBuffer();
-        urlBuffer.append("http://cms.tsingtao.com.cn:8001/da/zg/index.html");
+        urlBuffer.append("http://172.16.0.229:8001/da/zg/index.html");
         /*urlBuffer.append("?areaId=").append(PrefUtils.getString(getActivity(), "disId", ""));
         urlBuffer.append("&userId=").append(PrefUtils.getString(getActivity(), "userCode", ""));*/
-        urlBuffer.append("?areaId=").append("1-7F88W5");
-        urlBuffer.append("&userId=").append("8f65e66c-d10b-431e-a4cb-542b734fd083");
+        urlBuffer.append("?areaId=").append("1-4HKF");
+        urlBuffer.append("&userId=").append("4819b8b2-182c-463b-b2a6-a408e91b32b4");
         web_zhuguan.loadUrl(urlBuffer.toString());
     }
 
@@ -97,20 +99,22 @@ public class ZgFragment extends BaseActivity implements OnClickListener {
      * 初始化数据
      */
     private void initData() {
-        tv_title.setText(R.string.operation_zhuguan);
         showWebView();
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            // 界面返回按钮
-            case R.id.banner_navigation_rl_back:
-            case R.id.banner_navigation_bt_back:
-                finish();
-                break;
+    /*@Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //清空所有Cookie
+        CookieSyncManager.createInstance(ZgFragment.this);  //Create a singleton CookieSyncManager within a context
+        CookieManager cookieManager = CookieManager.getInstance(); // the singleton CookieManager instance
+        cookieManager.removeAllCookie();// Removes all cookies.
+        CookieSyncManager.getInstance().sync(); // forces sync manager to sync now
 
-        }
-    }
+        web_zhuguan.setWebChromeClient(null);
+        web_zhuguan.setWebViewClient(null);
+        web_zhuguan.getSettings().setJavaScriptEnabled(false);
+        web_zhuguan.clearCache(true);
+    }*/
 
 }

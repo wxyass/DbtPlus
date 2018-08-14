@@ -17,18 +17,20 @@ import et.tsingtaopad.db.tables.MstAgencyKFM;
 
 public class ShowPicActivity extends Activity {
 
-	private ImageView imageView;
+	// private ImageView imageView;
+	private com.github.chrisbanes.photoview.PhotoView imageView;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.camera_showpic);
+		setContentView(R.layout.visit_camera_show);
 
-		imageView = (ImageView) this.findViewById(R.id.showpic_iv_imageView);
-		
+		// imageView = (ImageView) this.findViewById(R.id.showpic_iv_imageView);
+		imageView = (com.github.chrisbanes.photoview.PhotoView) this.findViewById(R.id.showpic_iv_imageView);
+
 		initData();
 		
-		imageView.setOnTouchListener(new TouchListener());
+		// imageView.setOnTouchListener(new TouchListener());
 	}
 
 	/**
