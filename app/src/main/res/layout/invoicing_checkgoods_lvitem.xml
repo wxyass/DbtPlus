@@ -71,12 +71,14 @@
         android:layout_weight="2"
         android:ems="6"
         android:hint="@string/hit_input"
+        android:visibility="gone"
         android:inputType="number"
         android:maxLength="6" >
     </EditText>
 
     <View
         android:layout_width="1dp"
+        android:visibility="gone"
         android:layout_height="match_parent"
         android:background="@color/listview_line" />
 
