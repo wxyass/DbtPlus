@@ -38,6 +38,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -56,6 +57,7 @@ import et.tsingtaopad.db.DatabaseHelper;
 import et.tsingtaopad.db.dao.MstCameraiInfoMDao;
 import et.tsingtaopad.db.tables.MstCameraInfoM;
 import et.tsingtaopad.db.tables.MstTerminalinfoM;
+import et.tsingtaopad.db.tables.MstVisitM;
 import et.tsingtaopad.tools.DateUtil;
 import et.tsingtaopad.tools.DbtLog;
 import et.tsingtaopad.tools.FileTool;
@@ -115,6 +117,7 @@ public class CameraFragment extends BaseFragmentSupport {
 	// 查看时的提示
 	TextView descTv;
 	ScrollView descGv;
+	EditText visitreportEt;
 
 	private int idsuccess = -1; // 0在本地保存成功 1在本地还没保存成功
 	private Bitmap bitmap;// 拍照前默认图片
@@ -127,6 +130,10 @@ public class CameraFragment extends BaseFragmentSupport {
 	AlertDialog dialog;
 
 	MyHandler handler;
+
+
+	// 此次拜访,保存拜访记录
+	private MstVisitM visitM;
 
 	//是否在加载数据
 	private boolean isLoadingData = true;
@@ -288,6 +295,7 @@ public class CameraFragment extends BaseFragmentSupport {
 		descGv = (ScrollView) view.findViewById(R.id.visitshop_sv_desc);
 		picGv = (et.tsingtaopad.view.MyGridView) view.findViewById(R.id.gv_camera);
 		descTv = (TextView) view.findViewById(R.id.visitshop_tv_desc);
+		visitreportEt = (EditText) view.findViewById(R.id.camera_et_visitreport);
 
 	}
 
@@ -303,10 +311,10 @@ public class CameraFragment extends BaseFragmentSupport {
 
 		// 如果不是查看,图片列表展示 提示消失
 		if (!ConstValues.FLAG_1.equals(seeFlag)) {
-			descGv.setVisibility(View.VISIBLE);
+			picGv.setVisibility(View.VISIBLE);
 			descTv.setVisibility(View.GONE);
 		} else { // 如果是查看,图片列表消失 提示展示
-			descGv.setVisibility(View.GONE);
+			picGv.setVisibility(View.GONE);
 			descTv.setVisibility(View.VISIBLE);
 			descTv.setText("图片上传后本地会自动删除,查看模式下不能显示,只能通过服务器后台查看");
 		}
@@ -323,6 +331,12 @@ public class CameraFragment extends BaseFragmentSupport {
 		initpic();
 		// 初始化拍照文件夹
 		createphotoFile();
+
+		// 初始化拜访记录的数据
+		visitM = cameraService.findVisitById(visitKey);
+		if (visitM != null) {
+			visitreportEt.setText(visitM.getRemarks());
+		}
 	}
 
 	@Override
@@ -333,6 +347,15 @@ public class CameraFragment extends BaseFragmentSupport {
 		//createphotoFile();
 
 		//initpic();
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+
+		// 保存拜访记录
+		visitM.setRemarks(visitreportEt.getText().toString());
+		cameraService.saveVisitM(visitKey, termId, visitM);
 	}
 
 	// 初始化照片 及已拍照片
@@ -442,11 +465,11 @@ public class CameraFragment extends BaseFragmentSupport {
 
 		// 没有图片类型时,给与提示
 		if (valueLst == null || valueLst.size() <= 0) {
-			descGv.setVisibility(View.GONE);
+			picGv.setVisibility(View.GONE);
 			descTv.setVisibility(View.VISIBLE);
 			descTv.setText("普通图片类型后台未配置或促销活动未达成,不予显示");
 		} else if (ConstValues.FLAG_0.equals(seeFlag) && valueLst != null && valueLst.size() > 0) {
-			descGv.setVisibility(View.VISIBLE);
+			picGv.setVisibility(View.VISIBLE);
 			descTv.setVisibility(View.GONE);
 		}
 		// 根据促销活动,添加促销活动照片类型,注意initData()中先走了一遍(?)--160927----

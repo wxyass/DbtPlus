@@ -32,17 +32,50 @@
                 android:scrollbars="none"
                 android:verticalSpacing="30dp" >
             </et.tsingtaopad.view.MyGridView>
+
+            <!-- 图片上传后本地会自动删除,查看模式下不能显示,只能通过服务器后台查看 -->
+            <TextView
+                android:id="@+id/visitshop_tv_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/home_sp"
+                android:text=""/>
+
+
+
+            <!--拜访记录-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:gravity="center_vertical" >
+
+                <ImageView
+                    style="@style/point"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ico_point" />
+
+                <TextView
+                    style="@style/page_label_big"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:text="@string/chatvie_report" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/camera_et_visitreport"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="10dp"
+                android:inputType="textMultiLine" />
         </LinearLayout>
     </ScrollView>
 
-    <!-- 图片上传后本地会自动删除,查看模式下不能显示,只能通过服务器后台查看 -->
-    <TextView
-        android:id="@+id/visitshop_tv_desc"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" 
-        android:gravity="center"
-        android:layout_marginTop="20dp"
-        android:textColor="@color/home_sp"
-        android:text=""/>
+
 
 </LinearLayout>

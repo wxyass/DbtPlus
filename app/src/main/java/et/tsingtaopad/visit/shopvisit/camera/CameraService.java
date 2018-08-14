@@ -25,14 +25,18 @@ import et.tsingtaopad.db.dao.MstVistproductInfoDao;
 import et.tsingtaopad.db.tables.MstAgencysupplyInfo;
 import et.tsingtaopad.db.tables.MstCameraInfoM;
 import et.tsingtaopad.db.tables.MstCheckexerecordInfoTemp;
+import et.tsingtaopad.db.tables.MstCmpsupplyInfo;
 import et.tsingtaopad.db.tables.MstTerminalinfoM;
+import et.tsingtaopad.db.tables.MstVisitM;
 import et.tsingtaopad.db.tables.MstVistproductInfo;
 import et.tsingtaopad.tools.CheckUtil;
 import et.tsingtaopad.tools.DbtLog;
 import et.tsingtaopad.tools.FunUtil;
+import et.tsingtaopad.tools.PrefUtils;
 import et.tsingtaopad.visit.shopvisit.ShopVisitService;
 import et.tsingtaopad.visit.shopvisit.camera.domain.CameraDataStc;
 import et.tsingtaopad.visit.shopvisit.camera.domain.PictypeDataStc;
+import et.tsingtaopad.visit.shopvisit.chatvie.domain.ChatVieStc;
 import et.tsingtaopad.visit.shopvisit.invoicing.domain.InvoicingStc;
 import et.tsingtaopad.visit.shopvisit.sayhi.domain.MstTerminalInfoMStc;
 
@@ -364,5 +368,46 @@ public class CameraService extends ShopVisitService {
 			}
 		}
 	}
+
+
+
+    /**
+     * 保存拍照页面数据
+     *
+     * @param visitId       拜访主键
+     * @param termId        终端主键
+     * @param visitM        拜访主表相关信息
+     */
+    public void saveVisitM(
+                        String visitId, String termId, MstVisitM visitM) {
+
+        AndroidDatabaseConnection connection = null;
+        try {
+            DatabaseHelper helper = DatabaseHelper.getHelper(context);
+            Dao<MstVistproductInfo, String> proDao = helper.getMstVistproductInfoDao();
+            Dao<MstVisitM, String> visitDao = helper.getMstVisitMDao();
+            Dao<MstCmpsupplyInfo, String> supplyDao = helper.getMstCmpsupplyInfoDao();
+            connection = new AndroidDatabaseConnection(helper.getWritableDatabase(), true);
+            connection.setAutoCommit(false);
+
+            // 维护拜访产品-竞品记录
+            StringBuffer buffer;
+            // 更新拜访主表拜访记录
+            buffer = new StringBuffer();
+            buffer.append("update mst_visit_m set  remarks=? ,padisconsistent = '0' ");
+            buffer.append("where visitkey= ? ");
+            visitDao.executeRaw(buffer.toString(), new String[] {
+                     visitM.getRemarks(), visitId});
+
+            connection.commit(null);
+        } catch (Exception e) {
+            Log.e(TAG, "保存拍照数据发生异常", e);
+            try {
+                connection.rollback(null);
+            } catch (SQLException e1) {
+                Log.e(TAG, "回滚拍照数据发生异常", e1);
+            }
+        }
+    }
     
 }

@@ -635,6 +635,8 @@ public class ShopVisitService {
                         				.equals(prevVisitDate.substring(0, 8))) {
                         			//上周期进货总量(改为订单量)
                         			product.setPurcnum(null);
+                                    //累计卡,隔天清零
+                                    product.setAddcard(null);
                         			//上次库存
                         			product.setPronum(product.getCurrnum());
                         			//本次库存(当前库存)

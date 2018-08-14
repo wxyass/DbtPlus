@@ -209,11 +209,13 @@ public class ChatVieService extends ShopVisitService {
             
             // 更新拜访主表拜访记录
             buffer = new StringBuffer();
-            buffer.append("update mst_visit_m set status=?, iscmpcollapse=?, remarks=? ,padisconsistent = '0' ");
+            // buffer.append("update mst_visit_m set status=?, iscmpcollapse=?, remarks=? ,padisconsistent = '0' ");
+            buffer.append("update mst_visit_m set status=?, iscmpcollapse=? ,padisconsistent = '0' ");
             buffer.append("where visitkey= ? ");
             visitDao.executeRaw(buffer.toString(), new String[] {
-                visitM.getStatus(), visitM.getIscmpcollapse(), visitM.getRemarks(), visitId});
-            
+                //visitM.getStatus(), visitM.getIscmpcollapse(), visitM.getRemarks(), visitId});
+                visitM.getStatus(), visitM.getIscmpcollapse(), visitId});
+
             connection.commit(null);
         } catch (Exception e) {
             Log.e(TAG, "保存聊竞品数据发生异常", e);

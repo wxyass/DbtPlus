@@ -53,7 +53,7 @@ public class ChatVieFragment extends BaseFragmentSupport implements OnClickListe
     private VieStatusAdapter statusAdapter;
     private VieSourceAdapter sourceAdapter;
     private RadioGroup clearVieRg;
-    private EditText remarkEt;
+    // private EditText remarkEt;
 
     private List<ChatVieStc> dataLst;
     private String visitId;
@@ -122,7 +122,7 @@ public class ChatVieFragment extends BaseFragmentSupport implements OnClickListe
         vieStatusLv = (ListView) view.findViewById(R.id.chatvie_lv_viestatus);
         vieSourceLv = (ListView) view.findViewById(R.id.chatvie_lv_viesource);
         clearVieRg = (RadioGroup) view.findViewById(R.id.chatvie_rg_clearvie);
-        remarkEt = (EditText) view.findViewById(R.id.chatvie_et_visitreport);
+        // remarkEt = (EditText) view.findViewById(R.id.chatvie_et_visitreport);
 
         addRelationBt.setOnClickListener(this);
         clearVieRg.setOnClickListener(this);
@@ -161,7 +161,7 @@ public class ChatVieFragment extends BaseFragmentSupport implements OnClickListe
             } else {
                 clearVieRg.check(R.id.chatvie_rb_clearvie_false);
             }
-            remarkEt.setText(visitM.getRemarks());
+            // remarkEt.setText(visitM.getRemarks());
         } else {
             clearVieRg.check(R.id.chatvie_rb_clearvie_false);
         }
@@ -391,7 +391,7 @@ public class ChatVieFragment extends BaseFragmentSupport implements OnClickListe
         } else {
             visitM.setIscmpcollapse(ConstValues.FLAG_0);
         }
-        visitM.setRemarks(remarkEt.getText().toString());
+        // visitM.setRemarks(remarkEt.getText().toString());
 
         service.saveVie(dataLst, visitId, termId, visitM);
     }
