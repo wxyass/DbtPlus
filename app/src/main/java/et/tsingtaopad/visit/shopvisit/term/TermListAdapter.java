@@ -98,6 +98,7 @@ public class TermListAdapter extends BaseAdapter implements OnClickListener
             convertView = LayoutInflater.from(context).inflate(R.layout.shopvisit_terminal_lvitem2, null);
             holder.terminalSequenceEt = (EditText) convertView.findViewById(R.id.term_item_et_sequence);
             holder.terminalNameTv = (TextView) convertView.findViewById(R.id.term_item_tv_name);
+            holder.topTv = (TextView) convertView.findViewById(R.id.term_item_tv_top);
             holder.visitDateTv = (TextView) convertView.findViewById(R.id.term_item_tv_visitdate);
             holder.terminalRb = (RadioButton) convertView.findViewById(R.id.term_item_rb);
             holder.terminalTypeTv = (TextView) convertView.findViewById(R.id.term_item_tv_type);
@@ -160,6 +161,8 @@ public class TermListAdapter extends BaseAdapter implements OnClickListener
         }
         holder.terminalSequenceEt.setText(item.getSequence());
         holder.terminalNameTv.setText(item.getTerminalname());
+        // 总容量
+        holder.topTv.setText(item.getTvolume());
         holder.terminalTypeTv.setText(item.getTerminalType());
         if (!CheckUtil.isBlankOrNull(item.getVisitTime()))
         {
@@ -278,6 +281,7 @@ public class TermListAdapter extends BaseAdapter implements OnClickListener
         private EditText terminalSequenceEt;
         private RadioButton terminalRb;
         private TextView terminalNameTv;
+        private TextView topTv;
         private TextView visitDateTv;
         private TextView terminalTypeTv;
         private ImageView updateIv;

@@ -34,14 +34,14 @@ import et.tsingtaopad.visit.shopvisit.invoicing.domain.InvoicingStc;
  * 项目名称：营销移动智能工作平台 </br>
  * 文件名：InvoicingService.java</br>
  * 作者：吴承磊   </br>
- * 创建时间：2013-12-6</br>      
- * 功能描述: 巡店拜访进销存业务逻辑</br>      
- * 版本 V 1.0</br>               
+ * 创建时间：2013-12-6</br>
+ * 功能描述: 巡店拜访进销存业务逻辑</br>
+ * 版本 V 1.0</br>
  * 修改履历</br>
  * 日期      原因  BUG号    修改人 修改版本</br>
  */
 public class InvoicingService extends ShopVisitService {
-    
+
     private final String TAG = "InvoicingService";
 
     public InvoicingService(Context context, Handler handler) {
@@ -52,12 +52,12 @@ public class InvoicingService extends ShopVisitService {
      * 删除重复拜访产品（相同产品、供货商只保留一个）
      * @param visitkey
      */
-    public void delRepeatVistProduct(String visitkey){
+    public void delRepeatVistProduct(String visitkey) {
         try {
             DatabaseHelper helper = DatabaseHelper.getHelper(context);
             MstVistproductInfoDao dao = helper.getDao(MstVistproductInfo.class);
-            QueryBuilder<MstVistproductInfo, String> qb=dao.queryBuilder();
-            Where<MstVistproductInfo, String> where=  qb.where();
+            QueryBuilder<MstVistproductInfo, String> qb = dao.queryBuilder();
+            Where<MstVistproductInfo, String> where = qb.where();
             where.eq("visitkey", visitkey);
             where.and();
             where.isNotNull("productkey");
@@ -66,53 +66,53 @@ public class InvoicingService extends ShopVisitService {
             qb.orderBy("productkey", true);
             qb.orderBy("agencykey", true);
             qb.orderBy("updatetime", false);
-            List<MstVistproductInfo> valueLst =qb.query();
-            Map<String, MstVistproductInfo> map=new HashMap<String, MstVistproductInfo>();
+            List<MstVistproductInfo> valueLst = qb.query();
+            Map<String, MstVistproductInfo> map = new HashMap<String, MstVistproductInfo>();
             if (!CheckUtil.IsEmpty(valueLst)) {
                 for (MstVistproductInfo item : valueLst) {
-                	String key=item.getProductkey()+item.getAgencykey();
-                	if(!map.containsKey(key)){
-                		map.put(key, item);
-                	}else{
-                		dao.delete(item);
-                	}
+                    String key = item.getProductkey() + item.getAgencykey();
+                    if (!map.containsKey(key)) {
+                        map.put(key, item);
+                    } else {
+                        dao.delete(item);
+                    }
                 }
             }
         } catch (SQLException e) {
-        	e.printStackTrace();
+            e.printStackTrace();
             Log.e(TAG, "删除重复拜访产品", e);
         }
     }
 
     /**
      * 获取某次拜访的我品的进销存数据情况
-     * 
-     * @param visitId   拜访主键
+     *
+     * @param visitId 拜访主键
      * @return
      */
-    public List<InvoicingStc> queryMinePro(String visitId,String termKey) {
-        
+    public List<InvoicingStc> queryMinePro(String visitId, String termKey) {
+
         List<InvoicingStc> lst = new ArrayList<InvoicingStc>();
         try {
             DatabaseHelper helper = DatabaseHelper.getHelper(context);
             MstVistproductInfoDao dao = helper.getDao(MstVistproductInfo.class);
-            lst = dao.queryMinePro(helper, visitId,termKey);
+            lst = dao.queryMinePro(helper, visitId, termKey);
         } catch (SQLException e) {
             Log.e(TAG, "获取终端表DAO对象失败", e);
         }
-        
+
         return lst;
     }
-    
+
     /**
      * 保存销存页面数据，MST_VISTPRODUCT_INFO、MST_AGENCYSUPPLY_INFO
-     * 
-     * @param dataLst       我品进度销存数据
-     * @param visitId       拜访主键
-     * @param termId        终端主键
+     *
+     * @param dataLst 我品进度销存数据
+     * @param visitId 拜访主键
+     * @param termId  终端主键
      */
-    public void saveInvoicing(List<InvoicingStc> 
-                          dataLst, String visitId, String termId) {
+    public void saveInvoicing(List<InvoicingStc>
+                                      dataLst, String visitId, String termId) {
         if (CheckUtil.IsEmpty(dataLst) || CheckUtil
                 .isBlankOrNull(visitId) || CheckUtil.isBlankOrNull(termId)) {
             return;
@@ -124,18 +124,18 @@ public class InvoicingService extends ShopVisitService {
         AndroidDatabaseConnection connection = null;
         try {
             DatabaseHelper helper = DatabaseHelper.getHelper(context);
-            Dao<MstVistproductInfo, String> proDao = 
-                            helper.getDao(MstVistproductInfo.class);
-            Dao<MstAgencysupplyInfo, String> supplyDao = 
-                            helper.getDao(MstAgencysupplyInfo.class);
+            Dao<MstVistproductInfo, String> proDao =
+                    helper.getDao(MstVistproductInfo.class);
+            Dao<MstAgencysupplyInfo, String> supplyDao =
+                    helper.getDao(MstAgencysupplyInfo.class);
             connection = new AndroidDatabaseConnection(helper.getWritableDatabase(), true);
             connection.setAutoCommit(false);
-            
+
             // 维护拜访产品-我品记录
             StringBuffer buffer;
             MstVistproductInfo proItem;
-            for(InvoicingStc item : dataLst) {
-                
+            for (InvoicingStc item : dataLst) {
+
                 // 新增
                 buffer = new StringBuffer();
                 if (CheckUtil.isBlankOrNull(item.getRecordId())) {
@@ -161,11 +161,11 @@ public class InvoicingService extends ShopVisitService {
                     proItem.setCreuser(PrefUtils.getString(context, "userCode", ""));
                     //proItem.setUpdateuser(ConstValues.loginSession.getUserCode());
                     proItem.setUpdateuser(PrefUtils.getString(context, "userCode", ""));
-                    
+
                     proItem.setFristdate(item.getFristdate());
                     proDao.create(proItem);
-                    
-                // 更新
+
+                    // 更新
                 } else {
                     buffer.append("update MST_VISTPRODUCT_INFO set ");
                     buffer.append("PURCPRICE=?, RETAILPRICE=?, PURCNUM=?, ");
@@ -185,7 +185,7 @@ public class InvoicingService extends ShopVisitService {
                     proDao.executeRaw(buffer.toString(), args);
                 }
             }
-            
+
             // 维护经销商供货关系表
           /*  List<MstAgencysupplyInfo> supplyLst = 
                         supplyDao.queryForEq("lowerkey", termId);*/
@@ -234,12 +234,14 @@ public class InvoicingService extends ShopVisitService {
             }
         }
     }
+
     /**
      * 新增供货关系指标记录表进行更新
+     *
      * @param visitId
      * @param proId
      */
-    public void updateMstcheckexerecordInfoTemp(String visitId,String proId){
+    public void updateMstcheckexerecordInfoTemp(String visitId, String proId) {
         // 新增供货关系时，对指标记录表进行更新
         AndroidDatabaseConnection connection = null;
         try {
@@ -250,18 +252,17 @@ public class InvoicingService extends ShopVisitService {
             QueryBuilder<MstCheckexerecordInfoTemp, String> qb = tempDao.queryBuilder();
             qb.where().eq("visitkey", visitId).and().eq("productkey", proId).and().eq("deleteflag", "1");
             List<MstCheckexerecordInfoTemp> list = qb.query();
-            StringBuffer buffer = new StringBuffer();           
+            StringBuffer buffer = new StringBuffer();
             buffer = new StringBuffer();
-            if (list != null && list.size()>0)
-            {   
+            if (list != null && list.size() > 0) {
                 //acresult='-1'如果是产品删除后  再新增产品  状态值就改为-1  请选择(指标状态查询处可体现)
                 buffer.append("update mst_checkexerecord_info_temp set deleteflag='0', acresult='-1'");
                 //buffer.append("update mst_checkexerecord_info_temp set deleteflag='0' ");
-            }else{
+            } else {
                 buffer.append("update mst_checkexerecord_info_temp set deleteflag='0' ");
             }
             buffer.append("where visitkey=? and productkey=? ");
-            tempDao.executeRaw(buffer.toString(), new String[] {visitId, proId});           
+            tempDao.executeRaw(buffer.toString(), new String[]{visitId, proId});
             connection.commit(null);
         } catch (Exception e) {
             Log.e(TAG, "新增供货关系时指标记录表数据更新发生异常", e);
@@ -272,19 +273,19 @@ public class InvoicingService extends ShopVisitService {
             }
         }
     }
-    
+
     /***
      * 是否存在产品
      * @param productkey
      * @return
      */
-    public MstVistproductInfo getExistProduct(String visitKey,String productkey){
-    	MstVistproductInfo vistproductInfo=null;
+    public MstVistproductInfo getExistProduct(String visitKey, String productkey) {
+        MstVistproductInfo vistproductInfo = null;
         try {
             DatabaseHelper helper = DatabaseHelper.getHelper(context);
             Dao<MstVistproductInfo, String> proDao = helper.getDao(MstVistproductInfo.class);
-            QueryBuilder<MstVistproductInfo, String> qb=proDao.queryBuilder();
-            Where<MstVistproductInfo, String> where=qb.where();
+            QueryBuilder<MstVistproductInfo, String> qb = proDao.queryBuilder();
+            Where<MstVistproductInfo, String> where = qb.where();
             where.eq("visitkey", visitKey);
             where.and();
             where.eq("productkey", productkey);
@@ -292,30 +293,30 @@ public class InvoicingService extends ShopVisitService {
             where.ne("deleteflag", "1");
             where.and();
             where.isNull("cmpproductkey");
-            vistproductInfo=qb.queryForFirst();
+            vistproductInfo = qb.queryForFirst();
         } catch (Exception e) {
-        	e.printStackTrace();
+            e.printStackTrace();
         }
         return vistproductInfo;
     }
-    
+
     /**
      * 删除经销商与终端的产品供应关系
-     * 
+     *
      * @param recordKey 拜访产品-竞品我品记录表主键
      * @param termId    终端ID
      * @param visitId   拜访主键
      * @param proId     产品ID
      */
     public boolean deleteSupply(String recordKey, String termId, String visitId, String proId) {
-        boolean isFlag=false;
+        boolean isFlag = false;
         AndroidDatabaseConnection connection = null;
         try {
             DatabaseHelper helper = DatabaseHelper.getHelper(context);
-            Dao<MstVistproductInfo, String> proDao = 
-                            helper.getDao(MstVistproductInfo.class);
-            Dao<MstAgencysupplyInfo, String> supplyDao = 
-                            helper.getDao(MstAgencysupplyInfo.class);
+            Dao<MstVistproductInfo, String> proDao =
+                    helper.getDao(MstVistproductInfo.class);
+            Dao<MstAgencysupplyInfo, String> supplyDao =
+                    helper.getDao(MstAgencysupplyInfo.class);
             connection = new AndroidDatabaseConnection(helper.getWritableDatabase(), true);
             connection.setAutoCommit(false);
 
@@ -323,8 +324,8 @@ public class InvoicingService extends ShopVisitService {
             StringBuffer buffer = new StringBuffer();
             buffer.append("delete from mst_vistproduct_info ");
             buffer.append("where RECORDKEY=? ");
-            proDao.executeRaw(buffer.toString(), new String[] {recordKey});
-            
+            proDao.executeRaw(buffer.toString(), new String[]{recordKey});
+
             // 删除经销商供货关系相关数据
             /*buffer = new StringBuffer();
             buffer.append("update MST_AGENCYSUPPLY_INFO set ");
@@ -336,54 +337,54 @@ public class InvoicingService extends ShopVisitService {
             buffer.append("update mst_checkexerecord_info_temp set deleteflag='1' ");
             buffer.append("where visitkey=? and productkey=? ");
             supplyDao.executeRaw(buffer.toString(), new String[] {visitId, proId});*/
-            
+
             //↓-------------------------------------------------------------------------------------------------------------
             QueryBuilder<MstAgencysupplyInfo, String> qb = supplyDao.queryBuilder();
             qb.where().eq("lowerkey", termId).and().eq("productkey", proId).and().eq("orderbyno", "0");//
             List<MstAgencysupplyInfo> list = qb.query();
-            
+
             // 如果是今天新加的供货关系 但今天又删除了,直接物理删除该供货关系记录及临时指标记录 根据orderbyno
-            if(list!=null&&list.size()>0){
-            	// 删除经销商供货关系相关数据(业代误操作会造成,上传失效的供货关系,所以直接删除该条记录不坐更新 orderbyno的值为当前时间)
+            if (list != null && list.size() > 0) {
+                // 删除经销商供货关系相关数据(业代误操作会造成,上传失效的供货关系,所以直接删除该条记录不坐更新 orderbyno的值为当前时间)
                 buffer = new StringBuffer();
                 buffer.append("delete from MST_AGENCYSUPPLY_INFO ");
                 buffer.append("where LOWERKEY=? and PRODUCTKEY=? and  orderbyno = '0' ");
-                proDao.executeRaw(buffer.toString(), new String[] {termId, proId});
-                
+                proDao.executeRaw(buffer.toString(), new String[]{termId, proId});
+
                 // 删除产品相关的指标数据
                 buffer = new StringBuffer();
                 buffer.append("delete from  mst_checkexerecord_info_temp  ");
                 buffer.append("where visitkey=? and productkey=? ");
-                supplyDao.executeRaw(buffer.toString(), new String[] {visitId, proId});
-            }else{
+                supplyDao.executeRaw(buffer.toString(), new String[]{visitId, proId});
+            } else {
 
                 // 删除经销商供货关系相关数据
                 buffer = new StringBuffer();
                 buffer.append("update MST_AGENCYSUPPLY_INFO set ");
                 buffer.append("STATUS ='1',padisconsistent ='0' where LOWERKEY=? and PRODUCTKEY=? ");
-                supplyDao.executeRaw(buffer.toString(), new String[] {termId, proId});
-                
+                supplyDao.executeRaw(buffer.toString(), new String[]{termId, proId});
+
                 // 删除产品相关的指标数据
                 buffer = new StringBuffer();
                 buffer.append("update mst_checkexerecord_info_temp set deleteflag='1' ");
                 buffer.append("where visitkey=? and productkey=? ");
-                supplyDao.executeRaw(buffer.toString(), new String[] {visitId, proId});
+                supplyDao.executeRaw(buffer.toString(), new String[]{visitId, proId});
             }
-            
+
             //↑-------------------------------------------------------------------------------------------------------------
-            
-            
+
+
             //↑-------------------------------------------------------------------------------------------------------------
             buffer = new StringBuffer();
             buffer.append("delete from mst_collectionexerecord_info ");
             buffer.append("where visitkey=? and productkey=? ");
-            supplyDao.executeRaw(buffer.toString(), new String[] {visitId, proId});
+            supplyDao.executeRaw(buffer.toString(), new String[]{visitId, proId});
             connection.commit(null);
-            isFlag=true;
+            isFlag = true;
         } catch (Exception e) {
-            isFlag=false;
-            DbtLog.logUtils(TAG,"解除供货关系失败");
-            DbtLog.logUtils(TAG,e.getMessage());
+            isFlag = false;
+            DbtLog.logUtils(TAG, "解除供货关系失败");
+            DbtLog.logUtils(TAG, e.getMessage());
             e.printStackTrace();
             Log.e(TAG, "保存进销存数据发生异常", e);
             try {
@@ -396,7 +397,7 @@ public class InvoicingService extends ShopVisitService {
     }
     
 /*    public void getmonthSum(final String terminalkey){
-    			
+
 				// TODO Auto-generated method stub
 				HttpUtil httpUtil = new HttpUtil(60*1000);
 				httpUtil.configResponseTextCharset("ISO-8859-1");

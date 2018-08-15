@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/listview_bg_item"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content" >
+                style="@style/listview_bg_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
     <LinearLayout
         android:id="@+id/itrm_item_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
 
             <!-- 排序序号 -->
 
@@ -28,7 +28,7 @@
                 android:gravity="center"
                 android:inputType="number"
                 android:maxLength="3"
-                android:singleLine="true" />
+                android:singleLine="true"/>
 
             <!-- 选中标识 -->
 
@@ -37,7 +37,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:focusable="false" />
+                android:focusable="false"/>
             <!-- 终端名称 -->
 
             <TextView
@@ -45,7 +45,15 @@
                 style="@style/listview_tv_item_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="5" />
+                android:layout_weight="4"/>
+            <!-- Top1 - Top10 -->
+
+            <TextView
+                android:id="@+id/term_item_tv_top"
+                style="@style/listview_tv_item_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"/>
 
             <!-- 上传成功标识 -->
 
@@ -54,7 +62,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/ico_terminal_syncflag" />
+                android:src="@drawable/ico_terminal_syncflag"/>
 
             <!-- 渠道 -->
 
@@ -63,12 +71,12 @@
                 style="@style/listview_tv_item_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="2" />
+                android:layout_weight="2"/>
 
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="50dp"
-                android:layout_weight="2" >
+                android:layout_weight="2">
 
                 <!-- 我品 -->
 
@@ -78,7 +86,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:src="@drawable/ico_terminal_mine"
-                    android:visibility="invisible" />
+                    android:visibility="invisible"/>
 
                 <!-- 绿色小书 -->
 
@@ -87,7 +95,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/ico_terminal_mineprotocol" />
+                    android:src="@drawable/ico_terminal_mineprotocol"/>
 
                 <!-- 竞品 -->
 
@@ -97,7 +105,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="40dp"
-                    android:src="@drawable/ico_terminal_vie" />
+                    android:src="@drawable/ico_terminal_vie"/>
 
                 <!-- 黄色小书 -->
 
@@ -108,7 +116,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="40dp"
                     android:src="@drawable/ico_terminal_vieprotocol"
-                    android:visibility="invisible" />
+                    android:visibility="invisible"/>
             </RelativeLayout>
         </LinearLayout>
 
@@ -116,12 +124,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
 
             <View
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_weight="1"/>
             <!-- 拜访时间汇总 -->
 
             <TextView
@@ -129,7 +137,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="11"
-                android:visibility="gone" />
+                android:visibility="gone"/>
         </LinearLayout>
     </LinearLayout>
 
@@ -142,6 +150,6 @@
         android:layout_alignBottom="@+id/itrm_item_ll"
         android:layout_alignTop="@+id/itrm_item_ll"
         android:layout_centerInParent="true"
-        android:background="#c0c0c0" />
+        android:background="#c0c0c0"/>
 
 </RelativeLayout>

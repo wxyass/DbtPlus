@@ -29,39 +29,37 @@ import et.tsingtaopad.visit.shopvisit.term.domain.TermSequence;
  * 项目名称：营销移动智能工作平台 </br>
  * 文件名：MstTerminalinfoMDaoImpl.java</br>
  * 作者：吴承磊   </br>
- * 创建时间：2013-11-28</br>      
- * 功能描述: 终端表的DAO层</br>      
- * 版本 V 1.0</br>               
+ * 创建时间：2013-11-28</br>
+ * 功能描述: 终端表的DAO层</br>
+ * 版本 V 1.0</br>
  * 修改履历</br>
  * 日期      原因  BUG号    修改人 修改版本</br>
  */
-public class MstTerminalinfoMDaoImpl extends BaseDaoImpl<MstTerminalinfoM, String> implements MstTerminalinfoMDao
-{
+public class MstTerminalinfoMDaoImpl extends BaseDaoImpl<MstTerminalinfoM, String> implements MstTerminalinfoMDao {
 
-    public MstTerminalinfoMDaoImpl(ConnectionSource connectionSource) throws SQLException
-    {
+    public MstTerminalinfoMDaoImpl(ConnectionSource connectionSource) throws SQLException {
         super(connectionSource, MstTerminalinfoM.class);
     }
 
     /**
      * 获取某线路下的终端列表
-     * 
+     * <p>
      * 用于：巡店拜访  -- 终端选择
+     *
      * @param helper
-     * @param lineId    线路主键
+     * @param lineId 线路主键
      * @return
      */
-    public List<MstTermListMStc> queryTermLst(SQLiteOpenHelper helper, String lineId)
-    {
+    public List<MstTermListMStc> queryTermLst(SQLiteOpenHelper helper, String lineId) {
         List<MstTermListMStc> lst = new ArrayList<MstTermListMStc>();
-        lst.addAll(getTermList_sequence(helper, lineId, true));
-        lst.addAll(getTermList_sequence(helper, lineId, false));
+//        lst.addAll(getTermList_sequence(helper, lineId, true));
+//        lst.addAll(getTermList_sequence(helper, lineId, false));
+        lst.addAll(getTermList_sequence(helper, lineId, false));// true:已排序   false:未排序
         return lst;
     }
 
     @Override
-    public List<MstTermListMStc> getTermListByName(SQLiteOpenHelper helper, String termName)
-    {
+    public List<MstTermListMStc> getTermListByName(SQLiteOpenHelper helper, String termName) {
         List<MstTermListMStc> lst = new ArrayList<MstTermListMStc>();
         StringBuffer buffer = new StringBuffer();
         buffer.append("select tm.terminalkey,tm.terminalcode,tm.terminalname,tm.mobile,tm.status,tm.contact,tm.address,tm.routekey,rm.routename ");
@@ -75,8 +73,7 @@ public class MstTerminalinfoMDaoImpl extends BaseDaoImpl<MstTerminalinfoM, Strin
         SQLiteDatabase db = helper.getReadableDatabase();
         Cursor cursor = db.rawQuery(buffer.toString(), null);
         MstTermListMStc item;
-        while (cursor.moveToNext())
-        {
+        while (cursor.moveToNext()) {
             item = new MstTermListMStc();
             item.setMobile(cursor.getString(cursor.getColumnIndex("mobile")));
             item.setTerminalcode(cursor.getString(cursor.getColumnIndex("terminalcode")));
@@ -88,8 +85,7 @@ public class MstTerminalinfoMDaoImpl extends BaseDaoImpl<MstTerminalinfoM, Strin
             item.setRoutekey(FunUtil.isNullSetSpace(cursor.getString(cursor.getColumnIndex("routekey"))));
             item.setRoutename(cursor.getString(cursor.getColumnIndex("routename")));
             String status = item.getStatus();
-            if (!"2".equals(status))
-            {//有效终端
+            if (!"2".equals(status)) {//有效终端
                 lst.add(item);
             }
         }
@@ -103,13 +99,14 @@ public class MstTerminalinfoMDaoImpl extends BaseDaoImpl<MstTerminalinfoM, Strin
      * @param isSequence  是否查询已排序的终端
      * @return
      */
-    private List<MstTermListMStc> getTermList_sequence(SQLiteOpenHelper helper, String lineId, boolean isSequence)
-    {
+    private List<MstTermListMStc> getTermList_sequence(SQLiteOpenHelper helper, String lineId, boolean isSequence) {
         List<MstTermListMStc> lst = new ArrayList<MstTermListMStc>();
         StringBuffer buffer = new StringBuffer();
         buffer.append("select m.terminalkey, m.terminalcode, m.terminalname,m.status,m.sequence, ");
         //buffer.append("vm.isself, vm.iscmp, vm.selftreaty, vm.cmptreaty, ");
         buffer.append("vm.isself, vm.iscmp, m.selftreaty, vm.cmptreaty, ");
+        buffer.append("m.hvolume, m.mvolume, m.pvolume, m.lvolume, ");// 高中普低
+        buffer.append("nullif(nullif(m.hvolume,0)+nullif(m.mvolume,0)+nullif(m.pvolume,0)+nullif(m.lvolume,0),0) as tvolume,  ");// 高中普低的和
         buffer.append("vm.padisconsistent, vm.uploadFlag, m.minorchannel, ");
         buffer.append("dm.dicname terminalType, vm.visitdate ");
         buffer.append("from mst_terminalinfo_m m ");
@@ -118,24 +115,22 @@ public class MstTerminalinfoMDaoImpl extends BaseDaoImpl<MstTerminalinfoM, Strin
         buffer.append("left join v_visit_m_newest vm on m.terminalkey = vm.terminalkey ");
         buffer.append("where coalesce(m.status,'0') != '2' and m.routekey=? ");
         buffer.append(" and coalesce(m.deleteflag,'0') != '1' ");
-        if (isSequence)
-        {
+        // 不需要区分是否已排序
+        /*if (isSequence) {
             buffer.append(" and m.sequence!='' and m.sequence not null ");
-        }
-        else
-        {
+        } else {
             buffer.append(" and (m.sequence='' or m.sequence is null) ");
-        }
-        buffer.append("order by m.sequence+0 asc, m.orderbyno, m.terminalname ");
+        }*/
+        // buffer.append("order by m.sequence+0 asc, m.orderbyno, m.terminalname ");
+        buffer.append("order by case when (m.sequence + 0) is null then 1 else 0 end ,m.sequence + 0  , m.orderbyno, m.terminalname  ");
 
         String visitDate = "";
         String currDay = DateUtil.formatDate(new Date(), "yyyyMMdd");
 
         SQLiteDatabase db = helper.getReadableDatabase();
-        Cursor cursor = db.rawQuery(buffer.toString(), new String[] { lineId });
+        Cursor cursor = db.rawQuery(buffer.toString(), new String[]{lineId});
         MstTermListMStc item;
-        while (cursor.moveToNext())
-        {
+        while (cursor.moveToNext()) {
             item = new MstTermListMStc();
             item.setRoutekey(lineId);
             item.setTerminalkey(cursor.getString(cursor.getColumnIndex("terminalkey")));
@@ -148,21 +143,24 @@ public class MstTerminalinfoMDaoImpl extends BaseDaoImpl<MstTerminalinfoM, Strin
             item.setMineProtocolFlag(cursor.getString(cursor.getColumnIndex("selftreaty")));
             item.setVieProtocolFlag(cursor.getString(cursor.getColumnIndex("cmptreaty")));
             visitDate = cursor.getString(cursor.getColumnIndex("visitdate"));
-            if (visitDate != null && currDay.equals(visitDate.substring(0, 8)))
-            {
+            if (visitDate != null && currDay.equals(visitDate.substring(0, 8))) {
                 item.setSyncFlag(cursor.getString(cursor.getColumnIndex("padisconsistent")));
                 item.setUploadFlag(cursor.getString(cursor.getColumnIndex("uploadFlag")));
-            }
-            else
-            {
+            } else {
                 item.setSyncFlag(null);
                 item.setUploadFlag(null);
             }
             item.setMinorchannel(FunUtil.isNullSetSpace(cursor.getString(cursor.getColumnIndex("minorchannel"))));
             item.setTerminalType(cursor.getString(cursor.getColumnIndex("terminalType")));
+
+            item.setHvolume(cursor.getString(cursor.getColumnIndex("hvolume")));
+            item.setMvolume(cursor.getString(cursor.getColumnIndex("mvolume")));
+            item.setPvolume(cursor.getString(cursor.getColumnIndex("pvolume")));
+            item.setLvolume(cursor.getString(cursor.getColumnIndex("lvolume")));
+            item.setTvolume(cursor.getString(cursor.getColumnIndex("tvolume")));
+
             String status = item.getStatus();
-            if (!"2".equals(status))
-            {//有效终端
+            if (!"2".equals(status)) {//有效终端
                 lst.add(item);
             }
         }
@@ -171,20 +169,20 @@ public class MstTerminalinfoMDaoImpl extends BaseDaoImpl<MstTerminalinfoM, Strin
 
     /**
      * 获取某线路下的各终端当天的所有拜访进店及离店时间
-     * 
+     * <p>
      * 用于：巡店拜访  -- 终端选择
+     *
      * @param helper
-     * @param lineId    线路主键
+     * @param lineId 线路主键
      * @return
      */
-    public List<MstTermListMStc> queryTermVistTime(SQLiteOpenHelper helper, String lineId)
-    {
+    public List<MstTermListMStc> queryTermVistTime(SQLiteOpenHelper helper, String lineId) {
 
         List<MstTermListMStc> lst = new ArrayList<MstTermListMStc>();
 
         // 获取该线路下所有终端当天单击过上传按钮的数据
         StringBuffer buffer = new StringBuffer();
-        buffer.append("select m.terminalkey, vm.visitdate, vm.enddate  ");  
+        buffer.append("select m.terminalkey, vm.visitdate, vm.enddate  ");
         buffer.append("from mst_terminalinfo_m m  ");
         buffer.append("inner join mst_visit_m vm on m.terminalkey = vm.terminalkey ");
         buffer.append("     and (vm.uploadflag='1' or vm.padisconsistent ='1') ");
@@ -198,8 +196,7 @@ public class MstTerminalinfoMDaoImpl extends BaseDaoImpl<MstTerminalinfoM, Strin
         SQLiteDatabase db = helper.getReadableDatabase();
         Cursor cursor = db.rawQuery(buffer.toString(), args);
         MstTermListMStc item;
-        while (cursor.moveToNext())
-        {
+        while (cursor.moveToNext()) {
             item = new MstTermListMStc();
             item.setTerminalkey(cursor.getString(cursor.getColumnIndex("terminalkey")));
             item.setVisitDate(cursor.getString(cursor.getColumnIndex("visitdate")));
@@ -208,16 +205,16 @@ public class MstTerminalinfoMDaoImpl extends BaseDaoImpl<MstTerminalinfoM, Strin
         }
         return lst;
     }
-    
+
     @Override
-	public List<MstTermListMStc> queryTermVistTimeByLoginDate(DatabaseHelper helper, String lineId, String userGongHao) {
+    public List<MstTermListMStc> queryTermVistTimeByLoginDate(DatabaseHelper helper, String lineId, String userGongHao) {
 
 
-    	List<MstTermListMStc> lst = new ArrayList<MstTermListMStc>();
+        List<MstTermListMStc> lst = new ArrayList<MstTermListMStc>();
 
         // 获取该线路下所有终端当天单击过上传按钮的数据
         StringBuffer buffer = new StringBuffer();
-        buffer.append("select m.terminalkey, vm.visitdate, vm.enddate  ");  
+        buffer.append("select m.terminalkey, vm.visitdate, vm.enddate  ");
         buffer.append("from mst_terminalinfo_m m  ");
         buffer.append("inner join mst_visit_m vm on m.terminalkey = vm.terminalkey ");
         buffer.append("     and (vm.uploadflag='1' or vm.padisconsistent ='1') ");
@@ -231,8 +228,7 @@ public class MstTerminalinfoMDaoImpl extends BaseDaoImpl<MstTerminalinfoM, Strin
         SQLiteDatabase db = helper.getReadableDatabase();
         Cursor cursor = db.rawQuery(buffer.toString(), args);
         MstTermListMStc item;
-        while (cursor.moveToNext())
-        {
+        while (cursor.moveToNext()) {
             item = new MstTermListMStc();
             item.setTerminalkey(cursor.getString(cursor.getColumnIndex("terminalkey")));
             item.setVisitDate(cursor.getString(cursor.getColumnIndex("visitdate")));
@@ -240,18 +236,18 @@ public class MstTerminalinfoMDaoImpl extends BaseDaoImpl<MstTerminalinfoM, Strin
             lst.add(item);
         }
         return lst;
-	}
-    
+    }
+
     /**
      * 获取某线路下的当天已上传终端
-     * 
+     * <p>
      * 用于：巡店拜访  -- 终端选择
+     *
      * @param helper
-     * @param lineId    线路主键
+     * @param lineId 线路主键
      * @return
      */
-    public List<MstTermListMStc> queryTermUpflag(SQLiteOpenHelper helper, String lineId)
-    {
+    public List<MstTermListMStc> queryTermUpflag(SQLiteOpenHelper helper, String lineId) {
 
         List<MstTermListMStc> lst = new ArrayList<MstTermListMStc>();
 
@@ -260,9 +256,9 @@ public class MstTerminalinfoMDaoImpl extends BaseDaoImpl<MstTerminalinfoM, Strin
         //select m.terminalkey, m.terminalcode, m.terminalname,m.status,m.sequence, 
         //vm.isself, vm.iscmp, m.selftreaty, vm.cmptreaty, vm.padisconsistent, vm.uploadFlag, 
         //m.minorchannel, dm.dicname terminalType, vm.visitdate
-        buffer.append("select m.terminalkey, m.terminalcode, m.terminalname,m.status,m.sequence, vm.enddate,  ");  
-        buffer.append("vm.isself, vm.iscmp, m.selftreaty, vm.cmptreaty, vm.padisconsistent, vm.uploadFlag,");  
-        buffer.append("m.minorchannel, dm.dicname terminalType, vm.visitdate ");  
+        buffer.append("select m.terminalkey, m.terminalcode, m.terminalname,m.status,m.sequence, vm.enddate,  ");
+        buffer.append("vm.isself, vm.iscmp, m.selftreaty, vm.cmptreaty, vm.padisconsistent, vm.uploadFlag,");
+        buffer.append("m.minorchannel, dm.dicname terminalType, vm.visitdate ");
         //buffer.append("select m.terminalkey, vm.visitdate, vm.enddate  ");  
         buffer.append("from mst_terminalinfo_m m  ");
         buffer.append("inner join mst_visit_m vm on m.terminalkey = vm.terminalkey ");
@@ -272,7 +268,7 @@ public class MstTerminalinfoMDaoImpl extends BaseDaoImpl<MstTerminalinfoM, Strin
         buffer.append("     and coalesce(dm.deleteflag,'0') != '1' ");
         buffer.append("where m.routekey = ? and coalesce(m.deleteflag,'0') != '1' ");
         buffer.append("group by m.terminalkey ");
-        
+
         buffer.append("order by m.terminalkey, vm.visitdate ");
 
         String[] args = new String[2];
@@ -283,8 +279,7 @@ public class MstTerminalinfoMDaoImpl extends BaseDaoImpl<MstTerminalinfoM, Strin
         MstTermListMStc item;
         String visitDate = "";
         String currDay = DateUtil.formatDate(new Date(), "yyyyMMdd");
-        while (cursor.moveToNext())
-        {
+        while (cursor.moveToNext()) {
             // ----------
 
             item = new MstTermListMStc();
@@ -299,37 +294,32 @@ public class MstTerminalinfoMDaoImpl extends BaseDaoImpl<MstTerminalinfoM, Strin
             item.setMineProtocolFlag(cursor.getString(cursor.getColumnIndex("selftreaty")));
             item.setVieProtocolFlag(cursor.getString(cursor.getColumnIndex("cmptreaty")));
             visitDate = cursor.getString(cursor.getColumnIndex("visitdate"));
-            if (visitDate != null && currDay.equals(visitDate.substring(0, 8)))
-            {
+            if (visitDate != null && currDay.equals(visitDate.substring(0, 8))) {
                 item.setSyncFlag(cursor.getString(cursor.getColumnIndex("padisconsistent")));
                 item.setUploadFlag(cursor.getString(cursor.getColumnIndex("uploadFlag")));
-            }
-            else
-            {
+            } else {
                 item.setSyncFlag(null);
                 item.setUploadFlag(null);
             }
             item.setMinorchannel(FunUtil.isNullSetSpace(cursor.getString(cursor.getColumnIndex("minorchannel"))));
             item.setTerminalType(cursor.getString(cursor.getColumnIndex("terminalType")));
             String status = item.getStatus();
-            if (!"2".equals(status))
-            {//有效终端
+            if (!"2".equals(status)) {//有效终端
                 lst.add(item);
             }
-        
+
         }
         return lst;
     }
 
     /**
      * 依据终端主键获取终端 信息（包含数据字典对应的名称）
-     * 
+     *
      * @param helper
-     * @param termId    终端主键
+     * @param termId 终端主键
      * @return
      */
-    public MstTerminalInfoMStc findById(SQLiteOpenHelper helper, String termId)
-    {
+    public MstTerminalInfoMStc findById(SQLiteOpenHelper helper, String termId) {
 
         MstTerminalInfoMStc stc = new MstTerminalInfoMStc();
 
@@ -346,9 +336,8 @@ public class MstTerminalinfoMDaoImpl extends BaseDaoImpl<MstTerminalinfoM, Strin
         buffer.append("where tm.terminalkey = ? ");
 
         SQLiteDatabase db = helper.getReadableDatabase();
-        Cursor cursor = db.rawQuery(buffer.toString(), new String[] { termId });
-        while (cursor.moveToNext())
-        {
+        Cursor cursor = db.rawQuery(buffer.toString(), new String[]{termId});
+        while (cursor.moveToNext()) {
             stc.setTerminalkey(cursor.getString(cursor.getColumnIndex("terminalkey")));
             stc.setRoutekey(cursor.getString(cursor.getColumnIndex("routekey")));
             stc.setTerminalcode(cursor.getString(cursor.getColumnIndex("terminalcode")));
@@ -393,18 +382,17 @@ public class MstTerminalinfoMDaoImpl extends BaseDaoImpl<MstTerminalinfoM, Strin
 
         return stc;
     }
-    
+
     /**
      * 依据终端主键获取终端 信息（包含数据字典对应的名称）
-     * 
-     *  上传图片时,由于之前的方法(findById)出错,所以重写,注释掉会出错的代码
-     * 
+     * <p>
+     * 上传图片时,由于之前的方法(findById)出错,所以重写,注释掉会出错的代码
+     *
      * @param helper
-     * @param termId    终端主键
+     * @param termId 终端主键
      * @return
      */
-    public MstTerminalInfoMStc findByTermId(SQLiteOpenHelper helper, String termId)
-    {
+    public MstTerminalInfoMStc findByTermId(SQLiteOpenHelper helper, String termId) {
 
         MstTerminalInfoMStc stc = new MstTerminalInfoMStc();
 
@@ -421,9 +409,8 @@ public class MstTerminalinfoMDaoImpl extends BaseDaoImpl<MstTerminalinfoM, Strin
         buffer.append("where tm.terminalkey = ? ");
 
         SQLiteDatabase db = helper.getReadableDatabase();
-        Cursor cursor = db.rawQuery(buffer.toString(), new String[] { termId });
-        while (cursor.moveToNext())
-        {
+        Cursor cursor = db.rawQuery(buffer.toString(), new String[]{termId});
+        while (cursor.moveToNext()) {
             stc.setTerminalkey(cursor.getString(cursor.getColumnIndex("terminalkey")));
             stc.setRoutekey(cursor.getString(cursor.getColumnIndex("routekey")));
             stc.setTerminalcode(cursor.getString(cursor.getColumnIndex("terminalcode")));
@@ -470,21 +457,18 @@ public class MstTerminalinfoMDaoImpl extends BaseDaoImpl<MstTerminalinfoM, Strin
     }
 
     @Override
-    public void updateTermSequence(SQLiteOpenHelper helper, List<TermSequence> list)
-    {
-        for (TermSequence term : list)
-        {
+    public void updateTermSequence(SQLiteOpenHelper helper, List<TermSequence> list) {
+        for (TermSequence term : list) {
             StringBuffer buffer = new StringBuffer();
             buffer.append("update mst_terminalinfo_m set sequence=?");
             buffer.append("where terminalkey=?");
             SQLiteDatabase db = helper.getReadableDatabase();
-            db.execSQL(buffer.toString(), new Object[] { term.getSequence(), term.getTerminalkey() });
+            db.execSQL(buffer.toString(), new Object[]{term.getSequence(), term.getTerminalkey()});
         }
     }
 
     @Override
-    public TerminalName findByIdName(DatabaseHelper databaseHelper, String termId)
-    {
+    public TerminalName findByIdName(DatabaseHelper databaseHelper, String termId) {
         TerminalName terminalName = new TerminalName();
         StringBuffer buffer = new StringBuffer();
         buffer.append("select a.terminalname,b.routename ");
@@ -493,10 +477,9 @@ public class MstTerminalinfoMDaoImpl extends BaseDaoImpl<MstTerminalinfoM, Strin
         buffer.append("where terminalkey=? ");
 
         SQLiteDatabase db = databaseHelper.getReadableDatabase();
-        Cursor cursor = db.rawQuery(buffer.toString(), new String[] { termId });
+        Cursor cursor = db.rawQuery(buffer.toString(), new String[]{termId});
 
-        while (cursor.moveToNext())
-        {
+        while (cursor.moveToNext()) {
             terminalName.setRouteName(cursor.getString(cursor.getColumnIndex("routename")));
             terminalName.setTerminalName(cursor.getString(cursor.getColumnIndex("terminalname")));
 

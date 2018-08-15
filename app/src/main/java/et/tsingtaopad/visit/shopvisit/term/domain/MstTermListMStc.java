@@ -43,6 +43,11 @@ public class MstTermListMStc extends MstTerminalinfoM
     //当前终端 拜访结果
     private String terminalStatus;
 
+
+    // 总容量
+    private String tvolume;
+
+
     public String getRoutename()
     {
         return routename;
@@ -168,4 +173,11 @@ public class MstTermListMStc extends MstTerminalinfoM
         this.terminalStatus = terminalStatus;
     }
 
+    public String getTvolume() {
+        return tvolume;
+    }
+
+    public void setTvolume(String tvolume) {
+        this.tvolume = tvolume;
+    }
 }
