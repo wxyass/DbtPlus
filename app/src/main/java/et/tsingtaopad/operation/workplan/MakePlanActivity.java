@@ -2621,20 +2621,23 @@ public class MakePlanActivity extends BaseActivity implements OnClickListener, O
                         	MstPlanTerminalM mstPlanTerminalM ;
                         	for (int k = 0; k < list.size(); k++) {
                         		List<MstTerminalinfoM> MstTerminalinfoMs = MstTerminalinfoMDao.queryForEq("terminalkey", list.get(k));
-                        		mstPlanTerminalM = new MstPlanTerminalM();
-                        		mstPlanTerminalM.setPlanterminalkey(FunUtil.getUUID());
-                        		mstPlanTerminalM.setPcolitemkey(pcolitemkey);
-                        		mstPlanTerminalM.setTerminalkey(MstTerminalinfoMs.get(0).getTerminalkey());
-                        		mstPlanTerminalM.setTerminalname(MstTerminalinfoMs.get(0).getTerminalname());
-                        		mstPlanTerminalM.setTlevel(MstTerminalinfoMs.get(0).getTlevel());
-                        		//mstPlanTerminalM.setCreuser(ConstValues.loginSession.getUserCode());
-                        		mstPlanTerminalM.setCreuser(PrefUtils.getString(getApplicationContext(), "userCode", ""));
-                        		mstPlanTerminalM.setPadisconsistent("0");
-                        		//mstPlanTerminalM.setUpdateuser(ConstValues.loginSession.getUserCode());
-                        		mstPlanTerminalM.setUpdateuser(PrefUtils.getString(getApplicationContext(), "userCode", ""));
-                        		mstPlanTerminalM.setCretime(new Date());
-                        		mstPlanTerminalM.setUpdatetime(new Date());
-                        		MstPlanTerminalMDao.createOrUpdate(mstPlanTerminalM);
+                        		// 解决日计划,后台失效终端,导致找不到终端而崩溃的问题 2018年8月15日10:24:35
+                        		if(MstTerminalinfoMs.size()>0){
+                                    mstPlanTerminalM = new MstPlanTerminalM();
+                                    mstPlanTerminalM.setPlanterminalkey(FunUtil.getUUID());
+                                    mstPlanTerminalM.setPcolitemkey(pcolitemkey);
+                                    mstPlanTerminalM.setTerminalkey(MstTerminalinfoMs.get(0).getTerminalkey());
+                                    mstPlanTerminalM.setTerminalname(MstTerminalinfoMs.get(0).getTerminalname());
+                                    mstPlanTerminalM.setTlevel(MstTerminalinfoMs.get(0).getTlevel());
+                                    //mstPlanTerminalM.setCreuser(ConstValues.loginSession.getUserCode());
+                                    mstPlanTerminalM.setCreuser(PrefUtils.getString(getApplicationContext(), "userCode", ""));
+                                    mstPlanTerminalM.setPadisconsistent("0");
+                                    //mstPlanTerminalM.setUpdateuser(ConstValues.loginSession.getUserCode());
+                                    mstPlanTerminalM.setUpdateuser(PrefUtils.getString(getApplicationContext(), "userCode", ""));
+                                    mstPlanTerminalM.setCretime(new Date());
+                                    mstPlanTerminalM.setUpdatetime(new Date());
+                                    MstPlanTerminalMDao.createOrUpdate(mstPlanTerminalM);
+                                }
                         	}
                         }
                         
