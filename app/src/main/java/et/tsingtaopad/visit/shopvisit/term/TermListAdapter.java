@@ -161,8 +161,12 @@ public class TermListAdapter extends BaseAdapter implements OnClickListener
         }
         holder.terminalSequenceEt.setText(item.getSequence());
         holder.terminalNameTv.setText(item.getTerminalname());
-        // 总容量
-        holder.topTv.setText(item.getTvolume());
+        // top1 - top10
+        if(Integer.parseInt(item.getTopnum())<10){
+            holder.topTv.setText("top"+item.getTopnum());
+        }else{
+            holder.topTv.setText("");
+        }
         holder.terminalTypeTv.setText(item.getTerminalType());
         if (!CheckUtil.isBlankOrNull(item.getVisitTime()))
         {

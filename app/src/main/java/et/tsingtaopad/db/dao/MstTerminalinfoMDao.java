@@ -36,6 +36,16 @@ public interface MstTerminalinfoMDao extends Dao<MstTerminalinfoM, String>
      */
     public List<MstTermListMStc> queryTermLst(SQLiteOpenHelper helper, String lineId);
 
+    /**
+     * 获取某线路下的终端列表 根据总容量排序
+     *
+     * 用于：巡店拜访  -- 终端选择
+     * @param helper
+     * @param lineId    线路主键
+     * @return
+     */
+    public List<MstTermListMStc> getTermList_tvolnum(SQLiteOpenHelper helper, String lineId, boolean isSequence);
+
     /***
      * 通过终端名称查询终端集合（模糊查询）
      * @param helper

@@ -167,6 +167,81 @@ public class MstTerminalinfoMDaoImpl extends BaseDaoImpl<MstTerminalinfoM, Strin
         return lst;
     }
 
+    /***
+     * 获取线路下的终端集合  根据总容量排序
+     * @param helper
+     * @param lineId      线路主键
+     * @param isSequence  是否查询已排序的终端
+     * @return
+     */
+    public List<MstTermListMStc> getTermList_tvolnum(SQLiteOpenHelper helper, String lineId, boolean isSequence) {
+        List<MstTermListMStc> lst = new ArrayList<MstTermListMStc>();
+        StringBuffer buffer = new StringBuffer();
+        buffer.append("select m.terminalkey, m.terminalcode, m.terminalname,m.status,m.sequence, ");
+        //buffer.append("vm.isself, vm.iscmp, vm.selftreaty, vm.cmptreaty, ");
+        buffer.append("vm.isself, vm.iscmp, m.selftreaty, vm.cmptreaty, ");
+        buffer.append("m.hvolume, m.mvolume, m.pvolume, m.lvolume, ");// 高中普低
+        buffer.append("nullif(nullif(m.hvolume,0)+nullif(m.mvolume,0)+nullif(m.pvolume,0)+nullif(m.lvolume,0),0) as tvolume,  ");// 高中普低的和
+        buffer.append("vm.padisconsistent, vm.uploadFlag, m.minorchannel, ");
+        buffer.append("dm.dicname terminalType, vm.visitdate ");
+        buffer.append("from mst_terminalinfo_m m ");
+        buffer.append("left join cmm_datadic_m dm on m.minorchannel = dm.diccode ");
+        buffer.append("     and coalesce(dm.deleteflag,'0') != '1' ");
+        buffer.append("left join v_visit_m_newest vm on m.terminalkey = vm.terminalkey ");
+        buffer.append("where coalesce(m.status,'0') != '2' and m.routekey=? ");
+        buffer.append(" and coalesce(m.deleteflag,'0') != '1' ");
+        // 不需要区分是否已排序
+        /*if (isSequence) {
+            buffer.append(" and m.sequence!='' and m.sequence not null ");
+        } else {
+            buffer.append(" and (m.sequence='' or m.sequence is null) ");
+        }*/
+        // buffer.append("order by m.sequence+0 asc, m.orderbyno, m.terminalname ");
+        buffer.append("order by nullif(nullif(m.hvolume, 0) + nullif(m.mvolume, 0) + nullif(m.pvolume, 0) + nullif(m.lvolume, 0), 0) desc, m.sequence + 0, m.orderbyno, m.terminalname   ");
+
+        String visitDate = "";
+        String currDay = DateUtil.formatDate(new Date(), "yyyyMMdd");
+
+        SQLiteDatabase db = helper.getReadableDatabase();
+        Cursor cursor = db.rawQuery(buffer.toString(), new String[]{lineId});
+        MstTermListMStc item;
+        while (cursor.moveToNext()) {
+            item = new MstTermListMStc();
+            item.setRoutekey(lineId);
+            item.setTerminalkey(cursor.getString(cursor.getColumnIndex("terminalkey")));
+            item.setTerminalcode(cursor.getString(cursor.getColumnIndex("terminalcode")));
+            item.setTerminalname(cursor.getString(cursor.getColumnIndex("terminalname")));
+            item.setStatus(cursor.getString(cursor.getColumnIndex("status")));
+            item.setSequence(cursor.getString(cursor.getColumnIndex("sequence")));
+            item.setMineFlag(cursor.getString(cursor.getColumnIndex("isself")));
+            item.setVieFlag(cursor.getString(cursor.getColumnIndex("iscmp")));
+            item.setMineProtocolFlag(cursor.getString(cursor.getColumnIndex("selftreaty")));
+            item.setVieProtocolFlag(cursor.getString(cursor.getColumnIndex("cmptreaty")));
+            visitDate = cursor.getString(cursor.getColumnIndex("visitdate"));
+            if (visitDate != null && currDay.equals(visitDate.substring(0, 8))) {
+                item.setSyncFlag(cursor.getString(cursor.getColumnIndex("padisconsistent")));
+                item.setUploadFlag(cursor.getString(cursor.getColumnIndex("uploadFlag")));
+            } else {
+                item.setSyncFlag(null);
+                item.setUploadFlag(null);
+            }
+            item.setMinorchannel(FunUtil.isNullSetSpace(cursor.getString(cursor.getColumnIndex("minorchannel"))));
+            item.setTerminalType(cursor.getString(cursor.getColumnIndex("terminalType")));
+
+            item.setHvolume(cursor.getString(cursor.getColumnIndex("hvolume")));
+            item.setMvolume(cursor.getString(cursor.getColumnIndex("mvolume")));
+            item.setPvolume(cursor.getString(cursor.getColumnIndex("pvolume")));
+            item.setLvolume(cursor.getString(cursor.getColumnIndex("lvolume")));
+            item.setTvolume(cursor.getString(cursor.getColumnIndex("tvolume")));
+
+            String status = item.getStatus();
+            if (!"2".equals(status)) {//有效终端
+                lst.add(item);
+            }
+        }
+        return lst;
+    }
+
     /**
      * 获取某线路下的各终端当天的所有拜访进店及离店时间
      * <p>

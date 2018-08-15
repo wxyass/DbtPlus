@@ -118,20 +118,35 @@ public class TermListService {
                     visitTimeMap.put(item.getTerminalkey(), buffer.toString());
                 }
 
+
+                List<MstTermListMStc> terms = dao.getTermList_tvolnum(helper, lineKeys.get(i),false);
+
+                for (int j = 0; j < terms.size(); j++) {
+                    MstTermListMStc mStc = (MstTermListMStc)terms.get(j);
+                    mStc.setTopnum((j+1)+"");
+                }
+
                 // 获取线中下各终端显示列表,并把拜访时间添加进去
                 termlst = dao.queryTermLst(helper, lineKeys.get(i));
                 String visitTime = "";
                 for (MstTermListMStc item : termlst) {
-                    /*Long tvolume = 0l + FunUtil.isNullSetZero((item.getHvolume()))
-                            + FunUtil.isNullSetZero((item.getMvolume()))
-                            + FunUtil.isNullSetZero((item.getPvolume()))
-                            + FunUtil.isNullSetZero(item.getLvolume());
-                    item.setTvolume(String.valueOf(tvolume));*/
+
+                    // 设置top
+                    for (MstTermListMStc termListMStc : terms) {
+                        if (termListMStc.getTerminalkey().equals(item.getTerminalkey())) {
+                            item.setTopnum(termListMStc.getTopnum());
+                        }
+                    }
+
+
+                    // 设置拜访时间
                     if (visitTimeMap.containsKey(item.getTerminalkey())) {
                         visitTime = visitTimeMap.get(item.getTerminalkey());
                         visitTime = visitTime.substring(0, visitTime.length() - 2);
                         item.setVisitTime(visitTime);
                     }
+
+
                 }
                 terminalList.addAll(termlst);
             }
@@ -148,7 +163,7 @@ public class TermListService {
      * @param lineKeys 线路表主键
      * @return
      */
-    public List<MstTermListMStc> queryTerminal2(List<String> lineKeys) {
+    public List<MstTermListMStc> queryminal2(List<String> lineKeys) {
 
         List<MstTermListMStc> terminalList = new ArrayList<MstTermListMStc>();
         try {
@@ -209,7 +224,7 @@ public class TermListService {
      * @param lineKeys 线路表主键
      * @return
      */
-    public List<MstTermListMStc> queryTerminal3(List<String> lineKeys) {
+    public List<MstTermListMStc> querinal3(List<String> lineKeys) {
 
         List<MstTermListMStc> terminalList = new ArrayList<MstTermListMStc>();
         try {

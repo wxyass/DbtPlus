@@ -784,7 +784,7 @@ public class ShopVisitActivity extends BaseActivity implements OnClickListener,
                     DbtLog.logUtils(TAG, "结束拜访：是");
 
                     if (!checkInvoicingCheckGoods()) {// 进销存中渠道价零售价需>0
-                        Toast.makeText(getApplicationContext(), "进销存中渠道价零售价需>0", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "进销存的渠道价零售价必须大于0", Toast.LENGTH_SHORT).show();
                         return;
                     }
 

@@ -19,6 +19,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import et.tsingtaopad.BaseFragmentSupport;
 import et.tsingtaopad.ConstValues;
 import et.tsingtaopad.R;
@@ -37,149 +38,146 @@ import et.tsingtaopad.visit.termserch.TermSearchFragment;
  */
 // 选点拜访_选择线路列表
 public class LineListFragment extends BaseFragmentSupport implements
-		OnClickListener, OnItemClickListener {
+        OnClickListener, OnItemClickListener {
 
-	String TAG = "LineListFragment";
-	private LineListService service;
+    String TAG = "LineListFragment";
+    private LineListService service;
 
-	private MstRouteMStc lineStc;
-	private List<MstRouteMStc> lineLst;
-	private ListView lineLv;
-	private LineListAdapter adapter;
+    private MstRouteMStc lineStc;
+    private List<MstRouteMStc> lineLst;
+    private ListView lineLv;
+    private LineListAdapter adapter;
 
-	private TextView titleTv;
-	private Button backBt;
-	private TextView confirmBt;
-	private TextView gridNameTv;
+    private TextView titleTv;
+    private Button backBt;
+    private TextView confirmBt;
+    private TextView gridNameTv;
 
-	
 
-	private Button searchBt;
-	private EditText searchEt;
-	private RelativeLayout backRl;
-	private RelativeLayout confirmRl;
+    private Button searchBt;
+    private EditText searchEt;
+    private RelativeLayout backRl;
+    private RelativeLayout confirmRl;
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		DbtLog.logUtils(TAG, "onCreateView()");
-		View view = inflater.inflate(R.layout.shopvisit_line, null);
-		this.initView(view);
-		this.initData();
-		return view;
-	}
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        DbtLog.logUtils(TAG, "onCreateView()");
+        View view = inflater.inflate(R.layout.shopvisit_line, null);
+        this.initView(view);
+        this.initData();
+        return view;
+    }
 
-	/**
-	 * 初始化界面组件
-	 */
-	private void initView(View view) {
-		DbtLog.logUtils(TAG, "initView()");
-		// 绑定页面组件
-		titleTv = (TextView) view.findViewById(R.id.banner_navigation_tv_title);
-		backBt = (Button) view.findViewById(R.id.banner_navigation_bt_back);
-		confirmBt = (TextView) view.findViewById(R.id.banner_navigation_bt_confirm);
-		
-		gridNameTv = (TextView) view.findViewById(R.id.line_tv_gridname);
+    /**
+     * 初始化界面组件
+     */
+    private void initView(View view) {
+        DbtLog.logUtils(TAG, "initView()");
+        // 绑定页面组件
+        titleTv = (TextView) view.findViewById(R.id.banner_navigation_tv_title);
+        backBt = (Button) view.findViewById(R.id.banner_navigation_bt_back);
+        confirmBt = (TextView) view.findViewById(R.id.banner_navigation_bt_confirm);
 
-		lineLv = (ListView) view.findViewById(R.id.line_lv);
+        gridNameTv = (TextView) view.findViewById(R.id.line_tv_gridname);
 
-		searchBt = (Button) view.findViewById(R.id.term_bt_search);
-		searchEt = (EditText) view.findViewById(R.id.term_et_search);
-		searchBt.setOnClickListener(this);
-		// 绑定事件
-		backBt.setOnClickListener(this);
-		//confirmBt.setOnClickListener(this);
-		backRl = (RelativeLayout) view.findViewById(R.id.banner_navigation_rl_back);
-		confirmRl = (RelativeLayout) view.findViewById(R.id.banner_navigation_rl_confirm);
-		backRl.setOnClickListener(this);
-		confirmRl.setOnClickListener(this);
-		lineLv.setOnItemClickListener(this);
-		view.setOnClickListener(null);
-	}
+        lineLv = (ListView) view.findViewById(R.id.line_lv);
 
-	/**
-	 * 初始化界面数据
-	 */
-	private void initData() {
-		DbtLog.logUtils(TAG, "initData()");
-		service = new LineListService(getActivity());
+        searchBt = (Button) view.findViewById(R.id.term_bt_search);
+        searchEt = (EditText) view.findViewById(R.id.term_et_search);
+        searchBt.setOnClickListener(this);
+        // 绑定事件
+        backBt.setOnClickListener(this);
+        //confirmBt.setOnClickListener(this);
+        backRl = (RelativeLayout) view.findViewById(R.id.banner_navigation_rl_back);
+        confirmRl = (RelativeLayout) view.findViewById(R.id.banner_navigation_rl_confirm);
+        backRl.setOnClickListener(this);
+        confirmRl.setOnClickListener(this);
+        lineLv.setOnItemClickListener(this);
+        view.setOnClickListener(null);
+    }
 
-		titleTv.setText(R.string.linelist_title);
-		//gridNameTv.setText(ConstValues.loginSession.getGridName());
-		gridNameTv.setText(PrefUtils.getString(getActivity(), "gridName", ""));
+    /**
+     * 初始化界面数据
+     */
+    private void initData() {
+        DbtLog.logUtils(TAG, "initData()");
+        service = new LineListService(getActivity());
 
-		// 绑定LineList数据
-		lineLst = service.queryLine();
-		adapter = new LineListAdapter(getActivity(), lineLst, confirmBt);
-		lineLv.setAdapter(adapter);
-	}
+        titleTv.setText(R.string.linelist_title);
+        //gridNameTv.setText(ConstValues.loginSession.getGridName());
+        gridNameTv.setText(PrefUtils.getString(getActivity(), "gridName", ""));
 
-	@Override
-	public void onClick(View v) {
+        // 绑定LineList数据
+        lineLst = service.queryLine();
+        adapter = new LineListAdapter(getActivity(), lineLst, confirmBt);
+        lineLv.setAdapter(adapter);
+    }
 
-		// 如果快速重复单击
-		// if (ViewUtil.isDoubleClick(v.getId(), 2000)) return;
+    @Override
+    public void onClick(View v) {
 
-		Fragment fragment = null;
+        // 如果快速重复单击
+        // if (ViewUtil.isDoubleClick(v.getId(), 2000)) return;
 
-		switch (v.getId()) {
-		// 查询终端
-		case R.id.term_bt_search:
-			DbtLog.logUtils(TAG, "查询终端");
-			if (CheckUtil.isBlankOrNull(searchEt.getText().toString())) {
-				Toast.makeText(getActivity(), "查询终端不能为空", Toast.LENGTH_SHORT)
-						.show();
-			} else {
-				InputMethodManager inputMethodManager = (InputMethodManager) getActivity()
-						.getSystemService(Context.INPUT_METHOD_SERVICE);
-				inputMethodManager.hideSoftInputFromWindow(
-						searchEt.getWindowToken(), 0);
-				fragment = new TermSearchFragment();
-				Bundle bundle = new Bundle();
-				bundle.putSerializable("seacrch", searchEt.getText().toString());
-				fragment.setArguments(bundle);
-			}
-			break;
+        Fragment fragment = null;
 
-		case R.id.banner_navigation_rl_back:
-		case R.id.banner_navigation_bt_back:
-			getFragmentManager().popBackStack();
-			DbtLog.logUtils(TAG, "返回");
-			break;
+        switch (v.getId()) {
+            // 查询终端
+            case R.id.term_bt_search:
+                DbtLog.logUtils(TAG, "查询终端");
+                if (CheckUtil.isBlankOrNull(searchEt.getText().toString())) {
+                    Toast.makeText(getActivity(), "查询终端不能为空", Toast.LENGTH_SHORT).show();
+                } else {
+                    InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    inputMethodManager.hideSoftInputFromWindow(searchEt.getWindowToken(), 0);
+                    fragment = new TermSearchFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("seacrch", searchEt.getText().toString());
+                    fragment.setArguments(bundle);
+                }
+                break;
 
-		case R.id.banner_navigation_rl_confirm:
-		//case R.id.banner_navigation_bt_confirm:
-			if (ViewUtil.isDoubleClick(v.getId(), 1000)) return;
-			fragment = new TermListFragment();
-			lineStc = lineLst.get(adapter.getSelectItem());
-			Bundle bundle = new Bundle();
-			bundle.putSerializable("lineStc", lineStc);
-			fragment.setArguments(bundle);
-			DbtLog.logUtils(TAG, "进入终端列表");
-			break;
+            case R.id.banner_navigation_rl_back:
+            case R.id.banner_navigation_bt_back:
+                getFragmentManager().popBackStack();
+                DbtLog.logUtils(TAG, "返回");
+                break;
 
-		default:
-			break;
-		}
+            case R.id.banner_navigation_rl_confirm:
+                //case R.id.banner_navigation_bt_confirm:
+                if (ViewUtil.isDoubleClick(v.getId(), 1000))
+                    return;
+                fragment = new TermListFragment();
+                lineStc = lineLst.get(adapter.getSelectItem());
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("lineStc", lineStc);
+                fragment.setArguments(bundle);
+                DbtLog.logUtils(TAG, "进入终端列表");
+                break;
 
-		if (fragment != null) {
-			FragmentTransaction transaction = getFragmentManager()
-					.beginTransaction();
-			// 解决Fragment中嵌套fragment
-			//FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-			transaction.replace(R.id.shopvisit_line_container, fragment);
-			transaction
-					.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-			transaction.addToBackStack(null);
-			transaction.commit();
-		}
-	}
+            default:
+                break;
+        }
 
-	@Override
-	public void onItemClick(AdapterView<?> parent, View view, int position,
-			long id) {
-		adapter.setSelectItem(position);
-		adapter.notifyDataSetInvalidated();
-		confirmBt.setVisibility(View.VISIBLE);
-	}
+        if (fragment != null) {
+            FragmentTransaction transaction = getFragmentManager()
+                    .beginTransaction();
+            // 解决Fragment中嵌套fragment
+            //FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+            transaction.replace(R.id.shopvisit_line_container, fragment);
+            transaction
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+            transaction.addToBackStack(null);
+            transaction.commit();
+        }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position,
+                            long id) {
+        adapter.setSelectItem(position);
+        adapter.notifyDataSetInvalidated();
+        confirmBt.setVisibility(View.VISIBLE);
+    }
 }

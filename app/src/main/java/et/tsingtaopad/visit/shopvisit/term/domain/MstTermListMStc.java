@@ -46,6 +46,7 @@ public class MstTermListMStc extends MstTerminalinfoM
 
     // 总容量
     private String tvolume;
+    private String topnum;
 
 
     public String getRoutename()
@@ -179,5 +180,13 @@ public class MstTermListMStc extends MstTerminalinfoM
 
     public void setTvolume(String tvolume) {
         this.tvolume = tvolume;
+    }
+
+    public String getTopnum() {
+        return topnum;
+    }
+
+    public void setTopnum(String topnum) {
+        this.topnum = topnum;
     }
 }

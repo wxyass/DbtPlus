@@ -448,6 +448,7 @@ public class TermListFragment extends BaseFragmentSupport implements OnClickList
                 item_new.setVieProtocolFlag(item.getVieProtocolFlag());
                 item_new.setSyncFlag(item.getSyncFlag());
                 item_new.setTvolume(item.getTvolume());
+                item_new.setTopnum(item.getTopnum());
                 item_new.setUploadFlag(item.getUploadFlag());
                 item_new.setMinorchannel(item.getMinorchannel());
                 item_new.setTerminalType(item.getTerminalType());
