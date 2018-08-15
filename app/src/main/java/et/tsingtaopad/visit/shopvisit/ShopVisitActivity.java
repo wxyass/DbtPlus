@@ -59,6 +59,7 @@ import et.tsingtaopad.R;
 import et.tsingtaopad.db.tables.MstGroupproductM;
 import et.tsingtaopad.db.tables.MstTerminalinfoM;
 import et.tsingtaopad.db.tables.MstVisitM;
+import et.tsingtaopad.db.tables.MstVistproductInfo;
 import et.tsingtaopad.tools.CheckUtil;
 import et.tsingtaopad.tools.DateUtil;
 import et.tsingtaopad.tools.DbtLog;
@@ -101,6 +102,7 @@ public class ShopVisitActivity extends BaseActivity implements OnClickListener,
     private final String TAG = "ShopVisitActivity";
 
     private ShopVisitService service;
+    private InvoicingService invoicingservice;
 
     private String visitId;
     private int screenWidth, screenHeight;
@@ -458,7 +460,7 @@ public class ShopVisitActivity extends BaseActivity implements OnClickListener,
 
         // 初始化供货关系 直接点击结束 生成供货关系  (注意:生成供货关系, 也就各个产品的采集项数据就有数据了MST_COLLECTIONEXERECORD_INFO)
 
-        InvoicingService invoicingservice = new InvoicingService(getApplicationContext(), null);
+         invoicingservice = new InvoicingService(getApplicationContext(), null);
         dataLst = invoicingservice.queryMinePro(visitId, termStc.getTerminalkey());
         invoicingservice.saveInvoicing(dataLst, visitId, termStc.getTerminalkey());
 
@@ -600,6 +602,19 @@ public class ShopVisitActivity extends BaseActivity implements OnClickListener,
         for (ProItem proitem : proItemLst) {
             if ("".equals(FunUtil.isNullSetSpace(proitem.getBianhualiang())) || "".equals(FunUtil.isNullSetSpace(proitem.getXianyouliang()))) {
                 isallIn = false;// 为空不能上传
+                break;
+            }
+        }
+        return isallIn;
+    }
+    // // 进销存中渠道价零售价需>0   true:可以上传   false:不可上传
+    private boolean checkInvoicingCheckGoods() {
+
+        List<MstVistproductInfo> mstVistproductInfos = invoicingservice.queryVisitproMinePro(visitId, termStc.getTerminalkey());
+        boolean isallIn = true;
+        for (MstVistproductInfo invoicingStc : mstVistproductInfos) {
+            if (!(invoicingStc.getPurcprice()>0 && invoicingStc.getRetailprice()>0)) {
+                isallIn = false;//
                 break;
             }
         }
@@ -767,6 +782,11 @@ public class ShopVisitActivity extends BaseActivity implements OnClickListener,
                     if (ViewUtil.isDoubleClick(v.getId(), 2500))
                         return;
                     DbtLog.logUtils(TAG, "结束拜访：是");
+
+                    if (!checkInvoicingCheckGoods()) {// 进销存中渠道价零售价需>0
+                        Toast.makeText(getApplicationContext(), "进销存中渠道价零售价需>0", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
 
                     if (!checkCollectionexrecord()) {// 未填写现有量变化量
                         Toast.makeText(getApplicationContext(), "所有的现有量,变化量必须填值(没货填0)", Toast.LENGTH_SHORT).show();

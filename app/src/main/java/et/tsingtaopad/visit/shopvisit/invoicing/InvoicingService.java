@@ -84,25 +84,7 @@ public class InvoicingService extends ShopVisitService {
         }
     }
 
-    /**
-     * 获取某次拜访的我品的进销存数据情况
-     *
-     * @param visitId 拜访主键
-     * @return
-     */
-    public List<InvoicingStc> queryMinePro(String visitId, String termKey) {
 
-        List<InvoicingStc> lst = new ArrayList<InvoicingStc>();
-        try {
-            DatabaseHelper helper = DatabaseHelper.getHelper(context);
-            MstVistproductInfoDao dao = helper.getDao(MstVistproductInfo.class);
-            lst = dao.queryMinePro(helper, visitId, termKey);
-        } catch (SQLException e) {
-            Log.e(TAG, "获取终端表DAO对象失败", e);
-        }
-
-        return lst;
-    }
 
     /**
      * 保存销存页面数据，MST_VISTPRODUCT_INFO、MST_AGENCYSUPPLY_INFO
@@ -117,17 +99,13 @@ public class InvoicingService extends ShopVisitService {
                 .isBlankOrNull(visitId) || CheckUtil.isBlankOrNull(termId)) {
             return;
         }
-
-
         //DecimalFormat df = new DecimalFormat("0");
 
         AndroidDatabaseConnection connection = null;
         try {
             DatabaseHelper helper = DatabaseHelper.getHelper(context);
-            Dao<MstVistproductInfo, String> proDao =
-                    helper.getDao(MstVistproductInfo.class);
-            Dao<MstAgencysupplyInfo, String> supplyDao =
-                    helper.getDao(MstAgencysupplyInfo.class);
+            Dao<MstVistproductInfo, String> proDao = helper.getDao(MstVistproductInfo.class);
+            Dao<MstAgencysupplyInfo, String> supplyDao = helper.getDao(MstAgencysupplyInfo.class);
             connection = new AndroidDatabaseConnection(helper.getWritableDatabase(), true);
             connection.setAutoCommit(false);
 

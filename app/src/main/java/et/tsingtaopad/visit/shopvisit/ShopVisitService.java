@@ -29,6 +29,7 @@ import et.tsingtaopad.db.DatabaseHelper;
 import et.tsingtaopad.db.dao.MstAgencysupplyInfoDao;
 import et.tsingtaopad.db.dao.MstTerminalinfoMDao;
 import et.tsingtaopad.db.dao.MstVisitMDao;
+import et.tsingtaopad.db.dao.MstVistproductInfoDao;
 import et.tsingtaopad.db.tables.MstAgencysupplyInfo;
 import et.tsingtaopad.db.tables.MstCheckexerecordInfo;
 import et.tsingtaopad.db.tables.MstCheckexerecordInfoTemp;
@@ -45,6 +46,7 @@ import et.tsingtaopad.tools.FunUtil;
 import et.tsingtaopad.tools.PrefUtils;
 import et.tsingtaopad.tools.PropertiesUtil;
 import et.tsingtaopad.tools.ViewUtil;
+import et.tsingtaopad.visit.shopvisit.invoicing.domain.InvoicingStc;
 import et.tsingtaopad.visit.shopvisit.sayhi.domain.MstTerminalInfoMStc;
 import et.tsingtaopad.visit.shopvisit.term.domain.MstTermListMStc;
 
@@ -122,7 +124,53 @@ public class ShopVisitService {
         }
         return visitM;
     }
-    
+
+    /**
+     * 获取某次拜访的我品的进销存数据情况
+     *
+     * @param visitId 拜访主键
+     * @return
+     */
+    public List<InvoicingStc> queryMinePro(String visitId, String termKey) {
+
+        List<InvoicingStc> lst = new ArrayList<InvoicingStc>();
+        try {
+            DatabaseHelper helper = DatabaseHelper.getHelper(context);
+            MstVistproductInfoDao dao = helper.getDao(MstVistproductInfo.class);
+            lst = dao.queryMinePro(helper, visitId, termKey);
+        } catch (SQLException e) {
+            Log.e(TAG, "获取终端表DAO对象失败", e);
+        }
+
+        return lst;
+    }
+
+    /**
+     * 获取某次拜访的我品的进销存数据情况
+     *
+     * @param visitId 拜访主键
+     * @return
+     */
+    public List<MstVistproductInfo> queryVisitproMinePro(String visitId, String termKey) {
+
+        List<MstVistproductInfo> lst = new ArrayList<MstVistproductInfo>();
+        try {
+            DatabaseHelper helper = DatabaseHelper.getHelper(context);
+            MstVistproductInfoDao dao = helper.getDao(MstVistproductInfo.class);
+
+            QueryBuilder<MstVistproductInfo, String> valueQb = dao.queryBuilder();
+            Where<MstVistproductInfo, String> valueWr = valueQb.where();
+            /*valueWr.eq("terminalkey", termKey);
+            valueWr.and();*/
+            valueWr.eq("visitkey", visitId);
+            lst = valueQb.query();
+        } catch (SQLException e) {
+            Log.e(TAG, "获取终端表DAO对象失败", e);
+        }
+
+        return lst;
+    }
+
     /**
      * 获取某终端的最新拜访记录信息
      * 
