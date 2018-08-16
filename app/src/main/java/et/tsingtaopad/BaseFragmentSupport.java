@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -35,6 +37,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import cn.com.benyoyo.manage.Struct.ResponseStructBean;
+import et.tsingtaopad.db.DatabaseHelper;
 import et.tsingtaopad.tools.DataCleanManager;
 import et.tsingtaopad.tools.DateUtil;
 import et.tsingtaopad.tools.DialogUtil;
@@ -381,5 +384,15 @@ public class BaseFragmentSupport extends Fragment {
 		final Intent intent = getActivity().getPackageManager().getLaunchIntentForPackage("et.tsingtaopad");
 		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(intent);
+	}
+
+	// 查询终端表数量
+	public long getTermnalNum() {
+		DatabaseHelper helper = DatabaseHelper.getHelper(getActivity());
+		SQLiteDatabase db = helper.getReadableDatabase();
+		String querySql = "SELECT COUNT(*)  FROM MST_TERMINALINFO_M";
+		Cursor cursor = db.rawQuery(querySql, null);
+		cursor.moveToFirst();
+		return cursor.getLong(0);
 	}
 }

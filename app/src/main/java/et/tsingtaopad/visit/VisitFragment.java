@@ -567,15 +567,4 @@ public class VisitFragment extends BaseFragmentSupport implements OnClickListene
     	startActivity(intent);
     } 
     
- // 查询终端表数量
- 	private long getTermnalNum(){
- 		
- 		DatabaseHelper helper = DatabaseHelper.getHelper(getActivity());
- 		SQLiteDatabase db = helper.getReadableDatabase();
-
- 		String querySql = "SELECT COUNT(*)  FROM MST_TERMINALINFO_M";
- 		Cursor cursor = db.rawQuery(querySql, null);
- 		cursor.moveToFirst();
- 		return cursor.getLong(0);
- 	}
 }

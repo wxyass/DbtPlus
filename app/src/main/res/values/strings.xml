@@ -16,7 +16,7 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
-    <string name="get_data_need">每日都需同步数据</string>
+    <string name="get_data_need">每日都需先同步数据</string>
     <string name="get_data_all">基础信息不完整,定格下缺少终端</string>
 
     <!-- 对话框 -->

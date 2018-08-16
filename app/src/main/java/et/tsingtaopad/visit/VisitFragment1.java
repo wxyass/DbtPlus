@@ -58,9 +58,11 @@ import et.tsingtaopad.operation.orders.OrdersFragment;
 import et.tsingtaopad.operation.promotion.PromotionActivity;
 import et.tsingtaopad.operation.termtz.TermtzSearchFragment;
 import et.tsingtaopad.operation.working.DayWeekingSdFragment;
+import et.tsingtaopad.operation.working.DayWorkingActivity;
 import et.tsingtaopad.operation.working.DayWorkingFragment;
 import et.tsingtaopad.operation.working.WeekWorkingFragment;
 import et.tsingtaopad.operation.workplan.WorkPlanFragment;
+import et.tsingtaopad.operation.workplan.WorkPlanFragment1;
 import et.tsingtaopad.syssetting.SystemSettingInfor;
 import et.tsingtaopad.syssetting.SystemSettingModifyPwdFragment;
 import et.tsingtaopad.syssetting.notice.NoticeFragmentTest;
@@ -136,7 +138,7 @@ public class VisitFragment1 extends BaseFragmentSupport //implements OnClickList
 
 					 
 			            /*// 同步数据
-			            Intent download = new Intent(getActivity(),DownLoadDataProgressActivity.class);
+                        Intent download = new Intent(getActivity(),DownLoadDataProgressActivity.class);
 						startActivity(download);*/
                     } else {
                         dialog1.dismiss();
@@ -167,35 +169,35 @@ public class VisitFragment1 extends BaseFragmentSupport //implements OnClickList
     private void initPic() {
         // 初始化按钮图片对应
         authorityMap = new HashMap<String, Integer>();
-        authorityMap.put("1000000", R.drawable.bt_visit_shopvist);// 巡店拜访
-        authorityMap.put("1000001", R.drawable.bt_visit_addterm);// 新增终端
-        authorityMap.put("1000002", R.drawable.bt_visit_termdetail);// 终端进货明细
-        authorityMap.put("1000003", R.drawable.bt_visit_agency);// 经销商拜访
-        authorityMap.put("1000004", R.drawable.bt_visit_store);// 经销商库存
-        authorityMap.put("1000005", R.drawable.bt_visit_agencykf);// 经销商开发
-        authorityMap.put("1000006", R.drawable.bt_visit_sync);// 数据同步
-        authorityMap.put("1000007", R.drawable.bt_visit_termtaizhang);// 终端进货台账
-        authorityMap.put("1000008", R.drawable.bt_business_product);// 产品展示
-        authorityMap.put("1000009", R.drawable.bt_visit_addterm_other);// 其它
+        authorityMap.put("1000000", R.drawable.bt_visit_shopvist);          // 巡店拜访
+        authorityMap.put("1000001", R.drawable.bt_visit_addterm);           // 新增终端
+        authorityMap.put("1000002", R.drawable.bt_visit_termdetail);        // 终端进货明细(废弃)
+        authorityMap.put("1000003", R.drawable.bt_visit_agency);            // 经销商拜访
+        authorityMap.put("1000004", R.drawable.bt_visit_store);             // 经销商库存查询 运营管理
+        authorityMap.put("1000005", R.drawable.bt_visit_agencykf);          // 经销商开发
+        authorityMap.put("1000006", R.drawable.bt_visit_sync);              // 数据同步
+        authorityMap.put("1000007", R.drawable.bt_visit_termtaizhang);     // 终端进货台账查询(废弃)
+        authorityMap.put("1000008", R.drawable.bt_business_product);        // 产品展示
+        authorityMap.put("1000009", R.drawable.bt_visit_addterm_other);     // 其它
 
-        authorityMap.put("1000010", R.drawable.bt_operation_workplan);// 日/周工作计划
-        authorityMap.put("1000011", R.drawable.bt_operation_workdetail1);// 日工作推进(标准)
-        authorityMap.put("1000012", R.drawable.bt_operation_workdetail);// 周工作总结
-        authorityMap.put("1000013", R.drawable.bt_visit_work);// 日工作记录
-        authorityMap.put("1000014", R.drawable.bt_operation_omnipotent);// 万能铺货率查询
-        authorityMap.put("1000015", R.drawable.bt_operation_indexsearch);// 指标状态查询
-        authorityMap.put("1000016", R.drawable.bt_operation_promotion);// 促销活动查询
-        authorityMap.put("1000017", R.drawable.bt_operation_workdetail11);// 日工作推进(山东) 不用了
+        authorityMap.put("1000010", R.drawable.bt_operation_workplan);      // 周工作计划制定
+        authorityMap.put("1000011", R.drawable.bt_operation_workdetail1);   // 日工作推进查询
+        authorityMap.put("1000012", R.drawable.bt_operation_workdetail);    // 周工作总结查询
+        authorityMap.put("1000013", R.drawable.bt_visit_work);               // 日工作记录
+        authorityMap.put("1000014", R.drawable.bt_operation_omnipotent);    // 万能铺货率查询
+        authorityMap.put("1000015", R.drawable.bt_operation_indexsearch);   // 指标状态查询
+        authorityMap.put("1000016", R.drawable.bt_operation_promotion);     // 促销活动查询
+        authorityMap.put("1000017", R.drawable.bt_operation_workdetail11);  // 日工作推进(山东) (废弃)
 
-        authorityMap.put("1000018", R.drawable.bt_business_notice);// 通知公告
-        authorityMap.put("1000019", R.drawable.bt_business_question);// 问题反馈
-        authorityMap.put("1000020", R.drawable.bt_syssetting_update);// 检查更新
-        authorityMap.put("1000021", R.drawable.bt_syssetting_modify_pwd);// 修改密码
-        authorityMap.put("1000022", R.drawable.bt_syssetting_info);// 关于系统
+        authorityMap.put("1000018", R.drawable.bt_business_notice);         // 通知公告
+        authorityMap.put("1000019", R.drawable.bt_business_question);       // 问题反馈
+        authorityMap.put("1000020", R.drawable.bt_syssetting_update);       // 检查更新
+        authorityMap.put("1000021", R.drawable.bt_syssetting_modify_pwd);   // 修改密码
+        authorityMap.put("1000022", R.drawable.bt_syssetting_info);         // 关于系统
 
-        authorityMap.put("1000023", R.drawable.bt_operation_dingdan);// 订单详细
-        authorityMap.put("1000024", R.drawable.bt_operation_load);// 路线卡查询
-        authorityMap.put("1000025", R.drawable.bt_operation_taizhang);// 终端进货台账查询
+        authorityMap.put("1000023", R.drawable.bt_operation_dingdan);       // 订单详细
+        authorityMap.put("1000024", R.drawable.bt_operation_load);          // 路线卡查询
+        authorityMap.put("1000025", R.drawable.bt_operation_taizhang);      // 终端进货台账查询
     }
 
     // 初始化控件数据
@@ -320,101 +322,9 @@ public class VisitFragment1 extends BaseFragmentSupport //implements OnClickList
                         syncDownData();
                     }
 
-
-				
-				/*if(getTermnalNum()>0){// 判断是否同步过数据(即:终端表有数据)
-            		//fragment = new TermAddFragment();
-					//格式化日期
-	                String nowDate = DateUtil.formatDate(new Date(), DateUtil.DEFAULT_DATE_FORMAT);
-	                //获取同步更新日期
-	                String datasynTime = DownLoadDataService.getDatasynTime(getActivity());
-	                long daygap = 0;
-	                Date date1 = null;
-	                Date date2 = null;
-	                SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-
-	                if (!datasynTime.equals("") && !datasynTime.equals(null))
-	                {
-	                    GregorianCalendar cal1 = new GregorianCalendar();
-	                    GregorianCalendar cal2 = new GregorianCalendar();
-
-	                    try
-	                    {
-	                        date1 = sdf.parse(nowDate);
-	                        date2 = sdf.parse(datasynTime);
-	                    }
-	                    catch (ParseException e)
-	                    {
-	                        // TODO Auto-generated catch block
-	                        e.printStackTrace();
-	                    }
-	                    cal1.setTime(date1);
-	                    cal2.setTime(date2);
-	                    daygap = (cal1.getTimeInMillis() - cal2.getTimeInMillis()) / (1000 * 3600 * 24);
-	                }
-	                //当大于5时才同步,超过5天未同步会弹窗提示去同步
-	                //if (daygap >= 5)
-	                if (!nowDate.equals(datasynTime))// 上次同步时间与当前时间
-	                {
-	                    fragment = null;
-	                    intent = null;
-
-	                    Builder builder = new Builder(getActivity());
-	                    builder.setTitle("温馨提示");
-	                    builder.setMessage("今日未同步数据，请先同步数据再拜访.");
-	                    builder.setNegativeButton("确定", new DialogInterface.OnClickListener()
-	                    {
-	                        @Override
-	                        public void onClick(DialogInterface dialog, int which)
-	                        {
-	                            dialog.dismiss();
-	                        }
-	                    });
-	                    AlertDialog dialog = builder.create();
-	                    dialog.show();
-	                }
-	                else
-	                {
-	                    fragment = new LineListFragment();
-	                    //fragment = new TermListFragment();
-	                    DbtLog.logUtils(TAG, "巡店拜访");
-	                }
-
-
-	                //每天必须同步
-//	                if(nowDate.equals(datasynTime)){
-//	                    fragment = new LineListFragment();
-//	                    DbtLog.logUtils(TAG, "巡店拜访");
-//	                }else{
-//	                    fragment=null;
-//	                    intent=null;
-//
-//	                    AlertDialog.Builder builder = new Builder(getActivity());
-//	                    builder.setTitle("温馨提示");
-//	                    builder.setMessage("今日未同步数据，请先同步数据再拜访.");
-//	                    builder.setNegativeButton("确定", new android.content.DialogInterface.OnClickListener() {
-//	                        @Override
-//	                        public void onClick(DialogInterface dialog, int which) {
-//	                            dialog.dismiss();
-//	                        }
-//	                    });
-//	                    AlertDialog dialog=builder.create();
-//	                    dialog.show();
-//	                }
-            	} else {
-            		Toast.makeText(getActivity(), "基础信息不完整,请先同步数据", Toast.LENGTH_SHORT).show();
-            	}*/
-
                     break;
                 // 新增终端
                 case R.drawable.bt_visit_addterm:
-                    /*if (getTermnalNum() > 0) {
-                        fragment = new TermAddFragment();
-                    } else {
-                        Toast.makeText(getActivity(), "基础信息不完整,请先同步数据", Toast.LENGTH_SHORT).show();
-                    }*/
-
-
                     // 今天已同步
                     if (DateUtil.getDateTimeStr(7).equals(PrefUtils.getString(getActivity(), ConstValues.SYNCDATA, ""))) {
                         if (getTermnalNum() > 0) {// 判断 终端表中是否有数据
@@ -431,7 +341,7 @@ public class VisitFragment1 extends BaseFragmentSupport //implements OnClickList
 
                     DbtLog.logUtils(TAG, "新增终端");
                     break;
-                // 终端进货明细
+                // 终端进货明细(废弃)
                 case R.drawable.bt_visit_termdetail:
                     //intent = new Intent(getActivity(), TerminalDetailsFragment.class);
 
@@ -470,25 +380,7 @@ public class VisitFragment1 extends BaseFragmentSupport //implements OnClickList
 
                     DbtLog.logUtils(TAG, "经销商拜访");
                     break;
-                // 经销商库存
-                case R.drawable.bt_visit_store:
-                    // intent = new Intent(getActivity(), AgencyStorageActivity.class);
 
-                    // 今天已同步
-                    if (DateUtil.getDateTimeStr(7).equals(PrefUtils.getString(getActivity(), ConstValues.SYNCDATA, ""))) {
-                        if (getTermnalNum() > 0) {// 判断 终端表中是否有数据
-                            intent = new Intent(getActivity(), AgencyStorageActivity.class);
-                        } else {
-                            // 基础信息不完整,请先同步数据
-                            Toast.makeText(getActivity(), getString(R.string.get_data_all), Toast.LENGTH_SHORT).show();
-                        }
-                    } else {
-                        // "每日都需同步数据"
-                        Toast.makeText(getActivity(), getString(R.string.get_data_need), Toast.LENGTH_SHORT).show();
-                        syncDownData();
-                    }
-                    DbtLog.logUtils(TAG, "经销商库存");
-                    break;
                 // 经销商开发
                 case R.drawable.bt_visit_agencykf:
                     // intent = new Intent(getActivity(), AgencyKFActivity.class);
@@ -508,12 +400,8 @@ public class VisitFragment1 extends BaseFragmentSupport //implements OnClickList
                     }
                     DbtLog.logUtils(TAG, "新增经销商");
                     break;
-                // 手动同步
-                case R.drawable.bt_visit_sync:
-                    DbtLog.logUtils(TAG, "数据同步");
-                    syncData();
-                    break;
-                // 终端进货台账
+
+                // 终端进货台账查询(废弃)
                 case R.drawable.bt_visit_termtaizhang:
                     DbtLog.logUtils(TAG, "终端进货台账");
                     // intent = new Intent(getActivity(), TzAgencyActivity.class);
@@ -551,6 +439,13 @@ public class VisitFragment1 extends BaseFragmentSupport //implements OnClickList
                     }
                     DbtLog.logUtils(TAG, "产品展示");
                     break;
+
+                // 手动同步
+                case R.drawable.bt_visit_sync:
+                    DbtLog.logUtils(TAG, "数据同步");
+                    syncData();
+                    break;
+
                 // 其它
                 case R.drawable.bt_visit_addterm_other:
                     // fragment = new TermAddListFragment();
@@ -571,14 +466,14 @@ public class VisitFragment1 extends BaseFragmentSupport //implements OnClickList
                     DbtLog.logUtils(TAG, "新增终端列表");
                     break;
 
-                // 日/周工作计划
+                // 周工作计划制定
                 case R.drawable.bt_operation_workplan:
                     // fragment = new WorkPlanFragment();
 
                     // 今天已同步
                     if (DateUtil.getDateTimeStr(7).equals(PrefUtils.getString(getActivity(), ConstValues.SYNCDATA, ""))) {
                         if (getTermnalNum() > 0) {// 判断 终端表中是否有数据
-                            fragment = new WorkPlanFragment();
+                            fragment = new WorkPlanFragment1();
                         } else {
                             // 基础信息不完整,请先同步数据
                             Toast.makeText(getActivity(), getString(R.string.get_data_all), Toast.LENGTH_SHORT).show();
@@ -590,33 +485,14 @@ public class VisitFragment1 extends BaseFragmentSupport //implements OnClickList
                     }
                     break;
 
-                // 订单详细
-                case R.drawable.bt_operation_dingdan:
-                    // fragment = new OrdersFragment();
-
-                    // 今天已同步
-                    if (DateUtil.getDateTimeStr(7).equals(PrefUtils.getString(getActivity(), ConstValues.SYNCDATA, ""))) {
-                        if (getTermnalNum() > 0) {// 判断 终端表中是否有数据
-                            fragment = new OrdersFragment();
-                        } else {
-                            // 基础信息不完整,请先同步数据
-                            Toast.makeText(getActivity(), getString(R.string.get_data_all), Toast.LENGTH_SHORT).show();
-                        }
-                    } else {
-                        // "每日都需同步数据"
-                        Toast.makeText(getActivity(), getString(R.string.get_data_need), Toast.LENGTH_SHORT).show();
-                        syncDownData();
-                    }
-                    break;
-
-                // 日工作推进(标准)
+                // 日工作推进查询
                 case R.drawable.bt_operation_workdetail1:
                     // fragment = new DayWorkingFragment();
 
                     // 今天已同步
                     if (DateUtil.getDateTimeStr(7).equals(PrefUtils.getString(getActivity(), ConstValues.SYNCDATA, ""))) {
                         if (getTermnalNum() > 0) {// 判断 终端表中是否有数据
-                            fragment = new DayWorkingFragment();
+                            intent = new Intent(getActivity(), DayWorkingActivity.class);
                         } else {
                             // 基础信息不完整,请先同步数据
                             Toast.makeText(getActivity(), getString(R.string.get_data_all), Toast.LENGTH_SHORT).show();
@@ -627,7 +503,8 @@ public class VisitFragment1 extends BaseFragmentSupport //implements OnClickList
                         syncDownData();
                     }
                     break;
-                // 周工作总结
+
+                // 周工作总结查询
                 case R.drawable.bt_operation_workdetail:
                     // fragment = new WeekWorkingFragment();
 
@@ -646,10 +523,8 @@ public class VisitFragment1 extends BaseFragmentSupport //implements OnClickList
                     }
                     DbtLog.logUtils(TAG, "周工作总结");
                     break;
-                // 日工作记录
+                // 日工作记录查询
                 case R.drawable.bt_visit_work:
-                    // intent = new Intent(getActivity(), TomorrowWorkRecordFragment.class);
-
                     // 今天已同步
                     if (DateUtil.getDateTimeStr(7).equals(PrefUtils.getString(getActivity(), ConstValues.SYNCDATA, ""))) {
                         if (getTermnalNum() > 0) {// 判断 终端表中是否有数据
@@ -664,6 +539,63 @@ public class VisitFragment1 extends BaseFragmentSupport //implements OnClickList
                         syncDownData();
                     }
                     break;
+
+                // 指标状态查询
+                case R.drawable.bt_operation_indexsearch:
+                    // fragment = new IndexstatusFragment();
+
+                    // 今天已同步
+                    if (DateUtil.getDateTimeStr(7).equals(PrefUtils.getString(getActivity(), ConstValues.SYNCDATA, ""))) {
+                        if (getTermnalNum() > 0) {// 判断 终端表中是否有数据
+                            fragment = new IndexstatusFragment();
+                        } else {
+                            // 基础信息不完整,请先同步数据
+                            Toast.makeText(getActivity(), getString(R.string.get_data_all), Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        // "每日都需同步数据"
+                        Toast.makeText(getActivity(), getString(R.string.get_data_need), Toast.LENGTH_SHORT).show();
+                        syncDownData();
+                    }
+                    break;
+                // 促销活动查询
+                case R.drawable.bt_operation_promotion:
+                    // intent = new Intent(getActivity(), PromotionActivity.class);
+
+                    // 今天已同步
+                    if (DateUtil.getDateTimeStr(7).equals(PrefUtils.getString(getActivity(), ConstValues.SYNCDATA, ""))) {
+                        if (getTermnalNum() > 0) {// 判断 终端表中是否有数据
+                            intent = new Intent(getActivity(), PromotionActivity.class);
+                        } else {
+                            // 基础信息不完整,请先同步数据
+                            Toast.makeText(getActivity(), getString(R.string.get_data_all), Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        // "每日都需同步数据"
+                        Toast.makeText(getActivity(), getString(R.string.get_data_need), Toast.LENGTH_SHORT).show();
+                        syncDownData();
+                    }
+                    break;
+
+                // 当日订单查询
+                case R.drawable.bt_operation_dingdan:
+                    // fragment = new OrdersFragment();
+
+                    // 今天已同步
+                    if (DateUtil.getDateTimeStr(7).equals(PrefUtils.getString(getActivity(), ConstValues.SYNCDATA, ""))) {
+                        if (getTermnalNum() > 0) {// 判断 终端表中是否有数据
+                            fragment = new OrdersFragment();
+                        } else {
+                            // 基础信息不完整,请先同步数据
+                            Toast.makeText(getActivity(), getString(R.string.get_data_all), Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        // "每日都需同步数据"
+                        Toast.makeText(getActivity(), getString(R.string.get_data_need), Toast.LENGTH_SHORT).show();
+                        syncDownData();
+                    }
+                    break;
+
 
                 // 路线卡查询
                 case R.drawable.bt_operation_load:
@@ -702,6 +634,27 @@ public class VisitFragment1 extends BaseFragmentSupport //implements OnClickList
                         syncDownData();
                     }
                     break;
+
+                // 经销商库存查询
+                case R.drawable.bt_visit_store:
+                    // intent = new Intent(getActivity(), AgencyStorageActivity.class);
+
+                    // 今天已同步
+                    if (DateUtil.getDateTimeStr(7).equals(PrefUtils.getString(getActivity(), ConstValues.SYNCDATA, ""))) {
+                        if (getTermnalNum() > 0) {// 判断 终端表中是否有数据
+                            intent = new Intent(getActivity(), AgencyStorageActivity.class);
+                        } else {
+                            // 基础信息不完整,请先同步数据
+                            Toast.makeText(getActivity(), getString(R.string.get_data_all), Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        // "每日都需同步数据"
+                        Toast.makeText(getActivity(), getString(R.string.get_data_need), Toast.LENGTH_SHORT).show();
+                        syncDownData();
+                    }
+                    DbtLog.logUtils(TAG, "经销商库存");
+                    break;
+
                 // 万能铺货率查询
                 case R.drawable.bt_operation_omnipotent:
                     // intent = new Intent(getActivity(), DistirbutionActivity.class);
@@ -720,43 +673,7 @@ public class VisitFragment1 extends BaseFragmentSupport //implements OnClickList
                         syncDownData();
                     }
                     break;
-                // 指标状态查询
-                case R.drawable.bt_operation_indexsearch:
-                    // fragment = new IndexstatusFragment();
-
-                    // 今天已同步
-                    if (DateUtil.getDateTimeStr(7).equals(PrefUtils.getString(getActivity(), ConstValues.SYNCDATA, ""))) {
-                        if (getTermnalNum() > 0) {// 判断 终端表中是否有数据
-                            fragment = new IndexstatusFragment();
-                        } else {
-                            // 基础信息不完整,请先同步数据
-                            Toast.makeText(getActivity(), getString(R.string.get_data_all), Toast.LENGTH_SHORT).show();
-                        }
-                    } else {
-                        // "每日都需同步数据"
-                        Toast.makeText(getActivity(), getString(R.string.get_data_need), Toast.LENGTH_SHORT).show();
-                        syncDownData();
-                    }
-                    break;
-                // 促销活动查询
-                case R.drawable.bt_operation_promotion:
-                    // intent = new Intent(getActivity(), PromotionActivity.class);
-
-                    // 今天已同步
-                    if (DateUtil.getDateTimeStr(7).equals(PrefUtils.getString(getActivity(), ConstValues.SYNCDATA, ""))) {
-                        if (getTermnalNum() > 0) {// 判断 终端表中是否有数据
-                            intent = new Intent(getActivity(), PromotionActivity.class);
-                        } else {
-                            // 基础信息不完整,请先同步数据
-                            Toast.makeText(getActivity(), getString(R.string.get_data_all), Toast.LENGTH_SHORT).show();
-                        }
-                    } else {
-                        // "每日都需同步数据"
-                        Toast.makeText(getActivity(), getString(R.string.get_data_need), Toast.LENGTH_SHORT).show();
-                        syncDownData();
-                    }
-                    break;
-                // 日工作推进(山东)
+                // 日工作推进(山东) (废弃)
                 case R.drawable.bt_operation_workdetail11:
                     // fragment = new DayWeekingSdFragment();
 
@@ -778,34 +695,27 @@ public class VisitFragment1 extends BaseFragmentSupport //implements OnClickList
                 // 通知公告
                 case R.drawable.bt_business_notice:
                     fragment = new NoticeFragmentTest();
-
-
                     break;
 
                 // 问题反馈
                 case R.drawable.bt_business_question:
                     fragment = new QueryFeedbackFragment();
-
-
                     break;
+
                 // 检查更新
                 case R.drawable.bt_syssetting_update:
                     fragment = new SystemSettingUpdateFragment();
-
-
-                    DbtLog.logUtils(TAG, "周工作总结");
+                    DbtLog.logUtils(TAG, "检查更新");
                     break;
+
                 // 修改密码
                 case R.drawable.bt_syssetting_modify_pwd:
                     fragment = new SystemSettingModifyPwdFragment();
-
-
                     break;
+
                 // 关于系统
                 case R.drawable.bt_syssetting_info:
                     fragment = new SystemSettingInfor();
-
-
                     break;
 
                 default:
@@ -1211,17 +1121,5 @@ public class VisitFragment1 extends BaseFragmentSupport //implements OnClickList
             transaction.addToBackStack(null);
             transaction.commit();
         }
-    }
-
-    // 查询终端表数量
-    private long getTermnalNum() {
-
-        DatabaseHelper helper = DatabaseHelper.getHelper(getActivity());
-        SQLiteDatabase db = helper.getReadableDatabase();
-
-        String querySql = "SELECT COUNT(*)  FROM MST_TERMINALINFO_M";
-        Cursor cursor = db.rawQuery(querySql, null);
-        cursor.moveToFirst();
-        return cursor.getLong(0);
     }
 }
