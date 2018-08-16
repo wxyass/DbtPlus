@@ -362,7 +362,7 @@ public class SystemSettingFragment1 extends BaseFragmentSupport //implements OnC
 						// 手动同步
 						case R.drawable.bt_visit_sync:
 							DbtLog.logUtils(TAG, "数据同步");
-							syncData();
+							syncDownData();
 							break;
 						// 终端进货台账
 						case R.drawable.bt_visit_termtaizhang:
@@ -562,122 +562,7 @@ public class SystemSettingFragment1 extends BaseFragmentSupport //implements OnC
 
 		}
 	}
-	
-	/**
-	 * 同步数据
-	 */
-	private void syncData() {
-		// 如果网络可用
-		if (NetStatusUtil.isNetValid(getActivity())) {
-			// 根据后台标识   "0":需清除数据 ,"1":不需清除数据,直接同步
-			if ("0".equals(ConstValues.loginSession.getIsDel())) {
-				//弹窗是否删除之前所有数据
-				showNotifyDialog();
-			} else {
-				Intent download = new Intent(getActivity(),
-						DownLoadDataProgressActivity.class);
-				startActivity(download);
-			}
-		} else {
-			// 提示修改网络
-			Builder builder = new Builder(getActivity());
-			builder.setTitle("网络错误");
-			builder.setMessage("请连接好网络再同步数据");
-			builder.setPositiveButton("确定",
-					new DialogInterface.OnClickListener() {
 
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							getActivity()
-									.startActivityForResult(
-											new Intent(
-													android.provider.Settings.ACTION_WIRELESS_SETTINGS),
-											0);
-						}
-					}).create().show();
-			builder.setCancelable(false); // 是否可以通过返回键 关闭
-		}
-	}
-
-	/**
-     * 弹窗显示需清除数据
-     * 
-     */
-    public void showNotifyDialog(){
-        
-    	//提示删除数据
-        Builder builder = new Builder(getActivity());
-        builder.setTitle("初始化");
-        builder.setMessage("初次登陆，您的账号需要初始化。");
-        builder.setCancelable(false);
-        //builder.setCanceledOnTouchOutside(false);
-        builder.setPositiveButton("确定", new DialogInterface.OnClickListener()
-        {
-
-			@Override
-            public void onClick(DialogInterface dialog, int which)
-            {
-            	// 缓冲界面
-            	dialog1 = new DialogUtil().progressDialog(getActivity(), R.string.dialog_msg_delete);
-                dialog1.setCancelable(false);
-                dialog1.setCanceledOnTouchOutside(false);
-                dialog1.show();
-            	
-            	// 网络请求 传递参数
-            	HttpUtil httpUtil = new HttpUtil(60*1000);
-				httpUtil.configResponseTextCharset("ISO-8859-1");
-				
-				// 
-				StringBuffer buffer = new StringBuffer();
-				//buffer.append("{userid:'").append(ConstValues.loginSession.getUserGongHao());
-				buffer.append("{userid:'").append(PrefUtils.getString(getActivity(), "userGongHao", ""));
-				buffer.append("', isdel:'").append("1").append("'}");
-				
-				// qingqiu
-				httpUtil.send("opt_get_status", buffer.toString(),new RequestCallBack<String>() {
-					public void onSuccess(ResponseInfo<String> responseInfo) {
-						
-						ResponseStructBean resObj = HttpUtil.parseRes(responseInfo.result);
-						if (ConstValues.SUCCESS.equals(resObj.getResHead().getStatus())) {
-							// 删除缓存数据
-							new DeleteTools().deleteDatabase(getActivity());
-							new DataCleanManager().cleanSharedPreference(getActivity());
-
-							// 重新启动本应用
-							restartApplication();
-							android.os.Process.killProcess(android.os.Process.myPid());
-							
-							// 关闭缓冲界面
-							Message message = new Message();
-							message.what = ConstValues.WAIT2;
-							handler.sendMessage(message);
-						}
-					}
-
-					@Override
-					public void onFailure(HttpException error,
-							String msg) {
-
-					}
-				});
-            }
-        }).create().show();
-        
-        //builder.setCancelable(false); // 是否可以通过返回键 关闭
-        
-        // 直接show();
-        //builder.show();
-    }
-    
-    /**
-     * 重新启动本应用
-     */
-    private void restartApplication() {
-    	final Intent intent = getActivity().getPackageManager().getLaunchIntentForPackage("et.tsingtaopad");
-    	intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-    	startActivity(intent);
-    }
-    
     /**
 	 * 打开问题反馈
 	 */

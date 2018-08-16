@@ -360,7 +360,7 @@ public class OperationFragment1 extends BaseFragmentSupport //implements OnClick
 						// 手动同步
 						case R.drawable.bt_visit_sync:
 							DbtLog.logUtils(TAG, "数据同步");
-							syncData();
+							syncDownData();
 							break;
 						// 终端进货台账
 						case R.drawable.bt_visit_termtaizhang:
@@ -560,9 +560,7 @@ public class OperationFragment1 extends BaseFragmentSupport //implements OnClick
 		}
 	}
 	
-	/**
-	 * 同步数据
-	 */
+	/*// 同步数据
 	private void syncData() {
 		// 如果网络可用
 		if (NetStatusUtil.isNetValid(getActivity())) {
@@ -597,10 +595,7 @@ public class OperationFragment1 extends BaseFragmentSupport //implements OnClick
 		}
 	}
 
-	/**
-     * 弹窗显示需清除数据
-     * 
-     */
+	// 弹窗显示需清除数据
     public void showNotifyDialog(){
         
     	//提示删除数据
@@ -666,15 +661,13 @@ public class OperationFragment1 extends BaseFragmentSupport //implements OnClick
         // 直接show();
         //builder.show();
     }
-    
-    /**
-     * 重新启动本应用
-     */
+
+	// 重新启动本应用
     private void restartApplication() {
     	final Intent intent = getActivity().getPackageManager().getLaunchIntentForPackage("et.tsingtaopad");
     	intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     	startActivity(intent);
-    }
+    }*/
     
     // 查询终端表数量
  	private long getTermnalNum1(){

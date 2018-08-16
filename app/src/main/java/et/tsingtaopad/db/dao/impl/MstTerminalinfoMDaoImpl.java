@@ -197,7 +197,8 @@ public class MstTerminalinfoMDaoImpl extends BaseDaoImpl<MstTerminalinfoM, Strin
             buffer.append(" and (m.sequence='' or m.sequence is null) ");
         }*/
         // buffer.append("order by m.sequence+0 asc, m.orderbyno, m.terminalname ");
-        buffer.append("order by nullif(nullif(m.hvolume, 0) + nullif(m.mvolume, 0) + nullif(m.pvolume, 0) + nullif(m.lvolume, 0), 0) desc, m.sequence + 0, m.orderbyno, m.terminalname   ");
+        buffer.append("order by nullif(nullif(m.hvolume, 0) + nullif(m.mvolume, 0) + nullif(m.pvolume, 0) + nullif(m.lvolume, 0), 0) desc,    ");
+        buffer.append(" case when (m.sequence + 0) is null then 1 else 0 end, m.sequence + 0, m.orderbyno, m.terminalname   ");
 
         String visitDate = "";
         String currDay = DateUtil.formatDate(new Date(), "yyyyMMdd");

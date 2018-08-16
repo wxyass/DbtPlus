@@ -1,7 +1,9 @@
 package et.tsingtaopad;
 
+import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -9,7 +11,9 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.IBinder;
+import android.os.Message;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -19,6 +23,9 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.blankj.utilcode.util.FileUtils;
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -27,8 +34,17 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
+import cn.com.benyoyo.manage.Struct.ResponseStructBean;
+import et.tsingtaopad.tools.DataCleanManager;
+import et.tsingtaopad.tools.DateUtil;
+import et.tsingtaopad.tools.DialogUtil;
 import et.tsingtaopad.tools.FileTool;
+import et.tsingtaopad.tools.FileUtil;
+import et.tsingtaopad.tools.HttpUtil;
+import et.tsingtaopad.tools.NetStatusUtil;
+import et.tsingtaopad.tools.PrefUtils;
 import et.tsingtaopad.visit.shopvisit.camera.domain.CameraImageBean;
+import et.tsingtaopad.visit.syncdata.DownLoadDataProgressActivity;
 
 public class BaseFragmentSupport extends Fragment {
 	
@@ -238,4 +254,132 @@ public class BaseFragmentSupport extends Fragment {
 	}
 
 	// 权限相关 ↑--------------------------------------------------------------------------
+
+
+	// 同步数据
+	public void syncDownData(){
+		// 如果网络可用
+		if (NetStatusUtil.isNetValid(getActivity())) {
+			// 根据后台标识   "0":需清除数据 ,"1":不需清除数据,直接同步
+			if ("0".equals(ConstValues.loginSession.getIsDel())) {
+				//弹窗是否删除之前所有数据
+				showNotifyDialog();
+			} else {
+				// 打标记
+				PrefUtils.putString(getActivity(),ConstValues.SYNCDATA, DateUtil.getDateTimeStr(7));
+				Intent download = new Intent(getActivity(),DownLoadDataProgressActivity.class);
+				startActivity(download);
+			}
+		} else {
+			// 提示修改网络
+			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+			builder.setTitle("网络错误");
+			builder.setMessage("请连接好网络再同步数据");
+			builder.setPositiveButton("确定",
+					new DialogInterface.OnClickListener() {
+
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							getActivity()
+									.startActivityForResult(
+											new Intent(
+													android.provider.Settings.ACTION_WIRELESS_SETTINGS),
+											0);
+						}
+					}).create().show();
+			builder.setCancelable(false); // 是否可以通过返回键 关闭
+		}
+	}
+
+	/**
+	 * 同步数据-弹窗显示需清除数据
+	 *
+	 */
+	public void showNotifyDialog(){
+
+		//提示删除数据
+		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+		builder.setTitle("初始化");
+		builder.setMessage("初次登陆，您的账号需要初始化。");
+		builder.setCancelable(false);
+		//builder.setCanceledOnTouchOutside(false);
+		builder.setPositiveButton("确定", new DialogInterface.OnClickListener()
+		{
+
+			@Override
+			public void onClick(DialogInterface dialog, int which)
+			{
+				// 缓冲界面
+				AlertDialog dialog1 = new DialogUtil().progressDialog(getActivity(), R.string.dialog_msg_delete);
+				dialog1.setCancelable(false);
+				dialog1.setCanceledOnTouchOutside(false);
+				dialog1.show();
+
+				// 网络请求 传递参数
+				HttpUtil httpUtil = new HttpUtil(60*1000);
+				httpUtil.configResponseTextCharset("ISO-8859-1");
+
+				//
+				StringBuffer buffer = new StringBuffer();
+				//buffer.append("{userid:'").append(ConstValues.loginSession.getUserGongHao());
+				buffer.append("{userid:'").append(PrefUtils.getString(getActivity(), "userGongHao", ""));
+				buffer.append("', isdel:'").append("1").append("'}");
+
+				// qingqiu
+				httpUtil.send("opt_get_status", buffer.toString(),new RequestCallBack<String>() {
+					public void onSuccess(ResponseInfo<String> responseInfo) {
+
+						ResponseStructBean resObj = HttpUtil.parseRes(responseInfo.result);
+						if (ConstValues.SUCCESS.equals(resObj.getResHead().getStatus())) {
+							// 删除数据库表数据 然后直接同步
+							// new DeleteTools().deleteDatabase(getActivity());
+
+							// 删除数据库表数据 然后重启
+							new DeleteTools().deleteDatabaseAll(getActivity());
+
+							// 删除缓存数据
+							new DataCleanManager().cleanSharedPreference(getActivity());
+
+							// 删除bug文件夹
+							String bugPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/dbt/et.tsingtaopad" + "/bug/" ;
+							FileUtil.deleteFile(new File(bugPath));
+
+							// 删除log文件夹
+							String logPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/dbt/et.tsingtaopad" + "/log/" ;
+							FileUtil.deleteFile(new File(logPath));
+
+							// 重新启动本应用
+							restartApplication();
+							android.os.Process.killProcess(android.os.Process.myPid());
+
+							// 关闭缓冲界面
+							/*Message message = new Message();
+							message.what = ConstValues.WAIT2;
+							handler.sendMessage(message);*/
+						}
+					}
+
+					@Override
+					public void onFailure(HttpException error,
+										  String msg) {
+
+					}
+				});
+			}
+		}).create().show();
+
+		//builder.setCancelable(false); // 是否可以通过返回键 关闭
+
+		// 直接show();
+		//builder.show();
+	}
+
+	/**
+	 * 同步数据-弹窗显示需清除数据-重新启动本应用
+	 */
+	private void restartApplication() {
+		final Intent intent = getActivity().getPackageManager().getLaunchIntentForPackage("et.tsingtaopad");
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		startActivity(intent);
+	}
 }
