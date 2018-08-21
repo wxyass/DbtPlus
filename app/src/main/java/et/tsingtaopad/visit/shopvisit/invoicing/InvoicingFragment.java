@@ -33,6 +33,7 @@ import com.lidroid.xutils.http.callback.RequestCallBack;
 
 import et.tsingtaopad.BaseFragmentSupport;
 import et.tsingtaopad.ConstValues;
+import et.tsingtaopad.MyApplication;
 import et.tsingtaopad.R;
 import et.tsingtaopad.adapter.ListViewKeyValueAdapter;
 import et.tsingtaopad.cui.NoScrollListView;
@@ -43,6 +44,7 @@ import et.tsingtaopad.tools.FunUtil;
 import et.tsingtaopad.tools.HttpUtil;
 import et.tsingtaopad.tools.JsonUtil;
 import et.tsingtaopad.tools.ViewUtil;
+import et.tsingtaopad.ui.loader.LatteLoader;
 import et.tsingtaopad.visit.shopvisit.invoicing.domain.InvoicingStc;
 import et.tsingtaopad.visit.shopvisit.invoicing.domain.MonthSum;
 import et.tsingtaopad.visit.shopvisit.sayhi.SayHiFragment;
@@ -151,6 +153,13 @@ public class InvoicingFragment extends BaseFragmentSupport implements OnClickLis
                 case ConstValues.WAIT1:
                     String content = bundle.getString("content");
                     fragment.dealMonthSum(content);
+                    break;
+                case 7:// 关闭进度框
+                    LatteLoader.stopLoading(); // 若有进度条,关闭
+                    break;
+
+                default:
+                    break;
             }
         }
     }
@@ -175,13 +184,12 @@ public class InvoicingFragment extends BaseFragmentSupport implements OnClickLis
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        //View view = inflater.inflate(R.layout.shopvisit_invoicing, null);
         View view = inflater.inflate(R.layout.shopvisit_invoicing, container, false);
         DbtLog.logUtils(TAG, "onCreateView()");
         this.initView(view);
-        handler = new MyHandler(this);
-        //this.initData();
-        this.asynch();
+        // this.asynch();
+        InvoicingInitTask task = new InvoicingInitTask();
+        task.execute();
         return view;
     }
 
@@ -201,13 +209,78 @@ public class InvoicingFragment extends BaseFragmentSupport implements OnClickLis
             }
 
             protected void onPostExecute(Void result) {
-                initData();
+                // initData();
                 isLoadingData = false;
             }
 
             ;
 
         }.execute();
+    }
+
+    /**
+     * 异步加载
+     */
+    private class InvoicingInitTask extends AsyncTask<Void, Void, Void> {
+
+        // 异步执行前
+        protected void onPreExecute() {
+            LatteLoader.showLoading(getActivity(), true);// 处理数据中 ,在InvoicingFragment的Handle中关闭
+            initPreData();
+            isLoadingData = true;
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            initDoBackData();
+            return null;
+        }
+
+        // 异步执行后
+        protected void onPostExecute(Void result) {
+            // initData();
+            initPostData();
+            handler.sendEmptyMessageDelayed(7, 2000);
+            isLoadingData = false;
+        }
+    }
+
+    private void initPreData() {
+        //InvoicingService--进销存业务逻辑
+        service = new InvoicingService(getActivity(), null);
+        handler = new MyHandler(this);
+    }
+
+    private void initDoBackData() {
+        DbtLog.logUtils(TAG, "initDoBackData()");
+
+        // 获取参数
+        Bundle bundle = getArguments();
+        seeFlag = FunUtil.isBlankOrNullTo(bundle.getString("seeFlag"), "");
+        visitId = bundle.getString("visitKey");
+        termId = bundle.getString("termId");
+        //删除重复拜访产品
+        service.delRepeatVistProduct(visitId);
+        //获取某次拜访的我品的进销存数据情况
+        dataLst = service.queryMinePro(visitId, termId);
+
+        //订单推荐Adapter(原先名字是核查进销存Adapter)
+        checkAdapter = new InvoicingCheckGoodsAdapter(getActivity(), dataLst);//核查进销存
+        //问货源Adapter
+        askAdapter = new InvoicingAskGoodsAdapter(
+                getActivity(), seeFlag, dataLst, termId, visitId, checkAdapter, askGoodsLv, checkGoodsLv);//问货源
+    }
+
+    private void initPostData() {
+
+        //给订单推荐(原先是核查进销存)设置数据适配器
+        checkGoodsLv.setAdapter(checkAdapter);
+        //设置ListView的高度
+        ViewUtil.setListViewHeight(checkGoodsLv);
+
+        askGoodsLv.setAdapter(askAdapter);
+        ViewUtil.setListViewHeight(askGoodsLv);
+
     }
 
     private void initView(View view) {
@@ -228,6 +301,7 @@ public class InvoicingFragment extends BaseFragmentSupport implements OnClickLis
     private void initData() {
         DbtLog.logUtils(TAG, "initData()");
 
+        handler = new MyHandler(this);
 
         //InvoicingService--进销存业务逻辑
         service = new InvoicingService(getActivity(), null);
@@ -242,20 +316,21 @@ public class InvoicingFragment extends BaseFragmentSupport implements OnClickLis
         //获取某次拜访的我品的进销存数据情况
         dataLst = service.queryMinePro(visitId, termId);
         //if(dataLst.size()>0){
-            //请求网络获取本月合计数值
-            //getmonthSum();
-            //订单推荐Adapter(原先名字是核查进销存Adapter)
-            checkAdapter = new InvoicingCheckGoodsAdapter(getActivity(), dataLst);//核查进销存
-            //给订单推荐(原先是核查进销存)设置数据适配器
-            checkGoodsLv.setAdapter(checkAdapter);
-            //设置ListView的高度
-            ViewUtil.setListViewHeight(checkGoodsLv);
-            //问货源Adapter
-            askAdapter = new InvoicingAskGoodsAdapter(
-                    getActivity(), seeFlag, dataLst, termId, visitId, checkAdapter, askGoodsLv, checkGoodsLv);//问货源
-            askGoodsLv.setAdapter(askAdapter);
-            ViewUtil.setListViewHeight(askGoodsLv);
+        //请求网络获取本月合计数值
+        //getmonthSum();
+        //订单推荐Adapter(原先名字是核查进销存Adapter)
+        checkAdapter = new InvoicingCheckGoodsAdapter(getActivity(), dataLst);//核查进销存
+        //给订单推荐(原先是核查进销存)设置数据适配器
+        checkGoodsLv.setAdapter(checkAdapter);
+        //设置ListView的高度
+        ViewUtil.setListViewHeight(checkGoodsLv);
+        //问货源Adapter
+        askAdapter = new InvoicingAskGoodsAdapter(
+                getActivity(), seeFlag, dataLst, termId, visitId, checkAdapter, askGoodsLv, checkGoodsLv);//问货源
+        askGoodsLv.setAdapter(askAdapter);
+        ViewUtil.setListViewHeight(askGoodsLv);
         //}
+
     }
 
     @Override

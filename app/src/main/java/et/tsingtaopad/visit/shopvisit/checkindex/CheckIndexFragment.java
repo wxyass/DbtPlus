@@ -33,6 +33,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -70,6 +71,7 @@ import et.tsingtaopad.tools.ImageUtil;
 import et.tsingtaopad.tools.PhotoUtil;
 import et.tsingtaopad.tools.PrefUtils;
 import et.tsingtaopad.tools.ViewUtil;
+import et.tsingtaopad.ui.loader.LatteLoader;
 import et.tsingtaopad.visit.shopvisit.ShopVisitService;
 import et.tsingtaopad.visit.shopvisit.camera.CameraService;
 import et.tsingtaopad.visit.shopvisit.camera.TakeCameraActivity;
@@ -161,6 +163,11 @@ public class CheckIndexFragment extends BaseFragmentSupport implements OnClickLi
     private Spinner zhanyoulvSp;
     private LongSlideSwitch peisongSw;
 
+    String isbigerae = "0";  // 照片类型默认大区配置  0:大区配置   1:二级区域配置
+
+    // 获取后台配置的照片类型张数
+    List<PictypeDataStc> valueLst = new ArrayList<PictypeDataStc>();
+
     MyHandler handler;
 
     /*@SuppressLint("HandlerLeak")
@@ -240,6 +247,7 @@ public class CheckIndexFragment extends BaseFragmentSupport implements OnClickLi
 
                 // 自动计算
                 case ConstValues.WAIT5:
+                    fragment.hideKeyboard();
                     fragment.autoSum(bundle);
                     break;
                 // 自动计算
@@ -260,12 +268,24 @@ public class CheckIndexFragment extends BaseFragmentSupport implements OnClickLi
                     fragment.closeAlertDialog(true);// true:吐司 解释为什么失败
 
                     break;
+                case 7:// 关闭进度框
+                    LatteLoader.stopLoading(); // 若有进度条,关闭
+                    break;
 
                 default:
                     break;
             }
         }
+    }
 
+    // 关闭软键盘
+    private void hideKeyboard() {
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm.isActive()) {
+            if (getActivity().getCurrentFocus().getWindowToken() != null) {
+                imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            }
+        }
     }
 
     // 自动计算
@@ -302,7 +322,6 @@ public class CheckIndexFragment extends BaseFragmentSupport implements OnClickLi
     }
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -310,30 +329,71 @@ public class CheckIndexFragment extends BaseFragmentSupport implements OnClickLi
         View view = inflater.inflate(R.layout.shopvisit_checkindex, container, false);
         DbtLog.logUtils(TAG, "onCreateView()");
         this.initView(view);
-        this.asynch();
+
+        // this.asynch();
+        CheckIndexInitTask task = new CheckIndexInitTask();
+        task.execute();
+
         return view;
     }
 
     /**
-     * 异步加载
+     * 异步加载 有下面的CheckIndexInitTask代替 2018年8月21日16:13:36
      */
     public void asynch() {
         DbtLog.logUtils(TAG, "asynch()");
         new AsyncTask<Void, Void, Void>() {
+            // 异步执行前
             protected void onPreExecute() {
+                LatteLoader.showLoading(getActivity(), true);// 处理数据中 ,在InvoicingFragment的initData中关闭
+
+                initPreData();
                 isLoadingData = true;
             }
 
             @Override
             protected Void doInBackground(Void... params) {
+                initDoBackData();
                 return null;
             }
 
+            // 异步执行后
             protected void onPostExecute(Void result) {
-                initData();
+                // initData();
+                initPostData();
+                handler.sendEmptyMessageDelayed(7, 3000);
+                // LatteLoader.stopLoading(); // 若有进度条,关闭
                 isLoadingData = false;
             }
         }.execute();
+    }
+
+    /**
+     * 异步加载
+     */
+    private class CheckIndexInitTask extends AsyncTask<Void, Void, Void> {
+
+        // 异步执行前
+        protected void onPreExecute() {
+            LatteLoader.showLoading(getActivity(), true);// 处理数据中 ,在Handle中关闭
+            initPreData();
+            isLoadingData = true;
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            initDoBackData();
+            return null;
+        }
+
+        // 异步执行后
+        protected void onPostExecute(Void result) {
+            // initData();
+            initPostData();
+            handler.sendEmptyMessageDelayed(7, 2000);
+            isLoadingData = false;
+        }
+
     }
 
     private void initView(View view) {
@@ -365,13 +425,269 @@ public class CheckIndexFragment extends BaseFragmentSupport implements OnClickLi
         // 获取页面中用于动态添加的容器组件及模板
         noProlayout = (LinearLayout) view.findViewById(R.id.checkindex_lo_noproindex);
         noProlayout.removeAllViews();
-        inflater = (LayoutInflater) getActivity()
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         quickCollectBt.setOnClickListener(this);
         activityPicBt.setOnClickListener(this);
     }
 
+    // 异步执行前
+    private void initPreData() {
+
+        DbtLog.logUtils(TAG, "initData()");
+        handler = new MyHandler(this);
+        long time = new Date().getTime();
+        service = new CheckIndexService(getActivity(), null);
+        ConstValues.handler = handler;
+
+    }
+
+    // 异步执行中
+    private void initDoBackData() {
+
+        // 获取参数
+        Bundle bundle = getArguments();
+        seeFlag = FunUtil.isBlankOrNullTo(bundle.getString("seeFlag"), "");
+        visitId = bundle.getString("visitKey");
+        termId = bundle.getString("termId");
+
+        isfrist = PrefUtils.getInt(getActivity(), "isfrist" + termId, 1);
+        //  获取时间
+        if (isfrist == 1) {
+            // 获取上次拜访时间(原因:根据时间设置促销活动隔天关闭)若上次时间为null,设为"1901-01-01 17:31"
+            visitDate = bundle.getString("visitDate");
+            lastTime = bundle.getString("lastTime");
+            if ("".equals(lastTime) && lastTime.length() <= 0) {
+                lastTime = "1901-01-01 01:01";
+            }
+            PrefUtils.putInt(getActivity(), "isfrist" + termId, 2);
+        } else {
+            // 获取最后一次拜访的信息
+            ShopVisitService shopVisitService = new ShopVisitService(getActivity(), null);
+            MstVisitM visitM = shopVisitService.findNewVisit(termId, false);
+            if (visitM == null) {// 若此终端从未拜访过 设置此终端的上次拜访时间为1901-01-01 01:01
+                lastTime = "1901-01-01 01:01";// 2016-03-08 11:24
+                // 读取上次拜访的时间 (查询拜访主表的关于此终端的所有拜访记录,取最新一次,不管是否上传成功过,查询此记录的拜访时间)
+            } else {
+                lastTime = DateUtil.formatDate(0, visitM.getVisitdate());// 2016-03-08 11:24
+            }
+        }
+
+        // 获取最新的终端数据
+        term = service.findTermById(termId);
+        channelId = term.getMinorchannel();// 次渠道
+
+        // 删除多余的采集项记录  比如:渠道C->B  考核的产品少了一个,界面上上了这个产品,要将数据库中的采集项表也删除
+        // 1 查出mst_vistproduct_info考核产品
+        // 2 查出 采集项表 产品记录
+        // 3 把采集项表的产品记录 多出来的删除
+
+
+        // 获取分项采集页面显示数据 // 获取指标采集前3列数据 // 指标 产品 结果
+        calculateLst = service.queryCalculateIndex(visitId, termId, channelId, seeFlag);
+        // 获取分项采集部分的产品指标对应的采集项目数据 // 因为在ShopVisitActivity生成了供货关系,此时就能关联出各个产品的采集项,现有量变化量为0
+        proItemLst = service.queryCalculateItem(visitId, channelId);
+        // 删除多余的采集项记录  比如:渠道C->B  考核的产品少了一个,界面上没有了这个产品,要将数据库中的采集项表也删除
+        service.deleteCollection(visitId, proItemLst);
+        //CaculateAdapter---查指标的分项采集部分 一级Adapter
+        calculateAdapter = new CaculateAdapter(
+                getActivity(), calculateLst, ConstValues.indexLst, proItemLst);// 上下文,指标对象集合,同步下来的指标集合,所有产品集合
+
+
+        //获取巡店拜访-查指标的促销活动页面部分的数据
+        promotionLst = service.queryPromotion(visitId, term.getSellchannel(), term.getTlevel());
+
+        // 获取后台配置的照片类型张数
+        valueLst = new CameraService(getActivity(), null).queryPictypeMAll();
+        // 根据图片类型表Mst_pictype_M  判断普通图片 是不是大区配置的
+        if (valueLst.size() > 0) {// 有普通照片
+            // 查看普通照片中,是否有二级区域的记录
+            if (PrefUtils.getString(getActivity(), "disId", "").equals(valueLst.get(0).getAreaid())) {
+                isbigerae = "1";// 1:二级区域配置
+            }
+        } else {// 没有普通照片,查看促销活动,
+            for (CheckIndexPromotionStc pictypeDataStc : promotionLst) {
+                // 活动表记录 是二级区域的且是拍照类型
+                if (PrefUtils.getString(getActivity(), "disId", "").equals(pictypeDataStc.getAreaid()) && "1".equals(pictypeDataStc.getIspictype())) {
+                    isbigerae = "1";// 1:二级区域配置
+                }
+            }
+        }
+
+        // 获取与产品无关指标采集数据
+        //noProIndexLst = service.queryNoProIndex(visitId, term.getMinorchannel(), seeFlag);
+        noProIndexLst = service.queryNoProIndex2(visitId, term.getMinorchannel(), seeFlag);
+
+        // 先查询之前数据  判断终端该指标是否达标
+        List<MstGroupproductM> listvo = new ArrayList<MstGroupproductM>();
+        // 从表搂取一条数据,今天之前的包含今天
+        listvo = service.queryMstGroupproductM(term.getTerminalcode(), (DateUtil.getDateTimeStr(7) + "  00:00:00"));
+
+        // 有上次数据
+        if (listvo.size() > 0) {
+            // 数据是今天创建的
+            if ((DateUtil.getDateTimeStr(7) + "  00:00:00").equals(listvo.get(0).getStartdate())) {
+                vo = listvo.get(0);
+                // 之前创建的一条数据
+            } else {
+                vo = listvo.get(0);// 先复制再重新赋值
+                vo.setGproductid(FunUtil.getUUID());
+                vo.setTerminalcode(term.getTerminalcode());
+                vo.setTerminalname(term.getTerminalname());
+                vo.setStartdate(DateUtil.getDateTimeStr(7) + "  00:00:00");
+                vo.setEnddate("3000-12-01" + "  00:00:00");
+                vo.setCreateusereng(PrefUtils.getString(getActivity(), "userGongHao", "21000"));
+                vo.setCreatedate(DateUtil.getDateTimeStr(6));
+                vo.setUpdateusereng(PrefUtils.getString(getActivity(), "userGongHao", "21000"));
+                vo.setUpdatetime(DateUtil.getDateTimeStr(6));
+                vo.setUpdateusereng(PrefUtils.getString(getActivity(), "userGongHao", "21000"));
+                vo.setUploadFlag("0");// 不上传
+                vo.setPadisconsistent("0");// 未上传
+                service.createMstGroupproductM(vo);
+            }
+        }
+        // 没有上次数据
+        else {
+            // 插入一条今天新数据
+            vo = new MstGroupproductM();
+            vo.setGproductid(FunUtil.getUUID());
+            vo.setTerminalcode(term.getTerminalcode());
+            vo.setTerminalname(term.getTerminalname());
+            vo.setIfrecstand("N");// 未达标
+            vo.setStartdate(DateUtil.getDateTimeStr(7) + "  00:00:00");
+            vo.setEnddate("3000-12-01" + "  00:00:00");
+            vo.setCreateusereng(PrefUtils.getString(getActivity(), "userGongHao", "20000"));
+            vo.setCreatedate(DateUtil.getDateTimeStr(6));
+            vo.setUpdateusereng(PrefUtils.getString(getActivity(), "userGongHao", "20000"));
+            vo.setUpdatetime(DateUtil.getDateTimeStr(6));
+            vo.setUpdateusereng(PrefUtils.getString(getActivity(), "userGongHao", "20000"));
+            vo.setUploadFlag("0");// 不上传
+            vo.setPadisconsistent("0");// 未上传
+            service.createMstGroupproductM(vo);
+        }
+    }
+
+    // 异步执行后,展示页面数据
+    private void initPostData() {
+
+        progroupLL.setVisibility(View.VISIBLE);
+
+        calculateLv.setAdapter(calculateAdapter);
+        ViewUtil.setListViewHeight(calculateLv);// 解决无响应,注释这一行
+
+        // 若没有促销活动,隐藏标题及表头
+        if (promotionLst.size() > 0) {
+            promotionTitle.setVisibility(View.VISIBLE);
+            promotionHead.setVisibility(View.VISIBLE);
+        } else {
+            promotionTitle.setVisibility(View.GONE);
+            promotionHead.setVisibility(View.GONE);
+        }
+
+        // 对每个活动的 拍照按钮监听
+        promotionAdapter = new PromotionAdapter(getActivity(), promotionLst,
+                lastTime, null, valueLst, isbigerae, seeFlag, new IClick() {
+
+            @Override
+            public void listViewItemClick(int position, View v) {
+
+                int picindex = (Integer) v.getTag() + 4;
+                String pictypekey = promotionLst.get((Integer) v.getTag()).getPromotKey();
+                String pictypename = promotionLst.get((Integer) v.getTag()).getPromotName();
+                // 拍照角标,拍照类型key,图片类型名称
+                toItemCamera(picindex, pictypekey, pictypename);
+            }
+        });
+        promotionLv.setAdapter(promotionAdapter);
+        //  ViewUtil.setListViewHeight(promotionLv);
+
+
+        // long time1 = new Date().getTime();
+        // Log.e("Optimization", "查指标执行数据库" + (time1 - time));
+
+
+        // 产品组合是否达标
+        groupStatusSw.setOnLongSwitchChangedListener(new OnLongSwitchChangedListener() {
+
+            @Override
+            public void onLongSwitchChanged(LongSlideSwitch obj, int status) {
+                if (status == SlideSwitch.SWITCH_ON) {
+                    groupStatusSw.setStatus(true);
+                } else {
+                    groupStatusSw.setStatus(false);
+                }
+            }
+        });
+
+        // 合作执行是否到位
+        hezuoSw.setOnLongSwitchChangedListener(new OnLongSwitchChangedListener() {
+
+            @Override
+            public void onLongSwitchChanged(LongSlideSwitch obj, int status) {
+                if (status == SlideSwitch.SWITCH_ON) {
+                    hezuoSw.setStatus(true);
+                } else {
+                    hezuoSw.setStatus(false);
+                }
+            }
+        });
+
+        // 是否高质量配送
+        peisongSw.setOnLongSwitchChangedListener(new OnLongSwitchChangedListener() {
+
+            @Override
+            public void onLongSwitchChanged(LongSlideSwitch obj, int status) {
+                if (status == SlideSwitch.SWITCH_ON) {
+                    peisongSw.setStatus(true);
+                } else {
+                    peisongSw.setStatus(false);
+                }
+            }
+        });
+
+        // 初始化产品组合是否达标 若上次拜访没有数据,或者是N,null则设为false
+        if (CheckUtil.isBlankOrNull(vo.getIfrecstand()) || "N".equals(vo.getIfrecstand()) || "null".equals(vo.getIfrecstand())) {
+            groupStatusSw.setStatus(false);
+        } else {
+            groupStatusSw.setStatus(true);
+        }
+
+        // 初始化 合作是否到位 占有率 高质量配送数据
+        for (CheckIndexCalculateStc item : noProIndexLst) {
+            // 重新查询指标关联指标值 //因为原先的这3个指标 不再关联指标值(pad_checktype_m不再同步这三个指标)
+            // 交由pad直接初始化 // ywm 20160407
+            if ("666b74b3-b221-4920-b549-d9ec39a463fd".equals(item.getIndexId())) {// 合作是否到位
+                //tempLst = service.queryNoProIndexValueId1();// 此处报错
+                if (CheckUtil.isBlankOrNull(item.getIndexValueId())) {
+                    hezuoSw.setStatus(false);
+                } else if ("9019cf03-4572-4559-9971-48a27a611c3d".equals(item.getIndexValueId())) {// 合作是否到位 是
+                    hezuoSw.setStatus(true);
+                } else if ("8d36d1e5-c776-452e-8893-589ad786d71d".equals(item.getIndexValueId())) {// 合作是否到位 否
+                    hezuoSw.setStatus(false);
+                } else {
+                    hezuoSw.setStatus(false);
+                }
+            } else if ("df2e88c9-246f-40e2-b6e5-08cdebf8c281".equals(item.getIndexId())) {// 是否高质量配送
+                //tempLst = service.queryNoProIndexValueId2();
+                if (CheckUtil.isBlankOrNull(item.getIndexValueId())) {
+                    peisongSw.setStatus(false);
+                } else if ("460647a9-283a-44ea-b11f-42efe1fd62e4".equals(item.getIndexValueId())) {// 是否高质量配送
+                    peisongSw.setStatus(true);
+                } else if ("bf600cfe-f70d-4170-857d-65dd59740d57".equals(item.getIndexValueId())) {// 是否高质量配送
+                    peisongSw.setStatus(false);
+                } else {
+                    peisongSw.setStatus(false);
+                }
+
+            } else if ("59802090-02ac-4146-9cc3-f09570c36a26".equals(item.getIndexId())) {// 我品占有率
+                List<KvStc>  tempLst = service.queryNoProIndexValueId3();
+                zhanyoulvSp.setAdapter(new SpinnerKeyValueAdapter(getActivity(), tempLst, new String[]{"key", "value"}, item.getIndexValueId()));
+            }
+        }
+    }
+
+
+    // 由 initPreData() initDoBackData() initPostData() 替代这个方法  2018年8月21日16:04:25
     private void initData() {
         DbtLog.logUtils(TAG, "initData()");
         handler = new MyHandler(this);
@@ -459,7 +775,7 @@ public class CheckIndexFragment extends BaseFragmentSupport implements OnClickLi
         }
         String todaytime = DateUtil.formatDate(new Date(), "yyyy-MM-dd");
         // 获取后台配置的照片类型张数
-        List<PictypeDataStc> valueLst = new ArrayList<PictypeDataStc>();
+        // List<PictypeDataStc> valueLst = new ArrayList<PictypeDataStc>();
         valueLst = new CameraService(getActivity(), null).queryPictypeMAll();
         if (IsAccomplishcount1 > 0 && todaytime.equals(lastTime.substring(0, 10)) && valueLst.size() < 3 && (!"1".equals(seeFlag))) {// 有激活,当天拜访,拍照类型<3张,拜访模式(查看模式不显示拍照按钮)
             //activityPicBt.setVisibility(View.VISIBLE);// 如果有促销活动,拍照按钮显示
@@ -470,7 +786,7 @@ public class CheckIndexFragment extends BaseFragmentSupport implements OnClickLi
         // ↑判断锉削活动拍照是否出现160927-->拍照按钮不再出现170313
 
         // 根据图片类型表Mst_pictype_M  判断普通图片 是不是大区配置的
-        String isbigerae = "0";  // 默认大区配置  0:大区配置   1:二级区域配置
+        // String isbigerae = "0";  // 默认大区配置  0:大区配置   1:二级区域配置
         if (valueLst.size() > 0) {// 有普通照片
             // 查看普通照片中,是否有二级区域的记录
             if (PrefUtils.getString(getActivity(), "disId", "").equals(valueLst.get(0).getAreaid())) {
@@ -510,123 +826,9 @@ public class CheckIndexFragment extends BaseFragmentSupport implements OnClickLi
         long time1 = new Date().getTime();
         Log.e("Optimization", "查指标执行数据库" + (time1 - time));
         List<KvStc> tempLst = new ArrayList<KvStc>();
-        /*View itemV;
-        TextView indexTv;
-        RadioGroup indexValueRg;
-        //final SlideSwitch indexvalueSw;
-        EditText indexValueEt;
-        EditText indexValueNumEt;
-        Spinner indexValueSp;
-        int j = 0;
-        
-        for (CheckIndexCalculateStc item : noProIndexLst) {
-            j = j + 100;
-            //XML-->VIEW (查指标最下面三行控件)
-            itemV = inflater.inflate(R.layout.checkindex_noproindex_lvitem, null);
-            indexTv = (TextView)itemV.findViewById(R.id.noproindex_tv_indexname);
-            indexTv.setText(item.getIndexName());
-            
-            for (KvStc kvItem : ConstValues.indexLst) {
-            	// 指标ID (如:铺货状态,冰冻化,是否高质量配送 对应的ID)
-            	// 获取该指标下的指标值集合
-                if (kvItem.getKey().equals(item.getIndexId())) {
-                    tempLst = kvItem.getChildLst();
-                    break;
-                }
-            }
-            
-            // 重新查询指标关联指标值 //因为原先的这3个指标 不再关联指标值(pad_checktype_m不再同步这三个指标) 交由pad直接初始化 // ywm 20160407
-            if("666b74b3-b221-4920-b549-d9ec39a463fd".equals(item.getIndexId())){// 合作是否到位 
-            	tempLst = service.queryNoProIndexValueId1();//此处报错
-            }else if("df2e88c9-246f-40e2-b6e5-08cdebf8c281".equals(item.getIndexId())){// 是否高质量配送
-            	tempLst = service.queryNoProIndexValueId2();
-            }else if("59802090-02ac-4146-9cc3-f09570c36a26".equals(item.getIndexId())){// 我品占有率
-            	tempLst = service.queryNoProIndexValueId3();
-            }
-            
-            // 判定显示方式及初始化显示数据 0:计算单选、 1:单选、 2:文本框、 3:数值、 4:下拉单选
-            if (ConstValues.FLAG_1.equals(item.getIndexType())) {// 如果是1 改为滑动
-            	//RadioGroup
-                indexValueRg = (RadioGroup)itemV.findViewById(R.id.noproindex_rg_indexvalue);
-                RadioButton rb;
-                KvStc kvItem;
-                int checkedIndex = -1;
-                for (int i = 0; i < tempLst.size(); i++) {
-                    kvItem = tempLst.get(i);
-                    //设置单选按钮参数
-                    rb = new RadioButton(getActivity());
-                    rb.setTextColor(getActivity().getResources()
-                            .getColor(R.color.listview_item_font_color));
-                    rb.setTextSize(17);
-                    rb.setWidth(135);
-//                    rb.setHeight(35);
-                    rb.setHeight(45);
-                    rb.setId(i + j);
-                    rb.setText(kvItem.getValue());
-                    rb.setHint(kvItem.getKey());
-                    // 上次拜访没有数据,并且当前选项是0 这个选项作为默认
-                    if (CheckUtil.isBlankOrNull(item.getIndexValueId()) && ConstValues.FLAG_0.equals(kvItem.getIsDefault())) {
-                        checkedIndex = i + j;
-                        indexValueRg.setTag(rb.getId());
-                    // 上次数据与某个选项一致 选定这个选项
-                    } else if (kvItem.getKey().equals(item.getIndexValueId())) {
-                        checkedIndex = i + j;
-                    }
-                    rb.setOnClickListener(new OnClickListener() {
-                        
-                        @Override
-                        public void onClick(View v) {
-                            RadioGroup rg = (RadioGroup)v.getParent();
-                            int rgId = rg.getTag() == null ? 0 : Integer.parseInt(rg.getTag().toString());
-                            
-                            // 之前点击两次会将选中的改为不选中 (即都不选中)
-                            if (rgId == v.getId()) {
-                                rg.clearCheck();
-                                rg.setTag(null);
-                            } else {
-                                rg.setTag(v.getId());
-                            }
-                            
-                            // 改为选择 非是即否(必选其一)
-                            rg.setTag(v.getId());
-                        }
-                    });
-                    //把RadioButton添加进RadioGroup
-                    indexValueRg.addView(rb);
-                }
-                indexValueRg.check(checkedIndex);
-                indexValueRg.setVisibility(View.VISIBLE);
-                
-            } 
-            else if (ConstValues.FLAG_2.equals(item.getIndexType())) {
-                indexValueEt = (EditText)itemV.findViewById(R.id.noproindex_et_indexvalue);
-                indexValueEt.setText(item.getIndexValueId());
-                indexValueEt.setHint(item.getIndexValueId());
-                indexValueEt.setVisibility(View.VISIBLE);
-                
-            } else if (ConstValues.FLAG_3.equals(item.getIndexType())) {
-                indexValueNumEt = (EditText)itemV.findViewById(R.id.noproindex_et_indexvalue_num);
-                indexValueNumEt.setText(item.getIndexValueId());
-                indexValueNumEt.setHint(item.getIndexValueId());
-                indexValueNumEt.setVisibility(View.VISIBLE);
-                
-            } else if (ConstValues.FLAG_4.equals(item.getIndexType()) 
-                                || ConstValues.FLAG_0.equals(item.getIndexType())) {
-                indexValueSp = (Spinner)itemV.findViewById(R.id.noproindex_sp_indexvalue);
-                indexValueSp.setAdapter(new SpinnerKeyValueAdapter(
-                        getActivity(), tempLst, new String[]{"key","value"}, item.getIndexValueId()));
-                indexValueSp.setVisibility(View.VISIBLE);
-                
-            }
-            //把最下面三行控件添加进 整个布局中
-            noProlayout.addView(itemV);
-            long time2 = new Date().getTime();
-            Log.e("Optimization", "查指标执行数据库"+(time2-time1));
-            
-        }*/
 
         // 产品组合是否达标
-        groupproductNameTv.setText("产品组合是否达标: ");
+        // groupproductNameTv.setText("产品组合是否达标: ");
 
         // 先查询之前数据  判断终端该指标是否达标 
         List<MstGroupproductM> listvo = new ArrayList<MstGroupproductM>();
@@ -675,64 +877,7 @@ public class CheckIndexFragment extends BaseFragmentSupport implements OnClickLi
             vo.setPadisconsistent("0");// 未上传
             service.createMstGroupproductM(vo);
         }
-        
-        /*
-        //--
-        List<KvStc> itemLst = new ArrayList<KvStc>();
-        KvStc kvStc1 = new KvStc();
-		kvStc1.setKey("N"); // 0 , N 
-		kvStc1.setValue("未达标");
-		kvStc1.setIsDefault("0");
-		KvStc kvStc2 = new KvStc();
-		kvStc2.setKey("Y"); // 1 , Y 
-		kvStc2.setValue("达标");
-		itemLst.add(kvStc2);
-        itemLst.add(kvStc1);
-    	//RadioGroup
-        //RadioGroup groupproductRg = (RadioGroup)groupproductV.findViewById(R.id.noproindex_rg_indexvalue);
-        RadioButton radiobutton;
-        KvStc kvItem;
-        int checkedIndex = -1;
-        for (int i = 0; i < itemLst.size(); i++) {
-            kvItem = itemLst.get(i);
-            //设置单选按钮参数
-            radiobutton = new RadioButton(getActivity());
-            radiobutton.setTextColor(getActivity().getResources()
-                    .getColor(R.color.listview_item_font_color));
-            radiobutton.setTextSize(17);
-            radiobutton.setWidth(135);
-//            rb.setHeight(35);
-            radiobutton.setHeight(45);
-            radiobutton.setId(i + 400);
-            radiobutton.setText(kvItem.getValue());
-            radiobutton.setHint(kvItem.getKey());
-            // 上次拜访没有数据,并且当前选项是0 这个选项作为默认
-            if (CheckUtil.isBlankOrNull(vo.getIfrecstand()) && ConstValues.FLAG_0.equals(kvItem.getIsDefault())) {
-                checkedIndex = i + 400;
-                groupRg.setTag(radiobutton.getId());
-            // 上次数据与某个选项一致 选定这个选项
-            } else if (kvItem.getKey().equals(vo.getIfrecstand())) {
-                checkedIndex = i + 400;
-            }
-            radiobutton.setOnClickListener(new OnClickListener() {
-                
-                @Override
-                public void onClick(View v) {
-                    RadioGroup rg = (RadioGroup)v.getParent();
-                    int rgId = rg.getTag() == null ? 0 : Integer.parseInt(rg.getTag().toString());
-                    
-                    
-                    rg.setTag(v.getId());
-                }
-            });
-            //把RadioButton添加进RadioGroup
-            groupRg.addView(radiobutton);
-        }
-        groupRg.check(checkedIndex);
-        groupRg.setVisibility(View.VISIBLE);  
-        //groupproductLl.addView(groupproductV);
-        //--
-        */
+
 
         groupStatusSw.setOnLongSwitchChangedListener(new OnLongSwitchChangedListener() {
 
@@ -814,6 +959,7 @@ public class CheckIndexFragment extends BaseFragmentSupport implements OnClickLi
                 zhanyoulvSp.setAdapter(new SpinnerKeyValueAdapter(getActivity(), tempLst, new String[]{"key", "value"}, item.getIndexValueId()));
             }
         }
+
     }
 
 
@@ -996,7 +1142,7 @@ public class CheckIndexFragment extends BaseFragmentSupport implements OnClickLi
 
         // 获取产品组合是否达标值
         /*for (int k = 0; k < groupRg.getChildCount(); k++) {
-        	RadioButton groupRgChildRb = (RadioButton)groupRg.getChildAt(k);
+            RadioButton groupRgChildRb = (RadioButton)groupRg.getChildAt(k);
             if (groupRgChildRb.isChecked()) {
             	vo.setIfrecstand(groupRgChildRb.getHint().toString());
                 break;
@@ -1066,12 +1212,14 @@ public class CheckIndexFragment extends BaseFragmentSupport implements OnClickLi
 
             // 快速采集按钮
             case R.id.checkindex_bt_quickcollect:
-                if (ViewUtil.isDoubleClick(v.getId(), 2500)) return;
+                if (ViewUtil.isDoubleClick(v.getId(), 2500))
+                    return;
                 qulicklyDialog();
                 break;
             // 
             case R.id.checkindex_bt_activitypic:
-                if (ViewUtil.isDoubleClick(v.getId(), 2500)) return;
+                if (ViewUtil.isDoubleClick(v.getId(), 2500))
+                    return;
                 // activityPicDialog();
                 break;
 
@@ -1082,34 +1230,35 @@ public class CheckIndexFragment extends BaseFragmentSupport implements OnClickLi
 
     /**
      * 活动拍照
-
-    private void activityPicDialog() {
-        DbtLog.logUtils(TAG, "activityPicDialog()-跳到摄像头界面");
-        ViewUtil.clearDoubleClick();
-
-        cameraService = new CameraService(getActivity(), null);
-        // 已经拍了多少张照片
-        piclst = cameraService.queryCurrentPicRecord1(term.getTerminalkey(), DateUtil.getDateTimeStr(0), "1", "0", visitId);
-
-        ViewUtil.clearDoubleClick();
-        if (!FunUtil.cameraIsCanUse()) {// true
-            //cameraIsCanUse()
-            Toast.makeText(getActivity(), "请先开启拍照权限", Toast.LENGTH_SHORT).show();
-            return;
-        }
-		
-
-        // 位置是从0起计算的
-        position = new CameraService(getActivity(), null).queryPictypeMAll().size();
-
-        if (hasPermission(GlobalValues.HARDWEAR_CAMERA_PERMISSION)) {
-            // 拥有了此权限,那么直接执行业务逻辑
-            toCamera2(position);
-        } else {
-            // 还没有对一个权限(请求码,权限数组)这两个参数都事先定义好
-            requestPermission(GlobalValues.HARDWEAR_CAMERA_CODE, GlobalValues.HARDWEAR_CAMERA_PERMISSION);
-        }
-    }*/
+     * <p>
+     * private void activityPicDialog() {
+     * DbtLog.logUtils(TAG, "activityPicDialog()-跳到摄像头界面");
+     * ViewUtil.clearDoubleClick();
+     * <p>
+     * cameraService = new CameraService(getActivity(), null);
+     * // 已经拍了多少张照片
+     * piclst = cameraService.queryCurrentPicRecord1(term.getTerminalkey(), DateUtil.getDateTimeStr(0), "1", "0", visitId);
+     * <p>
+     * ViewUtil.clearDoubleClick();
+     * if (!FunUtil.cameraIsCanUse()) {// true
+     * //cameraIsCanUse()
+     * Toast.makeText(getActivity(), "请先开启拍照权限", Toast.LENGTH_SHORT).show();
+     * return;
+     * }
+     * <p>
+     * <p>
+     * // 位置是从0起计算的
+     * position = new CameraService(getActivity(), null).queryPictypeMAll().size();
+     * <p>
+     * if (hasPermission(GlobalValues.HARDWEAR_CAMERA_PERMISSION)) {
+     * // 拥有了此权限,那么直接执行业务逻辑
+     * toCamera2(position);
+     * } else {
+     * // 还没有对一个权限(请求码,权限数组)这两个参数都事先定义好
+     * requestPermission(GlobalValues.HARDWEAR_CAMERA_CODE, GlobalValues.HARDWEAR_CAMERA_PERMISSION);
+     * }
+     * }
+     */
 
     @Override
     public void doOpenCamera() {
@@ -1160,7 +1309,7 @@ public class CheckIndexFragment extends BaseFragmentSupport implements OnClickLi
 								bmp = FunUtil.scaleBitmap(bmp, 480, 640);*/
                                 DbtLog.logUtils(TAG, "onActivityResult()-裁剪成功800");
                                 // 删除图片(因为图片太大,物理删除)
-                                if(bmp!=null){
+                                if (bmp != null) {
                                     FileUtil.deleteFile(new File(path + name));
                                 }
 
@@ -1183,7 +1332,7 @@ public class CheckIndexFragment extends BaseFragmentSupport implements OnClickLi
                                 bmp = ImageUtil.drawTextToLeftBottom(getActivity(), bmp, "业代: " + gonghao, 10, Color.WHITE, ViewUtil.px2dip(getActivity(), 288), ViewUtil.dip2px(getActivity(), 16));
                                 bmp = ImageUtil.drawTextToLeftBottom(getActivity(), bmp, "终端: " + term.getTerminalname(), 10, Color.WHITE, ViewUtil.dip2px(getActivity(), 5), ViewUtil.dip2px(getActivity(), 3));
                                 bmp = ImageUtil.drawTextToLeftBottom(getActivity(), bmp, "照片: " + pictypename, 10, Color.WHITE, ViewUtil.px2dip(getActivity(), 288), ViewUtil.dip2px(getActivity(), 3));
-								
+
                                 // 保存压缩
                                 FunUtil.saveHeadImg(path, bmp, name, 100, definition);
 
@@ -1386,8 +1535,10 @@ public class CheckIndexFragment extends BaseFragmentSupport implements OnClickLi
         sureBt.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                if (ViewUtil.isDoubleClick(arg0.getId(), 2500)) return;
-                if (isasynitem) return;
+                if (ViewUtil.isDoubleClick(arg0.getId(), 2500))
+                    return;
+                if (isasynitem)
+                    return;
                 QuicklyProItem itemI;
                 ProItem itemJ;
                 List<ProItem> itemJLst;
@@ -1447,6 +1598,7 @@ public class CheckIndexFragment extends BaseFragmentSupport implements OnClickLi
      * 异步加载
      */
     private Boolean isasynitem = true;
+
     public void asynitem() {
         DbtLog.logUtils(TAG, "asynch()");
         new AsyncTask<Void, Void, Void>() {
@@ -1482,28 +1634,28 @@ public class CheckIndexFragment extends BaseFragmentSupport implements OnClickLi
     /**
      * 打开系统相机,去拍照
 
-    private void toCamera2(int position) {
-        DbtLog.logUtils(TAG, "toCamera2()-跳到系统摄像头界面");
-		
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        // 根据文件地址创建文件
+     private void toCamera2(int position) {
+     DbtLog.logUtils(TAG, "toCamera2()-跳到系统摄像头界面");
 
-        String sdcardPath = Environment.getExternalStorageDirectory() + "";
-        path = sdcardPath + "/dbt/et.tsingtaopad" + "/photo" + File.separator;
-        //path = getActivity().getFilesDir().getAbsolutePath() + File.separator + "photo" + File.separator;
-        name = DateUtil.formatDate(new Date(), null) + ".jpg";
+     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+     // 根据文件地址创建文件
 
-        //saveHeadImg(path, bm, nam
-        File file = new File(path + name);
-        if (file.exists()) {
-            file.delete();
-        }
-        // 把文件地址转换成Uri格式
-        Uri uri = Uri.fromFile(file);
-        // 设置系统相机拍摄照片完成后图片文件的存放地址
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-        startActivityForResult(intent, 100);
-    }*/
+     String sdcardPath = Environment.getExternalStorageDirectory() + "";
+     path = sdcardPath + "/dbt/et.tsingtaopad" + "/photo" + File.separator;
+     //path = getActivity().getFilesDir().getAbsolutePath() + File.separator + "photo" + File.separator;
+     name = DateUtil.formatDate(new Date(), null) + ".jpg";
+
+     //saveHeadImg(path, bm, nam
+     File file = new File(path + name);
+     if (file.exists()) {
+     file.delete();
+     }
+     // 把文件地址转换成Uri格式
+     Uri uri = Uri.fromFile(file);
+     // 设置系统相机拍摄照片完成后图片文件的存放地址
+     intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+     startActivityForResult(intent, 100);
+     }*/
 
     /**
      * 打开系统相机,去拍照
@@ -1519,7 +1671,7 @@ public class CheckIndexFragment extends BaseFragmentSupport implements OnClickLi
         name = DateUtil.formatDate(new Date(), null) + ".jpg";
 
         File file = new File(path, name);
-        DbtLog.logUtils(TAG, "创建File: "+path + name);
+        DbtLog.logUtils(TAG, "创建File: " + path + name);
 
 
         Uri fileuri;
@@ -1535,7 +1687,7 @@ public class CheckIndexFragment extends BaseFragmentSupport implements OnClickLi
             intent.putExtra(MediaStore.EXTRA_OUTPUT, fileuri);
             DELEGATE.startActivityForResult(intent, RequestCodes.TAKE_PHONE);*/
 
-            intent = toCameraByContentResolver(intent,file,name);
+            intent = toCameraByContentResolver(intent, file, name);
             startActivityForResult(intent, 800);
         } else {
             fileuri = Uri.fromFile(file);// 将File转为Uri

@@ -48,15 +48,16 @@ public class PromotionAdapter extends BaseAdapter {
     private String isbigarea;
     private String seeFlag;
     private String twoareaid;
-    Button activityPicBt;
+    // Button activityPicBt;
     List<PictypeDataStc> valueLst;
     private IClick mListener; 
     
+    // public PromotionAdapter(Activity context, List<CheckIndexPromotionStc> dataLst, String visitDate,Button activityPicBt,List<PictypeDataStc> valueLst,String isbigarea,String seeFlag,IClick listener) {
     public PromotionAdapter(Activity context, List<CheckIndexPromotionStc> dataLst, String visitDate,Button activityPicBt,List<PictypeDataStc> valueLst,String isbigarea,String seeFlag,IClick listener) {
         this.context = context;
         this.dataLst = dataLst;
         this.visitDate = visitDate;
-        this.activityPicBt = activityPicBt;
+        // this.activityPicBt = activityPicBt;
         this.valueLst = valueLst;
         this.isbigarea = isbigarea;
         this.seeFlag = seeFlag;
@@ -172,12 +173,12 @@ public class PromotionAdapter extends BaseAdapter {
     		            	IsAccomplishcount++;
     		            }
     		        }
-    		        if(IsAccomplishcount>0&&valueLst.size()<3&&(!"1".equals(seeFlag))){// 查看模式不显示拍照按钮
+    		        /*if(IsAccomplishcount>0&&valueLst.size()<3&&(!"1".equals(seeFlag))){// 查看模式不显示拍照按钮
     		        	//activityPicBt.setVisibility(View.VISIBLE);// 如果有促销活动,拍照按钮显示
     		        	activityPicBt.setVisibility(View.GONE);// 这个拍照按钮不再显示
     		        }else{
     		        	activityPicBt.setVisibility(View.GONE);
-    		        }
+    		        }*/
     		        // 根据是否有达成的活动,显示活动拍照按钮--160927-------------------
     		        
     			}

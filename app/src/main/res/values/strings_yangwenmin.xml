@@ -169,8 +169,9 @@
     <string name="linecardsearch_store">库存</string>  
     
     <!-- 查指标 -->
-    <string name="checkindex_tv_hz">合作执行是否到位: </string>  
-    <string name="checkindex_tv_zyl">我品单店占有率: </string>  
+    <string name="checkindex_tv_group">产品组合是否达标: </string>
+    <string name="checkindex_tv_hz">合作执行是否到位: </string>
+    <string name="checkindex_tv_zyl">我品单店占有率: </string>
     <string name="checkindex_tv_ps">是否高质量配送: </string>  
     
 </resources>
