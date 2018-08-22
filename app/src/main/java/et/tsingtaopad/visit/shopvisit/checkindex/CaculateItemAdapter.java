@@ -1,12 +1,10 @@
 package et.tsingtaopad.visit.shopvisit.checkindex;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Message;
@@ -15,7 +13,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,8 +30,8 @@ import et.tsingtaopad.tools.CheckUtil;
 import et.tsingtaopad.tools.DateUtil;
 import et.tsingtaopad.tools.DialogUtil;
 import et.tsingtaopad.tools.FunUtil;
-import et.tsingtaopad.tools.SoftInputUtil;
 import et.tsingtaopad.tools.ViewUtil;
+import et.tsingtaopad.visit.memorybook.MemoDialogFragment;
 import et.tsingtaopad.visit.shopvisit.checkindex.domain.ProIndexValue;
 import et.tsingtaopad.visit.shopvisit.checkindex.domain.ProItem;
 
@@ -206,28 +203,29 @@ public class CaculateItemAdapter extends BaseAdapter implements OnClickListener 
                 if (calculateDialog != null && calculateDialog.isShowing())
                     return;
 
-                // 加判断 是不是铺货状态,弹出不同列的弹窗
-                if ("ad3030fb-e42e-47f8-a3ec-4229089aab5d".equals(IndexId)) {// 铺货状态
+                // 获取产品信息
+                int position = (Integer) v.getTag();
+                final ProIndexValue indexValue = dataLst.get(position);
 
+                // 获取该产品采集项
+                tempLst = new ArrayList<ProItem>();
+                for (ProItem item : proItemLst) {
+                    if (indexValue.getProId().equals(item.getProId()) && item.getIndexIdLst().contains(indexValue.getIndexId())) {
+                        tempLst.add(item);
+                    }
+                }
+
+                // 弹窗,填写采集项
+                CalculateDialogFragment fragment = CalculateDialogFragment.getInstance(indexValue,tempLst);
+                fragment.show(context.getFragmentManager(),"CalculateDialogFragment");
+
+                /*// 加判断 是不是铺货状态,弹出不同列的弹窗
+                if ("ad3030fb-e42e-47f8-a3ec-4229089aab5d".equals(IndexId)) {// 铺货状态
                     // 加载弹出窗口layout
                     View itemForm = context.getLayoutInflater().inflate(R.layout.checkindex_calculate_puhuo, null);
-
-                    // 获取产品信息
-                    int position = (Integer) v.getTag();
-                    final ProIndexValue indexValue = dataLst.get(position);
                     TextView proTv = (TextView) itemForm.findViewById(R.id.calculatedialog_tv_proname);
                     proTv.setHint(indexValue.getProId());
                     proTv.setText(indexValue.getProName());
-
-
-                    // 获取该产品采集项
-                    tempLst = new ArrayList<ProItem>();
-                    //TODO
-                    for (ProItem item : proItemLst) {
-                        if (indexValue.getProId().equals(item.getProId()) && item.getIndexIdLst().contains(indexValue.getIndexId())) {
-                            tempLst.add(item);
-                        }
-                    }
 
                     calculateDialogLv = (NoScrollListView) itemForm.findViewById(R.id.calculatedialog_lv_pro);
                     calculateDialogLv.setAdapter(new CalculateIndexItemPuhuoAdapter(context, tempLst));
@@ -306,15 +304,15 @@ public class CaculateItemAdapter extends BaseAdapter implements OnClickListener 
                     });
                     calculateDialog.show();
 
+
+
                 } else {// 非铺货状态(比如:生动化,冰冻化...)
 
                     // 加载弹出窗口layout
-                    View itemForm = context.getLayoutInflater().inflate(R.layout.checkindex_calculatedialog, null);
+                    View itemForm = context.getLayoutInflater().inflate(R.layout.checkindex_calculatedialog,null);
 
-                    // 获取产品信息
-                    int position = (Integer) v.getTag();
-                    final ProIndexValue indexValue = dataLst.get(position);
-                    TextView proTv = (TextView) itemForm.findViewById(R.id.calculatedialog_tv_proname);
+
+                    TextView proTv = (TextView)itemForm.findViewById(R.id.calculatedialog_tv_proname);
                     proTv.setHint(indexValue.getProId());
                     proTv.setText(indexValue.getProName());
 
@@ -323,25 +321,17 @@ public class CaculateItemAdapter extends BaseAdapter implements OnClickListener 
                     calculateDialog.setView(itemForm, 0, 0, 0, 0);
                     calculateDialog.show();
 
-                    // 获取该产品采集项
-                    tempLst = new ArrayList<ProItem>();
-                    //TODO
-                    for (ProItem item : proItemLst) {
-                        if (indexValue.getProId().equals(item.getProId()) && item.getIndexIdLst().contains(indexValue.getIndexId())) {
-                            tempLst.add(item);
-                        }
-                    }
 
-                    calculateDialogLv = (NoScrollListView) itemForm.findViewById(R.id.calculatedialog_lv_pro);
+
+                    calculateDialogLv = (NoScrollListView)itemForm.findViewById(R.id.calculatedialog_lv_pro);
                     calculateDialogLv.setAdapter(new CalculateIndexItemAdapter(context, tempLst));
 
                     // 确定
-                    Button sureBt = (Button) itemForm.findViewById(R.id.calculatedialog_bt_sure);
+                    Button sureBt = (Button)itemForm.findViewById(R.id.calculatedialog_bt_sure);
                     sureBt.setOnClickListener(new OnClickListener() {
                         @Override
                         public void onClick(View arg0) {
-                            if (ViewUtil.isDoubleClick(arg0.getId(), 2500))
-                                return;
+                            if (ViewUtil.isDoubleClick(arg0.getId(), 2500)) return;
                             ProItem item = null;
                             EditText itemEt = null;
                             EditText itemEt2 = null;
@@ -350,18 +340,18 @@ public class CaculateItemAdapter extends BaseAdapter implements OnClickListener 
                                 item = tempLst.get(i);
                                 item.setCheckkey(indexValue.getIndexId());
                                 // 获取采集文本框内容
-                                itemEt = (EditText) calculateDialogLv.getChildAt(i).findViewById(R.id.calculatedialog_et_changenum);
+                                itemEt = (EditText)calculateDialogLv.getChildAt(i).findViewById(R.id.calculatedialog_et_changenum);
                                 item.setChangeNum((FunUtil.isBlankOrNullToDouble(itemEt.getText().toString())));
                                 //item.setChangeNum(Double.valueOf(FunUtil.isNullToZero(itemEt.getText().toString())));
                                 item.setBianhualiang(itemEt.getText().toString());// 变化量
-                                itemEt2 = (EditText) calculateDialogLv.getChildAt(i).findViewById(R.id.calculatedialog_et_finalnum);
+                                itemEt2 = (EditText)calculateDialogLv.getChildAt(i).findViewById(R.id.calculatedialog_et_finalnum);
                                 item.setFinalNum((FunUtil.isBlankOrNullToDouble(itemEt2.getText().toString())));
                                 //item.setFinalNum(Double.valueOf(FunUtil.isNullToZero(itemEt.getText().toString())));
                                 item.setXianyouliang(itemEt.getText().toString());// 现有量
 
                                 //
-                                if ("".equals(FunUtil.isNullSetSpace(itemEt.getText().toString())) || "".equals(FunUtil.isNullSetSpace(itemEt2.getText().toString()))) {
-                                    isAllIn = 1;
+                                if("".equals(FunUtil.isNullSetSpace(itemEt.getText().toString()))||"".equals(FunUtil.isNullSetSpace(itemEt2.getText().toString()))){
+                                    isAllIn=1;
                                 }
                             }
 
@@ -386,15 +376,17 @@ public class CaculateItemAdapter extends BaseAdapter implements OnClickListener 
                     });
 
                     // 取消
-                    Button cancelBt = (Button) itemForm.findViewById(R.id.calculatedialog_bt_cancel);
+                    Button cancelBt = (Button)itemForm.findViewById(R.id.calculatedialog_bt_cancel);
                     cancelBt.setOnClickListener(new OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             calculateDialog.cancel();
                         }
                     });
-                }
 
+                    //CalculateDialogFragmentT fragment = CalculateDialogFragmentT.getInstance(indexValue,tempLst);
+                    //fragment.show(context.getFragmentManager(),"CalculateDialogFragmentT");
+                }*/
                 break;
 
             default:

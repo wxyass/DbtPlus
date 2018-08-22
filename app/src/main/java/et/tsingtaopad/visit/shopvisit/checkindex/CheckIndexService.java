@@ -925,10 +925,7 @@ public class CheckIndexService extends ShopVisitService {
                 }
             }
         }
-        
-        
-        
-        
+
         
         //针对铺货状态中没有空白和有效销售
         /*for(ProIndex item : calculateLst){

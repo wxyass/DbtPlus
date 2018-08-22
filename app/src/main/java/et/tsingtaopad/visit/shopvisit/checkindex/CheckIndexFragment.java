@@ -249,6 +249,7 @@ public class CheckIndexFragment extends BaseFragmentSupport implements OnClickLi
                 case ConstValues.WAIT5:
                     fragment.hideKeyboard();
                     fragment.autoSum(bundle);
+                    LatteLoader.stopLoading(); // 若有进度条,关闭
                     break;
                 // 自动计算
                 case 2:
@@ -340,7 +341,7 @@ public class CheckIndexFragment extends BaseFragmentSupport implements OnClickLi
     /**
      * 异步加载 有下面的CheckIndexInitTask代替 2018年8月21日16:13:36
      */
-    public void asynch() {
+    /*public void asynch() {
         DbtLog.logUtils(TAG, "asynch()");
         new AsyncTask<Void, Void, Void>() {
             // 异步执行前
@@ -366,7 +367,7 @@ public class CheckIndexFragment extends BaseFragmentSupport implements OnClickLi
                 isLoadingData = false;
             }
         }.execute();
-    }
+    }*/
 
     /**
      * 异步加载

@@ -1,48 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/listview_bg_item"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal" >
+              style="@style/listview_bg_item"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="horizontal">
 
     <TextView
         android:id="@+id/calculatedialog_tv_itemname"
         android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_weight="4"
         android:gravity="center"
         android:textColor="@color/listview_item_font_color"
-        android:textSize="16sp"
-        android:layout_height="wrap_content"
-        android:layout_weight="4" />
+        android:textSize="16sp"/>
 
     <View
         android:layout_width="1dp"
         android:layout_height="match_parent"
-        android:background="@color/listview_line" />
+        android:background="@color/listview_line"/>
 
     <EditText
         android:id="@+id/calculatedialog_et_finalnum"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="2"
-        android:ems="10"
-        android:maxLength="8"
+        android:ems="6"
         android:inputType="numberSigned"
-        android:singleLine="true" />
+        android:maxLength="6"
+        android:singleLine="true"/>
 
     <View
         android:layout_width="1dp"
         android:layout_height="match_parent"
-        android:background="@color/listview_line" />
+        android:background="@color/listview_line"/>
 
     <EditText
         android:id="@+id/calculatedialog_et_changenum"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="2"
-        android:ems="10"
-        android:maxLength="8"
+        android:ems="6"
         android:inputType="numberSigned"
-        android:singleLine="true" />
+        android:maxLength="6"
+        android:singleLine="true"/>
 
 </LinearLayout>

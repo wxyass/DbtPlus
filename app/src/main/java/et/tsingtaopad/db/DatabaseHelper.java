@@ -440,7 +440,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper
                 { "MST_PROMOTIONSTYPE_M", "活动基础信息" }, 
                 { "MST_PROMOPRODUCT_INFO", "活动基础信息" }, 
                 { "MST_PROMOTERM_INFO", "巡店拜访1" }, 
-                { "MST_VISIT_M", "巡店拜访2" },
+                 { "MST_VISIT_M", "巡店拜访2" },
                 { "MST_VISTPRODUCT_INFO", "巡店拜访3" }, 
                 { "MST_CHECKEXERECORD_INFO", "巡店拜访4" },
                 { "MST_COLLECTIONEXERECORD_INFO","巡店拜访5"},
