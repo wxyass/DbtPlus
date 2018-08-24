@@ -967,6 +967,8 @@ public class CheckIndexService extends ShopVisitService {
                 }
             }
         }
+
+        //
     }
     
     // 

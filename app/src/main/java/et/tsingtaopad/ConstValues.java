@@ -56,7 +56,9 @@ public class ConstValues implements Serializable{
     public static final int WAIT4 = 4;
     public static final int WAIT5 = 5;
     public static final int WAIT6 = 6;
-    
+    public static final int WAIT7 = 7;
+    public static final int WAIT8 = 8;
+
     /***
      * 指标标删除状态（解决重复指标）
      */

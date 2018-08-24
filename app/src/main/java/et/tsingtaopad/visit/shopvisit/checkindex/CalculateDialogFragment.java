@@ -160,7 +160,7 @@ public class CalculateDialogFragment extends DialogFragment implements OnClickLi
                     bundle.putString("indexId", indexValue.getIndexId());
                 }
 
-                LatteLoader.showLoading(getActivity(), true);// 处理数据中 ,在Handle中关闭
+                 LatteLoader.showLoading(getActivity(), true);// 处理数据中 ,在Handle中关闭
                 Message msg = new Message();
                 msg.what = ConstValues.WAIT5;
                 msg.setData(bundle);

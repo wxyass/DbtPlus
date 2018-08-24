@@ -247,9 +247,14 @@ public class CheckIndexFragment extends BaseFragmentSupport implements OnClickLi
 
                 // 自动计算
                 case ConstValues.WAIT5:
-                    fragment.hideKeyboard();
+                    /*fragment.hideKeyboard();
                     fragment.autoSum(bundle);
-                    LatteLoader.stopLoading(); // 若有进度条,关闭
+                    LatteLoader.stopLoading(); // 若有进度条,关闭*/
+
+
+                    fragment.hideKeyboard();
+                    fragment.autoNewSum(bundle);
+
                     break;
                 // 自动计算
                 case 2:
@@ -271,6 +276,10 @@ public class CheckIndexFragment extends BaseFragmentSupport implements OnClickLi
                     break;
                 case 7:// 关闭进度框
                     LatteLoader.stopLoading(); // 若有进度条,关闭
+                    break;
+                case 8:// 关闭进度框
+
+                    fragment.adapterChanged();
                     break;
 
                 default:
@@ -302,6 +311,31 @@ public class CheckIndexFragment extends BaseFragmentSupport implements OnClickLi
             calculateAdapter.notifyDataSetChanged();
             ViewUtil.setListViewHeight(calculateLv);// 解决无响应,注释这一行
         }
+    }
+
+    // 自动计算
+    private void autoNewSum(Bundle bundle) {
+        if (!isLoadingData) {
+            String proId = "";
+            String indexId = "";
+            if (bundle != null) {
+                proId = FunUtil.isBlankOrNullTo(bundle.getString("proId"), "-1");// 产品主键
+                indexId = FunUtil.isBlankOrNullTo(bundle.getString("indexId"), "-1");// 指标主键: ad3030fb-e42e-47f8-a3ec-4229089aab5d
+            }
+            /*service.calculateIndex(channelId, proItemLst, calculateLst, proId, indexId);
+            calculateAdapter.notifyDataSetChanged();
+            ViewUtil.setListViewHeight(calculateLv);// 解决无响应,注释这一行*/
+
+            AutoSumTask autoSumTask = new AutoSumTask();
+            autoSumTask.execute(channelId, proItemLst, calculateLst, proId, indexId,service);
+        }
+    }
+    private void adapterChanged() {
+        calculateAdapter.notifyDataSetChanged();
+        ViewUtil.setListViewHeight(calculateLv);// 解决无响应,注释这一行
+
+        handler.sendEmptyMessageDelayed(7, 2000);
+        // LatteLoader.stopLoading(); // 若有进度条,关闭
     }
 
     // 弹出进度框
@@ -734,7 +768,7 @@ public class CheckIndexFragment extends BaseFragmentSupport implements OnClickLi
         channelId = term.getMinorchannel();// 次渠道
 
         // 删除多余的采集项记录  比如:渠道C->B  考核的产品少了一个,界面上上了这个产品,要将数据库中的采集项表也删除
-        // 1 查出mst_vistproduct_info考核产品 
+        // 1 查出mst_vistproduct_info考核产品
         // 2 查出 采集项表 产品记录
         // 3 把采集项表的产品记录 多出来的删除
 
@@ -742,7 +776,7 @@ public class CheckIndexFragment extends BaseFragmentSupport implements OnClickLi
         // 获取分项采集页面显示数据 // 获取指标采集前3列数据 // 铺货状态,道具生动化,产品生动化,冰冻化
         calculateLst = service.queryCalculateIndex(visitId, termId, channelId, seeFlag);
         // String sd = "visitId: "+ visitId +" termId: "+ termId +" channelId: "+ channelId +" seeFlag: "+ seeFlag ;
-        // FileUtil.writeTxt(sd, FileUtil.getSDPath()+"/MST_CHECKEXERECORD_INFO_ZIPww1223.txt");  
+        // FileUtil.writeTxt(sd, FileUtil.getSDPath()+"/MST_CHECKEXERECORD_INFO_ZIPww1223.txt");
         // 获取分项采集部分的产品指标对应的采集项目数据 // 因为在ShopVisitActivity生成了供货关系,此时就能关联出各个产品的采集项,现有量变化量为0
         proItemLst = service.queryCalculateItem(visitId, channelId);
 
@@ -831,7 +865,7 @@ public class CheckIndexFragment extends BaseFragmentSupport implements OnClickLi
         // 产品组合是否达标
         // groupproductNameTv.setText("产品组合是否达标: ");
 
-        // 先查询之前数据  判断终端该指标是否达标 
+        // 先查询之前数据  判断终端该指标是否达标
         List<MstGroupproductM> listvo = new ArrayList<MstGroupproductM>();
         // 从表搂取一条数据,今天之前的包含今天
         listvo = service.queryMstGroupproductM(term.getTerminalcode(), (DateUtil.getDateTimeStr(7) + "  00:00:00"));
@@ -1217,7 +1251,7 @@ public class CheckIndexFragment extends BaseFragmentSupport implements OnClickLi
                     return;
                 qulicklyDialog();
                 break;
-            // 
+            //
             case R.id.checkindex_bt_activitypic:
                 if (ViewUtil.isDoubleClick(v.getId(), 2500))
                     return;
@@ -1278,7 +1312,7 @@ public class CheckIndexFragment extends BaseFragmentSupport implements OnClickLi
 
             // 每个促销活动拍照 返回处理
             case 800:
-				/*Bundle extras = data.getExtras();  
+				/*Bundle extras = data.getExtras();
 				Bitmap  mImageBitmap = (Bitmap) extras.get("data");  
 				Bitmap bmp = FunUtil.zoomImg(mImageBitmap, 480, 640);*/
 
