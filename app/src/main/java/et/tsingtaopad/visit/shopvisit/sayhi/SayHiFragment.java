@@ -10,11 +10,15 @@ import java.util.List;
 
 import com.j256.ormlite.android.AndroidDatabaseConnection;
 import com.j256.ormlite.dao.Dao;
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -47,8 +51,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import cn.com.benyoyo.manage.Struct.ResponseStructBean;
 import et.tsingtaopad.BaseFragmentSupport;
 import et.tsingtaopad.ConstValues;
+import et.tsingtaopad.MainActivity;
 import et.tsingtaopad.R;
 import et.tsingtaopad.adapter.SpinnerKeyValueAdapter;
 import et.tsingtaopad.cui.LongSlideSwitch;
@@ -61,11 +67,14 @@ import et.tsingtaopad.db.tables.MstInvalidapplayInfo;
 import et.tsingtaopad.db.tables.MstTerminalinfoM;
 import et.tsingtaopad.db.tables.MstVisitM;
 import et.tsingtaopad.initconstvalues.domain.KvStc;
+import et.tsingtaopad.login.domain.LoginSession;
 import et.tsingtaopad.tools.CheckUtil;
 import et.tsingtaopad.tools.DateUtil;
 import et.tsingtaopad.tools.DbtLog;
 import et.tsingtaopad.tools.DbtUtils;
 import et.tsingtaopad.tools.FunUtil;
+import et.tsingtaopad.tools.HttpUtil;
+import et.tsingtaopad.tools.JsonUtil;
 import et.tsingtaopad.tools.PrefUtils;
 import et.tsingtaopad.tools.ViewUtil;
 import et.tsingtaopad.visit.VisitFragment;
@@ -125,6 +134,7 @@ public class SayHiFragment extends BaseFragmentSupport implements
     private Spinner minorChannelSp;
     private EditText visitPersonEt;
     private Button sayhi_text;
+    private Button upterminfoBtn;
 
     private String selectDate;
     private String aday;
@@ -221,7 +231,7 @@ public class SayHiFragment extends BaseFragmentSupport implements
         View view = inflater.inflate(R.layout.shopvisit_sayhi, container, false);
         DbtLog.logUtils(TAG, "onCreateView()");
         this.initView(view);
-         this.initData();
+        this.initData();
         //this.asynch();
         return view;
     }
@@ -261,6 +271,7 @@ public class SayHiFragment extends BaseFragmentSupport implements
         mineproductSW = (LongSlideSwitch) view.findViewById(R.id.sayhi_sw_wopindianzhao);
         mineProductTime = (Button) view.findViewById(R.id.sayhi_btn_time);
         sayhi_text = (Button) view.findViewById(R.id.sayhi_btn_text);
+
         mineCb = (CheckBox) view.findViewById(R.id.sayhi_cb_mine);
         vieCb = (CheckBox) view.findViewById(R.id.sayhi_cb_vie);
         mineProtocolCb = (CheckBox) view.findViewById(R.id.sayhi_cb_mineprotocol);
@@ -293,6 +304,7 @@ public class SayHiFragment extends BaseFragmentSupport implements
         visitPersonEt = (EditText) view.findViewById(R.id.sayhi_et_visitPerson);
         laobanSp = (Spinner) view.findViewById(R.id.sayhi_sp_laoban1);
 
+        upterminfoBtn = (Button) view.findViewById(R.id.sayhi_bt_terminfo);
         // 绑定事件
         termStatusSw.setOnLongSwitchChangedListener(this);
         mineproductSW.setOnLongSwitchChangedListener(this);
@@ -317,6 +329,7 @@ public class SayHiFragment extends BaseFragmentSupport implements
         lvolumeEt.addTextChangedListener(watcher);
         SayHiSv.setOnTouchListener(this);
         mineProductTime.setOnClickListener(this);
+        upterminfoBtn.setOnClickListener(this);
     }
 
     private void initData() {
@@ -858,7 +871,7 @@ public class SayHiFragment extends BaseFragmentSupport implements
 
         switch (v.getId()) {
             case R.id.sayhi_btn_time:
-                DatePickerDialog dateDialog = new DatePickerDialog(v.getContext(),R.style.dialog_date,
+                DatePickerDialog dateDialog = new DatePickerDialog(v.getContext(), R.style.dialog_date,
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int year,
@@ -883,13 +896,153 @@ public class SayHiFragment extends BaseFragmentSupport implements
                 if (!dateDialog.isShowing()) {
                     dateDialog.show();
                 }
-
                 break;
 
+            case R.id.sayhi_bt_terminfo:
+
+                // 上传终端信息
+                saveTerminalInfo();
+                break;
             default:
                 break;
         }
 
+    }
+
+
+    //
+    private void saveTerminalInfo() {
+        // 保存终端信息
+        if (termInfo != null) {
+            termInfo.setTerminalname(FunUtil.isNullSetSpace(termNameEt.getText()).toString());
+            termInfo.setRoutekey(FunUtil.isBlankOrNullTo(belongLineSp.getTag(), termInfo.getRoutekey()));
+            termInfo.setProvince(termInfo.getProvince());
+            termInfo.setCity(termInfo.getCity());
+            termInfo.setCounty(termInfo.getCounty());
+            termInfo.setAddress(FunUtil.isNullSetSpace(addressEt.getText()).toString());
+            termInfo.setContact(FunUtil.isNullSetSpace(linkmanEt.getText()).toString());
+            if (telEt.getText().toString().length() > 30)
+                telEt.setText(telEt.getText().toString().substring(0, 30));
+            termInfo.setMobile(FunUtil.isNullSetSpace(telEt.getText()).toString());
+            termInfo.setTlevel(FunUtil.isBlankOrNullTo(levelSp.getTag(), termInfo.getTlevel()));
+            termInfo.setSequence(FunUtil.isNullSetSpace(sequenceEt.getText()).toString());
+            termInfo.setCycle(FunUtil.isNullSetSpace(cycleEt.getText()).toString());
+            termInfo.setHvolume(FunUtil.isNullToZero(hvolumeEt.getText()).toString());
+            termInfo.setMvolume(FunUtil.isNullToZero(mvolumeEt.getText()).toString());
+            termInfo.setPvolume(FunUtil.isNullToZero(pvolumeEt.getText()).toString());
+            termInfo.setLvolume(FunUtil.isNullToZero(lvolumeEt.getText()).toString());
+            if (termStatusSw.getStatus()) {
+                termInfo.setStatus(ConstValues.FLAG_1);
+            } else {
+                termInfo.setStatus(ConstValues.FLAG_0);
+            }
+
+            // 店招
+            if (mineproductSW.getStatus()) {
+                termInfo.setIfmine(ConstValues.FLAG_1);// 是否我品店招 0不是 1是
+                if (mineProductTime.getText().toString() != null && mineProductTime.getText().toString().length() > 0) {
+                    termInfo.setIfminedate(mineProductTime.getText().toString());
+                } else {
+                    termInfo.setIfminedate(ifminedate);
+                }
+            } else {
+                termInfo.setIfmine(ConstValues.FLAG_0);
+            }
+
+            termInfo.setSellchannel(FunUtil.isBlankOrNullTo(sellChannelSp.getTag(), termInfo.getSellchannel()));
+            termInfo.setMainchannel(FunUtil.isBlankOrNullTo(mainChannelSp.getTag(), termInfo.getMainchannel()));
+            termInfo.setMinorchannel(FunUtil.isBlankOrNullTo(minorChannelSp.getTag(), termInfo.getMinorchannel()));
+            termInfo.setAreatype(FunUtil.isBlankOrNullTo(areaTypeSp.getTag(), termInfo.getAreatype()));
+            //termInfo.setUpdateuser(ConstValues.loginSession.getUserCode());
+            termInfo.setUpdateuser(PrefUtils.getString(getActivity(), "userCode", ""));
+            termInfo.setPadisconsistent(ConstValues.FLAG_0);
+            termInfo.setUpdatetime(DateUtil.getDateTimeDte(1));
+            // --- 更改mst_terminalinfo_m表中selftreaty字段 ywm 20160426-----------------
+            termInfo.setSelftreaty(visitM.getSelftreaty());
+            termInfo.setCmpselftreaty(visitM.getCmptreaty());
+            // --- 更改mst_terminalinfo_m表中selftreaty字段 ywm 20160426-----------------
+            service.updateTermInfo(termInfo, prevSequence);
+            upTerminalInfoTo(termInfo, prevSequence);
+        }
+    }
+
+    /**
+     *
+     */
+    public void upTerminalInfoTo(MstTerminalinfoM termInfo, String prevSequence) {
+
+        int msgId = -1;
+        if (CheckUtil.isBlankOrNull(termInfo.getTerminalname())) {
+            msgId = R.string.termadd_msg_invaltermname;
+
+        } else if ("-1".equals(termInfo.getRoutekey()) ||
+                CheckUtil.isBlankOrNull(termInfo.getRoutekey())) {
+            msgId = R.string.termadd_msg_invalbelogline;
+
+        } else if ("-1".equals(termInfo.getTlevel()) ||
+                CheckUtil.isBlankOrNull(termInfo.getTlevel())) {
+            msgId = R.string.termadd_msg_invaltermlevel;
+
+        } else if ("-1".equals(termInfo.getProvince()) ||
+                CheckUtil.isBlankOrNull(termInfo.getProvince())) {
+            msgId = R.string.termadd_msg_invalprov;
+
+        } else if ("-1".equals(termInfo.getCity()) ||
+                CheckUtil.isBlankOrNull(termInfo.getCity())) {
+            msgId = R.string.termadd_msg_invalcity;
+
+        } else if ("-1".equals(termInfo.getCounty())) {
+            msgId = R.string.termadd_msg_invalcountry;
+
+        } else if (CheckUtil.isBlankOrNull(termInfo.getAddress())) {
+            msgId = R.string.termadd_msg_invaladdress;
+
+        } else if (CheckUtil.isBlankOrNull(termInfo.getContact())) {
+            msgId = R.string.termadd_msg_invalcontact;
+
+        } else if ("-1".equals(termInfo.getSellchannel()) ||
+                CheckUtil.isBlankOrNull(termInfo.getSellchannel())) {
+            msgId = R.string.termadd_msg_invalsellchannel;
+
+        } else if ("-1".equals(termInfo.getMainchannel()) ||
+                CheckUtil.isBlankOrNull(termInfo.getMainchannel())) {
+            msgId = R.string.termadd_msg_invalmainchannel;
+
+        } else if ("-1".equals(termInfo.getMinorchannel()) ||
+                CheckUtil.isBlankOrNull(termInfo.getMinorchannel())) {
+            msgId = R.string.termadd_msg_invalminorchannel;
+        }
+        // 弹出提示信息
+        if (msgId != -1) {
+            Toast.makeText(getActivity(), getString(msgId), Toast.LENGTH_SHORT).show();
+            //service.sendMsg(getActivity(), msgId, ConstValues.WAIT2);
+        } else {
+
+            String json = JsonUtil.toJson(termInfo);
+            // 请求网络
+            HttpUtil httpUtil = new HttpUtil(60 * 1000);
+            httpUtil.configResponseTextCharset("ISO-8859-1");
+
+            httpUtil.send("update_terminal", JsonUtil.toJson(termInfo), new RequestCallBack<String>() {
+                @Override
+                public void onSuccess(ResponseInfo<String> responseInfo) {
+                    ResponseStructBean resObj = HttpUtil.parseRes(responseInfo.result);
+                    if (ConstValues.SUCCESS.equals(resObj.getResHead().getStatus())) {
+                        Toast.makeText(getActivity(), "终端修改信息上传成功", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getActivity(), "终端修改信息上传失败", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(HttpException error, String errMsg) {
+                    Log.e(TAG, errMsg, error);
+                    Toast.makeText(getActivity(), getString(R.string.msg_err_netfail), Toast.LENGTH_SHORT).show();
+                }
+            });
+
+
+        }
     }
 
     @Override

@@ -175,6 +175,8 @@ public class SayHiService extends ShopVisitService {
             }
         }
     }
+
+
     
     /**
      * 打招呼中无效终端的提示框

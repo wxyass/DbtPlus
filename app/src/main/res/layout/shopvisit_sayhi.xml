@@ -1,53 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:cuisw="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/bg_page_color"
-    android:orientation="vertical" >
+              xmlns:cuisw="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/bg_page_color"
+              android:orientation="vertical">
 
     <ImageView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top|center_horizontal"
         android:layout_marginTop="5dp"
-        android:src="@drawable/bg_search_bottom" />
+        android:src="@drawable/bg_search_bottom"/>
 
     <ScrollView
         android:id="@+id/sayhi_scrollview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <!-- 是否有效终端： -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="15dp"
-                android:gravity="center_vertical" >
+                android:gravity="center_vertical">
 
                 <ImageView
                     style="@style/point"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ico_point" />
+                    android:src="@drawable/ico_point"/>
 
                 <TextView
                     style="@style/page_label_big"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/sayhi_termstatus" />
+                    android:text="@string/sayhi_termstatus"/>
 
                 <RadioGroup
                     android:id="@+id/sayhi_rg_termstatus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:visibility="gone" >
+                    android:visibility="gone">
 
                     <RadioButton
                         android:id="@+id/sayhi_rb_termstatus_valid"
@@ -55,14 +55,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:checked="true"
-                        android:hint="@string/sayhi_termstatus_valid" />
+                        android:hint="@string/sayhi_termstatus_valid"/>
 
                     <RadioButton
                         android:id="@+id/sayhi_rb_termstatus_invalid"
                         style="@style/page_label_small"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:hint="@string/sayhi_termstatus_invalid" />
+                        android:hint="@string/sayhi_termstatus_invalid"/>
                 </RadioGroup>
 
                 <et.tsingtaopad.cui.LongSlideSwitch
@@ -74,33 +74,33 @@
                     cuisw:offText=""
                     cuisw:onText=""
                     cuisw:textColor="#595757"
-                    cuisw:textSize="17sp" />
+                    cuisw:textSize="17sp"/>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="15dp"
-                android:gravity="center_vertical" >
+                android:gravity="center_vertical">
 
                 <ImageView
                     style="@style/point"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ico_point" />
+                    android:src="@drawable/ico_point"/>
 
                 <TextView
                     style="@style/page_label_big"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/sayhi_visitstatus" />
+                    android:text="@string/sayhi_visitstatus"/>
 
                 <RadioGroup
                     android:id="@+id/sayhi_rg_visitstatus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:visibility="gone" >
+                    android:visibility="gone">
 
                     <RadioButton
                         android:id="@+id/sayhi_rb_visitstatus_ture"
@@ -108,14 +108,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:checked="true"
-                        android:hint="@string/sayhi_visitstatus_ture" />
+                        android:hint="@string/sayhi_visitstatus_ture"/>
 
                     <RadioButton
                         android:id="@+id/sayhi_rb_visitstatus_false"
                         style="@style/page_label_small"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:hint="@string/sayhi_visitstatus_false" />
+                        android:hint="@string/sayhi_visitstatus_false"/>
                 </RadioGroup>
 
                 <et.tsingtaopad.cui.LongSlideSwitch
@@ -127,26 +127,26 @@
                     cuisw:offText=""
                     cuisw:onText=""
                     cuisw:textColor="#595757"
-                    cuisw:textSize="17sp" />
+                    cuisw:textSize="17sp"/>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="15dp"
-                android:gravity="center_vertical" >
+                android:gravity="center_vertical">
 
                 <ImageView
                     style="@style/point"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ico_point" />
+                    android:src="@drawable/ico_point"/>
 
                 <TextView
                     style="@style/page_label_big"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/sayhi_wopindianzhao" />
+                    android:text="@string/sayhi_wopindianzhao"/>
 
                 <et.tsingtaopad.cui.LongSlideSwitch
                     android:id="@+id/sayhi_sw_wopindianzhao"
@@ -157,7 +157,7 @@
                     cuisw:offText=""
                     cuisw:onText=""
                     cuisw:textColor="#595757"
-                    cuisw:textSize="17sp" />
+                    cuisw:textSize="17sp"/>
 
                 <Button
                     android:id="@+id/sayhi_btn_text"
@@ -168,7 +168,7 @@
                     android:background="@drawable/transparent"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:text="@string/default_text" />
+                    android:text="@string/default_text"/>
 
                 <Button
                     android:id="@+id/sayhi_btn_time"
@@ -179,26 +179,26 @@
                     android:background="@drawable/bg_search_button"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:text="@string/default_date" />
+                    android:text="@string/default_date"/>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="12dp"
-                android:gravity="center_vertical" >
+                android:gravity="center_vertical">
 
                 <ImageView
                     style="@style/point"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ico_point" />
+                    android:src="@drawable/ico_point"/>
 
                 <TextView
                     style="@style/page_label_big"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/sayhi_prostatus" />
+                    android:text="@string/sayhi_prostatus"/>
 
                 <CheckBox
                     android:id="@+id/sayhi_cb_mine"
@@ -206,7 +206,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:button="@drawable/bt_checkbox"
-                    android:text="@string/sayhi_prostatus_mine" />
+                    android:text="@string/sayhi_prostatus_mine"/>
 
                 <CheckBox
                     android:id="@+id/sayhi_cb_vie"
@@ -215,7 +215,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="35dp"
                     android:button="@drawable/bt_checkbox"
-                    android:text="@string/sayhi_prostatus_vie" />
+                    android:text="@string/sayhi_prostatus_vie"/>
             </LinearLayout>
 
             <!-- 终端合作状态 -->
@@ -224,19 +224,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="8dp"
-                android:gravity="center_vertical" >
+                android:gravity="center_vertical">
 
                 <ImageView
                     style="@style/point"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ico_point" />
+                    android:src="@drawable/ico_point"/>
 
                 <TextView
                     style="@style/page_label_big"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/sayhi_protocol" />
+                    android:text="@string/sayhi_protocol"/>
 
                 <CheckBox
                     android:id="@+id/sayhi_cb_mineprotocol"
@@ -244,7 +244,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:button="@drawable/bt_checkbox"
-                    android:text="@string/sayhi_prostatus_mine" />
+                    android:text="@string/sayhi_prostatus_mine"/>
 
                 <CheckBox
                     android:id="@+id/sayhi_cb_vieprotocol"
@@ -253,26 +253,26 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="35dp"
                     android:button="@drawable/bt_checkbox"
-                    android:text="@string/sayhi_prostatus_vie" />
+                    android:text="@string/sayhi_prostatus_vie"/>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:gravity="center_vertical" >
+                android:gravity="center_vertical">
 
                 <ImageView
                     style="@style/point"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ico_point" />
+                    android:src="@drawable/ico_point"/>
 
                 <TextView
                     style="@style/page_label_big"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/sayhi_terminfo" />
+                    android:text="@string/sayhi_terminfo"/>
             </LinearLayout>
 
             <!-- 终端编码 所属路线 -->
@@ -283,19 +283,19 @@
                 android:layout_marginTop="5dp"
                 android:background="#f8f9fa"
                 android:gravity="center"
-                android:shrinkColumns="*" >
+                android:shrinkColumns="*">
 
                 <TableRow
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical" >
+                    android:gravity="center_vertical">
 
                     <TextView
                         style="@style/formLabel_title"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="5"
-                        android:text="@string/termadd_termcode" />
+                        android:text="@string/termadd_termcode"/>
 
                     <EditText
                         android:id="@+id/sayhi_tv_termCode"
@@ -304,7 +304,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="7"
                         android:enabled="false"
-                        android:singleLine="true" />
+                        android:singleLine="true"/>
 
                     <TextView
                         style="@style/formLabel_title"
@@ -312,14 +312,14 @@
                         android:layout_height="wrap_content"
                         android:text="@string/termadd_star"
                         android:textColor="#fd022b"
-                        android:visibility="invisible" />
+                        android:visibility="invisible"/>
 
                     <TextView
                         style="@style/formLabel_title"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="5"
-                        android:text="@string/termadd_belongline" />
+                        android:text="@string/termadd_belongline"/>
 
                     <Spinner
                         android:id="@+id/sayhi_sp_belongLine"
@@ -327,14 +327,14 @@
                         android:layout_width="0dp"
                         android:layout_height="43dp"
                         android:layout_weight="7"
-                        android:background="@drawable/bg_spinner" />
+                        android:background="@drawable/bg_spinner"/>
 
                     <TextView
                         style="@style/formLabel_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/termadd_star"
-                        android:textColor="#fd022b" />
+                        android:textColor="#fd022b"/>
                 </TableRow>
 
                 <!-- 终端名称 终端等级 -->
@@ -342,14 +342,14 @@
                 <TableRow
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical" >
+                    android:gravity="center_vertical">
 
                     <TextView
                         style="@style/formLabel_title"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="5"
-                        android:text="@string/termadd_termname" />
+                        android:text="@string/termadd_termname"/>
 
                     <EditText
                         android:id="@+id/sayhi_et_termName"
@@ -358,21 +358,21 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="7"
                         android:maxLength="20"
-                        android:singleLine="true" />
+                        android:singleLine="true"/>
 
                     <TextView
                         style="@style/formLabel_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/termadd_star"
-                        android:textColor="#fd022b" />
+                        android:textColor="#fd022b"/>
 
                     <TextView
                         style="@style/formLabel_title"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="5"
-                        android:text="@string/termadd_level" />
+                        android:text="@string/termadd_level"/>
 
                     <Spinner
                         android:id="@+id/sayhi_sp_termLevel"
@@ -380,14 +380,14 @@
                         android:layout_width="0dp"
                         android:layout_height="43dp"
                         android:layout_weight="7"
-                        android:background="@drawable/bg_spinner" />
+                        android:background="@drawable/bg_spinner"/>
 
                     <TextView
                         style="@style/formLabel_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/termadd_star"
-                        android:textColor="#fd022b" />
+                        android:textColor="#fd022b"/>
                 </TableRow>
 
                 <!-- 省 市 -->
@@ -396,14 +396,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
-                    android:gravity="center_vertical" >
+                    android:gravity="center_vertical">
 
                     <TextView
                         style="@style/formLabel_title"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="5"
-                        android:text="@string/termadd_prov" />
+                        android:text="@string/termadd_prov"/>
 
                     <Spinner
                         android:id="@+id/sayhi_sp_prov"
@@ -411,28 +411,28 @@
                         android:layout_width="0dp"
                         android:layout_height="43dp"
                         android:layout_weight="3"
-                        android:visibility="gone" />
+                        android:visibility="gone"/>
 
                     <TextView
                         android:id="@+id/sayhi_tv_prov"
                         style="@style/formLabel_value"
                         android:layout_width="0dp"
                         android:layout_height="43dp"
-                        android:layout_weight="7" />
+                        android:layout_weight="7"/>
 
                     <TextView
                         style="@style/formLabel_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/termadd_star"
-                        android:textColor="#fd022b" />
+                        android:textColor="#fd022b"/>
 
                     <TextView
                         style="@style/formLabel_title"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="5"
-                        android:text="@string/termadd_city" />
+                        android:text="@string/termadd_city"/>
 
                     <Spinner
                         android:id="@+id/sayhi_sp_city"
@@ -441,35 +441,35 @@
                         android:layout_height="43dp"
                         android:layout_weight="3"
                         android:background="@drawable/bg_spinner"
-                        android:visibility="gone" />
+                        android:visibility="gone"/>
 
                     <TextView
                         android:id="@+id/sayhi_tv_city"
                         style="@style/formLabel_value"
                         android:layout_width="0dp"
                         android:layout_height="43dp"
-                        android:layout_weight="7" />
+                        android:layout_weight="7"/>
 
                     <TextView
                         style="@style/formLabel_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/termadd_star"
-                        android:textColor="#fd022b" />
+                        android:textColor="#fd022b"/>
                 </TableRow>
 
                 <!-- 县 地址 -->
 
                 <TableRow
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content">
 
                     <TextView
                         style="@style/formLabel_title"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="5"
-                        android:text="@string/termadd_country" />
+                        android:text="@string/termadd_country"/>
 
                     <Spinner
                         android:id="@+id/sayhi_sp_country"
@@ -478,28 +478,28 @@
                         android:layout_height="43dp"
                         android:layout_weight="7"
                         android:background="@drawable/bg_spinner"
-                        android:visibility="gone" />
+                        android:visibility="gone"/>
 
                     <TextView
                         android:id="@+id/sayhi_tv_country"
                         style="@style/formLabel_value"
                         android:layout_width="0dp"
                         android:layout_height="43dp"
-                        android:layout_weight="7" />
+                        android:layout_weight="7"/>
 
                     <TextView
                         style="@style/formLabel_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/termadd_star"
-                        android:textColor="#fd022b" />
+                        android:textColor="#fd022b"/>
 
                     <TextView
                         style="@style/formLabel_title"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="5"
-                        android:text="@string/termadd_address" />
+                        android:text="@string/termadd_address"/>
 
                     <EditText
                         android:id="@+id/sayhi_et_address"
@@ -508,28 +508,28 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="7"
                         android:maxLength="200"
-                        android:singleLine="true" />
+                        android:singleLine="true"/>
 
                     <TextView
                         style="@style/formLabel_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/termadd_star"
-                        android:textColor="#fd022b" />
+                        android:textColor="#fd022b"/>
                 </TableRow>
 
                 <!-- 联系人 电话 -->
 
                 <TableRow
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content">
 
                     <TextView
                         style="@style/formLabel_title"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="5"
-                        android:text="@string/termadd_person" />
+                        android:text="@string/termadd_person"/>
 
                     <EditText
                         android:id="@+id/sayhi_et_person"
@@ -538,21 +538,21 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="7"
                         android:maxLength="20"
-                        android:singleLine="true" />
+                        android:singleLine="true"/>
 
                     <TextView
                         style="@style/formLabel_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/termadd_star"
-                        android:textColor="#fd022b" />
+                        android:textColor="#fd022b"/>
 
                     <TextView
                         style="@style/formLabel_title"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="5"
-                        android:text="@string/termadd_tel" />
+                        android:text="@string/termadd_tel"/>
 
                     <EditText
                         android:id="@+id/sayhi_et_contactTel"
@@ -563,33 +563,33 @@
                         android:digits="0123456789-()、,，/\"
                         android:inputType="phone"
                         android:maxLength="30"
-                        android:singleLine="true" />
+                        android:singleLine="true"/>
 
                     <TextView
                         style="@style/formLabel_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=""
-                        android:textColor="#fd022b" />
+                        android:textColor="#fd022b"/>
                 </TableRow>
 
                 <!-- 摆放顺序 拜访周期 -->
 
                 <TableRow
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content">
 
                     <TextView
                         style="@style/formLabel_title"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="5"
-                        android:text="@string/termadd_cycle" />
+                        android:text="@string/termadd_cycle"/>
 
                     <RelativeLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="7" >
+                        android:layout_weight="7">
 
                         <EditText
                             android:layout_width="match_parent"
@@ -597,7 +597,7 @@
                             android:layout_centerVertical="true"
                             android:enabled="false"
                             android:gravity="right"
-                            android:hint="@string/termadd_unit_cycle" />
+                            android:hint="@string/termadd_unit_cycle"/>
 
                         <EditText
                             android:id="@+id/sayhi_et_cycle"
@@ -609,7 +609,7 @@
                             android:inputType="number"
                             android:maxLength="10"
                             android:paddingBottom="8dp"
-                            android:singleLine="true" />
+                            android:singleLine="true"/>
                     </RelativeLayout>
 
                     <TextView
@@ -617,26 +617,26 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=""
-                        android:textColor="#fd022b" />
+                        android:textColor="#fd022b"/>
 
                     <TextView
                         style="@style/formLabel_title"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="5"
-                        android:text="@string/termadd_sequence" />
+                        android:text="@string/termadd_sequence"/>
 
                     <EditText
                         android:id="@+id/sayhi_et_sequence"
                         style="@style/formLabel_value"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="7"
                         android:layout_marginTop="2dp"
+                        android:layout_weight="7"
                         android:enabled="false"
                         android:inputType="number"
                         android:maxLength="8"
-                        android:singleLine="true" />
+                        android:singleLine="true"/>
 
                     <TextView
                         style="@style/formLabel_title"
@@ -644,26 +644,26 @@
                         android:layout_height="wrap_content"
                         android:text="@string/termadd_star"
                         android:textColor="#fd022b"
-                        android:visibility="invisible" />
+                        android:visibility="invisible"/>
                 </TableRow>
 
                 <!-- 高档容量 区域类型 -->
 
                 <TableRow
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content">
 
                     <TextView
                         style="@style/formLabel_title"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="5"
-                        android:text="@string/termadd_hvolume" />
+                        android:text="@string/termadd_hvolume"/>
 
                     <RelativeLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="7" >
+                        android:layout_weight="7">
 
                         <EditText
                             android:layout_width="match_parent"
@@ -672,7 +672,7 @@
                             android:layout_marginTop="2dp"
                             android:enabled="false"
                             android:gravity="right"
-                            android:hint="@string/termadd_unit_volume" />
+                            android:hint="@string/termadd_unit_volume"/>
 
                         <EditText
                             android:id="@+id/sayhi_et_hvolume"
@@ -684,7 +684,7 @@
                             android:inputType="number"
                             android:maxLength="8"
                             android:paddingBottom="8dp"
-                            android:singleLine="true" />
+                            android:singleLine="true"/>
                     </RelativeLayout>
 
                     <TextView
@@ -693,14 +693,14 @@
                         android:layout_height="wrap_content"
                         android:text="@string/termadd_star"
                         android:textColor="#fd022b"
-                        android:visibility="invisible" />
+                        android:visibility="invisible"/>
 
                     <TextView
                         style="@style/formLabel_title"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="5"
-                        android:text="@string/termadd_areatype" />
+                        android:text="@string/termadd_areatype"/>
 
                     <Spinner
                         android:id="@+id/sayhi_sp_termArea"
@@ -708,7 +708,7 @@
                         android:layout_width="0dp"
                         android:layout_height="43dp"
                         android:layout_weight="7"
-                        android:background="@drawable/bg_spinner" />
+                        android:background="@drawable/bg_spinner"/>
 
                     <TextView
                         style="@style/formLabel_title"
@@ -716,26 +716,26 @@
                         android:layout_height="wrap_content"
                         android:text="@string/termadd_star"
                         android:textColor="#fd022b"
-                        android:visibility="invisible" />
+                        android:visibility="invisible"/>
                 </TableRow>
 
                 <!-- 中档 销售渠道 -->
 
                 <TableRow
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content">
 
                     <TextView
                         style="@style/formLabel_title"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="5"
-                        android:text="@string/termadd_mvolume" />
+                        android:text="@string/termadd_mvolume"/>
 
                     <RelativeLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="7" >
+                        android:layout_weight="7">
 
                         <EditText
                             android:layout_width="match_parent"
@@ -744,7 +744,7 @@
                             android:layout_marginTop="2dp"
                             android:enabled="false"
                             android:gravity="right"
-                            android:hint="@string/termadd_unit_volume" />
+                            android:hint="@string/termadd_unit_volume"/>
 
                         <EditText
                             android:id="@+id/sayhi_et_mvolume"
@@ -756,7 +756,7 @@
                             android:inputType="number"
                             android:maxLength="8"
                             android:paddingBottom="8dp"
-                            android:singleLine="true" />
+                            android:singleLine="true"/>
                     </RelativeLayout>
 
                     <TextView
@@ -765,14 +765,14 @@
                         android:layout_height="wrap_content"
                         android:text="@string/termadd_star"
                         android:textColor="#fd022b"
-                        android:visibility="invisible" />
+                        android:visibility="invisible"/>
 
                     <TextView
                         style="@style/formLabel_title"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="5"
-                        android:text="@string/termadd_sellchannel" />
+                        android:text="@string/termadd_sellchannel"/>
 
                     <Spinner
                         android:id="@+id/sayhi_sp_sellChannel"
@@ -780,33 +780,33 @@
                         android:layout_width="0dp"
                         android:layout_height="43dp"
                         android:layout_weight="7"
-                        android:background="@drawable/bg_spinner" />
+                        android:background="@drawable/bg_spinner"/>
 
                     <TextView
                         style="@style/formLabel_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/termadd_star"
-                        android:textColor="#fd022b" />
+                        android:textColor="#fd022b"/>
                 </TableRow>
 
                 <!-- 普档 主渠道 -->
 
                 <TableRow
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content">
 
                     <TextView
                         style="@style/formLabel_title"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="5"
-                        android:text="@string/termadd_pvolume" />
+                        android:text="@string/termadd_pvolume"/>
 
                     <RelativeLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="7" >
+                        android:layout_weight="7">
 
                         <EditText
                             android:layout_width="match_parent"
@@ -815,7 +815,7 @@
                             android:layout_marginTop="2dp"
                             android:enabled="false"
                             android:gravity="right"
-                            android:hint="@string/termadd_unit_volume" />
+                            android:hint="@string/termadd_unit_volume"/>
 
                         <EditText
                             android:id="@+id/sayhi_et_pvolume"
@@ -827,7 +827,7 @@
                             android:inputType="number"
                             android:maxLength="8"
                             android:paddingBottom="8dp"
-                            android:singleLine="true" />
+                            android:singleLine="true"/>
                     </RelativeLayout>
 
                     <TextView
@@ -836,14 +836,14 @@
                         android:layout_height="wrap_content"
                         android:text="@string/termadd_star"
                         android:textColor="#fd022b"
-                        android:visibility="invisible" />
+                        android:visibility="invisible"/>
 
                     <TextView
                         style="@style/formLabel_title"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="5"
-                        android:text="@string/termadd_mainchannel" />
+                        android:text="@string/termadd_mainchannel"/>
 
                     <Spinner
                         android:id="@+id/sayhi_sp_mainChannel"
@@ -851,33 +851,33 @@
                         android:layout_width="0dp"
                         android:layout_height="43dp"
                         android:layout_weight="7"
-                        android:background="@drawable/bg_spinner" />
+                        android:background="@drawable/bg_spinner"/>
 
                     <TextView
                         style="@style/formLabel_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/termadd_star"
-                        android:textColor="#fd022b" />
+                        android:textColor="#fd022b"/>
                 </TableRow>
 
                 <!-- 抵挡 此渠道 -->
 
                 <TableRow
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content">
 
                     <TextView
                         style="@style/formLabel_title"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="5"
-                        android:text="@string/termadd_lvolume" />
+                        android:text="@string/termadd_lvolume"/>
 
                     <RelativeLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="7" >
+                        android:layout_weight="7">
 
                         <EditText
                             android:layout_width="match_parent"
@@ -886,7 +886,7 @@
                             android:layout_marginTop="2dp"
                             android:enabled="false"
                             android:gravity="right"
-                            android:hint="@string/termadd_unit_volume" />
+                            android:hint="@string/termadd_unit_volume"/>
 
                         <EditText
                             android:id="@+id/sayhi_et_lvolume"
@@ -898,7 +898,7 @@
                             android:inputType="number"
                             android:maxLength="8"
                             android:paddingBottom="8dp"
-                            android:singleLine="true" />
+                            android:singleLine="true"/>
                     </RelativeLayout>
 
                     <TextView
@@ -907,14 +907,14 @@
                         android:layout_height="wrap_content"
                         android:text="@string/termadd_star"
                         android:textColor="#fd022b"
-                        android:visibility="invisible" />
+                        android:visibility="invisible"/>
 
                     <TextView
                         style="@style/formLabel_title"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="5"
-                        android:text="@string/termadd_minorchannel" />
+                        android:text="@string/termadd_minorchannel"/>
 
                     <Spinner
                         android:id="@+id/sayhi_sp_minorChannel"
@@ -922,33 +922,33 @@
                         android:layout_width="0dp"
                         android:layout_height="43dp"
                         android:layout_weight="7"
-                        android:background="@drawable/bg_spinner" />
+                        android:background="@drawable/bg_spinner"/>
 
                     <TextView
                         style="@style/formLabel_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/termadd_star"
-                        android:textColor="#fd022b" />
+                        android:textColor="#fd022b"/>
                 </TableRow>
 
                 <!-- 最下面一行 -->
 
                 <TableRow
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content">
 
                     <TextView
                         style="@style/formLabel_title"
                         android:layout_width="0dp"
                         android:layout_height="43dp"
                         android:layout_weight="5"
-                        android:text="@string/termadd_totalvolume" />
+                        android:text="@string/termadd_totalvolume"/>
 
                     <RelativeLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="7" >
+                        android:layout_weight="7">
 
                         <EditText
                             android:layout_width="match_parent"
@@ -957,7 +957,7 @@
                             android:layout_marginTop="2dp"
                             android:enabled="false"
                             android:gravity="right"
-                            android:hint="@string/termadd_unit_volume" />
+                            android:hint="@string/termadd_unit_volume"/>
 
                         <EditText
                             android:id="@+id/sayhi_et_tvolume"
@@ -971,7 +971,7 @@
                             android:inputType="number"
                             android:maxLength="8"
                             android:paddingBottom="8dp"
-                            android:singleLine="true" />
+                            android:singleLine="true"/>
                     </RelativeLayout>
 
                     <TextView
@@ -980,7 +980,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/termadd_star"
                         android:textColor="#fd022b"
-                        android:visibility="invisible" />
+                        android:visibility="invisible"/>
 
                     <!-- 拜访对象 -->
 
@@ -989,14 +989,14 @@
                         android:layout_width="0dp"
                         android:layout_height="43dp"
                         android:layout_weight="5"
-                        android:text="@string/termadd_visitperson" />
+                        android:text="@string/termadd_visitperson"/>
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="45dp"
                         android:layout_gravity="center_vertical"
                         android:layout_weight="7"
-                        android:orientation="horizontal" >
+                        android:orientation="horizontal">
 
                         <!-- 拜访对象请选择 -->
 
@@ -1006,7 +1006,7 @@
                             android:layout_width="0dp"
                             android:layout_height="45dp"
                             android:layout_weight="4"
-                            android:background="@drawable/bg_spinner" />
+                            android:background="@drawable/bg_spinner"/>
 
                         <!-- 拜访对象请输入 -->
 
@@ -1018,7 +1018,7 @@
                             android:layout_weight="3"
                             android:maxLength="100"
                             android:singleLine="true"
-                            android:visibility="gone" />
+                            android:visibility="gone"/>
                     </LinearLayout>
 
                     <TextView
@@ -1027,7 +1027,38 @@
                         android:layout_height="wrap_content"
                         android:text="@string/termadd_star"
                         android:textColor="#fd022b"
-                        android:visibility="invisible" />
+                        android:visibility="invisible"/>
+                </TableRow>
+
+                <!--上传终端信息-->
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp">
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        >
+
+                        <Button
+                            android:id="@+id/sayhi_bt_terminfo"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
+                            android:layout_marginTop="20dp"
+                            android:background="@drawable/bg_select_green"
+                            android:text="上传终端基础信息"
+                            android:textColor="#FFFFFF"
+                            android:textSize="16dp"
+                            />
+                    </RelativeLayout>
+
+
                 </TableRow>
             </TableLayout>
         </LinearLayout>
