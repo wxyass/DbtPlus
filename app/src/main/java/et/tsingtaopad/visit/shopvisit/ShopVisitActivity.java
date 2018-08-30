@@ -52,7 +52,11 @@ import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.location.LocationClientOption.LocationMode;
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
 
+import cn.com.benyoyo.manage.Struct.ResponseStructBean;
 import et.tsingtaopad.BaseActivity;
 import et.tsingtaopad.ConstValues;
 import et.tsingtaopad.R;
@@ -65,6 +69,8 @@ import et.tsingtaopad.tools.DateUtil;
 import et.tsingtaopad.tools.DbtLog;
 import et.tsingtaopad.tools.FileUtil;
 import et.tsingtaopad.tools.FunUtil;
+import et.tsingtaopad.tools.HttpUtil;
+import et.tsingtaopad.tools.JsonUtil;
 import et.tsingtaopad.tools.PrefUtils;
 import et.tsingtaopad.tools.PropertiesUtil;
 import et.tsingtaopad.tools.ViewUtil;
@@ -223,6 +229,9 @@ public class ShopVisitActivity extends BaseActivity implements OnClickListener,
         // 初始化界面并组建Bundle参数
         //this.initVisitData();
         //this.initViewDate();// 因为注释掉handler,所以这句话会导致报错
+
+        // 上传经纬度,获取地理位置
+        updateLocation();
     }
 
     /**
@@ -1503,6 +1512,46 @@ public class ShopVisitActivity extends BaseActivity implements OnClickListener,
             // 纬度
             //latitude = 0.0;
         }
+    }
+
+    /**
+     *
+     */
+    public void updateLocation() {
+
+        longitude = 117.090734350000005000;
+        // 纬度
+        latitude = 24.050067309999999300;
+
+        String content = "{" +
+                "areaid:'" + PrefUtils.getString(this, "departmentid", "") + "'," +
+                "sourcelon:'" + longitude + "'," +  //"117.090734350000005000"  longitude
+                "sourcelat:'" + latitude + "'," +  // "24.050067309999999300"   latitude
+                "attencetime:'" + DateUtil.getDateTimeStr(8) + "'," +
+                "creuser:'" + PrefUtils.getString(this, "userid", "") + "'" +
+                "}";
+
+        // 请求网络
+        HttpUtil httpUtil = new HttpUtil(60 * 1000);
+        httpUtil.configResponseTextCharset("ISO-8859-1");
+
+        httpUtil.send("get_address", content, new RequestCallBack<String>() {
+            @Override
+            public void onSuccess(ResponseInfo<String> responseInfo) {
+                ResponseStructBean resObj = HttpUtil.parseRes(responseInfo.result);
+                if (ConstValues.SUCCESS.equals(resObj.getResHead().getStatus())) {
+                    Toast.makeText(ShopVisitActivity.this, "地理位置获取----成功", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(ShopVisitActivity.this, "地理位置获取----失败", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(HttpException error, String errMsg) {
+                Log.e(TAG, errMsg, error);
+                Toast.makeText(ShopVisitActivity.this, getString(R.string.msg_err_netfail), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     /**
