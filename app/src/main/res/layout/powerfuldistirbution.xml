@@ -60,13 +60,14 @@
                     android:gravity="center_horizontal"
                     android:text="@string/distirbution_select_line" />
 
-                <Spinner
+                <Button
                     android:id="@+id/distirbution_sp_line"
                     style="@style/button_text"
                     android:layout_width="200dp"
                     android:layout_height="43dp"
-                    android:background="@drawable/bg_spinner"
-                    android:gravity="left|center_vertical" />
+                    android:background="@drawable/bg_search_button"
+                    android:hint="@string/indexstatus_msg_line"
+                    android:gravity="center" />
             </LinearLayout>
 
             <LinearLayout
