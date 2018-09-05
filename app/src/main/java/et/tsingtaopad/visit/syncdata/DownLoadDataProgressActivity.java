@@ -12,8 +12,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import et.tsingtaopad.BaseActivity;
+import et.tsingtaopad.ConstValues;
 import et.tsingtaopad.R;
 import et.tsingtaopad.initconstvalues.InitConstValues;
+import et.tsingtaopad.tools.DateUtil;
+import et.tsingtaopad.tools.PrefUtils;
 
 /**
  * 项目名称：营销移动智能工作平台 </br>
@@ -57,6 +60,8 @@ public class DownLoadDataProgressActivity extends BaseActivity {
                 break;
                 //同步进度
             case SYNDATA_RESULT_Success:    //同步成功结束
+                // 打时间标记
+                PrefUtils.putString(DownLoadDataProgressActivity.this, ConstValues.SYNCDATA, DateUtil.getDateTimeStr(7));
                  new InitConstValues(DownLoadDataProgressActivity.this).start();
                   Toast.makeText(getApplicationContext(), (String) msg.obj, Toast.LENGTH_LONG).show();
                   DownLoadDataProgressActivity.this.finish();

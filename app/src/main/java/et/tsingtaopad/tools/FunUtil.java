@@ -613,6 +613,8 @@ public class FunUtil {
         String data = "0.0";
         if (".".equals(content)) {//
             data = "0.0";
+        } else if ("0".equals(content)) {
+            data = "0.0";
         } else if ("0.0".equals(content)) {
             data = "0.0";
         } else if (content.length() > 1 && content.endsWith(".")) {

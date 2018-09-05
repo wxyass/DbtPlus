@@ -53,6 +53,7 @@
                 style="@style/listview_tv_item_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:textColor="@android:color/holo_red_dark"
                 android:layout_weight="4"/>
 
             <!-- 上传成功标识 -->

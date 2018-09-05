@@ -77,6 +77,7 @@ import et.tsingtaopad.tools.HttpUtil;
 import et.tsingtaopad.tools.JsonUtil;
 import et.tsingtaopad.tools.PrefUtils;
 import et.tsingtaopad.tools.ViewUtil;
+import et.tsingtaopad.ui.loader.LatteLoader;
 import et.tsingtaopad.visit.VisitFragment;
 import et.tsingtaopad.visit.syncdata.UploadDataService;
 
@@ -96,6 +97,8 @@ public class SayHiFragment extends BaseFragmentSupport implements
     private MstTerminalinfoM termInfo;
     private String prevSequence;
     private String seeFlag;
+    private String visitKey;
+    private String termId;
 
     private ScrollView SayHiSv;
     private LongSlideSwitch termStatusSw;
@@ -218,7 +221,9 @@ public class SayHiFragment extends BaseFragmentSupport implements
                 case ConstValues.WAIT3:
                     fragment.requestMotionEvent();
                     break;
-
+                case 7:// 关闭进度框
+                    LatteLoader.stopLoading(); // 若有进度条,关闭
+                    break;
                 default:
                     break;
             }
@@ -233,6 +238,8 @@ public class SayHiFragment extends BaseFragmentSupport implements
         this.initView(view);
         this.initData();
         //this.asynch();
+        /*SayHiInitTask sayHiInitTask = new SayHiInitTask();
+        sayHiInitTask.execute();*/
         return view;
     }
 
@@ -354,8 +361,8 @@ public class SayHiFragment extends BaseFragmentSupport implements
         // 获取参数
         Bundle bundle = getArguments();
         seeFlag = FunUtil.isBlankOrNullTo(bundle.getString("seeFlag"), "");
-        String visitKey = bundle.getString("visitKey");
-        String termId = bundle.getString("termId");
+         visitKey = bundle.getString("visitKey");
+         termId = bundle.getString("termId");
 
         // 初始相应终端信息
         termInfo = service.findTermById(termId);
@@ -502,6 +509,206 @@ public class SayHiFragment extends BaseFragmentSupport implements
         // 加载完毕
         isLoadingData = false;
 
+    }
+
+    /**
+     * 异步加载
+     */
+    private class SayHiInitTask extends AsyncTask<Void, Void, Void> {
+
+        // 异步执行前
+        protected void onPreExecute() {
+            LatteLoader.showLoading(getActivity(), true);// 处理数据中 ,在Handle中关闭
+            initPreData();
+            isLoadingData = true;
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            initDoBackData();
+            return null;
+        }
+
+        // 异步执行后
+        protected void onPostExecute(Void result) {
+            // initData();
+            initPostData();
+            handler.sendEmptyMessageDelayed(7, 2000);
+            isLoadingData = false;
+        }
+
+    }
+
+    private void initPreData() {
+        handler = new MyHandler(this);
+        service = new SayHiService(getActivity(), handler);
+    }
+
+    private void initPostData() {
+        // 初始化拜访主表信息
+        Long time = new Date().getTime();
+        visitM = service.findVisitById(visitKey);
+        Long time1 = new Date().getTime();
+        Log.e("Optimization", "查找巡店拜访表" + (time1 - time));
+        if (visitM != null) {
+            // <Status 拜访状态>  //进行判断(如果Status拜访状态为1 或者 拜访状态不为空设置为选中状态)
+            if (ConstValues.FLAG_1.equals(visitM.getStatus()) || CheckUtil.isBlankOrNull(visitM.getStatus())) {
+                visitStatusSw.setStatus(true);// 是否有效拜访
+            } else {//否则为未选中状态
+                visitStatusSw.setStatus(false);
+            }
+
+            // 当我品店招选中的时候,显示对应的控件 文字
+            if (ConstValues.FLAG_1.equals(termInfo.getIfmine())) {
+                mineproductSW.setStatus(true);
+                mineProductTime.setVisibility(View.VISIBLE);
+                mineProductTime.setText(termInfo.getIfminedate());
+                sayhi_text.setVisibility(View.VISIBLE);
+
+            } else {
+                //当店招未选中的时候,隐藏对应的控件 文字
+                mineproductSW.setStatus(false);
+                mineProductTime.setText(ifminedate);
+                mineProductTime.setVisibility(View.GONE);
+                sayhi_text.setVisibility(View.GONE);
+            }
+
+            //<isself> // 销售产品范围我品
+            mineCb.setChecked(ConstValues.FLAG_1.equals(visitM.getIsself()) ? true : false);
+            //销售产品状态   :  iscmp是否为竞品,是1 否0
+            vieCb.setChecked(ConstValues.FLAG_1.equals(visitM.getIscmp()) ? true : false);
+            //vieProtocolCb:终端合作状态(SELFTREATY 我品合作状态) // 我品合作状态的值从终端表获取 ywm20160706
+            //mineProtocolCb.setChecked(ConstValues.FLAG_1 .equals(visitM.getSelftreaty()) ? true : false);
+            mineProtocolCb.setChecked(ConstValues.FLAG_1.equals(termInfo.getSelftreaty()) ? true : false);
+            mineProtocolCb.setTag(termInfo.getSelftreaty());
+            //vieProtocolCb:终端合作状态选择 (cmptreaty竞品合作状态)
+            vieProtocolCb.setChecked(ConstValues.FLAG_1.equals(termInfo.getCmpselftreaty()) ? true : false);
+            vieProtocolCb.setTag(termInfo.getCmpselftreaty());
+            visitPersonEt.setText(visitM.getVisituser());
+        }
+        Long time2 = new Date().getTime();
+        Log.e("Optimization", "巡店拜访赋值" + (time2 - time1));
+
+        Long time3 = new Date().getTime();
+        Log.e("Optimization", "查找终端数据" + (time3 - time2));
+        if (termInfo != null) {
+
+            // 保留修改关的拜访顺序，用于判定是不更改同线路下的各终端的拜访顺序
+            prevSequence = termInfo.getSequence();
+            termCodeTv.setText(termInfo.getTerminalcode());
+            termNameEt.setText(termInfo.getTerminalname());
+            addressEt.setText(termInfo.getAddress());
+            linkmanEt.setText(termInfo.getContact());
+            telEt.setText(termInfo.getMobile());
+            sequenceEt.setText(termInfo.getSequence());
+            cycleEt.setText(termInfo.getCycle());
+            Long tvolume = 0l;
+            if (ConstValues.FLAG_0.equals(FunUtil.isNullToZero(termInfo.getHvolume()))) {
+                hvolumeEt.setHint(FunUtil.isNullToZero(termInfo.getHvolume()));
+            } else {
+                hvolumeEt.setText(FunUtil.isNullToZero(termInfo.getHvolume()));
+                tvolume = tvolume + FunUtil.isNullSetZero((termInfo.getHvolume()));
+            }
+            if (ConstValues.FLAG_0.equals(FunUtil.isNullToZero(termInfo.getMvolume()))) {
+                mvolumeEt.setHint(FunUtil.isNullToZero(termInfo.getMvolume()));
+            } else {
+                mvolumeEt.setText(FunUtil.isNullToZero(termInfo.getMvolume()));
+                tvolume = tvolume + FunUtil.isNullSetZero((termInfo.getMvolume()));
+            }
+            if (ConstValues.FLAG_0.equals(FunUtil.isNullToZero(termInfo.getPvolume()))) {
+                pvolumeEt.setHint(FunUtil.isNullToZero(termInfo.getPvolume()));
+            } else {
+                pvolumeEt.setText(FunUtil.isNullToZero(termInfo.getPvolume()));
+                tvolume = tvolume + FunUtil.isNullSetZero((termInfo.getPvolume()));
+            }
+            if (ConstValues.FLAG_0.equals(FunUtil.isNullToZero(termInfo.getLvolume()))) {
+                lvolumeEt.setHint(FunUtil.isNullToZero(termInfo.getLvolume()));
+            } else {
+                lvolumeEt.setText(FunUtil.isNullToZero(termInfo.getLvolume()));
+                tvolume = tvolume + FunUtil.isNullSetZero(termInfo.getLvolume());
+            }
+            tvolumeEt.setText(String.valueOf(tvolume));
+
+            // 所属线路
+            belongLineSp.setTag(termInfo.getRoutekey());
+            SpinnerKeyValueAdapter adapter = new SpinnerKeyValueAdapter(
+                    getActivity(), ConstValues.lineLst, new String[]{
+                    "routekey", "routename"}, termInfo.getRoutekey());
+            belongLineSp.setAdapter(adapter);
+
+            // 区域类型
+            SpinnerKeyValueAdapter termAreaAdapter = new SpinnerKeyValueAdapter(
+                    getActivity(), ConstValues.dataDicMap.get("areaTypeLst"),
+                    new String[]{"key", "value"}, termInfo.getAreatype());
+            areaTypeSp.setAdapter(termAreaAdapter);
+
+            // 老板老板娘
+            SpinnerKeyValueAdapter laobanAdapter = new SpinnerKeyValueAdapter(
+                    getActivity(), ConstValues.dataDicMap.get("visitPositionLst"),
+                    //new String[] { "key", "value" }, "66AA9D3A55374232891C964350610927");// 默认的值是key
+                    //new String[] { "key", "value" }, TextUtils.isEmpty(FunUtil.isNullSetSpace(visitM.getVisitposition()))?
+                    new String[]{"key", "value"}, TextUtils.isEmpty(visitM.getVisitposition()) ?
+                    "-1" : visitM.getVisitposition());// 默认的值是key,-1:请选择
+            laobanSp.setAdapter(laobanAdapter);
+
+            // 终端等级
+            levelSp.setTag(termInfo.getTlevel());
+            SpinnerKeyValueAdapter termTypeAdapter = new SpinnerKeyValueAdapter(
+                    getActivity(), ConstValues.dataDicMap.get("levelLst"),
+                    new String[]{"key", "value"}, termInfo.getTlevel());
+            levelSp.setAdapter(termTypeAdapter);
+
+            // 销售渠道
+            sellChannelSp.setTag(termInfo.getSellchannel());
+            mainChannelSp.setTag(termInfo.getMainchannel());
+            minorChannelSp.setTag(termInfo.getMinorchannel());
+            SpinnerKeyValueAdapter sellChannelAdapter = new SpinnerKeyValueAdapter(
+                    getActivity(),
+                    getSellChannelList(ConstValues.dataDicMap
+                            .get("sellChannelLst")), new String[]{"key",
+                    "value"}, termInfo.getSellchannel());
+            sellChannelSp.setAdapter(sellChannelAdapter);
+
+            // 获取省市县数据
+            SpinnerKeyValueAdapter provAdapter = new SpinnerKeyValueAdapter(
+                    getActivity(), ConstValues.provLst, new String[]{"key",
+                    "value"}, termInfo.getProvince());
+            provSp.setAdapter(provAdapter);
+
+            // 直接设置终端的省市县(解决切换跳转反应慢)
+            provTv.setText(service.getAreaName(termInfo.getProvince()));
+            cityTv.setText(service.getAreaName(termInfo.getCity()));
+            countryTv.setText(service.getAreaName(termInfo.getCounty()));
+
+            Long time4 = new Date().getTime();
+            Log.e("Optimization", "给终端数据赋值" + (time4 - time3));
+        }
+    }
+
+    private void initDoBackData() {
+
+        //设置时间
+        calendar = Calendar.getInstance();
+        yearr = calendar.get(Calendar.YEAR);
+        month = calendar.get(Calendar.MONTH);
+        day = calendar.get(Calendar.DAY_OF_MONTH);
+        if (day < 10) {
+            aday = "0" + day;
+        } else {
+            aday = Integer.toString(day);
+        }
+        SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd");// 把选择控件也设置成系统时间
+        Date date = calendar.getTime();
+        ifminedate = sDateFormat.format(date);
+
+        // 获取参数
+        Bundle bundle = getArguments();
+        seeFlag = FunUtil.isBlankOrNullTo(bundle.getString("seeFlag"), "");
+        visitKey = bundle.getString("visitKey");
+        termId = bundle.getString("termId");
+
+        // 初始相应终端信息
+        termInfo = service.findTermById(termId);
     }
 
     /**
@@ -912,6 +1119,7 @@ public class SayHiFragment extends BaseFragmentSupport implements
 
     //
     private void saveTerminalInfo() {
+        LatteLoader.showLoading(getActivity(), true);// 处理数据中 ,在Handle中关闭
         // 保存终端信息
         if (termInfo != null) {
             termInfo.setTerminalname(FunUtil.isNullSetSpace(termNameEt.getText()).toString());
@@ -1026,6 +1234,7 @@ public class SayHiFragment extends BaseFragmentSupport implements
             httpUtil.send("update_terminal", JsonUtil.toJson(termInfo), new RequestCallBack<String>() {
                 @Override
                 public void onSuccess(ResponseInfo<String> responseInfo) {
+                    LatteLoader.stopLoading(); // 若有进度条,关闭
                     ResponseStructBean resObj = HttpUtil.parseRes(responseInfo.result);
                     if (ConstValues.SUCCESS.equals(resObj.getResHead().getStatus())) {
                         Toast.makeText(getActivity(), "终端修改信息上传成功", Toast.LENGTH_SHORT).show();

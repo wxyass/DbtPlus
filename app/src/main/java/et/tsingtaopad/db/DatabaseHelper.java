@@ -94,7 +94,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper
 {
 
     private static final String DATABASE_NAME = "FsaDBT.db";
-    private static final int DATABASE_VERSION = 49;
+    private static final int DATABASE_VERSION = 50;
 
     private Dao<CmmAreaM, String> cmmAreaMDao = null;
     private Dao<CmmDatadicM, String> cmmDatadicMDao = null;
@@ -787,6 +787,17 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper
         	} catch (Exception e) {
         		e.printStackTrace();
         	}
+        }
+        if(oldVersion < 50){
+
+            try {
+
+                // 拜访主表
+                db.execSQL("alter table MST_VISIT_M add address varchar2(200)");
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
         //		try {

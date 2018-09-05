@@ -268,8 +268,6 @@ public class BaseFragmentSupport extends Fragment {
 				//弹窗是否删除之前所有数据
 				showNotifyDialog();
 			} else {
-				// 打标记
-				PrefUtils.putString(getActivity(),ConstValues.SYNCDATA, DateUtil.getDateTimeStr(7));
 				Intent download = new Intent(getActivity(),DownLoadDataProgressActivity.class);
 				startActivity(download);
 			}

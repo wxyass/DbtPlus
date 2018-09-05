@@ -104,6 +104,8 @@ public class CameraFragment extends BaseFragmentSupport {
 	private String termId;
 	// 终端名称
 	private String termname;
+	// 终端地址,通过经纬度获取
+	private String termAddress;
 	// 拜访主键
 	private String visitKey;
 	// 读取数据库图片表已拍照记录
@@ -336,6 +338,7 @@ public class CameraFragment extends BaseFragmentSupport {
 		visitM = cameraService.findVisitById(visitKey);
 		if (visitM != null) {
 			visitreportEt.setText(visitM.getRemarks());
+			termAddress = TextUtils.isEmpty(visitM.getAddress())?"未获取到地理位置":visitM.getAddress();
 		}
 	}
 
@@ -892,13 +895,15 @@ public class CameraFragment extends BaseFragmentSupport {
 							String gonghao = PrefUtils.getString(getActivity(), "userGongHao", "");
 
 							Bitmap waterBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.bg_picc);
-							waterBitmap = FunUtil.zoomImg(waterBitmap, ViewUtil.dip2px(getActivity(), 640), ViewUtil.dip2px(getActivity(), 30));
+							waterBitmap = FunUtil.zoomImg(waterBitmap, ViewUtil.dip2px(getActivity(), 640), ViewUtil.dip2px(getActivity(), 45));
 							picphoto = ImageUtil.createWaterMaskLeftBottom(getActivity(), picphoto, waterBitmap, 0, 0);
 							// (上下文,bm,文字内容,字体大小,字体颜色,距左距离,距下距离)
-							picphoto = ImageUtil.drawTextToLeftBottom(getActivity(), picphoto, "日期: " + DateUtil.getDateTimeStr(3), 10, Color.WHITE, ViewUtil.dip2px(getActivity(), 5), ViewUtil.dip2px(getActivity(), 14));
-							picphoto = ImageUtil.drawTextToLeftBottom(getActivity(), picphoto, "业代: " + gonghao, 10, Color.WHITE, ViewUtil.px2dip(getActivity(), 288), ViewUtil.dip2px(getActivity(), 14));
-							picphoto = ImageUtil.drawTextToLeftBottom(getActivity(), picphoto, "终端: " + termname, 10, Color.WHITE, ViewUtil.dip2px(getActivity(), 5), ViewUtil.dip2px(getActivity(), 3));
-							picphoto = ImageUtil.drawTextToLeftBottom(getActivity(), picphoto, "照片: " + Pictypename, 10, Color.WHITE, ViewUtil.px2dip(getActivity(), 288), ViewUtil.dip2px(getActivity(), 3));
+
+							picphoto = ImageUtil.drawTextToLeftBottom(getActivity(), picphoto, "日期: " + DateUtil.getDateTimeStr(3), 10, Color.WHITE, ViewUtil.dip2px(getActivity(), 5), ViewUtil.dip2px(getActivity(), 23));
+							picphoto = ImageUtil.drawTextToLeftBottom(getActivity(), picphoto, "业代: " + gonghao, 10, Color.WHITE, ViewUtil.px2dip(getActivity(), 288), ViewUtil.dip2px(getActivity(), 23));
+							picphoto = ImageUtil.drawTextToLeftBottom(getActivity(), picphoto, "终端: " + termname, 10, Color.WHITE, ViewUtil.dip2px(getActivity(), 5), ViewUtil.dip2px(getActivity(), 13));
+							picphoto = ImageUtil.drawTextToLeftBottom(getActivity(), picphoto, "照片: " + Pictypename, 10, Color.WHITE, ViewUtil.px2dip(getActivity(), 288), ViewUtil.dip2px(getActivity(), 13));
+							picphoto = ImageUtil.drawTextToLeftBottom(getActivity(), picphoto, "地址: " + termAddress, 10, Color.WHITE, ViewUtil.dip2px(getActivity(), 5), ViewUtil.dip2px(getActivity(), 3));
 							/*
 							 * bmp =
 							 * ImageUtil.drawTextToLeftBottom(getActivity(),

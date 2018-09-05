@@ -14,6 +14,7 @@ import android.content.Context;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.util.Log;
 
 import cn.com.benyoyo.manage.bs.IntStc.BsVisitEmpolyeeStc;
@@ -1203,6 +1204,29 @@ public class ShopVisitService {
         } catch (SQLException e) {
             Log.e(TAG, "更新拜访GPS信息失败", e);
         } 
+    }
+	/***
+	 * 更新拜访离店时间及是否要上传标志
+	 * @param visitId
+	 * @param gpsStatus // 地理位置
+	 */
+    public void updateAddress(String visitId,String gpsStatus) {
+        try {
+        	if(!TextUtils.isEmpty(gpsStatus)){
+        		DatabaseHelper helper = DatabaseHelper.getHelper(context);
+        		MstVisitMDao dao = helper.getDao(MstVisitM.class);
+        		StringBuffer buffer = new StringBuffer();
+        		buffer.append("update mst_visit_m set address=? ");
+        		buffer.append("where visitkey=? ");
+        		String[] args = new String[2];
+        		args[0] = gpsStatus;
+        		args[1] = visitId;
+        		dao.executeRaw(buffer.toString(), args);
+        	}
+
+        } catch (SQLException e) {
+            Log.e(TAG, "更新拜访GPS信息失败", e);
+        }
     }
 
     /**

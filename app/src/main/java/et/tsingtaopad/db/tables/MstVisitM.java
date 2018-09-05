@@ -99,6 +99,9 @@ public class MstVisitM implements java.io.Serializable {
     @DatabaseField(defaultValue = "0")
 	private String uploadFlag;
 
+	@DatabaseField
+	private String address;//经纬度所获取的地理位置
+
 	// Constructors
 
 	/** default constructor */
@@ -474,6 +477,12 @@ public class MstVisitM implements java.io.Serializable {
 	public void setVisitposition(String visitposition) {
 		this.visitposition = visitposition;
 	}
-	
-    
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
 }

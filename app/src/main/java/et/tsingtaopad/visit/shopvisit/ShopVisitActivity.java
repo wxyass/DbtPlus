@@ -86,6 +86,7 @@ import et.tsingtaopad.visit.shopvisit.checkindex.domain.CheckIndexCalculateStc;
 import et.tsingtaopad.visit.shopvisit.checkindex.domain.CheckIndexPromotionStc;
 import et.tsingtaopad.visit.shopvisit.checkindex.domain.ProIndex;
 import et.tsingtaopad.visit.shopvisit.checkindex.domain.ProItem;
+import et.tsingtaopad.visit.shopvisit.domain.AddressStc;
 import et.tsingtaopad.visit.shopvisit.invoicing.InvoicingFragment;
 import et.tsingtaopad.visit.shopvisit.invoicing.InvoicingService;
 import et.tsingtaopad.visit.shopvisit.invoicing.domain.InvoicingStc;
@@ -230,8 +231,7 @@ public class ShopVisitActivity extends BaseActivity implements OnClickListener,
         //this.initVisitData();
         //this.initViewDate();// 因为注释掉handler,所以这句话会导致报错
 
-        // 上传经纬度,获取地理位置
-        updateLocation();
+
     }
 
     /**
@@ -260,8 +260,6 @@ public class ShopVisitActivity extends BaseActivity implements OnClickListener,
 
         }.execute();
     }
-
-
 
 
     private void initViewDate() {
@@ -469,7 +467,7 @@ public class ShopVisitActivity extends BaseActivity implements OnClickListener,
 
         // 初始化供货关系 直接点击结束 生成供货关系  (注意:生成供货关系, 也就各个产品的采集项数据就有数据了MST_COLLECTIONEXERECORD_INFO)
 
-         invoicingservice = new InvoicingService(getApplicationContext(), null);
+        invoicingservice = new InvoicingService(getApplicationContext(), null);
         dataLst = invoicingservice.queryMinePro(visitId, termStc.getTerminalkey());
         invoicingservice.saveInvoicing(dataLst, visitId, termStc.getTerminalkey());
 
@@ -579,7 +577,7 @@ public class ShopVisitActivity extends BaseActivity implements OnClickListener,
                 } else if (!checkTakeCamera()) {// 未拍照
                     Toast.makeText(getApplicationContext(), "拍照任务未完成,不能上传", Toast.LENGTH_SHORT).show();
                 }/*else if(!checkCollectionexrecord()){// 未拍照
-				Toast.makeText(getApplicationContext(), "所有的现有量,变化量必须填值(没货填0)", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "所有的现有量,变化量必须填值(没货填0)", Toast.LENGTH_SHORT).show();
 			}*/ else {
                     Toast.makeText(getApplicationContext(), "图片在本地还未保存,请稍后上传", Toast.LENGTH_SHORT).show();
                 }
@@ -616,13 +614,16 @@ public class ShopVisitActivity extends BaseActivity implements OnClickListener,
         }
         return isallIn;
     }
+
     // // 进销存中渠道价零售价需>0   true:可以上传   false:不可上传
     private boolean checkInvoicingCheckGoods() {
 
-        List<MstVistproductInfo> mstVistproductInfos = invoicingservice.queryVisitproMinePro(visitId, termStc.getTerminalkey());
+        //List<MstVistproductInfo> mstVistproductInfoss = invoicingservice.queryVisitproMinePro(visitId, termStc.getTerminalkey());
+        List<InvoicingStc> mstVistproductInfos = invoicingservice.queryMinePro(visitId, termStc.getTerminalkey());
         boolean isallIn = true;
-        for (MstVistproductInfo invoicingStc : mstVistproductInfos) {
-            if (!(invoicingStc.getPurcprice()>0 && invoicingStc.getRetailprice()>0)) {
+        for (InvoicingStc invoicingStc : mstVistproductInfos) {
+            if (!(Double.parseDouble(invoicingStc.getChannelPrice()) > 0
+                    && Double.parseDouble(invoicingStc.getSellPrice()) > 0)) {
                 isallIn = false;//
                 break;
             }
@@ -646,7 +647,7 @@ public class ShopVisitActivity extends BaseActivity implements OnClickListener,
         valueLst = cameraService.queryPictypeMAll();
 
         // 根据促销活动 重新设置需要拍多少张照片
-		/*int piccount = valueLst.size();
+        /*int piccount = valueLst.size();
 		List<CheckIndexPromotionStc> promotionLst = new ArrayList<CheckIndexPromotionStc>();
 		MstTerminalinfoM term = service.findTermById(termStc.getTerminalkey());
 		promotionLst = new CheckIndexService(this, null).queryPromotion(visitId, term.getSellchannel(), term.getTlevel());
@@ -793,7 +794,7 @@ public class ShopVisitActivity extends BaseActivity implements OnClickListener,
                     DbtLog.logUtils(TAG, "结束拜访：是");
 
                     if (!checkInvoicingCheckGoods()) {// 进销存中渠道价零售价需>0
-                        Toast.makeText(getApplicationContext(), "进销存的渠道价零售价必须大于0", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "问货源的渠道价零售价必须大于0", Toast.LENGTH_SHORT).show();
                         return;
                     }
 
@@ -1494,6 +1495,8 @@ public class ShopVisitActivity extends BaseActivity implements OnClickListener,
      *
      * @param location
      */
+    int type = 0;// 0需要上传(默认)  1不需要上传
+
     private void updateView(Location location) {
         if (location != null) {
 			/*editText.setText("设备位置信息\n\n经度：");
@@ -1504,6 +1507,11 @@ public class ShopVisitActivity extends BaseActivity implements OnClickListener,
             longitude = location.getLongitude();
             // 纬度
             latitude = location.getLatitude();
+            if (type == 0 && longitude > 0 && latitude > 0) {
+                type = 1;
+                // 上传经纬度,获取地理位置
+                updateLocation();
+            }
         } else {
             // 清空EditText对象
             //editText.getEditableText().clear();
@@ -1519,9 +1527,9 @@ public class ShopVisitActivity extends BaseActivity implements OnClickListener,
      */
     public void updateLocation() {
 
-        longitude = 117.090734350000005000;
+        //longitude = 117.090734350000005000;
         // 纬度
-        latitude = 24.050067309999999300;
+        //latitude = 24.050067309999999300;
 
         String content = "{" +
                 "areaid:'" + PrefUtils.getString(this, "departmentid", "") + "'," +
@@ -1540,7 +1548,9 @@ public class ShopVisitActivity extends BaseActivity implements OnClickListener,
             public void onSuccess(ResponseInfo<String> responseInfo) {
                 ResponseStructBean resObj = HttpUtil.parseRes(responseInfo.result);
                 if (ConstValues.SUCCESS.equals(resObj.getResHead().getStatus())) {
-                    Toast.makeText(ShopVisitActivity.this, "地理位置获取----成功", Toast.LENGTH_SHORT).show();
+                    AddressStc addressStc = JsonUtil.parseJson(resObj.getResBody().getContent(), AddressStc.class);
+                    service.updateAddress(visitId, addressStc.getAddress());
+                    // Toast.makeText(ShopVisitActivity.this, "地理位置获取----成功", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(ShopVisitActivity.this, "地理位置获取----失败", Toast.LENGTH_SHORT).show();
                 }
