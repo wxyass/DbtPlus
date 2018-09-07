@@ -38,7 +38,6 @@
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowBackground">@drawable/ico_guide_page_o</item>
         <item name="android:windowFullscreen">true</item>
-
     </style>
 
     <!--<style name="AppTheme" parent="AppBaseTheme">

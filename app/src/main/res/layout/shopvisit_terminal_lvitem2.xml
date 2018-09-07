@@ -53,8 +53,9 @@
                 style="@style/listview_tv_item_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textColor="@android:color/holo_red_dark"
-                android:layout_weight="4"/>
+                android:textColor="@android:color/holo_green_dark"
+                android:textSize="14sp"
+                android:layout_weight="1"/>
 
             <!-- 上传成功标识 -->
 
@@ -83,9 +84,10 @@
 
                 <ImageView
                     android:id="@+id/term_item_iv_mime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
                     android:src="@drawable/ico_terminal_mine"
                     android:visibility="invisible"/>
 
@@ -93,29 +95,30 @@
 
                 <ImageView
                     android:id="@+id/term_item_iv_mineprotocol"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
                     android:src="@drawable/ico_terminal_mineprotocol"/>
 
                 <!-- 竞品 -->
 
                 <ImageView
                     android:id="@+id/term_item_iv_vie"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="40dp"
+                    android:layout_alignParentRight="true"
                     android:src="@drawable/ico_terminal_vie"/>
 
                 <!-- 黄色小书 -->
 
                 <ImageView
                     android:id="@+id/term_item_iv_vieprotocol"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="40dp"
+                    android:layout_alignParentRight="true"
                     android:src="@drawable/ico_terminal_vieprotocol"
                     android:visibility="invisible"/>
             </RelativeLayout>

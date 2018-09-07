@@ -10,24 +10,21 @@ import android.util.Log;
 import com.ibm.mqtt.MqttPersistenceException;
 
 
-
 /**
  * 项目名称：营销移动智能工作平台 </br>
  * 文件名：MyApplication.java</br>
  * 作者：dbt   </br>
- * 创建时间：2013-12-25</br>      
- * 功能描述: </br>      
- * 版本 V 1.0</br>               
+ * 创建时间：2013-12-25</br>
+ * 功能描述: </br>
+ * 版本 V 1.0</br>
  * 修改履历</br>
  * 日期      原因  BUG号    修改人 修改版本</br>
  */
-public class MyApplication extends Application
-{
+public class MyApplication extends Application {
     private static MyApplication instance;
     private static Context mContext;
 
-    public static MyApplication getInstance()
-    {
+    public static MyApplication getInstance() {
         return instance;
     }
 
@@ -35,11 +32,8 @@ public class MyApplication extends Application
     ArrayList<Activity> activityList = new ArrayList<Activity>();
 
 
-
-
     @Override
-    public void onCreate()
-    {
+    public void onCreate() {
         // new ANRWatchDog().start();
         super.onCreate();
 
@@ -56,25 +50,20 @@ public class MyApplication extends Application
 
     // 创建服务用于捕获崩溃异常  
     @Override
-    public void onTerminate()
-    {
+    public void onTerminate() {
         super.onTerminate();
-        try
-        {
+        try {
             //在常量中取得登陆成功以后存储的MQ连接，断开
-            if (ConstValues.mqttClient != null)
-            {
+            if (ConstValues.mqttClient != null) {
                 ConstValues.mqttClient.disconnect();
             }
-        }
-        catch (MqttPersistenceException e)
-        {
+        } catch (MqttPersistenceException e) {
             Log.e("MQConnection", "MQ断开连接失败或者已经断开", e);
         }
     }
-    
-    public static Context getContext(){ 
-        
-    	  return mContext;     
-    	 }
+
+    public static Context getContext() {
+
+        return mContext;
+    }
 }

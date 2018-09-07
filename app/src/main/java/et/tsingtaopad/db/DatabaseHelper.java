@@ -795,6 +795,34 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper
                 // 拜访主表
                 db.execSQL("alter table MST_VISIT_M add address varchar2(200)");
 
+                // 获取各终端     每天    最新的拜访记录
+                StringBuffer buffer = new StringBuffer();
+                buffer.append("drop view if exists v_visit_m");
+                db.execSQL(buffer.toString());
+                buffer = new StringBuffer();
+                buffer.append("create view IF NOT EXISTS v_visit_m as ");
+                buffer.append("select m.* from mst_visit_m m  ");
+                buffer.append("inner join (select max(visitdate) maxvisitdate, ");
+                buffer.append("    max(terminalkey) maxterminalkey ");
+                buffer.append("    from mst_visit_m where visitdate is not null group by terminalkey, substr(visitdate,1,8)) v ");
+                buffer.append("  on m.terminalkey = v.maxterminalkey  ");
+                buffer.append("    and m.visitdate = v.maxvisitdate");
+                db.execSQL(buffer.toString());
+
+                // 获取各终端    所有    拜访数据中最新拜访记录
+                buffer = new StringBuffer();
+                buffer.append("drop view if exists v_visit_m_newest");
+                db.execSQL(buffer.toString());
+                buffer = new StringBuffer();
+                buffer.append("create view IF NOT EXISTS v_visit_m_newest as ");
+                buffer.append("select m.* from mst_visit_m m  ");
+                buffer.append("inner join (select max(visitdate) maxvisitdate, ");
+                buffer.append("    max(terminalkey) maxterminalkey ");
+                buffer.append("    from mst_visit_m where visitdate is not null group by terminalkey) v ");
+                buffer.append("  on m.terminalkey = v.maxterminalkey  ");
+                buffer.append("    and m.visitdate = v.maxvisitdate");
+                db.execSQL(buffer.toString());
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
