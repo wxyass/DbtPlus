@@ -52,9 +52,9 @@ public class MstTerminalinfoMDaoImpl extends BaseDaoImpl<MstTerminalinfoM, Strin
      */
     public List<MstTermListMStc> queryTermLst(SQLiteOpenHelper helper, String lineId) {
         List<MstTermListMStc> lst = new ArrayList<MstTermListMStc>();
-//        lst.addAll(getTermList_sequence(helper, lineId, true));
-//        lst.addAll(getTermList_sequence(helper, lineId, false));
-        lst.addAll(getTermList_sequence(helper, lineId, false));// true:已排序   false:未排序
+        lst.addAll(getTermList_sequence(helper, lineId, true));
+        lst.addAll(getTermList_sequence(helper, lineId, false));
+        //lst.addAll(getTermList_sequence(helper, lineId, false));// true:已排序   false:未排序
         return lst;
     }
 
@@ -115,12 +115,11 @@ public class MstTerminalinfoMDaoImpl extends BaseDaoImpl<MstTerminalinfoM, Strin
         buffer.append("left join v_visit_m_newest vm on m.terminalkey = vm.terminalkey ");
         buffer.append("where coalesce(m.status,'0') != '2' and m.routekey=? ");
         buffer.append(" and coalesce(m.deleteflag,'0') != '1' ");
-        // 不需要区分是否已排序
-        /*if (isSequence) {
+        if (isSequence) {
             buffer.append(" and m.sequence!='' and m.sequence not null ");
         } else {
             buffer.append(" and (m.sequence='' or m.sequence is null) ");
-        }*/
+        }
         // buffer.append("order by m.sequence+0 asc, m.orderbyno, m.terminalname ");
         buffer.append("order by case when (m.sequence + 0) is null then 1 else 0 end ,m.sequence + 0  , m.orderbyno, m.terminalname  ");
 

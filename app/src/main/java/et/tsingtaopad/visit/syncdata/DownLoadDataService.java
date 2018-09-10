@@ -200,7 +200,7 @@ public class DownLoadDataService {
 		if (padxinghao.contains("2207") || padxinghao.contains("2007") || padxinghao.contains("3000")) {
 			threadCount = 1;
 		} else {
-			threadCount = 2;
+			threadCount = 1;
 		}
 		try {
 			mstVisitmemoInfoDao = helper.getMstVisitmemoInfoDao();

@@ -119,8 +119,10 @@ public class TermListService {
                 }
 
 
+                // 获取路线下终端容量
                 List<MstTermListMStc> terms = dao.getTermList_tvolnum(helper, lineKeys.get(i),false);
 
+                // 设置容量排序
                 for (int j = 0; j < terms.size(); j++) {
                     MstTermListMStc mStc = (MstTermListMStc)terms.get(j);
                     mStc.setTopnum((j+1)+"");
