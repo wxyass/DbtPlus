@@ -426,7 +426,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper
         String synkvTabl[][] = {
         	
         		
-               { "CMM_BOARD_M", "通知公告" }, 
+               { "CMM_BOARD_M", "通知公告" },
                 { "CMM_DATADIC_M", "数据字典" }, 
                 { "CMM_AREA_M", "省市县区域" }, 
                 { "MST_ROUTE_M", "线路" },
@@ -474,9 +474,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper
                 { "MST_PLANTERMINAL_M", "计划终端表" },
                 { "MST_GROUPPRODUCT_M2", "产品组合是否达标" }
                 
-                
-                
-
         };
 
         StringBuffer buffer;
@@ -788,7 +785,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper
         		e.printStackTrace();
         	}
         }
-        if(oldVersion < 50){
+        if(oldVersion < 50){ // 业代新加字段  对应督导53
 
             try {
 

@@ -127,7 +127,7 @@ public class CalculateDialogFragment extends DialogFragment implements OnClickLi
                 for (int i = 0; i < tempLst.size(); i++) {
                     item = tempLst.get(i);
                     item.setCheckkey(indexValue.getIndexId());
-                    // 获取采集文本框内容
+                    // 获取采集文本框内容//
                     itemEt = (EditText) calculateDialogLv.getChildAt(i).findViewById(R.id.calculatedialog_et_changenum);
                     item.setChangeNum((FunUtil.isBlankOrNullToDouble(itemEt.getText().toString())));
                     //item.setChangeNum(Double.valueOf(FunUtil.isNullToZero(itemEt.getText().toString())));

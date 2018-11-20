@@ -1170,6 +1170,7 @@ public class SayHiFragment extends BaseFragmentSupport implements
             termInfo.setCmpselftreaty(visitM.getCmptreaty());
             // --- 更改mst_terminalinfo_m表中selftreaty字段 ywm 20160426-----------------
             service.updateTermInfo(termInfo, prevSequence);
+
             upTerminalInfoTo(termInfo, prevSequence);
         }
     }

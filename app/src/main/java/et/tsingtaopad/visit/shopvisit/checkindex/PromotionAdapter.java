@@ -1,11 +1,13 @@
 package et.tsingtaopad.visit.shopvisit.checkindex;
 
+import java.io.File;
 import java.util.Date;
 import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,6 +27,7 @@ import et.tsingtaopad.cui.SlideSwitch;
 import et.tsingtaopad.cui.SlideSwitch.OnSwitchChangedListener;
 import et.tsingtaopad.tools.CheckUtil;
 import et.tsingtaopad.tools.DateUtil;
+import et.tsingtaopad.tools.FileUtil;
 import et.tsingtaopad.tools.PrefUtils;
 import et.tsingtaopad.visit.shopvisit.camera.domain.PictypeDataStc;
 import et.tsingtaopad.visit.shopvisit.checkindex.domain.CheckIndexPromotionStc;
@@ -367,6 +370,7 @@ public class PromotionAdapter extends BaseAdapter {
 		}
 		public abstract void afterTextChanged(SlideSwitch obj, int status, ViewHolder holder);
     }
-    
-    
+
+
+
 }

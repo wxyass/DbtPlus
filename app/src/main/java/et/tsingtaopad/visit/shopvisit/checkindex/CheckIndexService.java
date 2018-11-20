@@ -463,7 +463,7 @@ public class CheckIndexService extends ShopVisitService {
             }
         }
     }
-    
+
     /**
      * 获取巡店拜访-查指标的分项采集部分的与产品无关的指标数据
      * 

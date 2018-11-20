@@ -459,8 +459,7 @@ public class ShopVisitActivity extends BaseActivity implements OnClickListener,
             // 去除重复产品指标表
             service.delRepeatMstCheckexerecordInfo(visitM);
             // 查看状态下的提示框
-            if (ConstValues.FLAG_1.equals(PropertiesUtil.getSharedPreferences(
-                    this, TAG, "1"))) {
+            if (ConstValues.FLAG_1.equals(PropertiesUtil.getSharedPreferences(this, TAG, "1"))) {
                 this.showSeeDialg();
             }
         }

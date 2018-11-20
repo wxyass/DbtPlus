@@ -44,7 +44,4 @@ public class AutoSumTask extends AsyncTask<Object, Void, Void> {
         ConstValues.handler.sendEmptyMessage(ConstValues.WAIT8);
         // ConstValues.handler.sendEmptyMessageDelayed(ConstValues.WAIT8, 2000);
     }
-
-
-
 }

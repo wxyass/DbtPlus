@@ -165,8 +165,7 @@ public class InvoicingService extends ShopVisitService {
             }
 
             // 维护经销商供货关系表
-          /*  List<MstAgencysupplyInfo> supplyLst = 
-                        supplyDao.queryForEq("lowerkey", termId);*/
+          /*  List<MstAgencysupplyInfo> supplyLst = supplyDao.queryForEq("lowerkey", termId);*/
             //修改经销存界面问货源产品重复的问题
             List<MstAgencysupplyInfo> supplyLst = supplyDao.queryBuilder()
                     .where().eq("lowerkey", termId).and().ne("status", "1").query();
@@ -212,6 +211,7 @@ public class InvoicingService extends ShopVisitService {
             }
         }
     }
+
 
     /**
      * 新增供货关系指标记录表进行更新

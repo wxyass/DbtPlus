@@ -17,10 +17,6 @@
         android:orientation="vertical" >
 
         <!-- 根据定格查询终端 -->
-
-
-        <!-- 根据定格查询终端 -->
-
         <LinearLayout
             android:id="@+id/orders_ll_top"
             android:layout_width="match_parent"
